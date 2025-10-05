@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using PBL2.Models;
-using PBL2.Views.loginForm;
 using PBL2.Views.staffView;
+using PBL2.Views.HomePage;
 
 
 namespace PBL2
@@ -20,25 +20,28 @@ namespace PBL2
         public Form1()
         {
             InitializeComponent();
+            LoadView("HomePage");
         }
 
-        private void buttonlogin_Click(object sender, EventArgs e)
+        public void LoadView(String ViewName)
         {
-            LoginView loginView = new LoginView();
-            loginView.loadView += LoadView;
-            loginView.Show();
-        }
-
-        private void LoadView(String ViewName)
-        {
-            if(ViewName == "staffLayoutView")
+            if (ViewName == "staffLayoutView")
             {
+                staffLayoutView staffLayoutView = new staffLayoutView();
+                staffLayoutView.form1 = this;
                 this.MainPanel.Controls.Clear();
-                this.MainPanel.Controls.Add(new staffLayoutView());
+                this.MainPanel.Controls.Add(staffLayoutView);
             }
+            else if (ViewName == "HomePage") {
+                HomePage homePage = new HomePage();
+                homePage.form1 = this;
+                this.MainPanel.Controls.Clear();
+                this.MainPanel.Controls.Add(homePage);
+            }
+
         }
 
-        private void LoadView(String ViewName, IModel model)
+        public void LoadView(String ViewName, IModel model)
         {
             if (ViewName == "staffLayoutView")
             {

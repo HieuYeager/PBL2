@@ -68,6 +68,8 @@
             this.btnLogout.Location = new System.Drawing.Point(0, 53);
             this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
             this.btnLogout.Name = "btnLogout";
+            this.btnLogout.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnLogout.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
             this.btnLogout.OverrideDefault.Border.Draw = Krypton.Toolkit.InheritBool.False;
             this.btnLogout.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -84,6 +86,7 @@
             this.btnLogout.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.TabIndex = 3;
             this.btnLogout.Values.Text = "Logout";
+            this.btnLogout.Click += new System.EventHandler(this.logout_btn_click);
             // 
             // panelBtns
             // 

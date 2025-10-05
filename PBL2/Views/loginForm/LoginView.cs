@@ -15,8 +15,7 @@ namespace PBL2.Views.loginForm
 {
     public partial class LoginView : Form, IView
     {
-        public delegate void LoadView(String ViewName);
-        public LoadView loadView { get; set; }
+        public Form1 form1;
         private LoginModel loginModel { get; } = new LoginModel();
         private LoginPresenter loginPresenter = new LoginPresenter();
 
@@ -67,7 +66,10 @@ namespace PBL2.Views.loginForm
             if (result != "")
             {
                 this.Close();
-                loadView?.Invoke("staffLayoutView");
+                if (form1 != null)
+                {
+                    form1.LoadView("staffLayoutView");
+                }
             }
         }
     }

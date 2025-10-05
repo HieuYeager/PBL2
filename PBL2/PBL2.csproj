@@ -119,6 +119,12 @@
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\HomePage\HomePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\HomePage\HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\loginForm\LoginView.cs">
       <SubType>Form</SubType>
@@ -145,6 +151,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\HomePage\HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\loginForm\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
