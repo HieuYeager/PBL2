@@ -11,7 +11,7 @@ namespace PBL2.Models
 {
     internal class MySQL_DB
     {
-        private string connectionString = "server=localhost;port=3306;database=pbl;uid=root;pwd=mysql12345;";
+        private string connectionString = "server=localhost;port=3306;database=pbl;uid=root;pwd=11012004;";
 
         public MySQL_DB() { }
 
