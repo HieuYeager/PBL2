@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PBL2.Views.Menu
+namespace PBL2.Views.MenuPage
 {
-    public partial class Menu : UserControl
+    public partial class Order : UserControl
     {
-        public Menu()
+        public Order()
         {
             InitializeComponent();
         }

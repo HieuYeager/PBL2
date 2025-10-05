@@ -132,16 +132,16 @@
     <Compile Include="Views\loginForm\LoginView.Designer.cs">
       <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Menu\Menu.cs">
+    <Compile Include="Views\MenuPage\Menu.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Menu\Menu.Designer.cs">
+    <Compile Include="Views\MenuPage\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Menu\Order.cs">
+    <Compile Include="Views\MenuPage\Order.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Menu\Order.Designer.cs">
+    <Compile Include="Views\MenuPage\Order.Designer.cs">
       <DependentUpon>Order.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\StaffLayoutView\staffLayoutView.cs">
@@ -169,10 +169,10 @@
     <EmbeddedResource Include="Views\loginForm\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Menu\Menu.resx">
+    <EmbeddedResource Include="Views\MenuPage\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Menu\Order.resx">
+    <EmbeddedResource Include="Views\MenuPage\Order.resx">
       <DependentUpon>Order.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\StaffLayoutView\staffLayoutView.resx">

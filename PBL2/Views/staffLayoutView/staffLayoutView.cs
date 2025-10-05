@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using PBL2.Views.MenuPage;
 namespace PBL2.Views.staffView
 {
     public partial class staffLayoutView : UserControl
@@ -16,6 +17,10 @@ namespace PBL2.Views.staffView
         public staffLayoutView()
         {
             InitializeComponent();
+            panelMenu.Controls.Clear();
+            panelMenu.Controls.Add(new PBL2.Views.MenuPage.Menu());
+            panelOrder.Controls.Clear();
+            panelOrder.Controls.Add(new Order());
         }
 
         private void logout_btn_click(object sender, EventArgs e)
