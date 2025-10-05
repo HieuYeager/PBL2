@@ -30,24 +30,24 @@
         {
             this.GroupPass = new Krypton.Toolkit.KryptonGroup();
             this.ShowPassCheckBtn = new Krypton.Toolkit.KryptonCheckButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PassTxt = new Krypton.Toolkit.KryptonTextBox();
             this.GroupAccount = new Krypton.Toolkit.KryptonGroup();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.AccTxt = new Krypton.Toolkit.KryptonTextBox();
             this.CloseBtn = new Krypton.Toolkit.KryptonButton();
             this.label1 = new System.Windows.Forms.Label();
             this.loginBtn = new Krypton.Toolkit.KryptonButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.GroupPass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GroupPass.Panel)).BeginInit();
             this.GroupPass.Panel.SuspendLayout();
             this.GroupPass.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GroupAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GroupAccount.Panel)).BeginInit();
             this.GroupAccount.Panel.SuspendLayout();
             this.GroupAccount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // GroupPass
@@ -105,16 +105,6 @@
             this.ShowPassCheckBtn.Values.Text = "";
             this.ShowPassCheckBtn.Click += new System.EventHandler(this.showPassword_click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.pictureBox1.Image = global::PBL2.Properties.Resources.PasswordIcon;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(27, 28);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // PassTxt
             // 
             this.PassTxt.Location = new System.Drawing.Point(3, 3);
@@ -150,16 +140,6 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.GroupAccount.StateCommon.Border.Rounding = 20F;
             this.GroupAccount.TabIndex = 3;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.pictureBox2.Image = global::PBL2.Properties.Resources.account;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 10);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(27, 28);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
             // 
             // AccTxt
             // 
@@ -222,10 +202,29 @@
             this.loginBtn.Values.Text = "LOGIN";
             this.loginBtn.Click += new System.EventHandler(this.loginButton_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.pictureBox2.Image = global::PBL2.Properties.Resources.account;
+            this.pictureBox2.Location = new System.Drawing.Point(12, 10);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(27, 28);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.pictureBox1.Image = global::PBL2.Properties.Resources.PasswordIcon;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(27, 28);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // LoginView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(88)))));
             this.ClientSize = new System.Drawing.Size(346, 391);
             this.Controls.Add(this.loginBtn);
@@ -242,13 +241,13 @@
             this.GroupPass.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GroupPass)).EndInit();
             this.GroupPass.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GroupAccount.Panel)).EndInit();
             this.GroupAccount.Panel.ResumeLayout(false);
             this.GroupAccount.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GroupAccount)).EndInit();
             this.GroupAccount.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

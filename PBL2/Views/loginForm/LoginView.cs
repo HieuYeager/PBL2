@@ -15,6 +15,8 @@ namespace PBL2.Views.loginForm
 {
     public partial class LoginView : Form, IView
     {
+        public delegate void LoadView(String ViewName);
+        public LoadView loadView { get; set; }
         private LoginModel loginModel { get; } = new LoginModel();
         private LoginPresenter loginPresenter = new LoginPresenter();
 
@@ -49,12 +51,10 @@ namespace PBL2.Views.loginForm
             {
                 //this.PassTxt.UseSystemPasswordChar = false;
                 this.PassTxt.PasswordChar = '\0';
-                //MessageBox.Show("password show");
             }
             else
             {
                 this.PassTxt.PasswordChar = '●';
-                //MessageBox.Show("password hide");
             }
         }
 
@@ -63,7 +63,12 @@ namespace PBL2.Views.loginForm
         {
        
             //LoginPresenter loginPresenter = new LoginPresenter(this, loginModel);
-            loginPresenter.login(loginModel);
+            String result = loginPresenter.login(loginModel);
+            if (result != "")
+            {
+                this.Close();
+                loadView?.Invoke("staffLayoutView");
+            }
         }
     }
 }

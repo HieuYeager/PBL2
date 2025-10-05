@@ -93,6 +93,16 @@ namespace PBL2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Green_coffee_logo_badge___Free_Vector {
+            get {
+                object obj = ResourceManager.GetObject("Green coffee logo badge _ Free Vector", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PasswordIcon {
             get {
                 object obj = ResourceManager.GetObject("PasswordIcon", resourceCulture);

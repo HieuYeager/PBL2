@@ -126,6 +126,12 @@
     <Compile Include="Views\loginForm\LoginView.Designer.cs">
       <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\staffLayoutView\staffLayoutView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\staffLayoutView\staffLayoutView.Designer.cs">
+      <DependentUpon>staffLayoutView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +147,9 @@
     </Compile>
     <EmbeddedResource Include="Views\loginForm\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\staffLayoutView\staffLayoutView.resx">
+      <DependentUpon>staffLayoutView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -158,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Class\" />
+    <Folder Include="Views\order\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PasswordIcon.png" />
@@ -173,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Green coffee logo badge _ Free Vector.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
