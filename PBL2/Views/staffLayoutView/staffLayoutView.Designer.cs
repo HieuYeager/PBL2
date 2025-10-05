@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelSideBar = new System.Windows.Forms.Panel();
             this.panelBot = new System.Windows.Forms.Panel();
             this.btnLogout = new Krypton.Toolkit.KryptonButton();
             this.panelBtns = new System.Windows.Forms.Panel();
@@ -36,22 +36,25 @@
             this.btnOrderlist = new Krypton.Toolkit.KryptonButton();
             this.btnMenu = new Krypton.Toolkit.KryptonButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.panelOrder = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelSideBar.SuspendLayout();
             this.panelBot.SuspendLayout();
             this.panelBtns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelSideBar
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.panel1.Controls.Add(this.panelBot);
-            this.panel1.Controls.Add(this.panelBtns);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(179, 700);
-            this.panel1.TabIndex = 0;
+            this.panelSideBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.panelSideBar.Controls.Add(this.panelBot);
+            this.panelSideBar.Controls.Add(this.panelBtns);
+            this.panelSideBar.Controls.Add(this.pictureBox1);
+            this.panelSideBar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelSideBar.Location = new System.Drawing.Point(0, 0);
+            this.panelSideBar.Name = "panelSideBar";
+            this.panelSideBar.Size = new System.Drawing.Size(179, 700);
+            this.panelSideBar.TabIndex = 0;
             // 
             // panelBot
             // 
@@ -182,13 +185,31 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // panelMenu
+            // 
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMenu.Location = new System.Drawing.Point(179, 0);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(821, 700);
+            this.panelMenu.TabIndex = 1;
+            // 
+            // panelOrder
+            // 
+            this.panelOrder.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelOrder.Location = new System.Drawing.Point(802, 0);
+            this.panelOrder.Name = "panelOrder";
+            this.panelOrder.Size = new System.Drawing.Size(198, 700);
+            this.panelOrder.TabIndex = 2;
+            // 
             // staffLayoutView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelOrder);
+            this.Controls.Add(this.panelMenu);
+            this.Controls.Add(this.panelSideBar);
             this.Name = "staffLayoutView";
             this.Size = new System.Drawing.Size(1000, 700);
-            this.panel1.ResumeLayout(false);
+            this.panelSideBar.ResumeLayout(false);
             this.panelBot.ResumeLayout(false);
             this.panelBtns.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -198,7 +219,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelSideBar;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panelBot;
         private System.Windows.Forms.Panel panelBtns;
@@ -206,5 +227,7 @@
         private Krypton.Toolkit.KryptonButton btnIngredient;
         private Krypton.Toolkit.KryptonButton btnOrderlist;
         private Krypton.Toolkit.KryptonButton btnLogout;
+        private System.Windows.Forms.Panel panelMenu;
+        private System.Windows.Forms.FlowLayoutPanel panelOrder;
     }
 }

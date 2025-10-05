@@ -132,10 +132,22 @@
     <Compile Include="Views\loginForm\LoginView.Designer.cs">
       <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\staffLayoutView\staffLayoutView.cs">
+    <Compile Include="Views\Menu\Menu.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\staffLayoutView\staffLayoutView.Designer.cs">
+    <Compile Include="Views\Menu\Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\Order.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Menu\Order.Designer.cs">
+      <DependentUpon>Order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StaffLayoutView\staffLayoutView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\StaffLayoutView\staffLayoutView.Designer.cs">
       <DependentUpon>staffLayoutView.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
@@ -157,7 +169,13 @@
     <EmbeddedResource Include="Views\loginForm\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\staffLayoutView\staffLayoutView.resx">
+    <EmbeddedResource Include="Views\Menu\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Menu\Order.resx">
+      <DependentUpon>Order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StaffLayoutView\staffLayoutView.resx">
       <DependentUpon>staffLayoutView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -176,7 +194,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Class\" />
-    <Folder Include="Views\order\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PasswordIcon.png" />
