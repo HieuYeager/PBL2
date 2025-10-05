@@ -66,6 +66,7 @@
             this.loginBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.TabIndex = 2;
             this.loginBtn.Values.Text = "LOGIN";
+            this.loginBtn.Click += new System.EventHandler(this.buttonlogin_Click);
             // 
             // Form1
             // 
