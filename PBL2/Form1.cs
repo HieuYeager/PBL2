@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using PBL2.Views.loginForm;
+
 namespace PBL2
 {
     public partial class Form1 : Form
@@ -15,6 +17,12 @@ namespace PBL2
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void buttonlogin_Click(object sender, EventArgs e)
+        {
+            LoginView loginView = new LoginView();
+            loginView.Show();
         }
     }
 }
