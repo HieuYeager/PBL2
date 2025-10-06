@@ -17,7 +17,7 @@ namespace PBL2.Views.loginForm
     {
         public Form1 form1;
         private LoginModel loginModel { get; } = new LoginModel();
-        private LoginPresenter loginPresenter = new LoginPresenter();
+        private LoginPresenter loginPresenter;
 
         //public string MaNV { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         //public string Password { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -31,6 +31,7 @@ namespace PBL2.Views.loginForm
         public LoginView()
         {
             InitializeComponent();
+            loginPresenter = new LoginPresenter(this);
 
             // Thiết lập Data Binding
             this.AccTxt.DataBindings.Add("Text", loginModel, "MaNV");
@@ -60,8 +61,6 @@ namespace PBL2.Views.loginForm
         //login button
         private void loginButton_Click(object sender, EventArgs e)
         {
-       
-            //LoginPresenter loginPresenter = new LoginPresenter(this, loginModel);
             String result = loginPresenter.login(loginModel);
             if (result != "")
             {

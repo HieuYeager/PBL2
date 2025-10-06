@@ -21,13 +21,14 @@ namespace PBL2
         {
             InitializeComponent();
             LoadView("HomePage");
+            //LoadView("staffView");
         }
 
         public void LoadView(String ViewName)
         {
-            if (ViewName == "staffLayoutView")
+            if (ViewName == "staffView")
             {
-                staffLayoutView staffLayoutView = new staffLayoutView();
+                staffView staffLayoutView = new staffView();
                 staffLayoutView.form1 = this;
                 this.MainPanel.Controls.Clear();
                 this.MainPanel.Controls.Add(staffLayoutView);
@@ -46,7 +47,7 @@ namespace PBL2
             if (ViewName == "staffLayoutView")
             {
                 this.MainPanel.Controls.Clear();
-                this.MainPanel.Controls.Add(new staffLayoutView());
+                this.MainPanel.Controls.Add(new staffView());
             }
         }
     }

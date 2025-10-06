@@ -11,16 +11,13 @@ using System.Windows.Forms;
 using PBL2.Views.MenuPage;
 namespace PBL2.Views.staffView
 {
-    public partial class staffLayoutView : UserControl
+    public partial class staffView : UserControl
     {
         public Form1 form1 { get; set; }
-        public staffLayoutView()
+        public staffView()
         {
             InitializeComponent();
-            panelMenu.Controls.Clear();
-            panelMenu.Controls.Add(new PBL2.Views.MenuPage.Menu());
-            panelOrder.Controls.Clear();
-            panelOrder.Controls.Add(new Order());
+            this.panelPage.Controls.Add(new menuPage());
         }
 
         private void logout_btn_click(object sender, EventArgs e)

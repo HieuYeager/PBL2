@@ -1,6 +1,6 @@
 ﻿namespace PBL2.Views.staffView
 {
-    partial class staffLayoutView
+    partial class staffView
     {
         /// <summary> 
         /// Required designer variable.
@@ -36,8 +36,7 @@
             this.btnOrderlist = new Krypton.Toolkit.KryptonButton();
             this.btnMenu = new Krypton.Toolkit.KryptonButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.panelOrder = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelPage = new System.Windows.Forms.Panel();
             this.panelSideBar.SuspendLayout();
             this.panelBot.SuspendLayout();
             this.panelBtns.SuspendLayout();
@@ -109,6 +108,9 @@
             this.btnIngredient.Location = new System.Drawing.Point(15, 124);
             this.btnIngredient.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
             this.btnIngredient.Name = "btnIngredient";
+            this.btnIngredient.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnIngredient.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnIngredient.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.btnIngredient.OverrideDefault.Border.Draw = Krypton.Toolkit.InheritBool.False;
             this.btnIngredient.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -132,6 +134,9 @@
             this.btnOrderlist.Location = new System.Drawing.Point(15, 77);
             this.btnOrderlist.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
             this.btnOrderlist.Name = "btnOrderlist";
+            this.btnOrderlist.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnOrderlist.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnOrderlist.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.btnOrderlist.OverrideDefault.Border.Draw = Krypton.Toolkit.InheritBool.False;
             this.btnOrderlist.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -157,6 +162,7 @@
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
             this.btnMenu.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnMenu.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.btnMenu.OverrideDefault.Border.Draw = Krypton.Toolkit.InheritBool.False;
             this.btnMenu.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -185,27 +191,18 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // panelMenu
+            // panelPage
             // 
-            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMenu.Location = new System.Drawing.Point(179, 0);
-            this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(821, 700);
-            this.panelMenu.TabIndex = 1;
-            // 
-            // panelOrder
-            // 
-            this.panelOrder.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelOrder.Location = new System.Drawing.Point(802, 0);
-            this.panelOrder.Name = "panelOrder";
-            this.panelOrder.Size = new System.Drawing.Size(198, 700);
-            this.panelOrder.TabIndex = 2;
+            this.panelPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelPage.Location = new System.Drawing.Point(179, 0);
+            this.panelPage.Name = "panelPage";
+            this.panelPage.Size = new System.Drawing.Size(821, 700);
+            this.panelPage.TabIndex = 1;
             // 
             // staffLayoutView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.panelOrder);
-            this.Controls.Add(this.panelMenu);
+            this.Controls.Add(this.panelPage);
             this.Controls.Add(this.panelSideBar);
             this.Name = "staffLayoutView";
             this.Size = new System.Drawing.Size(1000, 700);
@@ -227,7 +224,6 @@
         private Krypton.Toolkit.KryptonButton btnIngredient;
         private Krypton.Toolkit.KryptonButton btnOrderlist;
         private Krypton.Toolkit.KryptonButton btnLogout;
-        private System.Windows.Forms.Panel panelMenu;
-        private System.Windows.Forms.FlowLayoutPanel panelOrder;
+        private System.Windows.Forms.Panel panelPage;
     }
 }

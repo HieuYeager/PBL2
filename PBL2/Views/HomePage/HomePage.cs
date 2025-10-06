@@ -15,6 +15,9 @@ namespace PBL2.Views.HomePage
     public partial class HomePage : UserControl
     {
         public Form1 form1;
+
+        //public delegate void LoadView(String viewName);
+        //public LoadView form1Load;
         public HomePage()
         {
             InitializeComponent();

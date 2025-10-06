@@ -5,12 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PBL2.Views.loginForm;
 using PBL2.Models;
 namespace PBL2.Presenters
 {
     internal class LoginPresenter: IPresenter
     {
-        //public Login() { }
+        private LoginView view;
+        public LoginPresenter(LoginView view) {
+            this.view = view;
+        }
 
         public String login(LoginModel loginModel) {
             if (loginModel == null)

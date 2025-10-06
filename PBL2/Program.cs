@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PBL2.Views.loginForm;
+using PBL2.Views.staffView;
 
 namespace PBL2
 {
@@ -18,6 +18,7 @@ namespace PBL2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
         }
     }
 }
