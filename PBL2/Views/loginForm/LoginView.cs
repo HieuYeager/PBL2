@@ -67,7 +67,7 @@ namespace PBL2.Views.loginForm
                 this.Close();
                 if (form1 != null)
                 {
-                    form1.LoadView("staffLayoutView");
+                    form1.LoadView("staffView");
                 }
             }
         }
