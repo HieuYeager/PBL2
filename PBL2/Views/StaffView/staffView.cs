@@ -27,5 +27,18 @@ namespace PBL2.Views.staffView
                 form1.LoadView("HomePage");
             }
         }
+
+        private void menubtn_click(object sender, EventArgs e)
+        {
+            this.panelPage.Controls.Clear();
+            this.panelPage.Controls.Add(new menuPage());
+        }
+
+        private void oderList_btn_click(object sender, EventArgs e)
+        {
+            this.panelPage.Controls.Clear();
+            //this.panelPage.Controls.Add(new oderList());
+        }
+
     }
 }

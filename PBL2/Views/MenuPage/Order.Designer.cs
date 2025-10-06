@@ -46,6 +46,7 @@
             // 
             // panelOrder
             // 
+            this.panelOrder.AutoScroll = true;
             this.panelOrder.Location = new System.Drawing.Point(0, 52);
             this.panelOrder.Name = "panelOrder";
             this.panelOrder.Size = new System.Drawing.Size(227, 581);

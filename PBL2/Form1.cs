@@ -20,8 +20,8 @@ namespace PBL2
         public Form1()
         {
             InitializeComponent();
-            LoadView("HomePage");
-            //LoadView("staffView");
+            //LoadView("HomePage");
+            LoadView("staffView");
         }
 
         public void LoadView(String ViewName)
@@ -44,7 +44,7 @@ namespace PBL2
 
         public void LoadView(String ViewName, IModel model)
         {
-            if (ViewName == "staffLayoutView")
+            if (ViewName == "staffView")
             {
                 this.MainPanel.Controls.Clear();
                 this.MainPanel.Controls.Add(new staffView());

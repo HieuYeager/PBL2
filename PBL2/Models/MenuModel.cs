@@ -12,5 +12,9 @@ namespace PBL2.Models
         public List<MonModel> mons = new List<MonModel>();
 
         public List<DanhMuc> danhmuc = new List<DanhMuc>();
+
+        public String FindName { get; set; }
+
+        public String FindDanhMuc { get; set; }
     }
 }

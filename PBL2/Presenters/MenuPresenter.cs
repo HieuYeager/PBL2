@@ -56,8 +56,8 @@ namespace PBL2.Presenters
                 monModel.TenMon = row["TenMon"].ToString();
                 try
                 {
-                    string donGia = row["DonGia"].ToString();
-                    monModel.DonGia = decimal.Parse(donGia);
+                    string GiaBan = row["GiaBan"].ToString();
+                    monModel.DonGia = decimal.Parse(GiaBan);
                 }
                 catch
                 {
@@ -66,6 +66,11 @@ namespace PBL2.Presenters
                 menuModel.mons.Add(monModel);
             }
             view.UpdateView(menuModel);
+        }
+
+        public void Find(MenuModel menuModel) {
+            this.menuModel = menuModel;
+            //view.UpdateView(menuModel);
         }
     }
 }

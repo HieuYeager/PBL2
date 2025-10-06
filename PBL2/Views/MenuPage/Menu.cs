@@ -31,6 +31,9 @@ namespace PBL2.Views.MenuPage
             this.ComboBoxDanhMuc.ValueMember = "MaDM";
             this.ComboBoxDanhMuc.DisplayMember = "TenDM";
 
+            this.FindTxt.DataBindings.Add("Text", menuModel, "FindName");
+            this.ComboBoxDanhMuc.DataBindings.Add("SelectedValue", menuModel, "FindDanhMuc");
+
             foreach(MonModel mon in menuModel.mons)
             { 
                 Mon mon1 = new Mon(mon);

@@ -153,6 +153,7 @@
             this.btnOrderlist.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOrderlist.TabIndex = 1;
             this.btnOrderlist.Values.Text = "Order list";
+            this.btnOrderlist.Click += new System.EventHandler(this.oderList_btn_click);
             // 
             // btnMenu
             // 
@@ -179,6 +180,7 @@
             this.btnMenu.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenu.TabIndex = 0;
             this.btnMenu.Values.Text = "Menu";
+            this.btnMenu.Click += new System.EventHandler(this.menubtn_click);
             // 
             // pictureBox1
             // 
@@ -199,12 +201,12 @@
             this.panelPage.Size = new System.Drawing.Size(821, 700);
             this.panelPage.TabIndex = 1;
             // 
-            // staffLayoutView
+            // staffView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.panelPage);
             this.Controls.Add(this.panelSideBar);
-            this.Name = "staffLayoutView";
+            this.Name = "staffView";
             this.Size = new System.Drawing.Size(1000, 700);
             this.panelSideBar.ResumeLayout(false);
             this.panelBot.ResumeLayout(false);
