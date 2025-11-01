@@ -4,41 +4,135 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Org.BouncyCastle.X509;
+using PBL2.Models;
 using PBL2.Views.MenuPage;
+using PBL2.Views.ThanhToan;
 namespace PBL2.Views.staffView
 {
     public partial class staffView : UserControl
     {
         public Form1 form1 { get; set; }
-        public staffView()
+        private AccountModel account { get; set; }
+        //form
+        private menuPage menuPage { get; set; }
+
+
+        // màu khi được chọn
+        private readonly Color SelectedBack = Color.FromArgb(70, 101, 87);
+        private readonly Color SelectedText = Color.FromArgb(255, 255, 255);
+
+        // màu mặc định (hoặc màu "không chọn")
+        private readonly Color DefaultBack = Color.FromArgb(123, 163, 146);
+        private readonly Color DefaultText = Color.FromArgb(34, 49, 43);
+
+        //select button
+        private Krypton.Toolkit.KryptonButton selectedButton { get; set; }
+
+        public staffView(AccountModel account)
         {
             InitializeComponent();
-            this.panelPage.Controls.Add(new menuPage());
-        }
+            this.account = account;
 
+            this.labelTen.DataBindings.Add("Text", account, "TenNV");
+            this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
+
+
+
+            //default page
+            this.menuPage = new menuPage();
+            this.panelPage.Controls.Add(this.menuPage);
+
+            //default button
+            //changeButtonColor(this.btnMenu);
+            this.btnMenu.PerformClick();
+
+            Console.WriteLine(this.btnIngredient.StateCommon.Content.ShortText.Color1.ToString());
+        }
+        //event
         private void logout_btn_click(object sender, EventArgs e)
         {
             if (form1 != null)
             {
-                form1.LoadView("HomePage");
+                form1.LoadView("HomePage", null);
             }
         }
 
         private void menubtn_click(object sender, EventArgs e)
         {
-            this.panelPage.Controls.Clear();
-            this.panelPage.Controls.Add(new menuPage());
+            //change button color
+            changeButtonColor(this.btnMenu);
+            loadMenuPage();
         }
 
-        private void oderList_btn_click(object sender, EventArgs e)
+        private void Bill_btn_click(object sender, EventArgs e)
+        {
+            changeButtonColor(this.btnBill);
+            //LoadThanhToanPage();
+            //change button color
+        }
+
+        private void Ingredient_btn_click(object sender, EventArgs e)
+        {
+            //change button color
+            changeButtonColor(this.btnIngredient);
+            LoadIngredientPage();
+        }
+
+        //function
+        private void changeButtonColor(Krypton.Toolkit.KryptonButton button)
+        {
+            //chang button color
+            if (this.selectedButton != null)
+            {
+                this.ResetButtonAppearance(this.selectedButton);
+            }
+            this.selectedButton = button;
+            this.ApplySelectedAppearance(this.selectedButton);
+            
+            this.btnLogout.Focus();
+        }
+
+        private void ApplySelectedAppearance(Krypton.Toolkit.KryptonButton btn)
+        {
+            btn.StateCommon.Back.Color1 = SelectedBack;
+            btn.StateCommon.Content.ShortText.Color1 = SelectedText;
+        }
+
+        private void ResetButtonAppearance(Krypton.Toolkit.KryptonButton btn)
+        {
+            if (btn == null) return;
+            btn.StateCommon.Back.Color1 = DefaultBack;
+            btn.StateCommon.Content.ShortText.Color1 = DefaultText;
+        }
+
+        //load
+        private void loadMenuPage()
         {
             this.panelPage.Controls.Clear();
-            //this.panelPage.Controls.Add(new oderList());
+            if(menuPage != null)
+            {
+                this.menuPage = new menuPage();
+            }
+            this.panelPage.Controls.Add(this.menuPage);
+            this.menuPage.thanhtoan = LoadThanhToanPage;
+
         }
 
+        private void LoadIngredientPage()
+        {
+            //this.panelPage.Controls.Clear();
+
+            //MessageBox.Show("Chức năng đang phát triển", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
+        private void LoadThanhToanPage() {
+            this.panelPage.Controls.Clear();
+            this.panelPage.Controls.Add(new ThanhToanPage());
+        }
     }
 }

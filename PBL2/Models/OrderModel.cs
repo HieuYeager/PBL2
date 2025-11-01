@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace PBL2.Models
 {
-    internal class OrderModel
+    public class OrderModel
     {
         public List<OrderDetailModel> orderDetails = new List<OrderDetailModel>();
+
+        public decimal Total
+        {
+            get { return orderDetails.Sum(x => x.tongTien); }
+            private set { }
+        }
     }
 }

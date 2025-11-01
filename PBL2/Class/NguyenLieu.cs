@@ -6,13 +6,24 @@ using System.Threading.Tasks;
 
 namespace PBL2.Class
 {
+    public enum DonViNguyenLieu
+    {
+        Kg,
+        g,
+        L,
+        ml
+    }
+
     public class NguyenLieu
     {
-        public string MaNguyenLieu { get; set; } // CHAR(36) PK
-        public string TenNguyenLieu { get; set; } // varchar(30)
-        public decimal? SoLuong { get; set; }     // decimal
-        public DateTime? NgayTao { get; set; }    // datetime
+        public int MaNguyenLieu { get; set; }      // INT AUTO_INCREMENT PK
+        public string TenNguyenLieu { get; set; }  // varchar(30)
+        public DonViNguyenLieu DonVi { get; set; } // ENUM
+        public decimal SoLuong { get; set; }       // decimal(13,2)
         public DateTime? NgayCapNhat { get; set; } // datetime
+
+        public List<CongThuc> CongThucs { get; set; } = new List<CongThuc>();
+        public List<LichSuTonKho> LichSuTonKhos { get; set; } = new List<LichSuTonKho>();
     }
 
 }

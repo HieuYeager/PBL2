@@ -68,7 +68,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.GroupPass.StateCommon.Border.Rounding = 20F;
-            this.GroupPass.TabIndex = 2;
+            this.GroupPass.TabIndex = 10;
             // 
             // ShowPassCheckBtn
             // 
@@ -149,7 +149,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.GroupAccount.StateCommon.Border.Rounding = 20F;
-            this.GroupAccount.TabIndex = 3;
+            this.GroupAccount.TabIndex = 9;
             // 
             // pictureBox2
             // 
@@ -217,8 +217,9 @@
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.loginBtn.StateCommon.Border.Rounding = 25F;
+            this.loginBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.loginBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginBtn.TabIndex = 6;
+            this.loginBtn.TabIndex = 3;
             this.loginBtn.Values.Text = "LOGIN";
             this.loginBtn.Click += new System.EventHandler(this.loginButton_Click);
             // 

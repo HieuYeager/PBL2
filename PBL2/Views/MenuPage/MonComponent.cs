@@ -9,31 +9,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using PBL2.Models;
+using PBL2.Presenters.Menu;
 namespace PBL2.Views.MenuPage
 {
-    public partial class Mon : UserControl
+    public partial class MonComponent : UserControl
     {
-        public delegate void Select_Mon(MonModel mon);
-
-        public Select_Mon select_Mon;
+        //presenter
+        MenuPagePresenter presenter;
+        //model
         public MonModel mon { get; set; }
-        public Mon()
+        public MonComponent()
         {
             InitializeComponent();
         }
-
-        public Mon(MonModel mon)
+        public MonComponent(MonModel mon, MenuPagePresenter menuPagePresenter)
         {
             InitializeComponent();
             this.mon = mon;
 
             this.labelTenMon.DataBindings.Add("Text", mon, "TenMon");
-            this.labelGia.DataBindings.Add("Text", mon, "DonGia");
+            this.labelGia.DataBindings.Add("Text", mon, "GiaBan");
+            this.presenter = menuPagePresenter;
         }
 
         public void addMon_Click(object sender, EventArgs e) {
-            if (select_Mon != null) {
-                select_Mon(mon);
+            if (this.presenter != null) {
+                this.presenter.addMon(mon);
             }
         }
 

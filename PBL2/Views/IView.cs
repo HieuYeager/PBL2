@@ -8,9 +8,9 @@ using PBL2.Models;
 using PBL2.Presenters;
 namespace PBL2.Views
 {
-    internal interface IView
+    public interface IView<IPresenter, IModel>
     {
-        //update data form presenter to view
-        void UpdateView(IModel model);
+        IPresenter Presenter { get; }
+        IModel Model { get; }
     }
 }

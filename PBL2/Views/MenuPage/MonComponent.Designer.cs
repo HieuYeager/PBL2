@@ -1,6 +1,6 @@
 ﻿namespace PBL2.Views.MenuPage
 {
-    partial class Mon
+    partial class MonComponent
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,9 +30,9 @@
         {
             this.kryptonGroup1 = new Krypton.Toolkit.KryptonGroup();
             this.addBtn = new Krypton.Toolkit.KryptonButton();
-            this.Image = new Krypton.Toolkit.KryptonPictureBox();
             this.labelGia = new System.Windows.Forms.Label();
             this.labelTenMon = new System.Windows.Forms.Label();
+            this.Image = new Krypton.Toolkit.KryptonPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).BeginInit();
             this.kryptonGroup1.Panel.SuspendLayout();
@@ -58,19 +58,19 @@
             this.kryptonGroup1.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonGroup1.StateCommon.Border.Rounding = 20F;
+            this.kryptonGroup1.StateCommon.Border.Rounding = 10F;
             this.kryptonGroup1.TabIndex = 0;
             // 
             // addBtn
             // 
             this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBtn.Location = new System.Drawing.Point(139, 75);
+            this.addBtn.Location = new System.Drawing.Point(134, 75);
             this.addBtn.Name = "addBtn";
             this.addBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.addBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.addBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.addBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.addBtn.Size = new System.Drawing.Size(71, 39);
+            this.addBtn.Size = new System.Drawing.Size(76, 39);
             this.addBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.addBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.addBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -78,21 +78,10 @@
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.addBtn.StateCommon.Border.Rounding = 25F;
-            this.addBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.TabIndex = 7;
-            this.addBtn.Values.Text = "add +";
+            this.addBtn.Values.Text = "Thêm";
             this.addBtn.Click += new System.EventHandler(this.addMon_Click);
-            // 
-            // Image
-            // 
-            this.Image.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Image.Image = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
-            this.Image.Location = new System.Drawing.Point(0, 0);
-            this.Image.Name = "Image";
-            this.Image.Size = new System.Drawing.Size(100, 117);
-            this.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Image.TabIndex = 2;
-            this.Image.TabStop = false;
             // 
             // labelGia
             // 
@@ -116,12 +105,24 @@
             this.labelTenMon.TabIndex = 0;
             this.labelTenMon.Text = "label1";
             // 
-            // Mon
+            // Image
+            // 
+            this.Image.Dock = System.Windows.Forms.DockStyle.Left;
+            this.Image.Image = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
+            this.Image.Location = new System.Drawing.Point(0, 0);
+            this.Image.Name = "Image";
+            this.Image.Size = new System.Drawing.Size(100, 123);
+            this.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Image.TabIndex = 2;
+            this.Image.TabStop = false;
+            // 
+            // MonComponent
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.kryptonGroup1);
-            this.Name = "Mon";
+            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Name = "MonComponent";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Size = new System.Drawing.Size(247, 151);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).EndInit();

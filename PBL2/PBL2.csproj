@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net48\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
       <HintPath>..\packages\BouncyCastle.Cryptography.2.5.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
@@ -110,10 +114,14 @@
     <Compile Include="Class\ChiTietHoaDon.cs" />
     <Compile Include="Class\CongThuc.cs" />
     <Compile Include="Class\DanhMuc.cs" />
+    <Compile Include="Class\DanhMuc_Mon.cs" />
     <Compile Include="Class\HoaDon.cs" />
+    <Compile Include="Class\LichSuTonKho.cs" />
     <Compile Include="Class\Mon.cs" />
     <Compile Include="Class\NguyenLieu.cs" />
     <Compile Include="Class\NhanVien.cs" />
+    <Compile Include="Models\MenuPageModel.cs" />
+    <Compile Include="Models\NhanVienModel.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\MonModel.cs" />
@@ -125,11 +133,17 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\OrderDetailModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\QL_MenuPageModel.cs" />
+    <Compile Include="Models\QL_NhanVienPageModel.cs" />
+    <Compile Include="Models\ThanhToanPageModel.cs" />
     <Compile Include="Presenters\IPresenter.cs" />
-    <Compile Include="Presenters\LoginPresenter.cs" />
-    <Compile Include="Presenters\MenuPresenter.cs" />
+    <Compile Include="Presenters\Login\LoginPresenter.cs" />
+    <Compile Include="Presenters\Menu\MenuPagePresenter.cs" />
+    <Compile Include="Presenters\QL_Menu\QL_MenuPresenter.cs" />
+    <Compile Include="Presenters\QL_NhanVien\QL_NhanVienPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\HomePage\HomePage.cs">
@@ -145,11 +159,11 @@
     <Compile Include="Views\loginForm\LoginView.Designer.cs">
       <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuPage\Menu.cs">
+    <Compile Include="Views\ManagerView\mangerView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MenuPage\Menu.Designer.cs">
-      <DependentUpon>Menu.cs</DependentUpon>
+    <Compile Include="Views\ManagerView\mangerView.Designer.cs">
+      <DependentUpon>mangerView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuPage\menuPage.cs">
       <SubType>UserControl</SubType>
@@ -157,29 +171,77 @@
     <Compile Include="Views\MenuPage\menuPage.Designer.cs">
       <DependentUpon>menuPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuPage\Mon.cs">
+    <Compile Include="Views\MenuPage\MonComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MenuPage\Mon.Designer.cs">
-      <DependentUpon>Mon.cs</DependentUpon>
+    <Compile Include="Views\MenuPage\MonComponent.Designer.cs">
+      <DependentUpon>MonComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuPage\Order.cs">
+    <Compile Include="Views\MenuPage\OrderDetailComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MenuPage\Order.Designer.cs">
-      <DependentUpon>Order.cs</DependentUpon>
+    <Compile Include="Views\MenuPage\OrderDetailComponent.Designer.cs">
+      <DependentUpon>OrderDetailComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuPage\OrderDetail.cs">
+    <Compile Include="Views\QL_Menu\AddMonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QL_Menu\AddMonForm.Designer.cs">
+      <DependentUpon>AddMonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QL_Menu\DeleteMonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QL_Menu\DeleteMonForm.Designer.cs">
+      <DependentUpon>DeleteMonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QL_Menu\QL_MenuPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MenuPage\OrderDetail.Designer.cs">
-      <DependentUpon>OrderDetail.cs</DependentUpon>
+    <Compile Include="Views\QL_Menu\QL_MenuPage.Designer.cs">
+      <DependentUpon>QL_MenuPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QL_Menu\UpdateMonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QL_Menu\UpdateMonForm.Designer.cs">
+      <DependentUpon>UpdateMonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\AddNhanVienForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\AddNhanVienForm.Designer.cs">
+      <DependentUpon>AddNhanVienForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\DeleteNhanVienForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\DeleteNhanVienForm.Designer.cs">
+      <DependentUpon>DeleteNhanVienForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\QL_NhanVienPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\QL_NhanVienPage.Designer.cs">
+      <DependentUpon>QL_NhanVienPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\UpdateNhanVienForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\UpdateNhanVienForm.Designer.cs">
+      <DependentUpon>UpdateNhanVienForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\StaffView\staffView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\StaffView\staffView.Designer.cs">
       <DependentUpon>staffView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ThanhToan\ThanhToanPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ThanhToan\ThanhToanPage.Designer.cs">
+      <DependentUpon>ThanhToanPage.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -200,23 +262,38 @@
     <EmbeddedResource Include="Views\loginForm\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MenuPage\Menu.resx">
-      <DependentUpon>Menu.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ManagerView\mangerView.resx">
+      <DependentUpon>mangerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuPage\menuPage.resx">
       <DependentUpon>menuPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MenuPage\Mon.resx">
-      <DependentUpon>Mon.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MenuPage\MonComponent.resx">
+      <DependentUpon>MonComponent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MenuPage\Order.resx">
-      <DependentUpon>Order.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MenuPage\OrderDetailComponent.resx">
+      <DependentUpon>OrderDetailComponent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MenuPage\OrderDetail.resx">
-      <DependentUpon>OrderDetail.cs</DependentUpon>
+    <EmbeddedResource Include="Views\QL_Menu\QL_MenuPage.resx">
+      <DependentUpon>QL_MenuPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_NhanVien\AddNhanVienForm.resx">
+      <DependentUpon>AddNhanVienForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_NhanVien\DeleteNhanVienForm.resx">
+      <DependentUpon>DeleteNhanVienForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_NhanVien\QL_NhanVienPage.resx">
+      <DependentUpon>QL_NhanVienPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_NhanVien\UpdateNhanVienForm.resx">
+      <DependentUpon>UpdateNhanVienForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\StaffView\staffView.resx">
       <DependentUpon>staffView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ThanhToan\ThanhToanPage.resx">
+      <DependentUpon>ThanhToanPage.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -232,7 +309,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PasswordIcon.png" />
   </ItemGroup>
@@ -250,6 +329,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Green coffee logo badge _ Free Vector.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

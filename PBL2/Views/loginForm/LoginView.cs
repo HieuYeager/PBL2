@@ -8,34 +8,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using PBL2.Presenters;
+using PBL2.Presenters.Login;
 using PBL2.Models;
 
 namespace PBL2.Views.loginForm
 {
-    public partial class LoginView : Form, IView
+    public partial class LoginView : Form
     {
         public Form1 form1;
-        private LoginModel loginModel { get; } = new LoginModel();
+        //private LoginModel loginModel { 
+        //    get{
+        //        return new LoginModel()
+        //        {
+        //            MaNV = this.AccTxt.Text,
+        //            Password = this.PassTxt.Text
+        //        };
+        //    }
+        //    set
+        //    {
+        //        this.AccTxt.Text = value.MaNV.ToString();
+        //        this.PassTxt.Text = value.Password.ToString();
+        //    }
+        //}
+
+        private LoginModel loginModel = new LoginModel();
         private LoginPresenter loginPresenter;
 
-        //public string MaNV { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        //public string Password { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public void UpdateView(IModel model) { 
-            if(model is LoginModel)
-            {
-                //update du lieu
-            }
-        }
         public LoginView()
         {
             InitializeComponent();
-            loginPresenter = new LoginPresenter(this);
+            loginPresenter = new LoginPresenter();
 
             // Thiết lập Data Binding
             this.AccTxt.DataBindings.Add("Text", loginModel, "MaNV");
             this.PassTxt.DataBindings.Add("Text", loginModel, "Password");
+
         }
 
         //close button
@@ -61,14 +68,19 @@ namespace PBL2.Views.loginForm
         //login button
         private void loginButton_Click(object sender, EventArgs e)
         {
-            String result = loginPresenter.login(loginModel);
-            if (result != "")
+            AccountModel accountModel = loginPresenter.login(loginModel);
+            if (accountModel != null)
             {
-                this.Close();
-                if (form1 != null)
+                //MessageBox.Show(accountModel.ToString());
+                if (form1 != null && accountModel.VaiTro == "Nhân viên")
                 {
-                    form1.LoadView("staffView");
+                    form1.LoadView("StaffView", accountModel);
                 }
+                else if (form1 != null && accountModel.VaiTro == "Quản lý")
+                {
+                    form1.LoadView("ManagerView", accountModel);
+                }
+                this.Close();
             }
         }
     }
