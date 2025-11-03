@@ -37,7 +37,7 @@ namespace PBL2.Views.QL_Menu
             MonModel mon = presenter.GetMonByMaMon(maMon);
             if (mon != null)
             {
-                txtMaMonAn.Text = mon.MaMon;
+                txtMaMonAn.Text = Convert.ToString(mon.MaMon);
                 txtMaMonAn.ReadOnly = true;
                 txtMaMonAn.BackColor = System.Drawing.SystemColors.Control; 
                 txtTenMon.Text = mon.TenMon;
@@ -81,7 +81,7 @@ namespace PBL2.Views.QL_Menu
            
             MonModel mon = new MonModel
             {
-                MaMon = this.maMon,
+                MaMon = Convert.ToInt32(this.maMon),
                 TenMon = txtTenMon.Text.Trim(),
                 GiaBan = giaBan,
                 DonVi = txtDonVi.Text.Trim()

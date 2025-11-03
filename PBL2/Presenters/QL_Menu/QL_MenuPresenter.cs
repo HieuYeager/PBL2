@@ -61,7 +61,7 @@ namespace PBL2.Presenters.QL_Menu
                 string fields = "TenMon, GiaBan, DonVi";
                 string values = $"'{mon.TenMon}', {mon.GiaBan}, '{mon.DonVi}'";
                 
-                if (!string.IsNullOrWhiteSpace(mon.MaMon) && int.TryParse(mon.MaMon, out int maMonValue))
+                if (!string.IsNullOrWhiteSpace(mon.MaMon.ToString()) && int.TryParse(mon.MaMon.ToString(), out int maMonValue))
                 {
                     fields = $"MaMon, {fields}";
                     values = $"{maMonValue}, {values}";
@@ -91,7 +91,7 @@ namespace PBL2.Presenters.QL_Menu
       
         public bool EditMon(MonModel mon)
         {
-            if (mon == null || string.IsNullOrWhiteSpace(mon.MaMon))
+            if (mon == null || string.IsNullOrWhiteSpace(mon.MaMon.ToString()))
             {
                 MessageBox.Show("Thông tin món không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -189,7 +189,7 @@ namespace PBL2.Presenters.QL_Menu
                     DataRow row = dt.Rows[0];
                     MonModel mon = new MonModel
                     {
-                        MaMon = row["MaMon"].ToString(),
+                        MaMon =  Convert.ToInt32(row["MaMon"]),
                         TenMon = row["TenMon"].ToString(),
                         GiaBan = Convert.ToDecimal(row["GiaBan"]),
                         DonVi = row["DonVi"].ToString()

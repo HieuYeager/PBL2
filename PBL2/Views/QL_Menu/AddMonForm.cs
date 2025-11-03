@@ -82,7 +82,7 @@ namespace PBL2.Views.QL_Menu
       
             MonModel mon = new MonModel
             {
-                MaMon = maMon, 
+                MaMon = Convert.ToInt32(maMon),
                 TenMon = txtTenMon.Text.Trim(),
                 GiaBan = giaBan,
                 DonVi = txtDonVi.Text.Trim()
