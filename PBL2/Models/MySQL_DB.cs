@@ -137,6 +137,16 @@ namespace PBL2.Models
             //string values = "'abc', 20";
             //Insert("table", fields, values);
         }
+        public bool Insert(string table, Dictionary<string, string> data)
+        {
+            if (data == null || data.Count == 0) return false;
+            string fields = string.Join(", ", data.Keys);
+            string values = string.Join(", ", data.Values.Select(v => $"'{v.Replace("'", "''")}'"));
+            string query = $"INSERT INTO {table} ({fields}) VALUES ({values})";
+            int result = ExecuteNonQuery(query);
+            
+            return result > 0;
+        }
 
         //ham update
         public int Update(string table, string updates, string condition)
@@ -148,16 +158,17 @@ namespace PBL2.Models
         }
 
         //ham delete
-        public int Delete(string table, string condition)
+        public bool Delete(string table, string condition)
         {
             string query = $"DELETE FROM {table} WHERE {condition}";
-            return ExecuteNonQuery(query);
+            return ExecuteNonQuery(query) > 0;
             //Ex: Delete("table", "id = 1");
         }
+         //public bool Delete(string table, string condition) { string query = $"DELETE FROM {table} WHERE {condition}"; return ExecuteNonQuery(query) > 0; //Ex: Delete("table", "id = 1"); }
 
 
         //---------------------------------------------------------------------
-    
+
 
     }
 }
