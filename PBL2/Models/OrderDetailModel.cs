@@ -12,8 +12,6 @@ namespace PBL2.Models
         public MonModel monModel { get; set; }
 
         public string TenMon => monModel?.TenMon;
-        public decimal tongTien { get; set; }
-
         public decimal giaBan { get => monModel.GiaBan; }
         //public int soLuong { get; set; } = 0 ;
         private int _soLuong = 0;
@@ -26,13 +24,15 @@ namespace PBL2.Models
                 if (_soLuong != value)
                 {
                     _soLuong = value;
-                    tongTien = monModel.GiaBan * soLuong;
+                    tongTien = giaBan * soLuong;
                     OnPropertyChanged(nameof(soLuong));
                     OnPropertyChanged(nameof(tongTien));
                 }
             }
         }
+        public decimal tongTien { get; set; }
 
+        //PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {

@@ -8,6 +8,7 @@ namespace PBL2.Models
 {
     public class OrderModel
     {
+        public string MaHD { get; set; }
         public List<OrderDetailModel> orderDetails = new List<OrderDetailModel>();
 
         public decimal Total

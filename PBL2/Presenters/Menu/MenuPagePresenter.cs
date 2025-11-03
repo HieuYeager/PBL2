@@ -64,7 +64,14 @@ namespace PBL2.Presenters.Menu
             foreach (DataRow row in dt.Rows)
             {
                 MonModel monModel = new MonModel();
-                monModel.MaMon = row["MaMon"].ToString();
+                try
+                {
+                    monModel.MaMon = Convert.ToInt32(row["MaMon"]); //row["MaMon"];
+                }
+                catch
+                {
+                    monModel.MaMon = -1;
+                }
                 monModel.TenMon = row["TenMon"].ToString();
                 try
                 {
@@ -114,7 +121,14 @@ namespace PBL2.Presenters.Menu
             foreach (DataRow row in dt.Rows)
             {
                 MonModel monModel = new MonModel();
-                monModel.MaMon = row["MaMon"].ToString();
+                try
+                {
+                    monModel.MaMon = Convert.ToInt32(row["MaMon"]); //row["MaMon"];
+                }
+                catch
+                {
+                    monModel.MaMon = -1;
+                }
                 monModel.TenMon = row["TenMon"].ToString();
                 try
                 {

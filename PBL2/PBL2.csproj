@@ -144,6 +144,7 @@
     <Compile Include="Presenters\Menu\MenuPagePresenter.cs" />
     <Compile Include="Presenters\QL_Menu\QL_MenuPresenter.cs" />
     <Compile Include="Presenters\QL_NhanVien\QL_NhanVienPresenter.cs" />
+    <Compile Include="Presenters\ThanhToan\ThanhToanPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\HomePage\HomePage.cs">
