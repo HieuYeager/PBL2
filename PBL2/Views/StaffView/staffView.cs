@@ -41,17 +41,11 @@ namespace PBL2.Views.staffView
             this.labelTen.DataBindings.Add("Text", account, "TenNV");
             this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
 
-
-
-            //default page
-            this.menuPage = new menuPage();
-            this.panelPage.Controls.Add(this.menuPage);
-
             //default button
             //changeButtonColor(this.btnMenu);
-            this.btnMenu.PerformClick();
+            changeButtonColor(this.btnMenu);
 
-            Console.WriteLine(this.btnIngredient.StateCommon.Content.ShortText.Color1.ToString());
+            this.loadMenuPage();
         }
         //event
         private void logout_btn_click(object sender, EventArgs e)
@@ -114,12 +108,12 @@ namespace PBL2.Views.staffView
         private void loadMenuPage()
         {
             this.panelPage.Controls.Clear();
-            if(menuPage != null)
+            if(menuPage == null)
             {
                 this.menuPage = new menuPage();
             }
             this.panelPage.Controls.Add(this.menuPage);
-            this.menuPage.thanhtoan = LoadThanhToanPage;
+            this.menuPage.thanhtoan = this.LoadThanhToanPage;
 
         }
 
@@ -130,9 +124,10 @@ namespace PBL2.Views.staffView
             //MessageBox.Show("Chức năng đang phát triển", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
-        private void LoadThanhToanPage() {
+        private void LoadThanhToanPage(OrderModel order) {
+            if (order.orderDetails.Count == 0) return;
             this.panelPage.Controls.Clear();
-            this.panelPage.Controls.Add(new ThanhToanPage());
+            this.panelPage.Controls.Add(new ThanhToanPage(this.account, order));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace PBL2.Views.MenuPage
 {
     public partial class menuPage : UserControl
     {
-        public delegate void ThanhToan();
+        public delegate void ThanhToan(OrderModel order);
         public ThanhToan thanhtoan = null;
 
         //presenter
@@ -49,14 +49,7 @@ namespace PBL2.Views.MenuPage
 
         private void buttonThanhToan_click(object sender, EventArgs e)
         {
-            foreach (OrderDetailModel detail in Model.order.orderDetails) { 
-                Console.WriteLine("ten:{0}| gia:{1}| soluong: {2}| tong:{3}",
-                    detail.monModel.TenMon,
-                    detail.giaBan,
-                    detail.soLuong,
-                    detail.tongTien);
-            }
-            if(thanhtoan != null)thanhtoan();
+            thanhtoan?.Invoke(this.Model.order);
         }
         //funtion
         public void AddOrderDetail(OrderDetailModel orderDetail)
