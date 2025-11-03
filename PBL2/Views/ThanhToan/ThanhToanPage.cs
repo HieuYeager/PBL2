@@ -102,5 +102,17 @@ namespace PBL2.Views.ThanhToan
             }
         }
 
+        private void thanhToanBtn_click(object sender, EventArgs e)
+        {
+            if (this.Presenter.CheckThanhToan())
+            {
+                MessageBox.Show("Thanh toán thành công");
+            }
+            else
+            {
+                MessageBox.Show("Thanh toán không thành công");
+            }
+        }
+
     }
 }

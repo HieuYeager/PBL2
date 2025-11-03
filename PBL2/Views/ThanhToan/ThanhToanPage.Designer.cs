@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelTongTien = new System.Windows.Forms.Label();
             this.labelTong = new System.Windows.Forms.Label();
@@ -40,12 +40,12 @@
             this.tong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelHeader = new System.Windows.Forms.Label();
             this.panelThanhToan = new System.Windows.Forms.Panel();
-            this.txtTienThanhToan = new System.Windows.Forms.TextBox();
-            this.txtTienThua = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.ThanhToanBtn = new Krypton.Toolkit.KryptonButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTienThua = new System.Windows.Forms.TextBox();
+            this.txtTienThanhToan = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelThanhToan.SuspendLayout();
@@ -92,28 +92,28 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TenMon,
             this.SoLuong,
             this.Gia,
             this.tong});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.Color.White;
             this.dataGridView1.Location = new System.Drawing.Point(3, 54);
@@ -176,59 +176,6 @@
             this.panelThanhToan.Size = new System.Drawing.Size(331, 379);
             this.panelThanhToan.TabIndex = 1;
             // 
-            // txtTienThanhToan
-            // 
-            this.txtTienThanhToan.BackColor = System.Drawing.SystemColors.Info;
-            this.txtTienThanhToan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTienThanhToan.Location = new System.Drawing.Point(39, 112);
-            this.txtTienThanhToan.Name = "txtTienThanhToan";
-            this.txtTienThanhToan.Size = new System.Drawing.Size(261, 37);
-            this.txtTienThanhToan.TabIndex = 0;
-            this.txtTienThanhToan.TextChanged += new System.EventHandler(this.CheckValidNumber_textChange);
-            // 
-            // txtTienThua
-            // 
-            this.txtTienThua.BackColor = System.Drawing.SystemColors.Info;
-            this.txtTienThua.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTienThua.Location = new System.Drawing.Point(39, 212);
-            this.txtTienThua.Name = "txtTienThua";
-            this.txtTienThua.ReadOnly = true;
-            this.txtTienThua.Size = new System.Drawing.Size(261, 37);
-            this.txtTienThua.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.label1.Location = new System.Drawing.Point(68, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(202, 43);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Thanh Toán";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.label2.Location = new System.Drawing.Point(34, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(164, 26);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Tiền thanh toán";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.label3.Location = new System.Drawing.Point(34, 183);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(103, 26);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Tiền thừa";
-            // 
             // ThanhToanBtn
             // 
             this.ThanhToanBtn.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -250,6 +197,60 @@
             this.ThanhToanBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ThanhToanBtn.TabIndex = 12;
             this.ThanhToanBtn.Values.Text = "Thanh toán";
+            this.ThanhToanBtn.Click += new System.EventHandler(this.thanhToanBtn_click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.label3.Location = new System.Drawing.Point(34, 183);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(103, 26);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Tiền thừa";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.label2.Location = new System.Drawing.Point(34, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(164, 26);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Tiền thanh toán";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.label1.Location = new System.Drawing.Point(68, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(202, 43);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Thanh Toán";
+            // 
+            // txtTienThua
+            // 
+            this.txtTienThua.BackColor = System.Drawing.SystemColors.Info;
+            this.txtTienThua.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTienThua.Location = new System.Drawing.Point(39, 212);
+            this.txtTienThua.Name = "txtTienThua";
+            this.txtTienThua.ReadOnly = true;
+            this.txtTienThua.Size = new System.Drawing.Size(261, 37);
+            this.txtTienThua.TabIndex = 1;
+            // 
+            // txtTienThanhToan
+            // 
+            this.txtTienThanhToan.BackColor = System.Drawing.SystemColors.Info;
+            this.txtTienThanhToan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTienThanhToan.Location = new System.Drawing.Point(39, 112);
+            this.txtTienThanhToan.Name = "txtTienThanhToan";
+            this.txtTienThanhToan.Size = new System.Drawing.Size(261, 37);
+            this.txtTienThanhToan.TabIndex = 0;
+            this.txtTienThanhToan.TextChanged += new System.EventHandler(this.CheckValidNumber_textChange);
             // 
             // ThanhToanPage
             // 

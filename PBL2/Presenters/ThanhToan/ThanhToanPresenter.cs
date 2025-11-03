@@ -33,7 +33,8 @@ namespace PBL2.Presenters.ThanhToan
             hoaDon.NgayLapHD = DateTime.Today;
             hoaDon.MaBan = 1;
             hoaDon.ThanhTien = this.Model.order.Total;
-
+            
+            this.Model.order.MaHD = hoaDon.MaHD;
             //add order detail
             foreach (var item in this.Model.order.orderDetails)
             {
@@ -59,7 +60,6 @@ namespace PBL2.Presenters.ThanhToan
                 MySQL_DB.Instance.Insert("chiTietHoaDon", fields, values);
             }
             //
-            MessageBox.Show("Thanh toán thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private string gererateMaHoaDon()
@@ -79,6 +79,18 @@ namespace PBL2.Presenters.ThanhToan
             DataTable dt = MySQL_DB.Instance.Select("hoadon", "MaHD", "MaHD= '" + maHoaDon + "' LIMIT 1");
             if (dt.Rows.Count > 0) return true;
             return false;
+        }
+
+        public bool CheckThanhToan()
+        {
+            if (this.Model.TienThua < 0 && this.Model.TienThanhToan > 0)
+            {
+                return false;
+            }
+
+            MySQL_DB.Instance.Update("hoaDon", "TrangThai = '" + TrangThaiHoaDon.DaThanhToan.GetDisplayName() + "'", "MaHD='" + this.Model.order.MaHD + "'");
+
+            return true;
         }
     }
 }

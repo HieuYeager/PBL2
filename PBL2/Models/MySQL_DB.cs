@@ -16,7 +16,7 @@ namespace PBL2.Models
     public class MySQL_DB
     {
         //----------------Hieu,  Bin, Hai-------------------------------------------------
-        private string connectionString = "server=localhost;port=3306;database=pbl;uid=root;pwd=mysql12345;";
+        private string connectionString = "server=localhost;port=3306;database=pbl;uid=root;pwd=;";
         //-----------------------------------------------------------------
         public static MySQL_DB Instance { get; } = new MySQL_DB();
         private MySQL_DB() { }
@@ -132,7 +132,6 @@ namespace PBL2.Models
         public int Insert(string table, string fields, string values)
         {
             string query = $"INSERT INTO {table}({fields}) VALUES ({values})";
-            MessageBox.Show(query);
             return ExecuteNonQuery(query);
             //Ex: string fields = "name, age";
             //string values = "'abc', 20";
