@@ -155,9 +155,9 @@ namespace PBL2.Presenters.QL_Menu
             try
             {
                 string condition = $"MaMon = {maMon}";
-                int result = MySQL_DB.Instance.Delete("Mon", condition);
+                bool result = MySQL_DB.Instance.Delete("Mon", condition);
 
-                if (result > 0)
+                if (result)
                 {
                     MessageBox.Show("Xóa món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
