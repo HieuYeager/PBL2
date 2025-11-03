@@ -274,8 +274,17 @@
     <EmbeddedResource Include="Views\MenuPage\OrderDetailComponent.resx">
       <DependentUpon>OrderDetailComponent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_Menu\AddMonForm.resx">
+      <DependentUpon>AddMonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_Menu\DeleteMonForm.resx">
+      <DependentUpon>DeleteMonForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\QL_Menu\QL_MenuPage.resx">
       <DependentUpon>QL_MenuPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_Menu\UpdateMonForm.resx">
+      <DependentUpon>UpdateMonForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QL_NhanVien\AddNhanVienForm.resx">
       <DependentUpon>AddNhanVienForm.cs</DependentUpon>

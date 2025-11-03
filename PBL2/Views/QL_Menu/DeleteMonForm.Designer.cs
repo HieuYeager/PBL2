@@ -28,12 +28,77 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.lbCanhBao = new System.Windows.Forms.Label();
+            this.lbText = new System.Windows.Forms.Label();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnHuy2 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // lbCanhBao
+            // 
+            this.lbCanhBao.AutoSize = true;
+            this.lbCanhBao.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCanhBao.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbCanhBao.Location = new System.Drawing.Point(290, 58);
+            this.lbCanhBao.Name = "lbCanhBao";
+            this.lbCanhBao.Size = new System.Drawing.Size(208, 51);
+            this.lbCanhBao.TabIndex = 0;
+            this.lbCanhBao.Text = "Cảnh báo";
+            // 
+            // lbText
+            // 
+            this.lbText.AutoSize = true;
+            this.lbText.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbText.ForeColor = System.Drawing.Color.Red;
+            this.lbText.Location = new System.Drawing.Point(60, 182);
+            this.lbText.Name = "lbText";
+            this.lbText.Size = new System.Drawing.Size(686, 42);
+            this.lbText.TabIndex = 1;
+            this.lbText.Text = "Bạn có chắc muốn xóa món này không?";
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.BackColor = System.Drawing.Color.Red;
+            this.btnXoa.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnXoa.Location = new System.Drawing.Point(141, 310);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(165, 55);
+            this.btnXoa.TabIndex = 2;
+            this.btnXoa.Text = "Xóa";
+            this.btnXoa.UseVisualStyleBackColor = false;
+            // 
+            // btnHuy2
+            // 
+            this.btnHuy2.Location = new System.Drawing.Point(487, 310);
+            this.btnHuy2.Name = "btnHuy2";
+            this.btnHuy2.Size = new System.Drawing.Size(165, 55);
+            this.btnHuy2.TabIndex = 3;
+            this.btnHuy2.Text = "Hủy";
+            this.btnHuy2.UseVisualStyleBackColor = true;
+            // 
+            // DeleteMonForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaGreen;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnHuy2);
+            this.Controls.Add(this.btnXoa);
+            this.Controls.Add(this.lbText);
+            this.Controls.Add(this.lbCanhBao);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "DeleteMonForm";
             this.Text = "DeleteMonForm";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label lbCanhBao;
+        private System.Windows.Forms.Label lbText;
+        private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnHuy2;
     }
 }
