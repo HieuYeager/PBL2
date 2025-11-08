@@ -16,13 +16,7 @@ namespace PBL2.Views.QL_NhanVien
 {
     public partial class QL_NhanVienPage : UserControl, IView<QL_NhanVienPresenter, QL_NhanVienPageModel>
     {
-        private void addBtn_Click_1(object sender, EventArgs e)
-        {
-            AddNhanVienForm addForm = new AddNhanVienForm(this.Presenter);
-            addForm.ShowDialog();
-            // Reload the DataGridView after adding a new employee
-            this.LoadTableNV();
-        }
+
         public QL_NhanVienPresenter Presenter { get; set; }
 
         public QL_NhanVienPageModel Model { get; set; }
@@ -52,7 +46,7 @@ namespace PBL2.Views.QL_NhanVien
                 this.dataGridView1.Columns["MaNV"].HeaderText = "Mã NV";
 
                 this.dataGridView1.Columns["TenNV"].HeaderText = "Tên";
-                //this.dataGridView1.Columns["TenNV"].FillWeight = 100;
+                this.dataGridView1.Columns["TenNV"].FillWeight = 100;
 
                 this.dataGridView1.Columns["VaiTro"].HeaderText = "Vai trò";
                 this.dataGridView1.Columns["SDT"].HeaderText = "SĐT";
@@ -61,7 +55,9 @@ namespace PBL2.Views.QL_NhanVien
                 this.dataGridView1.Columns["DiaChi"].FillWeight = 200;
 
                 this.dataGridView1.Columns["MucLuongCoBan"].HeaderText = "Lương cơ bản";
-                this.dataGridView1.Columns["CaLamViec"].HeaderText = "Ca làm việc";
+                //this.dataGridView1.Columns["CaLamViec"].HeaderText = "Ca làm việc";
+                this.dataGridView1.Columns["CaLamViec"].Visible = false;
+
             }
             catch (Exception ex)
             {
@@ -91,11 +87,20 @@ namespace PBL2.Views.QL_NhanVien
             // Đảm bảo thiết lập kéo giãn hàng và tắt hàng trống (đã hướng dẫn ở phần trước)
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            //load details
+            this.loadDetails(dataGridView1.Rows[0]);
+
+            //conboBox
+            comboBox1.Items.Clear();
+            comboBox1.Items.Add("Nhân viên");
+            comboBox1.Items.Add("Quản lý");
+
+            if (comboBox1.SelectedItem == null)
+                comboBox1.SelectedItem = "Nhân viên";
         }
 
         private void QL_NhanVienPage_Load(object sender, EventArgs e) {}
-
-        private void Label_Click(object sender, EventArgs e) {}
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
@@ -130,7 +135,10 @@ namespace PBL2.Views.QL_NhanVien
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
-                return;
+            {
+                return; 
+            }
+            loadDetails(dataGridView1.Rows[e.RowIndex]);
 
             string columnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
@@ -148,33 +156,105 @@ namespace PBL2.Views.QL_NhanVien
                 {
                     this.LoadTableNV();
                 }
+                return;
             }
 
             //xử lý sự kiện nút SỬA
             if (columnName == "EditColumn")
             {
-                //lấy thông tin nhân viên từ hàng được chọn
-                string maNV = dataGridView1.Rows[e.RowIndex].Cells["MaNV"].Value.ToString();
-                string tenNV = dataGridView1.Rows[e.RowIndex].Cells["TenNV"].Value.ToString();
-                string sdt = dataGridView1.Rows[e.RowIndex].Cells["SDT"].Value.ToString();
-                string diaChi = dataGridView1.Rows[e.RowIndex].Cells["DiaChi"].Value.ToString();
-                string mucLuong = dataGridView1.Rows[e.RowIndex].Cells["MucLuongCoBan"].Value.ToString();
-                string vaitro = dataGridView1.Rows[e.RowIndex].Cells["VaiTro"].Value.ToString();
-
-                //mở form sửa nhân viên
-                UpdateNhanVienForm updateForm = new UpdateNhanVienForm();
-
-                //điền thông tin nhân viên vào form
-                updateForm.SetNhanVienInfo(maNV, tenNV, sdt, diaChi, mucLuong, vaitro);
-
-                if (updateForm.ShowDialog() == DialogResult.OK)
-                {
-                    //nếu người dùng lưu thay đổi, reload lại bảng
-                    this.LoadTableNV();
-                }
+                this.UpdateNhanVien();
+                return;
             }
+            
+            this.cancel();
         }
 
-        private void FindTxt_TextChanged(object sender, EventArgs e) {}
+        private void loadDetails(DataGridViewRow row)
+        {
+            if(row == null)
+            {
+                this.txtMaNV.Text = this.Presenter.GenerateMaNV();
+                this.txtTen.Text = "";
+                this.comboBox1.SelectedItem = "Nhân viên";
+                this.txtSDT.Text = "";
+                this.txtDiaChi.Text = "";
+                this.txtMucLuong.Text = "";
+                return;
+            }
+
+            this.txtMaNV.Text = row.Cells["MaNV"].Value.ToString();
+            this.txtTen.Text = row.Cells["TenNV"].Value.ToString();
+            this.comboBox1.SelectedItem = row.Cells["VaiTro"].Value.ToString();
+            this.txtSDT.Text = row.Cells["SDT"].Value.ToString();
+            this.txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
+            this.txtMucLuong.Text = row.Cells["MucLuongCoBan"].Value.ToString();
+        }
+
+        private void addBtn_Click_1(object sender, EventArgs e)
+        {
+            this.panelDetail.Enabled = true;
+            this.loadDetails(null);
+            //btns
+            this.AddSubmitBtn.Visible = true;
+            this.CancelBtn.Visible = true;
+            //focus
+            this.txtTen.Focus();
+        }
+
+        private void Them_Click(object sender, EventArgs e)
+        {
+            NhanVien newNhanVien = new NhanVien()
+            {
+                MaNV = this.txtMaNV.Text.Trim(),
+                TenNV = txtTen.Text.Trim(),
+                SDT = txtSDT.Text.Trim(),
+                DiaChi = txtDiaChi.Text.Trim(),
+                //MucLuongCoBan = Convert.ToDecimal(txtMucLuong.Text.Trim()),
+                //VaiTro = comboBox1.SelectedItem.ToString()
+                VaiTro = this.comboBox1.SelectedItem.ToString() == VaiTro.QuanLy.GetDisplayName() ? VaiTro.QuanLy : VaiTro.NhanVien
+            };
+
+            if (string.IsNullOrEmpty(newNhanVien.TenNV) || string.IsNullOrEmpty(newNhanVien.SDT) || string.IsNullOrEmpty(newNhanVien.DiaChi) || string.IsNullOrEmpty(this.txtMucLuong.Text.ToString()))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!decimal.TryParse(this.txtMucLuong.Text, out decimal mucLuongCoBan))
+            {
+                MessageBox.Show("Mức lương không hợp lệ. Vui lòng nhập số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            newNhanVien.MucLuongCoBan = mucLuongCoBan;
+
+            this.Presenter.Add_NhanVien(newNhanVien);
+            this.LoadTableNV();
+            this.cancel();
+        }
+        private void UpdateNhanVien()
+        {
+            this.panelDetail.Enabled = true;
+            this.loadDetails(this.dataGridView1.SelectedRows[0]);
+            //btns
+            this.UpdateSubmitBtn.Visible = true;
+            this.CancelBtn.Visible = true;
+            //focus
+            this.txtTen.Focus();
+        }
+        private void cancel(object sender, EventArgs e)
+        {
+            this.cancel();
+        }
+
+        private void cancel()
+        {
+            this.panelDetail.Enabled = false;
+            this.loadDetails(this.dataGridView1.SelectedRows[0]);
+            //btns
+            this.AddSubmitBtn.Visible = false;
+            this.UpdateSubmitBtn.Visible = false;
+            this.CancelBtn.Visible = false;
+        }
     }
 }

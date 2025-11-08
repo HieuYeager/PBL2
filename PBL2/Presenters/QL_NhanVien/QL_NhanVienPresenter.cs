@@ -111,7 +111,7 @@ namespace PBL2.Presenters.QL_NhanVien
         //    }
         //}
 
-        private string GenerateMaNV()
+        public string GenerateMaNV()
         {
             try
             {
@@ -136,6 +136,60 @@ namespace PBL2.Presenters.QL_NhanVien
             {
                 MessageBox.Show("Lỗi tạo mã NV: " + ex.Message);
                 return "NV001"; // nếu lỗi thì trả về mặc định
+            }
+        }
+
+        public void Add_NhanVien(NhanVien nv)
+        {
+            try
+            {
+                Dictionary<string, string> Data = new Dictionary<string, string>
+                {
+                    { "MaNV", nv.MaNV },
+                    { "TenNV", nv.TenNV },
+                    { "SDT", nv.SDT },
+                    { "DiaChi", nv.DiaChi },
+                    { "MucLuongCoBan", nv.MucLuongCoBan.ToString() },
+                    { "VaiTro", nv.VaiTro.GetDisplayName() } //Mặc định
+                    //{ "CaLamViec", "Ca Sáng" }
+                };
+
+                bool success = MySQL_DB.Instance.Insert("NhanVien", Data);
+
+                if (success)
+                {
+                    MessageBox.Show("Thêm nhân viên thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                //tao acc
+                string password = BCrypt.Net.BCrypt.HashPassword("123456");
+                Dictionary<string, string> DataAcc = new Dictionary<string, string>
+                {
+                    { "MaNV", nv.MaNV },
+                    { "Password", password }, //Mặc định
+                    { "khoa",  "0"}
+
+                };
+
+                bool result = MySQL_DB.Instance.Insert("Account", DataAcc);
+
+                if (result)
+                {
+                    MessageBox.Show("Tạo acc thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Tạo acc thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -184,6 +184,7 @@ namespace PBL2.Views.QL_Menu
             this.Presenter.LoadMenu();
             this.dataGridView1.Columns.Clear();
             this.dataGridView1.DataSource = Model.Table;
+            this.dataGridView1.Columns["URl_Anh"].Visible = false;
             //custom column
             try
             {

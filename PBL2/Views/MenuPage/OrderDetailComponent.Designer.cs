@@ -33,10 +33,10 @@
             this.labelSoLuong = new System.Windows.Forms.Label();
             this.minusBtn = new Krypton.Toolkit.KryptonButton();
             this.addBtn = new Krypton.Toolkit.KryptonButton();
-            this.labelGia = new System.Windows.Forms.Label();
             this.labelTenMon = new System.Windows.Forms.Label();
-            this.labelTong = new System.Windows.Forms.Label();
             this.labelSubTotal = new System.Windows.Forms.Label();
+            this.labelTong = new System.Windows.Forms.Label();
+            this.labelGia = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).BeginInit();
             this.kryptonGroup1.Panel.SuspendLayout();
@@ -158,17 +158,6 @@
             this.addBtn.Values.Text = "";
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
-            // labelGia
-            // 
-            this.labelGia.AutoSize = true;
-            this.labelGia.BackColor = System.Drawing.Color.Transparent;
-            this.labelGia.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGia.Location = new System.Drawing.Point(112, 9);
-            this.labelGia.Name = "labelGia";
-            this.labelGia.Size = new System.Drawing.Size(52, 27);
-            this.labelGia.TabIndex = 1;
-            this.labelGia.Text = "1000";
-            // 
             // labelTenMon
             // 
             this.labelTenMon.AutoSize = true;
@@ -179,6 +168,17 @@
             this.labelTenMon.Size = new System.Drawing.Size(115, 27);
             this.labelTenMon.TabIndex = 0;
             this.labelTenMon.Text = "<Tên món>";
+            // 
+            // labelSubTotal
+            // 
+            this.labelSubTotal.AutoSize = true;
+            this.labelSubTotal.BackColor = System.Drawing.Color.Transparent;
+            this.labelSubTotal.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSubTotal.Location = new System.Drawing.Point(112, 36);
+            this.labelSubTotal.Name = "labelSubTotal";
+            this.labelSubTotal.Size = new System.Drawing.Size(52, 27);
+            this.labelSubTotal.TabIndex = 13;
+            this.labelSubTotal.Text = "1000";
             // 
             // labelTong
             // 
@@ -191,16 +191,16 @@
             this.labelTong.TabIndex = 12;
             this.labelTong.Text = "Tổng phụ: ";
             // 
-            // labelSubTotal
+            // labelGia
             // 
-            this.labelSubTotal.AutoSize = true;
-            this.labelSubTotal.BackColor = System.Drawing.Color.Transparent;
-            this.labelSubTotal.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSubTotal.Location = new System.Drawing.Point(112, 36);
-            this.labelSubTotal.Name = "labelSubTotal";
-            this.labelSubTotal.Size = new System.Drawing.Size(52, 27);
-            this.labelSubTotal.TabIndex = 13;
-            this.labelSubTotal.Text = "1000";
+            this.labelGia.AutoSize = true;
+            this.labelGia.BackColor = System.Drawing.Color.Transparent;
+            this.labelGia.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGia.Location = new System.Drawing.Point(112, 9);
+            this.labelGia.Name = "labelGia";
+            this.labelGia.Size = new System.Drawing.Size(52, 27);
+            this.labelGia.TabIndex = 1;
+            this.labelGia.Text = "1000";
             // 
             // OrderDetailComponent
             // 
@@ -223,12 +223,12 @@
 
         private Krypton.Toolkit.KryptonGroup kryptonGroup1;
         private Krypton.Toolkit.KryptonButton addBtn;
-        private System.Windows.Forms.Label labelGia;
         private System.Windows.Forms.Label labelTenMon;
         private Krypton.Toolkit.KryptonButton minusBtn;
         private System.Windows.Forms.Label labelSoLuong;
         private Krypton.Toolkit.KryptonButton closeBtn;
         private System.Windows.Forms.Label labelSubTotal;
         private System.Windows.Forms.Label labelTong;
+        private System.Windows.Forms.Label labelGia;
     }
 }

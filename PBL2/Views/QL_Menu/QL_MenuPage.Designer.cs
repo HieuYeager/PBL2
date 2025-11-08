@@ -52,7 +52,7 @@
             this.Label.BackColor = System.Drawing.Color.Transparent;
             this.Label.Font = new System.Drawing.Font("Mongolian Baiti", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
-            this.Label.Location = new System.Drawing.Point(395, 19);
+            this.Label.Location = new System.Drawing.Point(500, 13);
             this.Label.Name = "Label";
             this.Label.Size = new System.Drawing.Size(206, 35);
             this.Label.TabIndex = 1;
@@ -128,7 +128,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1003, 575);
+            this.dataGridView1.Size = new System.Drawing.Size(1203, 628);
             this.dataGridView1.TabIndex = 6;
             // 
             // Column5
@@ -164,9 +164,9 @@
             // ComboBoxDanhMuc
             // 
             this.ComboBoxDanhMuc.DropDownWidth = 161;
-            this.ComboBoxDanhMuc.Location = new System.Drawing.Point(519, 73);
+            this.ComboBoxDanhMuc.Location = new System.Drawing.Point(743, 79);
             this.ComboBoxDanhMuc.Name = "ComboBoxDanhMuc";
-            this.ComboBoxDanhMuc.Size = new System.Drawing.Size(176, 42);
+            this.ComboBoxDanhMuc.Size = new System.Drawing.Size(176, 38);
             this.ComboBoxDanhMuc.StateCommon.ComboBox.Back.Color1 = System.Drawing.Color.White;
             this.ComboBoxDanhMuc.StateCommon.ComboBox.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.ComboBoxDanhMuc.StateCommon.ComboBox.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
@@ -186,7 +186,7 @@
             // 
             // FindTxt
             // 
-            this.FindTxt.Location = new System.Drawing.Point(728, 73);
+            this.FindTxt.Location = new System.Drawing.Point(952, 79);
             this.FindTxt.Name = "FindTxt";
             this.FindTxt.Size = new System.Drawing.Size(176, 40);
             this.FindTxt.StateCommon.Back.Color1 = System.Drawing.Color.White;
@@ -206,7 +206,7 @@
             // addBtn
             // 
             this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBtn.Location = new System.Drawing.Point(927, 73);
+            this.addBtn.Location = new System.Drawing.Point(1151, 79);
             this.addBtn.Name = "addBtn";
             this.addBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.addBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -237,10 +237,10 @@
             this.Controls.Add(this.Label);
             this.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.MaximumSize = new System.Drawing.Size(1003, 700);
-            this.MinimumSize = new System.Drawing.Size(1003, 700);
+            this.MaximumSize = new System.Drawing.Size(1203, 753);
+            this.MinimumSize = new System.Drawing.Size(1203, 753);
             this.Name = "QL_MenuPage";
-            this.Size = new System.Drawing.Size(1003, 700);
+            this.Size = new System.Drawing.Size(1203, 753);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ComboBoxDanhMuc)).EndInit();
             this.ResumeLayout(false);

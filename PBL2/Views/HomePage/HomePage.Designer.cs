@@ -42,14 +42,16 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MainPanel.MaximumSize = new System.Drawing.Size(1382, 753);
+            this.MainPanel.MinimumSize = new System.Drawing.Size(1382, 753);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(1182, 700);
+            this.MainPanel.Size = new System.Drawing.Size(1382, 753);
             this.MainPanel.TabIndex = 2;
             // 
             // loginBtn
             // 
             this.loginBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.loginBtn.Location = new System.Drawing.Point(514, 584);
+            this.loginBtn.Location = new System.Drawing.Point(627, 625);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.loginBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -72,8 +74,10 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.MainPanel);
+            this.MaximumSize = new System.Drawing.Size(1382, 753);
+            this.MinimumSize = new System.Drawing.Size(1382, 753);
             this.Name = "HomePage";
-            this.Size = new System.Drawing.Size(1182, 700);
+            this.Size = new System.Drawing.Size(1382, 753);
             this.MainPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 

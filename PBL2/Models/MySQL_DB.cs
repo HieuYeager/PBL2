@@ -143,6 +143,8 @@ namespace PBL2.Models
             string fields = string.Join(", ", data.Keys);
             string values = string.Join(", ", data.Values.Select(v => $"'{v.Replace("'", "''")}'"));
             string query = $"INSERT INTO {table} ({fields}) VALUES ({values})";
+
+            MessageBox.Show(query);
             int result = ExecuteNonQuery(query);
             
             return result > 0;

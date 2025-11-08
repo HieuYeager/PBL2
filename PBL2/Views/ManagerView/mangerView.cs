@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using PBL2.Models;
 using PBL2.Views.QL_Menu;
 using PBL2.Views.QL_NhanVien;
+using PBL2.Views.BaoCao;
+using PBL2.Views.QLTonKho;
 namespace PBL2.Views.ManagerView
 {
     public partial class mangerView : UserControl
@@ -63,6 +65,17 @@ namespace PBL2.Views.ManagerView
             changeButtonColor((Krypton.Toolkit.KryptonButton)sender);
             this.loadQlNhanVien();
         }
+
+        private void btnBaoCao_click(object sender, EventArgs e)
+        {
+            changeButtonColor((Krypton.Toolkit.KryptonButton)sender);
+            this.loadBaoCao();
+        }
+        private void btnQLTonKho_click(object sender, EventArgs e)
+        {
+            changeButtonColor((Krypton.Toolkit.KryptonButton)sender);
+            this.loadQLTonKho();
+        }
         //function
         private void changeButtonColor(Krypton.Toolkit.KryptonButton button)
         {
@@ -90,16 +103,28 @@ namespace PBL2.Views.ManagerView
             btn.StateCommon.Content.ShortText.Color1 = DefaultText;
         }
         //load
-        private void loadQLMenu()
+        public void loadQLMenu()
         {
             this.panelPage.Controls.Clear();
             this.panelPage.Controls.Add(new QL_MenuPage());
         }
 
-        private void loadQlNhanVien()
+        public void loadQlNhanVien()
         {
             this.panelPage.Controls.Clear();
             this.panelPage.Controls.Add(new QL_NhanVienPage());
+        }
+
+        public void loadBaoCao()
+        {
+            this.panelPage.Controls.Clear();
+            this.panelPage.Controls.Add(new BaoCaoPage());
+        }
+
+        public void loadQLTonKho()
+        {
+            this.panelPage.Controls.Clear();
+            this.panelPage.Controls.Add(new QLTonKhoPage());
         }
     }
 }

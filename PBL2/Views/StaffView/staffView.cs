@@ -12,6 +12,8 @@ using Org.BouncyCastle.X509;
 using PBL2.Models;
 using PBL2.Views.MenuPage;
 using PBL2.Views.ThanhToan;
+using PBL2.Views.QLTonKho;
+using PBL2.Views.QLDon;
 namespace PBL2.Views.staffView
 {
     public partial class staffView : UserControl
@@ -63,11 +65,10 @@ namespace PBL2.Views.staffView
             loadMenuPage();
         }
 
-        private void Bill_btn_click(object sender, EventArgs e)
+        private void Don_btn_click(object sender, EventArgs e)
         {
-            changeButtonColor(this.btnBill);
-            //LoadThanhToanPage();
-            //change button color
+            changeButtonColor(this.btnDon);
+            loadQlDonPage();
         }
 
         private void Ingredient_btn_click(object sender, EventArgs e)
@@ -117,12 +118,18 @@ namespace PBL2.Views.staffView
 
         }
 
+        public void loadQlDonPage()
+        {
+            this.panelPage.Controls.Clear();
+
+            this.panelPage.Controls.Add(new QLDonPage());
+        }
+
         private void LoadIngredientPage()
         {
-            //this.panelPage.Controls.Clear();
+            this.panelPage.Controls.Clear();
 
-            //MessageBox.Show("Chức năng đang phát triển", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            this.panelPage.Controls.Add(new QLTonKhoPage());
         }
         private void LoadThanhToanPage(OrderModel order) {
             if (order.orderDetails.Count == 0) return;

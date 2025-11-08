@@ -56,16 +56,16 @@
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(743, 700);
+            this.panelMenu.Size = new System.Drawing.Size(947, 753);
             this.panelMenu.TabIndex = 0;
             // 
             // panelMons
             // 
             this.panelMons.AutoScroll = true;
             this.panelMons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelMons.Location = new System.Drawing.Point(0, 93);
+            this.panelMons.Location = new System.Drawing.Point(0, 87);
             this.panelMons.Name = "panelMons";
-            this.panelMons.Size = new System.Drawing.Size(743, 607);
+            this.panelMons.Size = new System.Drawing.Size(947, 666);
             this.panelMons.TabIndex = 12;
             // 
             // panel1
@@ -76,13 +76,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(743, 87);
+            this.panel1.Size = new System.Drawing.Size(947, 87);
             this.panel1.TabIndex = 11;
             // 
             // ComboBoxDanhMuc
             // 
             this.ComboBoxDanhMuc.DropDownWidth = 161;
-            this.ComboBoxDanhMuc.Location = new System.Drawing.Point(276, 25);
+            this.ComboBoxDanhMuc.Location = new System.Drawing.Point(470, 17);
             this.ComboBoxDanhMuc.Name = "ComboBoxDanhMuc";
             this.ComboBoxDanhMuc.Size = new System.Drawing.Size(176, 42);
             this.ComboBoxDanhMuc.StateCommon.ComboBox.Back.Color1 = System.Drawing.Color.White;
@@ -103,7 +103,7 @@
             // 
             // FindTxt
             // 
-            this.FindTxt.Location = new System.Drawing.Point(481, 23);
+            this.FindTxt.Location = new System.Drawing.Point(675, 15);
             this.FindTxt.Name = "FindTxt";
             this.FindTxt.Size = new System.Drawing.Size(176, 44);
             this.FindTxt.StateCommon.Back.Color1 = System.Drawing.Color.White;
@@ -123,7 +123,7 @@
             // addBtn
             // 
             this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBtn.Location = new System.Drawing.Point(673, 25);
+            this.addBtn.Location = new System.Drawing.Point(867, 17);
             this.addBtn.Name = "addBtn";
             this.addBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.addBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -150,24 +150,24 @@
             this.panelOrder.Controls.Add(this.ListOrderDetailsPn);
             this.panelOrder.Controls.Add(this.panel2);
             this.panelOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelOrder.Location = new System.Drawing.Point(743, 0);
+            this.panelOrder.Location = new System.Drawing.Point(947, 0);
             this.panelOrder.Name = "panelOrder";
-            this.panelOrder.Size = new System.Drawing.Size(260, 700);
+            this.panelOrder.Size = new System.Drawing.Size(256, 753);
             this.panelOrder.TabIndex = 1;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.ThanhToanbtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 613);
+            this.panel3.Location = new System.Drawing.Point(0, 666);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(260, 87);
+            this.panel3.Size = new System.Drawing.Size(256, 87);
             this.panel3.TabIndex = 9;
             // 
             // ThanhToanbtn
             // 
             this.ThanhToanbtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ThanhToanbtn.Location = new System.Drawing.Point(72, 20);
+            this.ThanhToanbtn.Location = new System.Drawing.Point(77, 23);
             this.ThanhToanbtn.Name = "ThanhToanbtn";
             this.ThanhToanbtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.ThanhToanbtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -192,7 +192,7 @@
             this.ListOrderDetailsPn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ListOrderDetailsPn.Location = new System.Drawing.Point(0, 87);
             this.ListOrderDetailsPn.Name = "ListOrderDetailsPn";
-            this.ListOrderDetailsPn.Size = new System.Drawing.Size(260, 613);
+            this.ListOrderDetailsPn.Size = new System.Drawing.Size(256, 666);
             this.ListOrderDetailsPn.TabIndex = 8;
             // 
             // panel2
@@ -201,7 +201,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(260, 87);
+            this.panel2.Size = new System.Drawing.Size(256, 87);
             this.panel2.TabIndex = 0;
             // 
             // label2
@@ -209,7 +209,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Monotype Corsiva", 16.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(95, 26);
+            this.label2.Location = new System.Drawing.Point(91, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 34);
             this.label2.TabIndex = 7;
@@ -220,8 +220,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.panelOrder);
             this.Controls.Add(this.panelMenu);
+            this.MaximumSize = new System.Drawing.Size(1203, 753);
+            this.MinimumSize = new System.Drawing.Size(1203, 753);
             this.Name = "menuPage";
-            this.Size = new System.Drawing.Size(1003, 700);
+            this.Size = new System.Drawing.Size(1203, 753);
             this.panelMenu.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

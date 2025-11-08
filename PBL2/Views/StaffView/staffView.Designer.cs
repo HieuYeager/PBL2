@@ -31,11 +31,9 @@
             this.panelSideBar = new System.Windows.Forms.Panel();
             this.panelBtns = new System.Windows.Forms.Panel();
             this.btnIngredient = new Krypton.Toolkit.KryptonButton();
-            this.btnBill = new Krypton.Toolkit.KryptonButton();
+            this.btnDon = new Krypton.Toolkit.KryptonButton();
             this.btnMenu = new Krypton.Toolkit.KryptonButton();
             this.panelAccount = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.labelVaiTro = new System.Windows.Forms.Label();
             this.labelTen = new System.Windows.Forms.Label();
             this.panelBot = new System.Windows.Forms.Panel();
@@ -59,19 +57,19 @@
             this.panelSideBar.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSideBar.Location = new System.Drawing.Point(0, 0);
             this.panelSideBar.Name = "panelSideBar";
-            this.panelSideBar.Size = new System.Drawing.Size(179, 700);
+            this.panelSideBar.Size = new System.Drawing.Size(179, 753);
             this.panelSideBar.TabIndex = 0;
             // 
             // panelBtns
             // 
             this.panelBtns.Controls.Add(this.btnIngredient);
-            this.panelBtns.Controls.Add(this.btnBill);
+            this.panelBtns.Controls.Add(this.btnDon);
             this.panelBtns.Controls.Add(this.btnMenu);
             this.panelBtns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBtns.Location = new System.Drawing.Point(0, 265);
             this.panelBtns.Name = "panelBtns";
             this.panelBtns.Padding = new System.Windows.Forms.Padding(15, 1, 15, 0);
-            this.panelBtns.Size = new System.Drawing.Size(179, 341);
+            this.panelBtns.Size = new System.Drawing.Size(179, 394);
             this.panelBtns.TabIndex = 1;
             // 
             // btnIngredient
@@ -97,40 +95,42 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnIngredient.StateCommon.Border.Rounding = 10F;
             this.btnIngredient.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(49)))), ((int)(((byte)(43)))));
-            this.btnIngredient.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngredient.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngredient.StateCommon.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.btnIngredient.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.btnIngredient.TabIndex = 2;
-            this.btnIngredient.Values.Text = "Nguyên liệu";
+            this.btnIngredient.Values.Text = "Tồn kho";
             this.btnIngredient.Click += new System.EventHandler(this.Ingredient_btn_click);
             // 
-            // btnBill
+            // btnDon
             // 
-            this.btnBill.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnBill.Location = new System.Drawing.Point(15, 48);
-            this.btnBill.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
-            this.btnBill.Name = "btnBill";
-            this.btnBill.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnBill.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnBill.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnBill.OverrideDefault.Border.Draw = Krypton.Toolkit.InheritBool.False;
-            this.btnBill.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnDon.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDon.Location = new System.Drawing.Point(15, 48);
+            this.btnDon.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
+            this.btnDon.Name = "btnDon";
+            this.btnDon.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnDon.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnDon.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnDon.OverrideDefault.Border.Draw = Krypton.Toolkit.InheritBool.False;
+            this.btnDon.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnBill.Size = new System.Drawing.Size(149, 47);
-            this.btnBill.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnBill.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnBill.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnBill.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnBill.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnDon.Size = new System.Drawing.Size(149, 47);
+            this.btnDon.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnDon.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnDon.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnDon.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnDon.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnBill.StateCommon.Border.Rounding = 10F;
-            this.btnBill.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(49)))), ((int)(((byte)(43)))));
-            this.btnBill.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBill.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
-            this.btnBill.TabIndex = 1;
-            this.btnBill.Values.Text = "Hóa đơn";
-            this.btnBill.Click += new System.EventHandler(this.Bill_btn_click);
+            this.btnDon.StateCommon.Border.Rounding = 10F;
+            this.btnDon.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(49)))), ((int)(((byte)(43)))));
+            this.btnDon.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDon.StateCommon.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.btnDon.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnDon.TabIndex = 1;
+            this.btnDon.Values.Text = "Đơn";
+            this.btnDon.Click += new System.EventHandler(this.Don_btn_click);
             // 
             // btnMenu
             // 
@@ -160,7 +160,8 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnMenu.StateCommon.Border.Rounding = 10F;
             this.btnMenu.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(49)))), ((int)(((byte)(43)))));
-            this.btnMenu.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMenu.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMenu.StateCommon.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
             this.btnMenu.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.btnMenu.StateTracking.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
@@ -173,8 +174,6 @@
             // panelAccount
             // 
             this.panelAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
-            this.panelAccount.Controls.Add(this.label2);
-            this.panelAccount.Controls.Add(this.label1);
             this.panelAccount.Controls.Add(this.labelVaiTro);
             this.panelAccount.Controls.Add(this.labelTen);
             this.panelAccount.Dock = System.Windows.Forms.DockStyle.Top;
@@ -184,55 +183,35 @@
             this.panelAccount.Size = new System.Drawing.Size(179, 103);
             this.panelAccount.TabIndex = 3;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(3, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 19);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Vai trò:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(3, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 19);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Tên:";
-            // 
             // labelVaiTro
             // 
             this.labelVaiTro.AutoSize = true;
             this.labelVaiTro.BackColor = System.Drawing.Color.Transparent;
+            this.labelVaiTro.Font = new System.Drawing.Font("Mongolian Baiti", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelVaiTro.ForeColor = System.Drawing.Color.White;
-            this.labelVaiTro.Location = new System.Drawing.Point(82, 57);
+            this.labelVaiTro.Location = new System.Drawing.Point(11, 55);
             this.labelVaiTro.Name = "labelVaiTro";
-            this.labelVaiTro.Size = new System.Drawing.Size(73, 19);
-            this.labelVaiTro.TabIndex = 3;
+            this.labelVaiTro.Size = new System.Drawing.Size(89, 24);
+            this.labelVaiTro.TabIndex = 7;
             this.labelVaiTro.Text = "Vai trò:";
             // 
             // labelTen
             // 
             this.labelTen.AutoSize = true;
             this.labelTen.BackColor = System.Drawing.Color.Transparent;
+            this.labelTen.Font = new System.Drawing.Font("Mongolian Baiti", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTen.ForeColor = System.Drawing.Color.White;
-            this.labelTen.Location = new System.Drawing.Point(54, 16);
+            this.labelTen.Location = new System.Drawing.Point(11, 14);
             this.labelTen.Name = "labelTen";
-            this.labelTen.Size = new System.Drawing.Size(40, 19);
-            this.labelTen.TabIndex = 2;
+            this.labelTen.Size = new System.Drawing.Size(49, 24);
+            this.labelTen.TabIndex = 6;
             this.labelTen.Text = "Tên";
             // 
             // panelBot
             // 
             this.panelBot.Controls.Add(this.btnLogout);
             this.panelBot.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBot.Location = new System.Drawing.Point(0, 606);
+            this.panelBot.Location = new System.Drawing.Point(0, 659);
             this.panelBot.Name = "panelBot";
             this.panelBot.Size = new System.Drawing.Size(179, 94);
             this.panelBot.TabIndex = 2;
@@ -280,7 +259,7 @@
             this.panelPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPage.Location = new System.Drawing.Point(179, 0);
             this.panelPage.Name = "panelPage";
-            this.panelPage.Size = new System.Drawing.Size(1003, 700);
+            this.panelPage.Size = new System.Drawing.Size(1203, 753);
             this.panelPage.TabIndex = 1;
             // 
             // staffView
@@ -288,8 +267,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.panelPage);
             this.Controls.Add(this.panelSideBar);
+            this.MaximumSize = new System.Drawing.Size(1382, 753);
+            this.MinimumSize = new System.Drawing.Size(1382, 753);
             this.Name = "staffView";
-            this.Size = new System.Drawing.Size(1182, 700);
+            this.Size = new System.Drawing.Size(1382, 753);
             this.panelSideBar.ResumeLayout(false);
             this.panelBtns.ResumeLayout(false);
             this.panelAccount.ResumeLayout(false);
@@ -308,13 +289,11 @@
         private System.Windows.Forms.Panel panelBtns;
         private Krypton.Toolkit.KryptonButton btnMenu;
         private Krypton.Toolkit.KryptonButton btnIngredient;
-        private Krypton.Toolkit.KryptonButton btnBill;
+        private Krypton.Toolkit.KryptonButton btnDon;
         private Krypton.Toolkit.KryptonButton btnLogout;
         private System.Windows.Forms.Panel panelPage;
-        private System.Windows.Forms.Label labelVaiTro;
-        private System.Windows.Forms.Label labelTen;
         private System.Windows.Forms.Panel panelAccount;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelTen;
+        private System.Windows.Forms.Label labelVaiTro;
     }
 }
