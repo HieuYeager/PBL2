@@ -30,14 +30,14 @@
         {
             this.kryptonGroup1 = new Krypton.Toolkit.KryptonGroup();
             this.addBtn = new Krypton.Toolkit.KryptonButton();
-            this.Image = new Krypton.Toolkit.KryptonPictureBox();
             this.labelGia = new System.Windows.Forms.Label();
             this.labelTenMon = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).BeginInit();
             this.kryptonGroup1.Panel.SuspendLayout();
             this.kryptonGroup1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonGroup1
@@ -48,8 +48,8 @@
             // 
             // kryptonGroup1.Panel
             // 
+            this.kryptonGroup1.Panel.Controls.Add(this.pictureBox);
             this.kryptonGroup1.Panel.Controls.Add(this.addBtn);
-            this.kryptonGroup1.Panel.Controls.Add(this.Image);
             this.kryptonGroup1.Panel.Controls.Add(this.labelGia);
             this.kryptonGroup1.Panel.Controls.Add(this.labelTenMon);
             this.kryptonGroup1.Size = new System.Drawing.Size(225, 143);
@@ -58,7 +58,7 @@
             this.kryptonGroup1.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonGroup1.StateCommon.Border.Rounding = 10F;
+            this.kryptonGroup1.StateCommon.Border.Rounding = 7F;
             this.kryptonGroup1.TabIndex = 0;
             // 
             // addBtn
@@ -83,17 +83,6 @@
             this.addBtn.Values.Text = "Thêm";
             this.addBtn.Click += new System.EventHandler(this.addMon_Click);
             // 
-            // Image
-            // 
-            this.Image.Dock = System.Windows.Forms.DockStyle.Left;
-            this.Image.Image = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
-            this.Image.Location = new System.Drawing.Point(0, 0);
-            this.Image.Name = "Image";
-            this.Image.Size = new System.Drawing.Size(100, 135);
-            this.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Image.TabIndex = 2;
-            this.Image.TabStop = false;
-            // 
             // labelGia
             // 
             this.labelGia.AutoSize = true;
@@ -116,6 +105,19 @@
             this.labelTenMon.TabIndex = 0;
             this.labelTenMon.Text = "label1";
             // 
+            // pictureBox
+            // 
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox.ErrorImage = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
+            this.pictureBox.Image = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
+            this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(100, 137);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 8;
+            this.pictureBox.TabStop = false;
+            // 
             // MonComponent
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -130,7 +132,7 @@
             this.kryptonGroup1.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).EndInit();
             this.kryptonGroup1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -140,7 +142,7 @@
         private Krypton.Toolkit.KryptonGroup kryptonGroup1;
         private System.Windows.Forms.Label labelTenMon;
         private System.Windows.Forms.Label labelGia;
-        private Krypton.Toolkit.KryptonPictureBox Image;
         private Krypton.Toolkit.KryptonButton addBtn;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }

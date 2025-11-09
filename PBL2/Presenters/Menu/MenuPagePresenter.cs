@@ -61,29 +61,8 @@ namespace PBL2.Presenters.Menu
 
             DataTable dt = MySQL_DB.Instance.Select("Mon", "*");
             //MessageBox.Show(dt.Rows.Count.ToString());
-            foreach (DataRow row in dt.Rows)
-            {
-                MonModel monModel = new MonModel();
-                try
-                {
-                    monModel.MaMon = Convert.ToInt32(row["MaMon"]); //row["MaMon"];
-                }
-                catch
-                {
-                    monModel.MaMon = -1;
-                }
-                monModel.TenMon = row["TenMon"].ToString();
-                try
-                {
-                    string GiaBan = row["GiaBan"].ToString();
-                    monModel.GiaBan = decimal.Parse(GiaBan);
-                }
-                catch
-                {
-                    monModel.GiaBan = -1;
-                }
-                this.Model.mons.Add(monModel);
-            }
+
+            loadMons(dt);
         }
 
         public void timMon()
@@ -107,7 +86,7 @@ namespace PBL2.Presenters.Menu
             DataTable dt = null;
             if (this.Model.FindDanhMucID > 0)
             {
-                dt = MySQL_DB.Instance.SelectJoin("Mon", "Mon.MaMon, Mon.TenMon, Mon.GiaBan ", $" {conditionDMQuery} AND {conditionNameQuery}");
+                dt = MySQL_DB.Instance.SelectJoin("Mon", "Mon.MaMon, Mon.TenMon, Mon.GiaBan, Mon.URL_anh ", $" {conditionDMQuery} AND {conditionNameQuery}");
             }
             else
             {
@@ -118,6 +97,11 @@ namespace PBL2.Presenters.Menu
                 return;
             }
             //add mons
+            loadMons(dt);       
+        }
+
+        private void loadMons(DataTable dt)
+        {
             foreach (DataRow row in dt.Rows)
             {
                 MonModel monModel = new MonModel();
@@ -139,10 +123,12 @@ namespace PBL2.Presenters.Menu
                 {
                     monModel.GiaBan = -1;
                 }
+                monModel.URLImage = row["URL_anh"].ToString();
                 this.Model.mons.Add(monModel);
             }
         }
 
+        // them vao hoa don
         public void addMon(MonModel mon)
         {
             OrderDetailModel orderDetail = new OrderDetailModel();
