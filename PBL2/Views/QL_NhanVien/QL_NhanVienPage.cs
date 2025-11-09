@@ -58,6 +58,10 @@ namespace PBL2.Views.QL_NhanVien
                 //this.dataGridView1.Columns["CaLamViec"].HeaderText = "Ca làm việc";
                 this.dataGridView1.Columns["CaLamViec"].Visible = false;
 
+                this.dataGridView1.Columns["khoa"].HeaderText = "Khóa";
+                this.dataGridView1.Columns["khoa"].FillWeight = 40;
+
+
             }
             catch (Exception ex)
             {

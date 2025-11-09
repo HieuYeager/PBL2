@@ -27,7 +27,8 @@ namespace PBL2.Presenters.QL_NhanVien
 
         public void Load()
         {
-            DataTable dt = MySQL_DB.Instance.Select("nhanvien", "*");
+            //DataTable dt = MySQL_DB.Instance.Select("nhanvien", "*");
+            DataTable dt = MySQL_DB.Instance.SelectJoin("nhanvien", "nhanvien.*, account.khoa", "JOIN account ON nhanvien.MaNV = account.MaNV");
             this.Model.Table = dt;
         }
         //public void addNhanVien(NhanVien nv)
