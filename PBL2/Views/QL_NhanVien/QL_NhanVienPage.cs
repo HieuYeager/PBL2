@@ -31,7 +31,8 @@ namespace PBL2.Views.QL_NhanVien
             this.LoadTableNV();
 
             // Bắt sự kiện click nút trong DataGridView
-            this.dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            //this.dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            this.dataGridView1.CellClick += dataGridView1_CellContentClick;
         }
 
         public void LoadTableNV()
@@ -139,7 +140,7 @@ namespace PBL2.Views.QL_NhanVien
 
                 this.DeleteNhanVienDataColumn_Click(maNV, tenNV);
                 return;
-        }
+            }
 
             //xử lý sự kiện nút SỬA
             if (columnName == "EditColumn")
@@ -163,13 +164,18 @@ namespace PBL2.Views.QL_NhanVien
                 this.txtMucLuong.Text = "";
                 return;
             }
-
-            this.txtMaNV.Text = row.Cells["MaNV"].Value.ToString();
-            this.txtTen.Text = row.Cells["TenNV"].Value.ToString();
-            this.comboBox1.SelectedItem = row.Cells["VaiTro"].Value.ToString();
-            this.txtSDT.Text = row.Cells["SDT"].Value.ToString();
-            this.txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
-            this.txtMucLuong.Text = row.Cells["MucLuongCoBan"].Value.ToString();
+            try {
+                this.txtMaNV.Text = row.Cells["MaNV"].Value.ToString();
+                this.txtTen.Text = row.Cells["TenNV"].Value.ToString();
+                this.comboBox1.SelectedItem = row.Cells["VaiTro"].Value.ToString();
+                this.txtSDT.Text = row.Cells["SDT"].Value.ToString();
+                this.txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
+                this.txtMucLuong.Text = row.Cells["MucLuongCoBan"].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         private void addBtn_Click(object sender, EventArgs e)
