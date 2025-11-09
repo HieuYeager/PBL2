@@ -4,6 +4,7 @@ using PBL2.Class;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
@@ -13,8 +14,11 @@ using System.Windows.Forms;
 
 namespace PBL2.Models
 {
-    public class MySQL_DB
+     public class MySQL_DB
     {
+        private static string startupPath = Application.StartupPath;
+        // Lên 2 cấp từ bin/Debug → MyProject
+        public static string projectRoot = Directory.GetParent(startupPath).Parent.FullName;
         //----------------Hieu,  Bin, Hai-------------------------------------------------
         private string connectionString = "server=localhost;port=3306;database=pbl;uid=root;pwd=;";
         //-----------------------------------------------------------------

@@ -32,7 +32,7 @@ namespace PBL2.Views.MenuPage
             this.labelTenMon.DataBindings.Add("Text", this.orderDetailModel.monModel, "TenMon");
             this.labelGia.DataBindings.Add("Text", this.orderDetailModel, "giaBan", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00 VNĐ");
             this.labelSoLuong.DataBindings.Add("Text", this.orderDetailModel, "soLuong", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.labelSubTotal.DataBindings.Add("Text", this.orderDetailModel, "tongTien", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00 VNĐ");
+            //this.labelSubTotal.DataBindings.Add("Text", this.orderDetailModel, "tongTien", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00 VNĐ");
 
         }
 

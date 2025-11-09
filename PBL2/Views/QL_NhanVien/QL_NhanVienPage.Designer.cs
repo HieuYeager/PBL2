@@ -93,14 +93,14 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.loginBtn.StateCommon.Border.Rounding = 10F;
             this.loginBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.loginBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F);
+            this.loginBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.TabIndex = 5;
             this.loginBtn.Values.Text = "Thêm";
-            this.loginBtn.Click += new System.EventHandler(this.addBtn_Click_1);
+            this.loginBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // FindTxt
             // 
-            this.FindTxt.Location = new System.Drawing.Point(1011, 68);
+            this.FindTxt.Location = new System.Drawing.Point(991, 68);
             this.FindTxt.Name = "FindTxt";
             this.FindTxt.Size = new System.Drawing.Size(189, 40);
             this.FindTxt.StateCommon.Back.Color1 = System.Drawing.Color.White;
@@ -115,12 +115,11 @@
             this.FindTxt.StateCommon.Content.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindTxt.StateCommon.Content.Padding = new System.Windows.Forms.Padding(3);
             this.FindTxt.TabIndex = 9;
-            this.FindTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // searchBtn
             // 
             this.searchBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.searchBtn.Location = new System.Drawing.Point(947, 68);
+            this.searchBtn.Location = new System.Drawing.Point(927, 68);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.searchBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -186,6 +185,7 @@
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.Color.Black;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
@@ -194,13 +194,15 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Mongolian Baiti", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(140)))), ((int)(((byte)(100)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(966, 633);
             this.dataGridView1.TabIndex = 13;
+            this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
+            this.dataGridView1.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dataGridView1_CellToolTipTextNeeded);
             // 
             // Column5
             // 
@@ -265,13 +267,13 @@
             // UpdateSubmitBtn
             // 
             this.UpdateSubmitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.UpdateSubmitBtn.Location = new System.Drawing.Point(28, 518);
+            this.UpdateSubmitBtn.Location = new System.Drawing.Point(36, 519);
             this.UpdateSubmitBtn.Name = "UpdateSubmitBtn";
             this.UpdateSubmitBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.UpdateSubmitBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.UpdateSubmitBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.UpdateSubmitBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.UpdateSubmitBtn.Size = new System.Drawing.Size(179, 46);
+            this.UpdateSubmitBtn.Size = new System.Drawing.Size(162, 46);
             this.UpdateSubmitBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.UpdateSubmitBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.UpdateSubmitBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -280,21 +282,22 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.UpdateSubmitBtn.StateCommon.Border.Rounding = 10F;
             this.UpdateSubmitBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.UpdateSubmitBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F);
+            this.UpdateSubmitBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UpdateSubmitBtn.TabIndex = 31;
             this.UpdateSubmitBtn.Values.Text = "Lưu";
             this.UpdateSubmitBtn.Visible = false;
+            this.UpdateSubmitBtn.Click += new System.EventHandler(this.UpdateNhanVienBtn_Click);
             // 
             // CancelBtn
             // 
             this.CancelBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CancelBtn.Location = new System.Drawing.Point(28, 570);
+            this.CancelBtn.Location = new System.Drawing.Point(36, 571);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.CancelBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.CancelBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.CancelBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.CancelBtn.Size = new System.Drawing.Size(179, 46);
+            this.CancelBtn.Size = new System.Drawing.Size(162, 46);
             this.CancelBtn.StateCommon.Back.Color1 = System.Drawing.Color.Brown;
             this.CancelBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.CancelBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -303,7 +306,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.CancelBtn.StateCommon.Border.Rounding = 10F;
             this.CancelBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.CancelBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F);
+            this.CancelBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CancelBtn.TabIndex = 30;
             this.CancelBtn.Values.Text = "Hủy";
             this.CancelBtn.Visible = false;
@@ -312,13 +315,13 @@
             // AddSubmitBtn
             // 
             this.AddSubmitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddSubmitBtn.Location = new System.Drawing.Point(28, 518);
+            this.AddSubmitBtn.Location = new System.Drawing.Point(36, 519);
             this.AddSubmitBtn.Name = "AddSubmitBtn";
             this.AddSubmitBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.AddSubmitBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.AddSubmitBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.AddSubmitBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.AddSubmitBtn.Size = new System.Drawing.Size(179, 46);
+            this.AddSubmitBtn.Size = new System.Drawing.Size(162, 46);
             this.AddSubmitBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.AddSubmitBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.AddSubmitBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -327,11 +330,11 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.AddSubmitBtn.StateCommon.Border.Rounding = 10F;
             this.AddSubmitBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.AddSubmitBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F);
+            this.AddSubmitBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddSubmitBtn.TabIndex = 29;
             this.AddSubmitBtn.Values.Text = "Thêm";
             this.AddSubmitBtn.Visible = false;
-            this.AddSubmitBtn.Click += new System.EventHandler(this.Them_Click);
+            this.AddSubmitBtn.Click += new System.EventHandler(this.AddNhanVienBtn_Click);
             // 
             // comboBox1
             // 
