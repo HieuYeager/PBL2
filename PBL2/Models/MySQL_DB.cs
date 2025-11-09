@@ -1,14 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.Mozilla;
+using PBL2.Class;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-
-using PBL2.Class;
 using System.Windows.Forms;
 
 namespace PBL2.Models
@@ -146,8 +146,66 @@ namespace PBL2.Models
 
             MessageBox.Show(query);
             int result = ExecuteNonQuery(query);
-            
+
             return result > 0;
+        }
+        public bool InsertNguyenLieu(string table, Dictionary<string, object> data)
+        {
+            if (string.IsNullOrEmpty(table) || data == null || data.Count == 0)
+                return false;
+
+            try
+            {
+                // Lấy dữ liệu từ dictionary
+                string ten = data.ContainsKey("TenNguyenLieu") ? data["TenNguyenLieu"].ToString().Trim() : "";
+                string donVi = data.ContainsKey("DonVi") ? data["DonVi"].ToString() : "g";
+                double soLuong = data.ContainsKey("SoLuong") ? Convert.ToDouble(data["SoLuong"]) : 0;
+
+                if (string.IsNullOrEmpty(ten) || string.IsNullOrEmpty(donVi)) 
+                    return false;
+
+                // Quy đổi số lượng về gram để cộng dồn
+                double soLuongGram = donVi == "kg" ? soLuong * 1000 : soLuong;
+
+                // Kiểm tra nguyên liệu đã tồn tại chưa
+                string queryCheck = $"SELECT SoLuong, DonVi FROM {table} WHERE TenNguyenLieu = '{ten.Replace("'", "''")}'";
+                DataTable dt = ExecuteQuery(queryCheck);
+
+                // Nếu có rồi → xử lý cộng dồn
+                if (dt.Rows.Count > 0)
+                {
+                    // Đã tồn tại → cộng dồn
+                    double soLuongHienTai = Convert.ToDouble(dt.Rows[0]["SoLuong"]); // luôn g
+                    string donViHienTai = dt.Rows[0]["DonVi"].ToString();
+
+                    // Quy đổi số lượng mới về đơn vị DB nếu khác
+                    double soLuongMoiQuyDoi = soLuongGram;
+                    if (donViHienTai == "kg") soLuongMoiQuyDoi /= 1000; // gram -> kg
+
+                    double tongSoLuong = soLuongHienTai + soLuongGram;
+
+                    string queryUpdate = $"UPDATE {table} SET SoLuong = {tongSoLuong}, NgayCapNhat = NOW() WHERE TenNguyenLieu = '{ten.Replace("'", "''")}'";
+                    int result = ExecuteNonQuery(queryUpdate);
+
+                    MessageBox.Show($"Nguyên liệu '{ten}' đã tồn tại — số lượng đã được cộng dồn!");
+                    return result > 0;
+                }
+                else
+                {
+                    string queryInsert = $"INSERT INTO {table} (TenNguyenLieu, DonVi, SoLuong, NgayCapNhat) " +
+                                 $"VALUES ('{ten.Replace("'", "''")}', '{donVi}', {soLuongGram}, NOW())";
+
+                    int result = ExecuteNonQuery(queryInsert);
+
+                    MessageBox.Show($"Đã thêm mới nguyên liệu '{ten}'!");
+                    return result > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi thêm nguyên liệu: {ex.Message}");
+                return false;
+            }
         }
 
         //ham update
