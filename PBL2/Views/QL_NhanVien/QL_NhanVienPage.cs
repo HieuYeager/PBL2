@@ -116,30 +116,9 @@ namespace PBL2.Views.QL_NhanVien
         {
             string keyword = FindTxt.Text.Trim();
 
-            if (string.IsNullOrEmpty(keyword))
-            {
-                // Nếu ô tìm kiếm trống, tải lại toàn bộ bảng
-                this.LoadTableNV();
-                return;
-            }
+            this.Presenter.search(keyword);
 
-            string condition = $"MaNV LIKE '%{keyword}%' OR TenNV LIKE '%{keyword}%' OR SDT LIKE '%{keyword}%'";
-
-            try
-            {
-                DataTable dt = MySQL_DB.Instance.Select("nhanvien", "*", condition);
-
-                if (dt.Rows.Count == 0)
-                {
-                    MessageBox.Show("Không tìm thấy nhân viên phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                this.dataGridView1.DataSource = dt;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Đã xảy ra lỗi khi tìm kiếm nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            this.dataGridView1.DataSource = this.Model.Table;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

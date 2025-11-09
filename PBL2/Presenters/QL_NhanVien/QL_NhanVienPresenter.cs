@@ -31,86 +31,6 @@ namespace PBL2.Presenters.QL_NhanVien
             DataTable dt = MySQL_DB.Instance.SelectJoin("nhanvien", "nhanvien.*, account.khoa", "JOIN account ON nhanvien.MaNV = account.MaNV");
             this.Model.Table = dt;
         }
-        //public void addNhanVien(NhanVien nv)
-        //{
-        //    //string maNV = GenerateMaNV();
-        //    //string tenNV = txtTen.Text.Trim();
-        //    //string sdt = txtSDT.Text.Trim();
-        //    //string diaChi = txtDiaChi.Text.Trim();
-        //    //string mucLuong = txtMucLuong.Text.Trim();
-        //    //string vaitro = comboBox1.SelectedItem.ToString();
-
-        //    string maNV = GenerateMaNV();
-        //    string tenNV = nv.TenNV;
-        //    string sdt = nv.
-        //    string diaChi = txtDiaChi.Text.Trim();
-        //    string mucLuong = txtMucLuong.Text.Trim();
-        //    string vaitro = comboBox1.SelectedItem.ToString();
-
-        //    if (string.IsNullOrEmpty(tenNV) || string.IsNullOrEmpty(sdt) || string.IsNullOrEmpty(diaChi) || string.IsNullOrEmpty(mucLuong))
-        //    {
-        //        MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
-
-        //    if (!decimal.TryParse(mucLuong, out decimal mucLuongCoBan))
-        //    {
-        //        MessageBox.Show("Mức lương không hợp lệ. Vui lòng nhập số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        Dictionary<string, string> Data = new Dictionary<string, string>
-        //        {
-        //            { "MaNV", maNV },
-        //            { "TenNV", tenNV },
-        //            { "SDT", sdt },
-        //            { "DiaChi", diaChi },
-        //            { "MucLuongCoBan", mucLuongCoBan.ToString() },
-        //            { "VaiTro", vaitro } //Mặc định
-        //            //{ "CaLamViec", "Ca Sáng" }
-        //        };
-
-        //        bool success = MySQL_DB.Instance.Insert("NhanVien", Data);
-
-        //        if (success)
-        //        {
-        //            MessageBox.Show("Thêm nhân viên thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            this.Close();
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Thêm nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-
-        //        //tao acc
-        //        string password = BCrypt.Net.BCrypt.HashPassword("123456");
-        //        Dictionary<string, string> DataAcc = new Dictionary<string, string>
-        //        {
-        //            { "MaNV", maNV },
-        //            { "Password", password }, //Mặc định
-        //            { "khoa",  "0"}
-
-        //        };
-
-        //        bool result = MySQL_DB.Instance.Insert("Account", DataAcc);
-
-        //        if (result)
-        //        {
-        //            MessageBox.Show("Tạo acc thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            this.Close();
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Tạo acc thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Lỗi khi thêm nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
 
         public string GenerateMaNV()
         {
@@ -223,6 +143,37 @@ namespace PBL2.Presenters.QL_NhanVien
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi cập nhật thông tin nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void search(string keyword)
+        {
+
+            if (string.IsNullOrEmpty(keyword))
+            {
+                // Nếu ô tìm kiếm trống
+                DataTable dt = MySQL_DB.Instance.SelectJoin("nhanvien", "nhanvien.*, account.khoa", "JOIN account ON nhanvien.MaNV = account.MaNV");
+                this.Model.Table = dt;
+                return;
+            }
+
+            string condition = $"JOIN account ON nhanvien.MaNV = account.MaNV WHERE nhanvien.MaNV LIKE '%{keyword}%' OR nhanvien.TenNV LIKE '%{keyword}%' OR nhanvien.SDT LIKE '%{keyword}%' OR nhanvien.DiaChi LIKE '%{keyword}%'";
+
+            try
+            {
+                DataTable dt = MySQL_DB.Instance.SelectJoin("nhanvien", "nhanvien.*, account.khoa", condition);
+
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy nhân viên phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //return;
+                }
+
+                this.Model.Table = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi khi tìm kiếm nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
