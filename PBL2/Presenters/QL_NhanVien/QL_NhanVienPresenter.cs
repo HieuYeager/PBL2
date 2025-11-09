@@ -192,5 +192,37 @@ namespace PBL2.Presenters.QL_NhanVien
                 MessageBox.Show("Lỗi khi thêm nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public void UpdateNhanVien(NhanVien nv)
+        {
+            try
+            {
+                string updates = $"TenNV = '{nv.TenNV}', " +
+                                 $"SDT = '{nv.SDT}', " +
+                                 $"DiaChi = '{nv.DiaChi}', " +
+                                 $"MucLuongCoBan = {nv.MucLuongCoBan?.ToString(System.Globalization.CultureInfo.InvariantCulture)}, " +
+                                 $"VaiTro = '{nv.VaiTro.GetDisplayName()}'";
+
+                string condition = $"MaNV = '{nv.MaNV}'";
+
+                //update
+                bool success = MySQL_DB.Instance.Update("NhanVien", updates, condition) > 0;
+
+                if (success)
+                {
+                    MessageBox.Show("Cập nhật thông tin nhân viên thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //this.DialogResult = DialogResult.OK; // để form cha reload DataGridView
+                    //this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật thông tin nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật thông tin nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

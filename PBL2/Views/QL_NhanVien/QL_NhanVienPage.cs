@@ -148,21 +148,14 @@ namespace PBL2.Views.QL_NhanVien
                 string maNV = dataGridView1.Rows[e.RowIndex].Cells["MaNV"].Value.ToString();
                 string tenNV = dataGridView1.Rows[e.RowIndex].Cells["TenNV"].Value.ToString();
 
-                DeleteNhanVienForm deleteForm = new DeleteNhanVienForm(maNV, tenNV);
-                deleteForm.ShowDialog();
-
-                // Nếu form trả về DialogResult.OK → reload lại bảng
-                if (deleteForm.DialogResult == DialogResult.OK)
-                {
-                    this.LoadTableNV();
-                }
+                this.DeleteNhanVienDataColumn_Click(maNV, tenNV);
                 return;
             }
 
             //xử lý sự kiện nút SỬA
             if (columnName == "EditColumn")
             {
-                this.UpdateNhanVien();
+                this.UpdateNhanVienDataColumn_Click();
                 return;
             }
             
@@ -190,7 +183,7 @@ namespace PBL2.Views.QL_NhanVien
             this.txtMucLuong.Text = row.Cells["MucLuongCoBan"].Value.ToString();
         }
 
-        private void addBtn_Click_1(object sender, EventArgs e)
+        private void addBtn_Click(object sender, EventArgs e)
         {
             this.panelDetail.Enabled = true;
             this.loadDetails(null);
@@ -201,7 +194,7 @@ namespace PBL2.Views.QL_NhanVien
             this.txtTen.Focus();
         }
 
-        private void Them_Click(object sender, EventArgs e)
+        private void AddNhanVienBtn_Click(object sender, EventArgs e)
         {
             NhanVien newNhanVien = new NhanVien()
             {
@@ -232,7 +225,45 @@ namespace PBL2.Views.QL_NhanVien
             this.LoadTableNV();
             this.cancel();
         }
-        private void UpdateNhanVien()
+
+        private void cancel(object sender, EventArgs e)
+        {
+            this.cancel();
+        }
+
+        private void UpdateNhanVienBtn_Click(object sender, EventArgs e)
+        {
+            // ktr data
+            if (string.IsNullOrEmpty(txtTen.Text) || string.IsNullOrEmpty(txtSDT.Text) || string.IsNullOrEmpty(txtDiaChi.Text) || string.IsNullOrEmpty(txtMucLuong.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //chuyển mức lương sang decimal
+            if (!decimal.TryParse(txtMucLuong.Text, out decimal mucLuongCoBan))
+            {
+                MessageBox.Show("Mức lương không hợp lệ. Vui lòng nhập số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            NhanVien updateNhanVien = new NhanVien()
+            {
+                MaNV = this.txtMaNV.Text.Trim(),
+                TenNV = txtTen.Text.Trim(),
+                SDT = txtSDT.Text.Trim(),
+                DiaChi = txtDiaChi.Text.Trim(),
+                MucLuongCoBan = mucLuongCoBan,
+                VaiTro = this.comboBox1.SelectedItem.ToString() == VaiTro.QuanLy.GetDisplayName() ? VaiTro.QuanLy : VaiTro.NhanVien
+            };
+
+            this.Presenter.UpdateNhanVien(updateNhanVien);
+            this.LoadTableNV();
+            this.cancel();
+        }
+
+        //function
+        private void UpdateNhanVienDataColumn_Click()
         {
             this.panelDetail.Enabled = true;
             this.loadDetails(this.dataGridView1.SelectedRows[0]);
@@ -241,10 +272,6 @@ namespace PBL2.Views.QL_NhanVien
             this.CancelBtn.Visible = true;
             //focus
             this.txtTen.Focus();
-        }
-        private void cancel(object sender, EventArgs e)
-        {
-            this.cancel();
         }
 
         private void cancel()
@@ -255,6 +282,20 @@ namespace PBL2.Views.QL_NhanVien
             this.AddSubmitBtn.Visible = false;
             this.UpdateSubmitBtn.Visible = false;
             this.CancelBtn.Visible = false;
+        }
+
+        private void DeleteNhanVienDataColumn_Click(string maNV, string tenNV)
+        {
+
+            DeleteNhanVienForm deleteForm = new DeleteNhanVienForm(maNV, tenNV);
+            deleteForm.ShowDialog();
+
+            // Nếu form trả về DialogResult.OK → reload lại bảng
+            if (deleteForm.DialogResult == DialogResult.OK)
+            {
+                this.LoadTableNV();
+                this.cancel();
+            }
         }
     }
 }
