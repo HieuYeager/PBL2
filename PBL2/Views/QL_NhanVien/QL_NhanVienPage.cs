@@ -1,8 +1,10 @@
-﻿using System;
+﻿//--------------------Hai--------------------
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,6 +62,7 @@ namespace PBL2.Views.QL_NhanVien
 
                 this.dataGridView1.Columns["khoa"].HeaderText = "Khóa";
                 this.dataGridView1.Columns["khoa"].FillWeight = 40;
+                this.dataGridView1.Columns["khoa"].Visible = false;
 
 
             }
@@ -68,12 +71,15 @@ namespace PBL2.Views.QL_NhanVien
                 Console.WriteLine(ex.ToString());
             }
 
+            string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "edit_icon.png");
+
+            this.dataGridView1.ShowCellToolTips = true;
             //Cột SỬA
             DataGridViewButtonColumn editButtonColumn = new DataGridViewButtonColumn();
             editButtonColumn.Name = "EditColumn";
             editButtonColumn.HeaderText = "";
             editButtonColumn.Text = "Sửa";
-            editButtonColumn.UseColumnTextForButtonValue = true;
+            editButtonColumn.UseColumnTextForButtonValue = false;
             editButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Cột XÓA
@@ -81,7 +87,7 @@ namespace PBL2.Views.QL_NhanVien
             deleteButtonColumn.Name = "DeleteColumn";
             deleteButtonColumn.HeaderText = "";
             deleteButtonColumn.Text = "Xóa";
-            deleteButtonColumn.UseColumnTextForButtonValue = true;
+            deleteButtonColumn.UseColumnTextForButtonValue = false;
             deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             // Thêm cột vào DataGridView
@@ -154,7 +160,7 @@ namespace PBL2.Views.QL_NhanVien
 
                 this.DeleteNhanVienDataColumn_Click(maNV, tenNV);
                 return;
-            }
+        }
 
             //xử lý sự kiện nút SỬA
             if (columnName == "EditColumn")
@@ -301,5 +307,60 @@ namespace PBL2.Views.QL_NhanVien
                 this.cancel();
             }
         }
+
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridView1.Columns["EditColumn"].Index && e.RowIndex >= 0)
+            {
+                e.PaintBackground(e.CellBounds, true);
+
+                // Vẽ nút như bình thường
+                e.PaintContent(e.CellBounds);
+                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "edit_icon.png");
+                // Load ảnh icon
+                Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
+
+                // Tính vị trí để căn giữa ảnh
+                int x = e.CellBounds.Left + (e.CellBounds.Width - icon.Width) / 2;
+                int y = e.CellBounds.Top + (e.CellBounds.Height - icon.Height) / 2;
+
+                // Vẽ ảnh
+                e.Graphics.DrawImage(icon, new Point(x, y));
+
+                e.Handled = true;
+            }
+            if (e.ColumnIndex == dataGridView1.Columns["DeleteColumn"].Index && e.RowIndex >= 0)
+            {
+                e.PaintBackground(e.CellBounds, true);
+
+                // Vẽ nút như bình thường
+                e.PaintContent(e.CellBounds);
+                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "close.png");
+                // Load ảnh icon
+                Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
+
+                // Tính vị trí để căn giữa ảnh
+                int x = e.CellBounds.Left + (e.CellBounds.Width - icon.Width) / 2;
+                int y = e.CellBounds.Top + (e.CellBounds.Height - icon.Height) / 2;
+
+                // Vẽ ảnh
+                e.Graphics.DrawImage(icon, new Point(x, y));
+
+                e.Handled = true;
+            }
+        }
+
+        private void dataGridView1_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["EditColumn"].Index)
+            {
+                e.ToolTipText = "Sửa";
+            }
+            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["DeleteColumn"].Index)
+            {
+                e.ToolTipText = "Xóa";
+            }
+        }
+
     }
 }
