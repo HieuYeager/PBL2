@@ -18,10 +18,6 @@ namespace PBL2.Views.MenuPage
         MenuPagePresenter presenter;
         //model
         public MonModel mon { get; set; }
-        //
-        private static string startupPath = Application.StartupPath;
-        // Lên 2 cấp từ bin/Debug → MyProject
-        private static string projectRoot = Directory.GetParent(startupPath).Parent.FullName;
 
         private string imagePath;
         public MonComponent()
@@ -38,7 +34,7 @@ namespace PBL2.Views.MenuPage
 
             try
             {
-                imagePath = Path.Combine(projectRoot, "Resources", mon.URLImage);
+                imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", mon.URLImage);
                 //MessageBox.Show(imagePath);
                 this.pictureBox.Image = Image.FromFile(imagePath);
             }
