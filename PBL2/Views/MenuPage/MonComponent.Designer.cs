@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.kryptonGroup1 = new Krypton.Toolkit.KryptonGroup();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.addBtn = new Krypton.Toolkit.KryptonButton();
             this.labelGia = new System.Windows.Forms.Label();
             this.labelTenMon = new System.Windows.Forms.Label();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).BeginInit();
             this.kryptonGroup1.Panel.SuspendLayout();
@@ -58,8 +58,21 @@
             this.kryptonGroup1.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonGroup1.StateCommon.Border.Rounding = 7F;
+            this.kryptonGroup1.StateCommon.Border.Rounding = 0F;
             this.kryptonGroup1.TabIndex = 0;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox.ErrorImage = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
+            this.pictureBox.Image = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
+            this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(100, 141);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 8;
+            this.pictureBox.TabStop = false;
             // 
             // addBtn
             // 
@@ -104,19 +117,6 @@
             this.labelTenMon.Size = new System.Drawing.Size(66, 24);
             this.labelTenMon.TabIndex = 0;
             this.labelTenMon.Text = "label1";
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox.ErrorImage = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
-            this.pictureBox.Image = global::PBL2.Properties.Resources.Green_coffee_logo_badge___Free_Vector;
-            this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(100, 137);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox.TabIndex = 8;
-            this.pictureBox.TabStop = false;
             // 
             // MonComponent
             // 

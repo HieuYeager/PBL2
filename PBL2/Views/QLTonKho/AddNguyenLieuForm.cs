@@ -64,15 +64,21 @@ namespace PBL2.Views.QLTonKho
                 else
                 {
                     // Chưa có nguyên liệu, thêm mới
-                    var data = new Dictionary<string, object>
+                    Dictionary<string, string> data = new Dictionary<string, string>
                     {
                         { "TenNguyenLieu", tenNguyenLieu },
                         { "DonVi", donVi.ToString() },
-                        { "SoLuong", soLuongMoi },
-                        { "NgayCapNhat", ngayCapNhat }
+                        { "SoLuong", soLuongMoi.ToString() },
+                        { "NgayCapNhat", ngayCapNhat.ToString("yyyy-MM-dd HH:mm:ss") }
                     };
 
-                    bool inserted = MySQL_DB.Instance.InsertNguyenLieu("nguyenlieu", data);
+                    //show data for test
+                    //foreach (var item in data)
+                    //{
+                    //    Console.WriteLine($"{item.Key}: {item.Value}");
+                    //}
+
+                    bool inserted = MySQL_DB.Instance.Insert("nguyenlieu", data);
 
                     if (inserted)
                     {

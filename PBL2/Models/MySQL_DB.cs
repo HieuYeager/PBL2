@@ -188,7 +188,7 @@ namespace PBL2.Models
 
                     double tongSoLuong = soLuongHienTai + soLuongGram;
 
-                    string queryUpdate = $"UPDATE {table} SET SoLuong = {tongSoLuong}, NgayCapNhat = NOW() WHERE TenNguyenLieu = '{ten.Replace("'", "''")}'";
+                    string queryUpdate = $"UPDATE {table} SET SoLuong = {tongSoLuong}, NgayCapNhat = NOW() WHERE TenNguyenLieu = '{ten}'";
                     int result = ExecuteNonQuery(queryUpdate);
 
                     MessageBox.Show($"Nguyên liệu '{ten}' đã tồn tại — số lượng đã được cộng dồn!");
@@ -197,7 +197,7 @@ namespace PBL2.Models
                 else
                 {
                     string queryInsert = $"INSERT INTO {table} (TenNguyenLieu, DonVi, SoLuong, NgayCapNhat) " +
-                                 $"VALUES ('{ten.Replace("'", "''")}', '{donVi}', {soLuongGram}, NOW())";
+                                 $"VALUES ('{ten}', '{donVi}', {soLuongGram}, NOW())";
 
                     int result = ExecuteNonQuery(queryInsert);
 

@@ -168,7 +168,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnMenu.StateTracking.Border.Rounding = 10F;
             this.btnMenu.TabIndex = 0;
-            this.btnMenu.Values.Text = "Menu";
+            this.btnMenu.Values.Text = "Thực đơn";
             this.btnMenu.Click += new System.EventHandler(this.menubtn_click);
             // 
             // panelAccount

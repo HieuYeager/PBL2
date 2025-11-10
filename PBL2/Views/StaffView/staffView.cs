@@ -129,7 +129,7 @@ namespace PBL2.Views.staffView
         {
             this.panelPage.Controls.Clear();
 
-            this.panelPage.Controls.Add(new QLTonKhoPage());
+            this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
         }
         private void LoadThanhToanPage(OrderModel order) {
             if (order.orderDetails.Count == 0) return;

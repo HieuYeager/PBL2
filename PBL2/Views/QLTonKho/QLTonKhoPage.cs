@@ -1,10 +1,12 @@
-﻿using PBL2.Models;
+﻿using PBL2.Class;
+using PBL2.Models;
 using PBL2.Presenters.QLTonKho;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +16,19 @@ namespace PBL2.Views.QLTonKho
 {
     public partial class QLTonKhoPage : UserControl
     {
+        private AccountModel Account { get; set; }
         private QLTonKhoPresenter presenters;
 
         public QLTonKhoPage()
         {
             InitializeComponent();
             presenters = new QLTonKhoPresenter();
+        }
+        public QLTonKhoPage(AccountModel account)
+        {
+            InitializeComponent();
+            presenters = new QLTonKhoPresenter();
+            this.Account = account;
         }
 
         public void QLTonKhoPage_Load(object sender, EventArgs e)
@@ -36,14 +45,20 @@ namespace PBL2.Views.QLTonKho
             
             if (dt != null)
             {
+                this.dataGridView1.Columns.Clear();
                 dataGridView1.DataSource = dt;
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                 dataGridView1.Columns["MaNguyenLieu"].HeaderText = "Mã Nguyên Liệu";
+                dataGridView1.Columns["MaNguyenLieu"].FillWeight = 5;
                 dataGridView1.Columns["TenNguyenLieu"].HeaderText = "Tên Nguyên Liệu";
+                dataGridView1.Columns["TenNguyenLieu"].FillWeight = 30;
                 dataGridView1.Columns["DonVi"].HeaderText = "Đơn Vị";
+                dataGridView1.Columns["DonVi"].FillWeight = 10;
                 dataGridView1.Columns["SoLuong"].HeaderText = "Số Lượng";
+                dataGridView1.Columns["SoLuong"].FillWeight = 10;
                 dataGridView1.Columns["NgayCapNhat"].HeaderText = "Ngày Cập Nhật";
+                dataGridView1.Columns["NgayCapNhat"].FillWeight = 20;
 
                 AddActionButtons(); // thêm cột Xóa và Sửa
             }
@@ -67,11 +82,11 @@ namespace PBL2.Views.QLTonKho
             btnDelete.Name = "btnDelete";
             btnDelete.HeaderText = "";
             btnDelete.Text = "X";
-            btnDelete.UseColumnTextForButtonValue = true;
+            btnDelete.UseColumnTextForButtonValue = false;
             btnDelete.Width = 50;
             btnDelete.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.DefaultCellStyle.BackColor = Color.IndianRed;
+            //btnDelete.FlatStyle = FlatStyle.Flat;
+            //btnDelete.DefaultCellStyle.BackColor = Color.IndianRed;
             btnDelete.DefaultCellStyle.ForeColor = Color.Black;
 
             // Thêm cột Sửa
@@ -169,29 +184,12 @@ namespace PBL2.Views.QLTonKho
             using (AddNguyenLieuForm form = new AddNguyenLieuForm())
             {
                 if (form.ShowDialog() == DialogResult.OK)
-                {
-                    // Thêm nguyên liệu vào DB
-                    var data = new Dictionary<string, string>
-                {
-                    { "TenNguyenLieu", form.TenNguyenLieu },
-                    { "DonVi", form.DonVi.ToString() },
-                    { "SoLuong", form.SoLuong.ToString() },
-                    { "NgayCapNhat", $"'{DateTime.Now:yyyy-MM-dd HH:mm:ss}'" } // ngày hiện tại
-                };
-
-                    bool inserted = MySQL_DB.Instance.Insert("nguyenlieu", data);
-                    if (inserted)
-                    {
-                        MessageBox.Show("Thêm nguyên liệu thành công!");
+                { 
+                        //MessageBox.Show("Thêm nguyên liệu thành công!");
                         LoadNguyenLieu(); // Load lại DataGridView
                         CapNhatTongNguyenLieu();
                         CapNhatCanhBao();
                         CapNhatThongTinKho();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Thêm nguyên liệu thất bại!");
-                    }
                 }
             }
         }
@@ -235,15 +233,16 @@ namespace PBL2.Views.QLTonKho
         }
         private void CapNhatTongNguyenLieu()
         {
-            DataTable dt = MySQL_DB.Instance.Select("nguyenlieu", "MaNguyenLieu");
+            //DataTable dt = MySQL_DB.Instance.Select("nguyenlieu", "MaNguyenLieu");
 
-            if (dt == null || dt.Rows.Count == 0)
-            {
-                lblTongNL.Text = "";
-                return;
-            }
+            //if (dt == null || dt.Rows.Count == 0)
+            //{
+            //    lblTongNL.Text = "";
+            //    return;
+            //}
 
-            int tong = dt.Rows.Count;
+            //int tong = dt.Rows.Count;
+            int tong = MySQL_DB.Instance.Count("nguyenlieu");
 
             lblTongNL.Text = $"{tong}";
         }
@@ -374,9 +373,10 @@ namespace PBL2.Views.QLTonKho
                 form.ShowDialog();
             }
         }
+
         private void nhapKho_Click(object sender, EventArgs e)
         {
-            using (NhapKhoForm form = new NhapKhoForm())
+            using (NhapKhoForm form = new NhapKhoForm(this.Account))
             {
                 form.StartPosition = FormStartPosition.CenterParent; // mở giữa parent
                 form.Text = "Nhập Kho Nguyên Liệu"; // tiêu đề form
@@ -391,17 +391,64 @@ namespace PBL2.Views.QLTonKho
             }
         }
 
-        private void lblTongNL_Click(object sender, EventArgs e)
+        private void xuatKho_Click(object sender, EventArgs e)
         {
-
+            using (XuatKhoForm form = new XuatKhoForm(this.Account))
+            {
+                form.StartPosition = FormStartPosition.CenterParent; // mở giữa parent
+                form.Text = "Xuất Kho Nguyên Liệu"; // tiêu đề form
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    // Nếu có cập nhật dữ liệu, load lại danh sách
+                    LoadNguyenLieu();
+                    CapNhatTongNguyenLieu();
+                    CapNhatCanhBao();
+                    CapNhatThongTinKho();
+                }
+            }
         }
-        private void label4_Click(object sender, EventArgs e)
+        //Hieu
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
+            //if (e.ColumnIndex == dataGridView1.Columns["EditColumn"].Index && e.RowIndex >= 0)
+            //{
+            //    e.PaintBackground(e.CellBounds, true);
 
-        }
-        private void label2_Click(object sender, EventArgs e)
-        {
+            //    // Vẽ nút như bình thường
+            //    e.PaintContent(e.CellBounds);
+            //    string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "edit_icon.png");
+            //    // Load ảnh icon
+            //    Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 
+            //    // Tính vị trí để căn giữa ảnh
+            //    int x = e.CellBounds.Left + (e.CellBounds.Width - icon.Width) / 2;
+            //    int y = e.CellBounds.Top + (e.CellBounds.Height - icon.Height) / 2;
+
+            //    // Vẽ ảnh
+            //    e.Graphics.DrawImage(icon, new Point(x, y));
+
+            //    e.Handled = true;
+            //}
+            if (e.ColumnIndex == dataGridView1.Columns["btnDelete"].Index && e.RowIndex >= 0)
+            {
+                e.PaintBackground(e.CellBounds, true);
+
+                // Vẽ nút như bình thường
+                e.PaintContent(e.CellBounds);
+                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "close.png");
+                // Load ảnh icon
+                Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
+
+                // Tính vị trí để căn giữa ảnh
+                int x = e.CellBounds.Left + (e.CellBounds.Width - icon.Width) / 2;
+                int y = e.CellBounds.Top + (e.CellBounds.Height - icon.Height) / 2;
+
+                // Vẽ ảnh
+                e.Graphics.DrawImage(icon, new Point(x, y));
+
+                e.Handled = true;
+            }
         }
+
     }
 }

@@ -14,9 +14,19 @@ namespace PBL2.Views.QLTonKho
 {
     public partial class NhapKhoForm : Form
     {
-        public NhapKhoForm()
+        private AccountModel currentAccount;
+        public NhapKhoForm(AccountModel account)
         {
             InitializeComponent();
+            this.currentAccount = account;
+            //
+            this.txtMaNV.Text = this.currentAccount.MaNV;
+            //load comboBox ten nguyen lieu
+            DataTable dt = MySQL_DB.Instance.Select("nguyenlieu", "TenNguyenLieu");
+            foreach (DataRow row in dt.Rows)
+            {
+                this.comboBoxTenNL.Items.Add(row["TenNguyenLieu"].ToString());
+            }
         }
 
         // Khi người dùng rời khỏi txtTenMaNL hoặc nhấn Enter
@@ -37,7 +47,8 @@ namespace PBL2.Views.QLTonKho
 
         private void LoadNguyenLieu()
         {
-            string input = txtMaNL.Text.Trim();
+            //string input = txtMaNL.Text.Trim();
+            string input = comboBoxTenNL.Text.Trim();
             if (string.IsNullOrEmpty(input))
                 return;
 
@@ -65,12 +76,16 @@ namespace PBL2.Views.QLTonKho
 
         private void XacNhan_Click(object sender, EventArgs e)
         {
-            string maNL = txtMaNL.Tag?.ToString() ?? ""; // lấy mã nguyên liệu chính xác
-            string tenNL = txtMaNL.Text.Trim();
+            //string maNL = txtMaNL.Tag?.ToString() ?? ""; // lấy mã nguyên liệu chính xác
+            //string tenNL = txtMaNL.Text.Trim();
+            string tenNL = comboBoxTenNL.Text.Trim();
             string donVi = txtDonVi.Text.Trim();
             string ghiChu = txtGhiChu.Text.Trim();
-            string maNV = txtMaNV.Text.Trim();
+            //string maNV = txtMaNV.Text.Trim();
+            string maNV = currentAccount.MaNV;
             decimal soLuongNhap = 0;
+
+            string maNL = MySQL_DB.Instance.Select("nguyenlieu", "MaNguyenLieu", $"TenNguyenLieu = '{tenNL}'").Rows[0]["MaNguyenLieu"].ToString();
 
             //ktr số lượng
             if (!decimal.TryParse(txtSoLuong.Text.Trim(), out soLuongNhap) || soLuongNhap <= 0)
@@ -98,8 +113,9 @@ namespace PBL2.Views.QLTonKho
                 { "SoLuong", soLuongNhap }
             };
 
-            bool success = MySQL_DB.Instance.InsertNguyenLieu("nguyenlieu", data);
-
+            //bool success = MySQL_DB.Instance.InsertNguyenLieu("nguyenlieu", data);
+            string updateQuery = $"UPDATE nguyenlieu SET SoLuong = SoLuong + {soLuongNhap}, NgayCapNhat = NOW() WHERE MaNguyenLieu = '{maNL}'";
+            bool success = MySQL_DB.Instance.ExecuteNonQuery(updateQuery) > 0;
             if (!success)
             {
                 MessageBox.Show("Nhập kho thất bại!");

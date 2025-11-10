@@ -40,7 +40,8 @@ namespace PBL2.Views.ManagerView
             this.labelTen.DataBindings.Add("Text", account, "TenNV");
             this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
 
-            this.panelPage.Controls.Add(new QL_MenuPage());
+            //this.panelPage.Controls.Add(new QL_MenuPage());
+            this.loadBaoCao();
 
             this.selectedButton = this.btnQLMenu;
         }
@@ -124,7 +125,7 @@ namespace PBL2.Views.ManagerView
         public void loadQLTonKho()
         {
             this.panelPage.Controls.Clear();
-            this.panelPage.Controls.Add(new QLTonKhoPage());
+            this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
         }
     }
 }
