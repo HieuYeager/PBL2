@@ -23,13 +23,46 @@ namespace PBL2.Views.BaoCao
             InitializeComponent();
             this.Presenter = new BaoCaoPresenter(this);
             this.Model = this.Presenter.Model;
+
+            DateTime from = DateTime.Now.AddDays(-10);
+            this.DateTimeFrom.Value = from;
+            DateTime today = DateTime.Now;
+            this.DateTimeTo.Value = today;
+            this.Presenter.load(from, today);
+            loadChart();
+
+        }
+
+        private void DateTime_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime from = this.DateTimeFrom.Value;
+            DateTime to = this.DateTimeTo.Value;
+            if (from.Date > to.Date)
+            { 
+                DateTimeFrom.Value = DateTimeTo.Value.AddDays(-1);
+            }
+            if (to.Date < from.Date) 
+            { 
+                DateTimeTo.Value = DateTimeFrom.Value.AddDays(1);
+            }
+        }
+
+        private void  loadBtn_click(object sender, EventArgs e) {
+            DateTime from = this.DateTimeFrom.Value;
+            DateTime to = this.DateTimeTo.Value;
+            this.Presenter.load(from, to);
+            loadChart(); 
+        }
+        
+        public void loadChart()
+        {
             chart1.DataSource = this.Model.dt;
             chart1.Series[0].XValueMember = "Ngay";
             chart1.Series[0].YValueMembers = "TongThanhTien";
             chart1.Series[0].ChartType = SeriesChartType.Column;
-            //chart1.DataBind();
-
+            chart1.DataBind();
         }
+
 
     }
 }

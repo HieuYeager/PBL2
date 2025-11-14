@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.DateTimeFrom = new Krypton.Toolkit.KryptonDateTimePicker();
+            this.DateTimeTo = new Krypton.Toolkit.KryptonDateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.LoadBtn = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,23 +52,86 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea7.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chart1.Legends.Add(legend7);
             this.chart1.Location = new System.Drawing.Point(73, 180);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series7.ChartArea = "ChartArea1";
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chart1.Series.Add(series7);
             this.chart1.Size = new System.Drawing.Size(971, 300);
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             // 
+            // DateTimeFrom
+            // 
+            this.DateTimeFrom.Location = new System.Drawing.Point(224, 63);
+            this.DateTimeFrom.Name = "DateTimeFrom";
+            this.DateTimeFrom.Size = new System.Drawing.Size(226, 25);
+            this.DateTimeFrom.TabIndex = 3;
+            this.DateTimeFrom.ValueChanged += new System.EventHandler(this.DateTime_ValueChanged);
+            // 
+            // DateTimeTo
+            // 
+            this.DateTimeTo.Location = new System.Drawing.Point(597, 63);
+            this.DateTimeTo.Name = "DateTimeTo";
+            this.DateTimeTo.Size = new System.Drawing.Size(226, 25);
+            this.DateTimeTo.TabIndex = 4;
+            this.DateTimeTo.ValueChanged += new System.EventHandler(this.DateTime_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(127, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 25);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Từ ngày";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(487, 63);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 25);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Đến ngày";
+            // 
+            // LoadBtn
+            // 
+            this.LoadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LoadBtn.Location = new System.Drawing.Point(862, 52);
+            this.LoadBtn.Name = "LoadBtn";
+            this.LoadBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
+            this.LoadBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.LoadBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
+            this.LoadBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.LoadBtn.Size = new System.Drawing.Size(116, 46);
+            this.LoadBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
+            this.LoadBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.LoadBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.LoadBtn.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.LoadBtn.StateCommon.Border.Rounding = 10F;
+            this.LoadBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoadBtn.TabIndex = 10;
+            this.LoadBtn.Values.Text = "Thanh toán";
+            this.LoadBtn.Click += new System.EventHandler(this.loadBtn_click);
+            // 
             // BaoCaoPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.LoadBtn);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.DateTimeTo);
+            this.Controls.Add(this.DateTimeFrom);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.label1);
             this.MaximumSize = new System.Drawing.Size(1203, 753);
@@ -80,5 +148,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private Krypton.Toolkit.KryptonDateTimePicker DateTimeFrom;
+        private Krypton.Toolkit.KryptonDateTimePicker DateTimeTo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private Krypton.Toolkit.KryptonButton LoadBtn;
     }
 }
