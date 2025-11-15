@@ -350,15 +350,29 @@ namespace PBL2.Views.QL_Menu
             this.CancelBtn.Visible = false;
         }
 
-        private void DeleteDishDataColumn_Click(string maNV, string tenNV)
+        private void DeleteDishDataColumn_Click(string maMon, string tenMon)
         {
 
-            DeleteNhanVienForm deleteForm = new DeleteNhanVienForm(maNV, tenNV);
-            deleteForm.ShowDialog();
+            //DeleteMonForm deleteForm = new DeleteMonForm(this.Presenter, maNV, tenNV);
+            //deleteForm.ShowDialog();
 
-            // Nếu form trả về DialogResult.OK → reload lại bảng
-            if (deleteForm.DialogResult == DialogResult.OK)
+            //// Nếu form trả về DialogResult.OK → reload lại bảng
+            //if (deleteForm.DialogResult == DialogResult.OK)
+            //{
+            //    this.LoadTable();
+            //    this.cancel();
+            //}
+
+            var result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn xóa món '{tenMon}' (Mã: {maMon})?",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result == DialogResult.Yes)
             {
+                this.Presenter.DeleteMon(maMon);
                 this.LoadTable();
                 this.cancel();
             }
