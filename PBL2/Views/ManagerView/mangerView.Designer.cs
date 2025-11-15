@@ -256,7 +256,7 @@
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.btnLogout.StateCommon.Border.Rounding = 10F;
-            this.btnLogout.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F);
             this.btnLogout.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
             this.btnLogout.TabIndex = 3;
             this.btnLogout.Values.Text = "Logout";

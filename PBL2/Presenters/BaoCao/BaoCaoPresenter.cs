@@ -41,7 +41,7 @@ namespace PBL2.Presenters.BaoCao
         public void load(DateTime from, DateTime to)
         {
             string query = $"SELECT DATE(NgayLapHD) AS Ngay, SUM(ThanhTien) AS TongThanhTien FROM HoaDon WHERE NgayLapHD BETWEEN '{from.ToString("yyyy-MM-dd")}' AND '{to.ToString("yyyy-MM-dd")}' GROUP BY DATE(NgayLapHD) ORDER BY Ngay;";
-            MessageBox.Show(query);
+            //MessageBox.Show(query);
             DataTable dt = MySQL_DB.Instance.ExecuteQuery(query);
             if (dt != null) this.Model.dt = dt;
             else
