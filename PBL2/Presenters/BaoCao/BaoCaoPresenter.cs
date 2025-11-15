@@ -41,13 +41,13 @@ namespace PBL2.Presenters.BaoCao
         public void load(DateTime from, DateTime to)
         {
             string query = $"SELECT DATE(NgayLapHD) AS Ngay, SUM(ThanhTien) AS TongThanhTien FROM HoaDon WHERE NgayLapHD BETWEEN '{from.ToString("yyyy-MM-dd")}' AND '{to.ToString("yyyy-MM-dd")}' GROUP BY DATE(NgayLapHD) ORDER BY Ngay;";
-            //MessageBox.Show(query);
+            MessageBox.Show(query);
             DataTable dt = MySQL_DB.Instance.ExecuteQuery(query);
             if (dt != null) this.Model.dt = dt;
             else
             {
                 this.Model.dt = new DataTable();
-                this.Model.dt.Columns.Add("Ngay", typeof(string));
+                this.Model.dt.Columns.Add("Ngay", typeof(DateTime));
                 this.Model.dt.Columns.Add("TongThanhTien", typeof(decimal));
             }
         }

@@ -58,7 +58,9 @@ namespace PBL2.Views.BaoCao
         {
             chart1.DataSource = this.Model.dt;
             chart1.Series[0].XValueMember = "Ngay";
+            chart1.Series[0].XValueType = ChartValueType.Date;
             chart1.Series[0].YValueMembers = "TongThanhTien";
+            chart1.Series[0].YValueType = ChartValueType.Double;
             chart1.Series[0].ChartType = SeriesChartType.Column;
             chart1.DataBind();
         }

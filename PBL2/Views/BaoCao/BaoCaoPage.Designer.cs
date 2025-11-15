@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.DateTimeFrom = new Krypton.Toolkit.KryptonDateTimePicker();
             this.DateTimeTo = new Krypton.Toolkit.KryptonDateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.LoadBtn = new Krypton.Toolkit.KryptonButton();
+            this.kryptonButton1 = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,16 +52,16 @@
             // 
             // chart1
             // 
-            chartArea7.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.chart1.Legends.Add(legend7);
+            chartArea11.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea11);
+            legend11.Name = "Legend1";
+            this.chart1.Legends.Add(legend11);
             this.chart1.Location = new System.Drawing.Point(73, 180);
             this.chart1.Name = "chart1";
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.chart1.Series.Add(series7);
+            series11.ChartArea = "ChartArea1";
+            series11.Legend = "Legend1";
+            series11.Name = "Series1";
+            this.chart1.Series.Add(series11);
             this.chart1.Size = new System.Drawing.Size(971, 300);
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
@@ -102,32 +102,26 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Đến ngày";
             // 
-            // LoadBtn
+            // kryptonButton1
             // 
-            this.LoadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LoadBtn.Location = new System.Drawing.Point(862, 52);
-            this.LoadBtn.Name = "LoadBtn";
-            this.LoadBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
-            this.LoadBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.LoadBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
-            this.LoadBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.LoadBtn.Size = new System.Drawing.Size(116, 46);
-            this.LoadBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
-            this.LoadBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.LoadBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.LoadBtn.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.LoadBtn.StateCommon.Border.Rounding = 10F;
-            this.LoadBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoadBtn.TabIndex = 10;
-            this.LoadBtn.Values.Text = "Thanh toán";
-            this.LoadBtn.Click += new System.EventHandler(this.loadBtn_click);
+            this.kryptonButton1.Location = new System.Drawing.Point(848, 63);
+            this.kryptonButton1.Name = "kryptonButton1";
+            this.kryptonButton1.OverrideDefault.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonButton1.OverrideDefault.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonButton1.OverrideFocus.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonButton1.OverrideFocus.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonButton1.Size = new System.Drawing.Size(31, 25);
+            this.kryptonButton1.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonButton1.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonButton1.TabIndex = 7;
+            this.kryptonButton1.Values.Image = global::PBL2.Properties.Resources.refresh_icon;
+            this.kryptonButton1.Values.Text = "";
+            this.kryptonButton1.Click += new System.EventHandler(this.loadBtn_click);
             // 
             // BaoCaoPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.LoadBtn);
+            this.Controls.Add(this.kryptonButton1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.DateTimeTo);
@@ -152,6 +146,6 @@
         private Krypton.Toolkit.KryptonDateTimePicker DateTimeTo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private Krypton.Toolkit.KryptonButton LoadBtn;
+        private Krypton.Toolkit.KryptonButton kryptonButton1;
     }
 }
