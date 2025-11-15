@@ -146,6 +146,40 @@ namespace PBL2.Presenters.QL_NhanVien
             }
         }
 
+        public void DeleteNhanVien(string MaNV)
+        {
+            try
+            {
+                string condition = $"MaNV = '{MaNV}'";
+
+                //delete account truoc
+                bool successAcc = MySQL_DB.Instance.Delete("Account", condition);
+
+                if (successAcc)
+                {
+                    //MessageBox.Show("Xoá tài khoản nhân viên thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    //MessageBox.Show("Xoá tài khoản nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                bool success = MySQL_DB.Instance.Delete("NhanVien", condition);
+                if (success)
+                {
+                    MessageBox.Show("Xóa nhân viên thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Xóa nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xoá nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void search(string keyword)
         {
 
