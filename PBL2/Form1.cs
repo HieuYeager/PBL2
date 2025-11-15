@@ -23,8 +23,8 @@ namespace PBL2
         {
             InitializeComponent();
             //LoadView("HomePage", null);
-            LoadView("StaffView", new AccountModel() { MaNV = "Test" , TenNV = "Test", VaiTro = "Nhân viên"});
-            //LoadView("ManagerView", new AccountModel() { MaNV = "Test", TenNV = "Test", VaiTro = "Quản lý" });
+            //LoadView("StaffView", new AccountModel() { MaNV = "Test" , TenNV = "Test", VaiTro = "Nhân viên"});
+            LoadView("ManagerView", new AccountModel() { MaNV = "Test", TenNV = "Test", VaiTro = "Quản lý" });
 
         }
 

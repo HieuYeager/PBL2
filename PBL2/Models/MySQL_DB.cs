@@ -20,7 +20,7 @@ namespace PBL2.Models
         // Lên 2 cấp từ bin/Debug → MyProject
         public static string projectRoot = Directory.GetParent(startupPath).Parent.FullName;
         //----------------Hieu,  Bin, Hai-------------------------------------------------
-        private string connectionString = "server=localhost;port=3306;database=pbl;uid=root;pwd=;";
+        private string connectionString = "server=localhost;port=3306;database=pbl;uid=root;pwd=mysql12345;";
         //-----------------------------------------------------------------
         public static MySQL_DB Instance { get; } = new MySQL_DB();
         private MySQL_DB() { }
@@ -148,7 +148,7 @@ namespace PBL2.Models
             string values = string.Join(", ", data.Values.Select(v => $"'{v.Replace("'", "''")}'"));
             string query = $"INSERT INTO {table} ({fields}) VALUES ({values})";
 
-            MessageBox.Show(query);
+            //MessageBox.Show(query);
             int result = ExecuteNonQuery(query);
 
             return result > 0;
