@@ -239,53 +239,17 @@
     <Compile Include="Views\QLTonKho\XuatKhoForm.Designer.cs">
       <DependentUpon>XuatKhoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\QL_Menu\AddMonForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\QL_Menu\AddMonForm.Designer.cs">
-      <DependentUpon>AddMonForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QL_Menu\DeleteMonForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\QL_Menu\DeleteMonForm.Designer.cs">
-      <DependentUpon>DeleteMonForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\QL_Menu\QL_MenuPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\QL_Menu\QL_MenuPage.Designer.cs">
       <DependentUpon>QL_MenuPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\QL_Menu\UpdateMonForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\QL_Menu\UpdateMonForm.Designer.cs">
-      <DependentUpon>UpdateMonForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QL_NhanVien\AddNhanVienForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\QL_NhanVien\AddNhanVienForm.Designer.cs">
-      <DependentUpon>AddNhanVienForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QL_NhanVien\DeleteNhanVienForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\QL_NhanVien\DeleteNhanVienForm.Designer.cs">
-      <DependentUpon>DeleteNhanVienForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\QL_NhanVien\QL_NhanVienPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\QL_NhanVien\QL_NhanVienPage.Designer.cs">
       <DependentUpon>QL_NhanVienPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QL_NhanVien\UpdateNhanVienForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\QL_NhanVien\UpdateNhanVienForm.Designer.cs">
-      <DependentUpon>UpdateNhanVienForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\StaffView\staffView.cs">
       <SubType>UserControl</SubType>
@@ -354,29 +318,11 @@
     <EmbeddedResource Include="Views\QLTonKho\XuatKhoForm.resx">
       <DependentUpon>XuatKhoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\QL_Menu\AddMonForm.resx">
-      <DependentUpon>AddMonForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\QL_Menu\DeleteMonForm.resx">
-      <DependentUpon>DeleteMonForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\QL_Menu\QL_MenuPage.resx">
       <DependentUpon>QL_MenuPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\QL_Menu\UpdateMonForm.resx">
-      <DependentUpon>UpdateMonForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\QL_NhanVien\AddNhanVienForm.resx">
-      <DependentUpon>AddNhanVienForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\QL_NhanVien\DeleteNhanVienForm.resx">
-      <DependentUpon>DeleteNhanVienForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\QL_NhanVien\QL_NhanVienPage.resx">
       <DependentUpon>QL_NhanVienPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\QL_NhanVien\UpdateNhanVienForm.resx">
-      <DependentUpon>UpdateNhanVienForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\StaffView\staffView.resx">
       <DependentUpon>staffView.cs</DependentUpon>
