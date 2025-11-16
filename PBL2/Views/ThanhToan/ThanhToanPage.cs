@@ -44,6 +44,8 @@ namespace PBL2.Views.ThanhToan
             this.txtTienThanhToan.DataBindings.Add("Text", this.Model, "TienThanhToan", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0");
             this.txtTienThua.DataBindings.Add("Text", this.Model, "TienThua", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0");
             this.txtMaHD.DataBindings.Add("Text", this.Model.order, "MaHD", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.numericMaBan.DataBindings.Add(new Binding("Value", this.Model.order, "maBan", true, DataSourceUpdateMode.OnPropertyChanged));
+
         }
 
         public void Load()

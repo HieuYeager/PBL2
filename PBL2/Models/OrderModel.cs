@@ -10,9 +10,9 @@ namespace PBL2.Models
 {
     public class OrderModel
     {
-        public string MaHD { get; set; }
+        public string MaHD { get; set; } = "";
         public List<OrderDetailModel> orderDetails = new List<OrderDetailModel>();
-
+        public int maBan { get; set; } = 1;
         public decimal Total
         {
             get { return orderDetails.Sum(x => x.tongTien); }
@@ -24,24 +24,24 @@ namespace PBL2.Models
         public OrderModel(HoaDon hd) 
         {
             this.MaHD = hd.MaHD;
+            if(hd.MaBan != null) this.maBan = Convert.ToInt32(hd.MaBan);
+            
             this.orderDetails = new List<OrderDetailModel>();
-            DataTable dt = MySQL_DB.Instance.Select("chitiethoadon", $"MaHD = '{hd.MaHD}'");
+            DataTable dt = MySQL_DB.Instance.Select("chitiethoadon", "*",  $"MaHD = '{hd.MaHD}'");
             foreach (DataRow row in dt.Rows)
             {
-                OrderDetailModel orderDetail = new OrderDetailModel();
                 try
                 {
                     //mon model
                     MonModel mon = new MonModel();
                     DataTable dtmon = MySQL_DB.Instance.Select("mon", "*", $"MaMon = '{row["MaMon"]}' LIMIT 1");
-                    foreach (DataRow rowmon in dtmon.Rows)
-                    {
-                        mon.MaMon = Convert.ToInt32(rowmon["MaMon"]);
-                        mon.TenMon = rowmon["TenMon"].ToString();
-                        mon.GiaBan = Convert.ToDecimal(rowmon["GiaBan"]);
-                        mon.DonVi = rowmon["DonVi"].ToString();
-                        mon.URLImage = rowmon["URL_anh"].ToString();
-                    }
+                    mon.MaMon = Convert.ToInt32(dtmon.Rows[0]["MaMon"]);
+                    mon.TenMon = dtmon.Rows[0]["TenMon"].ToString();
+                    mon.GiaBan = Convert.ToDecimal(dtmon.Rows[0]["GiaBan"]);
+                    mon.DonVi = dtmon.Rows[0]["DonVi"].ToString();
+                    mon.URLImage = dtmon.Rows[0]["URL_anh"].ToString();
+                    //order detail model
+                    OrderDetailModel orderDetail = new OrderDetailModel();
                     orderDetail.monModel = mon;
                     orderDetail.soLuong = Convert.ToInt32(row["SoLuong"]);
                     orderDetail.tongTien = Convert.ToDecimal(row["TongTien"]);

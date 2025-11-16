@@ -27,7 +27,9 @@ namespace PBL2.Models
                 OnPropertyChanged(nameof(TienThua));
             } 
         }
-        public decimal TienThua { get; set; }
+        public decimal TienThua { 
+            get => TienThanhToan - order.Total; 
+            set { } }
 
         public ThanhToanPageModel(AccountModel acc, OrderModel order)
         {

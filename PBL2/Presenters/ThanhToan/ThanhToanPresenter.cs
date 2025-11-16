@@ -31,7 +31,7 @@ namespace PBL2.Presenters.ThanhToan
             hoaDon.MaNV = maNV;
             hoaDon.TrangThai = TrangThaiHoaDon.ChuaThanhToan;
             hoaDon.NgayLapHD = DateTime.Now;
-            hoaDon.MaBan = 1;
+            hoaDon.MaBan = this.Model.order.maBan;
             hoaDon.ThanhTien = this.Model.order.Total;
             
             this.Model.order.MaHD = hoaDon.MaHD;
@@ -91,12 +91,14 @@ namespace PBL2.Presenters.ThanhToan
 
         public bool CheckThanhToan()
         {
-            if (this.Model.TienThua < 0 && this.Model.TienThanhToan > 0)
+            if (this.Model.TienThua < 0)
             {
                 return false;
             }
 
             MySQL_DB.Instance.Update("hoaDon", "TrangThai = '" + TrangThaiHoaDon.DaThanhToan.GetDisplayName() + "'", "MaHD='" + this.Model.order.MaHD + "'");
+            MySQL_DB.Instance.Update("hoaDon", "MaNV = '" + this.Model.acc.MaNV + "'", "MaHD='" + this.Model.order.MaHD + "'");
+            MySQL_DB.Instance.Update("hoaDon", "MaBan = '" + this.Model.order.maBan + "'", "MaHD='" + this.Model.order.MaHD + "'");
 
             return true;
         }
