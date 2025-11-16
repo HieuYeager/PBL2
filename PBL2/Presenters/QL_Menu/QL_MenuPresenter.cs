@@ -95,7 +95,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -155,7 +155,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -210,7 +210,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Cập nhật món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Cập nhật món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -264,7 +264,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Cập nhật món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Cập nhật món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -290,6 +290,18 @@ namespace PBL2.Presenters.QL_Menu
                 return false;
             }
 
+            //check mon co trong danh muc mon khong
+            if (MySQL_DB.Instance.Count("DanhMuc_Mon", $"MaMon = {maMon}") > 0)
+            {
+                //xoa mon khoi danh muc mon
+                MySQL_DB.Instance.Delete("DanhMuc_Mon", $"MaMon = {maMon}");
+            }
+            //xoa cong thuc
+            if (MySQL_DB.Instance.Count("CongThuc", $"MaMon = {maMon}") > 0)
+            {
+                MySQL_DB.Instance.Delete("CongThuc", $"MaMon = {maMon}");
+            }
+
             try
             {
                 string condition = $"MaMon = {maMon}";
@@ -297,7 +309,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result)
                 {
-                    MessageBox.Show("Xóa món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Xóa món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -448,7 +460,7 @@ namespace PBL2.Presenters.QL_Menu
                     string fields = "MaMon, MaNguyenLieu, SoLuong, DonVi";
                     string values = $"{maMon}, {maNguyenLieu}, {soLuong}, '{donVi}'";
                     MySQL_DB.Instance.Insert("CongThuc", fields, values);
-                    return;
+                    
                 }
                 else
                 {
