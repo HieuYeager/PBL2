@@ -205,10 +205,6 @@ namespace PBL2.Views.QL_Menu
 
         private void PhanLoaiPage_btnClicked(object sender, EventArgs e)
         {
-            //this.Hide();
-            //selected mon
-            int maMon = int.Parse(this.dataGridView1.SelectedRows[0].Cells["MaMon"].Value.ToString());
-            this.Model.seletedMaMon = maMon;
             QL_PhanLoaiPage phanLoaiPage = new QL_PhanLoaiPage(this.Presenter);
             this.LoadQL_PhanLoaiPageHandler?.Invoke(phanLoaiPage);
         }

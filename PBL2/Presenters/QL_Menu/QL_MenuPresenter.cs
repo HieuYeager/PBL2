@@ -470,5 +470,86 @@ namespace PBL2.Presenters.QL_Menu
         {
             return MySQL_DB.Instance.Count("CongThuc", $"MaMon = {maMon} AND MaNguyenLieu = {maNguyenLieu}") > 0;
         }
+
+        //QL phan loai/ danh muc
+        public void LoadDanhMuc()
+        {  
+            //DataTable dt = MySQL_DB.Instance.Select("CongThuc", "*", condition);
+            DataTable dt = MySQL_DB.Instance.Select("DanhMuc dm LEFT JOIN DanhMuc_Mon dmm ON dm.MaDM = dmm.MaDM GROUP BY dm.MaDM;", 
+                            "dm.*, COUNT(dmm.MaMon) AS SoLuongMon");
+            //return dt;
+            this.Model.DanhMucList = dt;
+        }
+        public void LoadMonInDanhMuc(int maDM)
+        {
+            DataTable dt = MySQL_DB.Instance.SelectJoin("Mon m", "m.*",
+                            $" JOIN DanhMuc_Mon dm ON m.MaMon = dm.MaMon WHERE dm.MaDM = {maDM}");
+            this.Model.MonInDanhMucList = dt;
+        }
+        public void LoadMonNotInDanhMuc(int maDM)
+        {
+            DataTable dt = MySQL_DB.Instance.SelectJoin("Mon m", "m.*",
+                            $" WHERE m.MaMon NOT IN (SELECT dm.MaMon FROM DanhMuc_Mon dm WHERE dm.MaDM = {maDM})");
+            this.Model.MonNotInDanhMucList = dt;
+        }
+        
+        public void AddDanhMuc(string tenDM)
+        {
+            if (TenDanhMucExists(tenDM))
+            {
+                MessageBox.Show($"Danh mục: {tenDM} đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string fields = "TenDM";
+            string values = $"'{tenDM}'";
+            MySQL_DB.Instance.Insert("DanhMuc", fields, values);
+        }
+
+        public bool TenDanhMucExists(string tenDM)
+        {
+            return MySQL_DB.Instance.Count("DanhMuc", $"TenDM = '{tenDM}'") > 0;
+        }
+
+        public void EditDanhMuc(int maDM, string tenDM)
+        {
+            if (TenDanhMucExists(tenDM))
+            {
+                MessageBox.Show($"Danh mục: {tenDM} đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string updates = $"TenDM = '{tenDM}'";
+            string condition = $"MaDM = {maDM}";
+            MySQL_DB.Instance.Update("DanhMuc", updates, condition);
+        }
+        public void DeleteDanhMuc(int maDM)
+        {
+            //check if danh muc is used
+            if (MySQL_DB.Instance.Count("DanhMuc_Mon", $"MaDM = {maDM}") > 0)
+            {
+                MessageBox.Show($"Danh mục đang có món, không thể xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string condition = $"MaDM = {maDM}";
+            MySQL_DB.Instance.Delete("DanhMuc", condition);
+        }
+    
+        public void AddMonToDanhMuc(int maMon, int maDM)
+        {
+            //check if exists
+            if (MySQL_DB.Instance.Count("DanhMuc_Mon", $"MaMon = {maMon} AND MaDM = {maDM}") > 0)
+            {
+                MessageBox.Show($"Món đã có trong danh mục!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string fields = "MaMon, MaDM";
+            string values = $"{maMon}, {maDM}";
+            MySQL_DB.Instance.Insert("DanhMuc_Mon", fields, values);
+        }
+
+        public void RemoveMonFromDanhMuc(int maMon, int maDM)
+        {
+            string condition = $"MaMon = {maMon} AND MaDM = {maDM}";
+            MySQL_DB.Instance.Delete("DanhMuc_Mon", condition);
+        }
     }
 }
