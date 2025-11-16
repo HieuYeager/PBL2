@@ -69,7 +69,7 @@ namespace PBL2.Views.ThanhToan
 
             if (this.Presenter.CheckMaHoaDon(this.Model.order.MaHD))
             {
-                MessageBox.Show("Hoá đơn đã tồn tại");
+                Console.WriteLine("Hoá đơn đã tồn tại");
                 return;
             }
             this.Presenter.CreateOrder(this.Model.acc.MaNV);
