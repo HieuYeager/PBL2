@@ -14,6 +14,7 @@ using PBL2.Views.MenuPage;
 using PBL2.Views.ThanhToan;
 using PBL2.Views.QLTonKho;
 using PBL2.Views.QLDon;
+using PBL2.Class;
 namespace PBL2.Views.staffView
 {
     public partial class staffView : UserControl
@@ -137,8 +138,10 @@ namespace PBL2.Views.staffView
         public void loadQlDonPage()
         {
             this.panelPage.Controls.Clear();
+            QLDonPage qlDonPage = new QLDonPage(this.account);
+            qlDonPage.loadThanhToan_Handler += this.LoadThanhToanPage;
+            this.panelPage.Controls.Add(qlDonPage);
 
-            this.panelPage.Controls.Add(new QLDonPage());
         }
 
         private void LoadIngredientPage()
