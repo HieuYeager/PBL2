@@ -111,10 +111,26 @@ namespace PBL2.Views.staffView
             this.panelPage.Controls.Clear();
             if(menuPage == null)
             {
-                this.menuPage = new menuPage();
+                this.menuPage = new menuPage(this.account);
             }
             this.panelPage.Controls.Add(this.menuPage);
-            this.menuPage.thanhtoan = this.LoadThanhToanPage;
+            this.menuPage.thanhtoanPage = this.LoadThanhToanPage;
+
+        }
+
+        private void loadMenuPage_ClearOrder()
+        {
+            this.panelPage.Controls.Clear();
+            if (menuPage == null)
+            {
+                this.menuPage = new menuPage(this.account);
+            }
+            else
+            {
+                this.menuPage.clearOrder();
+            }
+            this.panelPage.Controls.Add(this.menuPage);
+            this.menuPage.thanhtoanPage = this.LoadThanhToanPage;
 
         }
 
@@ -131,10 +147,13 @@ namespace PBL2.Views.staffView
 
             this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
         }
-        private void LoadThanhToanPage(OrderModel order) {
+        private void LoadThanhToanPage(OrderModel order, AccountModel acc) {
             if (order.orderDetails.Count == 0) return;
             this.panelPage.Controls.Clear();
-            this.panelPage.Controls.Add(new ThanhToanPage(this.account, order));
+            ThanhToanPage thanhToanPage = new ThanhToanPage(acc, order);
+            thanhToanPage.LoadMenuPageHandler += this.loadMenuPage;
+            thanhToanPage.LoadMenuPageHandler_ClearOrder += this.loadMenuPage_ClearOrder;
+            this.panelPage.Controls.Add(thanhToanPage);
         }
     }
 }

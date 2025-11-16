@@ -15,19 +15,20 @@ namespace PBL2.Views.MenuPage
 {
     public partial class menuPage : UserControl
     {
-        public delegate void ThanhToan(OrderModel order);
-        public ThanhToan thanhtoan = null;
+        public delegate void ThanhToan(OrderModel order, AccountModel acc);
+        public ThanhToan thanhtoanPage = null;
 
         //presenter
         MenuPagePresenter Presenter { get;}
         MenuPageModel Model { get; set; }
-        public menuPage()
+        public menuPage(AccountModel account)
         {
             InitializeComponent();
 
             //presenter
             this.Presenter = new MenuPagePresenter(this);
             this.Model = this.Presenter.Model;
+            this.Model.account = account;
             //binding data
             this.ComboBoxDanhMuc.DataSource = Model.danhmuc;
             this.ComboBoxDanhMuc.ValueMember = "MaDM";
@@ -49,7 +50,8 @@ namespace PBL2.Views.MenuPage
 
         private void buttonThanhToan_click(object sender, EventArgs e)
         {
-            thanhtoan?.Invoke(this.Model.order);
+            if(thanhtoanPage == null) return;
+            thanhtoanPage?.Invoke(this.Model.order, this.Model.account);
         }
         //funtion
         public void AddOrderDetail(OrderDetailModel orderDetail)
@@ -68,6 +70,12 @@ namespace PBL2.Views.MenuPage
                 MonComponent mon1 = new MonComponent(mon, this.Presenter);
                 this.panelMons.Controls.Add(mon1);
             }
+        }
+
+        public void clearOrder()
+        {
+            this.Model.order = new OrderModel();
+            this.ListOrderDetailsPn.Controls.Clear();
         }
     }
 }

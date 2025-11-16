@@ -22,6 +22,14 @@ namespace PBL2.Views.ThanhToan
         public ThanhToanPresenter Presenter { get; set; }
 
         public ThanhToanPageModel Model { get; set; }
+
+        //back to menu
+        public delegate void LoadMenuPageDelegate();
+        public event LoadMenuPageDelegate LoadMenuPageHandler;
+
+        public delegate void LoadMenuPageDelegate_ClearOrder();
+        public event LoadMenuPageDelegate_ClearOrder LoadMenuPageHandler_ClearOrder;
+
         public ThanhToanPage(AccountModel acc, OrderModel order)
         {
             InitializeComponent();
@@ -30,31 +38,10 @@ namespace PBL2.Views.ThanhToan
             this.Model = this.Presenter.Model;
 
             this.labelTongTien.DataBindings.Add("Text", this.Model.order, "Total", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00 VNĐ");
-            //
-            //Binding binding = new Binding("Text", this.Model, "TienThanhToan", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0");
-            //binding.Format += (s, e) => {
-            //    if (decimal.TryParse(e.Value?.ToString(), out decimal result))
-            //    {
-            //        e.Value = result;
-            //    }
-            //    else
-            //    {
-            //        e.Value = 0m; // Gán giá trị mặc định là 0 nếu nhập sai
-            //    }
-
-            //};
 
             this.txtTienThanhToan.DataBindings.Add("Text", this.Model, "TienThanhToan", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0");
             this.txtTienThua.DataBindings.Add("Text", this.Model, "TienThua", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0");
 
-            //foreach (OrderDetailModel item in order.orderDetails)
-            //{
-            //    Console.WriteLine("ten san pham:{0}, so luong: {1}, gia: {2}, tong phu:{3}",
-            //        item.TenMon,
-            //        item.soLuong,
-            //        item.giaBan,
-            //        item.tongTien);
-            //}
             Load();
         }
 
@@ -80,16 +67,18 @@ namespace PBL2.Views.ThanhToan
             this.Presenter.CreateOrder(this.Model.acc.MaNV);
         }
 
+        //event
         private void CheckValidNumber_textChange(object sender, EventArgs e)
         {
-            if(sender is TextBox)
+            if (sender is TextBox)
             {
                 try
                 {
                     if (((TextBox)sender).Text == "") return;
-                    
+
                     decimal a = Convert.ToDecimal(((TextBox)sender).Text);
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     ((TextBox)sender).Text = pre_value;
                     return;
@@ -107,6 +96,7 @@ namespace PBL2.Views.ThanhToan
             if (this.Presenter.CheckThanhToan())
             {
                 MessageBox.Show("Thanh toán thành công");
+                LoadMenuPageHandler_ClearOrder?.Invoke();
             }
             else
             {
@@ -114,5 +104,20 @@ namespace PBL2.Views.ThanhToan
             }
         }
 
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            LoadMenuPageHandler?.Invoke();
+
+        }
+        private void WaitOrderBtn_Click(object sender, EventArgs e)
+        {
+            LoadMenuPageHandler_ClearOrder?.Invoke();
+        }
+
+        private void CancelOrderBtn_Click(object sender, EventArgs e)
+        {
+            this.Presenter.CancelOrder();
+            LoadMenuPageHandler_ClearOrder?.Invoke();
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace PBL2.Presenters.ThanhToan
             hoaDon.MaHD = this.gererateMaHoaDon();
             hoaDon.MaNV = maNV;
             hoaDon.TrangThai = TrangThaiHoaDon.ChuaThanhToan;
-            hoaDon.NgayLapHD = DateTime.Today;
+            hoaDon.NgayLapHD = DateTime.Now;
             hoaDon.MaBan = 1;
             hoaDon.ThanhTien = this.Model.order.Total;
             
@@ -46,20 +46,28 @@ namespace PBL2.Presenters.ThanhToan
                 chiTietHoaDon.TongTien = item.tongTien;
                 hoaDon.ChiTietHoaDons.Add(chiTietHoaDon);
             }
-            //Insert
-            string fields = "MaHD, TrangThai, NgayLapHD, MaBan, ThanhTien, MaNV";
-            string values = "'" + hoaDon.MaHD + "', '" + hoaDon.TrangThai.GetDisplayName() + "', '" + hoaDon.NgayLapHD?.ToString("yyyy-MM-dd") + "', '" + hoaDon.MaBan + "', '" + hoaDon.ThanhTien + "', '" + hoaDon.MaNV + "'";
-
-            //Console.WriteLine(fields + "--" + values);
-            MySQL_DB.Instance.Insert("hoaDon", fields, values);
-            //insert cac chi tiet hoa don
-            foreach (var item in hoaDon.ChiTietHoaDons)
+            try
             {
-                fields = "MaHD, MaMon, SoLuong, DonGia, TongTien";
-                values = "'" + item.MaHD + "', '" + item.MaMon + "', '" + item.SoLuong + "', '" + item.DonGia + "', '" + item.TongTien + "'";
-                MySQL_DB.Instance.Insert("chiTietHoaDon", fields, values);
+                //Insert
+                string fields = "MaHD, TrangThai, NgayLapHD, MaBan, ThanhTien, MaNV";
+                string values = "'" + hoaDon.MaHD + "', '" + hoaDon.TrangThai.GetDisplayName() + "', '" + hoaDon.NgayLapHD?.ToString("yyyy-MM-dd HH:mm:ss") + "', '" + hoaDon.MaBan + "', '" + hoaDon.ThanhTien + "', '" + hoaDon.MaNV + "'";
+
+                //Console.WriteLine(fields + "--" + values);
+                MySQL_DB.Instance.Insert("hoaDon", fields, values);
+                //insert cac chi tiet hoa don
+                foreach (var item in hoaDon.ChiTietHoaDons)
+                {
+                    fields = "MaHD, MaMon, SoLuong, DonGia, TongTien";
+                    values = "'" + item.MaHD + "', '" + item.MaMon + "', '" + item.SoLuong + "', '" + item.DonGia + "', '" + item.TongTien + "'";
+                    MySQL_DB.Instance.Insert("chiTietHoaDon", fields, values);
+                }
+
             }
-            //
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi tạo hóa đơn: " + ex.Message);
+            }
+
         }
 
         private string gererateMaHoaDon()
@@ -91,6 +99,20 @@ namespace PBL2.Presenters.ThanhToan
             MySQL_DB.Instance.Update("hoaDon", "TrangThai = '" + TrangThaiHoaDon.DaThanhToan.GetDisplayName() + "'", "MaHD='" + this.Model.order.MaHD + "'");
 
             return true;
+        }
+
+        public void CancelOrder()
+        {
+            try
+            {
+                MySQL_DB.Instance.Delete("chiTietHoaDon", "MaHD='" + this.Model.order.MaHD + "'");
+                MySQL_DB.Instance.Delete("hoadon", "MaHD='" + this.Model.order.MaHD + "'");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi hủy đơn: " + ex.Message);
+            }
         }
     }
 }
