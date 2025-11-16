@@ -10,7 +10,7 @@ namespace PBL2.Models
     public class QL_MenuPageModel: IModel
     {
         public DataTable Table { get; set; }
-        public int DanhMuc { get; set; }
-        public string Find { get; set; }
+        public DataTable CongThuc { get; set; }
+        public int seletedMaMon { get; set; }
     }
 }

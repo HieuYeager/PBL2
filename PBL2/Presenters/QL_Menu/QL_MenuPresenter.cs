@@ -379,5 +379,96 @@ namespace PBL2.Presenters.QL_Menu
             this.Model.Table = dt;
         }
 
+        //QLCongThuc
+        public void LoadCongThuc(int maMon)
+        {
+            //this.Model.seletedMaMon = maMon;
+            string condition = $"MaMon = {maMon}";
+            //DataTable dt = MySQL_DB.Instance.Select("CongThuc", "*", condition);
+            DataTable dt = MySQL_DB.Instance.SelectJoin("CongThuc ct", "ct.MaMon, nl.MaNguyenLieu, nl.TenNguyenLieu, ct.SoLuong, ct.DonVi", 
+                        $" JOIN NguyenLieu nl ON ct.MaNguyenLieu = nl.MaNguyenLieu WHERE ct.MaMon = {maMon}");
+            //return dt;
+            this.Model.CongThuc = dt;
+        }
+        
+        public void loadNguyenLieu(Krypton.Toolkit.KryptonComboBox cb)
+        {
+            DataTable dt = MySQL_DB.Instance.Select("NguyenLieu", "NguyenLieu.MaNguyenLieu, NguyenLieu.TenNguyenLieu");
+            cb.DataSource = dt;
+            cb.DisplayMember = "TenNguyenLieu";
+            cb.ValueMember = "MaNguyenLieu";
+        }
+
+        public int getMaNguyenLieu(string tenNguyenLieu)
+        {
+            DataTable dt = MySQL_DB.Instance.Select("NguyenLieu", "*", $"TenNguyenLieu = '{tenNguyenLieu}'");
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32( dt.Rows[0]["MaNguyenLieu"]);
+            }
+            return -1;
+        }
+
+        public void loadDonVi(Krypton.Toolkit.KryptonComboBox cb)
+        {
+            DonViNguyenLieu[] donVis = (DonViNguyenLieu[])Enum.GetValues(typeof(DonViNguyenLieu));
+            var donVisList = donVis.Select(dv => new
+            {
+                Name = dv.GetDisplayName(),
+                Value = dv
+            }).ToList();
+            cb.DataSource = donVisList;
+            cb.DisplayMember = "Name";
+            cb.ValueMember = "Value";
+        }
+
+        public void luuCongThuc()
+        {
+            foreach (DataRow row in this.Model.CongThuc.Rows)
+            {
+                int maMon = 0;
+                int maNguyenLieu = 0;
+                double soLuong = 0;
+                string donVi = row["DonVi"].ToString();
+                try
+                {
+                    maMon = Convert.ToInt32(row["MaMon"]);
+                    maNguyenLieu = Convert.ToInt32(row["MaNguyenLieu"]);
+                    soLuong = Convert.ToDouble(row["SoLuong"]);
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return;
+                }
+
+                bool exists = this.CongThucExists(maMon, maNguyenLieu);
+                if(!exists)
+                {
+                    // Insert new record
+                    string fields = "MaMon, MaNguyenLieu, SoLuong, DonVi";
+                    string values = $"{maMon}, {maNguyenLieu}, {soLuong}, '{donVi}'";
+                    MySQL_DB.Instance.Insert("CongThuc", fields, values);
+                    return;
+                }
+                else
+                {
+                    string updates = $"SoLuong = {soLuong}, DonVi = '{donVi}'";
+                    string condition = $"MaMon = {maMon} AND MaNguyenLieu = {maNguyenLieu}";
+                    MySQL_DB.Instance.Update("CongThuc", updates, condition);
+                }
+                    
+            }
+        }
+
+        public void xoaCongThuc(int maMon, int maNguyenLieu)
+        {
+            string condition = $"MaMon = {maMon} AND MaNguyenLieu = {maNguyenLieu}";
+            MySQL_DB.Instance.Delete("CongThuc", condition);
+        }
+
+        public bool CongThucExists(int maMon, int maNguyenLieu)
+        {
+            return MySQL_DB.Instance.Count("CongThuc", $"MaMon = {maMon} AND MaNguyenLieu = {maNguyenLieu}") > 0;
+        }
     }
 }

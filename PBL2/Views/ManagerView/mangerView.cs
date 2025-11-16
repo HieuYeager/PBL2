@@ -107,7 +107,9 @@ namespace PBL2.Views.ManagerView
         public void loadQLMenu()
         {
             this.panelPage.Controls.Clear();
-            this.panelPage.Controls.Add(new QL_MenuPage());
+            QL_MenuPage ql_MenuPage = new QL_MenuPage();
+            ql_MenuPage.LoadQL_ConhThucPageHandler += this.loadQL_CongThuc;
+            this.panelPage.Controls.Add(ql_MenuPage);
         }
 
         public void loadQlNhanVien()
@@ -126,6 +128,13 @@ namespace PBL2.Views.ManagerView
         {
             this.panelPage.Controls.Clear();
             this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
+        }
+
+        public void loadQL_CongThuc(QL_CongThucPage ql_CongThucPage)
+        {
+            this.panelPage.Controls.Clear();
+            if (ql_CongThucPage != null) ql_CongThucPage.LoadQL_MenuPageHandler += this.loadQLMenu;
+            this.panelPage.Controls.Add(ql_CongThucPage);
         }
     }
 }

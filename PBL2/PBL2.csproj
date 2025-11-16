@@ -239,6 +239,18 @@
     <Compile Include="Views\QLTonKho\XuatKhoForm.Designer.cs">
       <DependentUpon>XuatKhoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\QL_Menu\QL_PhanLoaiPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\QL_Menu\QL_PhanLoaiPage.Designer.cs">
+      <DependentUpon>QL_PhanLoaiPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QL_Menu\QL_CongThucPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\QL_Menu\QL_CongThucPage.Designer.cs">
+      <DependentUpon>QL_CongThucPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\QL_Menu\QL_MenuPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -318,6 +330,12 @@
     <EmbeddedResource Include="Views\QLTonKho\XuatKhoForm.resx">
       <DependentUpon>XuatKhoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_Menu\QL_PhanLoaiPage.resx">
+      <DependentUpon>QL_PhanLoaiPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_Menu\QL_CongThucPage.resx">
+      <DependentUpon>QL_CongThucPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\QL_Menu\QL_MenuPage.resx">
       <DependentUpon>QL_MenuPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -376,6 +394,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\refresh_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_back_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -43,6 +43,11 @@ namespace PBL2.Views.QL_Menu
         }
 
         private string ImagePath { get; set; } = string.Empty;
+        //page phu
+        //private void cancel() => this.panelDetail.Enabled = false;
+        public delegate void LoadQL_ConhThucPageDelegate(QL_CongThucPage qlConhThucPage);
+        public LoadQL_ConhThucPageDelegate LoadQL_ConhThucPageHandler { get; set; }
+
         //event
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -184,6 +189,17 @@ namespace PBL2.Views.QL_Menu
         //        }
         //    }
         //}
+
+        //chuyen sang trang khac
+        private void ConhThucPage_btnClicked(object sender, EventArgs e)
+        {
+            //this.Hide();
+            //selected mon
+            int maMon = int.Parse(this.dataGridView1.SelectedRows[0].Cells["MaMon"].Value.ToString());
+            this.Model.seletedMaMon = maMon;
+            QL_CongThucPage conhThucPage = new QL_CongThucPage(this.Presenter);
+            this.LoadQL_ConhThucPageHandler?.Invoke(conhThucPage);
+        }
 
         //table load
         public void LoadTable()
