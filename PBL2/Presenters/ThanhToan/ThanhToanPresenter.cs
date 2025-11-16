@@ -81,7 +81,7 @@ namespace PBL2.Presenters.ThanhToan
             return maHoaDon;
         }
 
-        private bool CheckMaHoaDon(string maHoaDon)
+        public bool CheckMaHoaDon(string maHoaDon)
         {
             //DataTable dt = MySQL_DB.Instance.ExecuteQuery("SELECT MaHoaDon FROM hoadon ORDER BY MaHoaDon DESC LIMIT 1");
             DataTable dt = MySQL_DB.Instance.Select("hoadon", "MaHD", "MaHD= '" + maHoaDon + "' LIMIT 1");
