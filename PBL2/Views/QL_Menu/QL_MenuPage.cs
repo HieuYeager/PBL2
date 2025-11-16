@@ -48,6 +48,8 @@ namespace PBL2.Views.QL_Menu
         public delegate void LoadQL_ConhThucPageDelegate(QL_CongThucPage qlConhThucPage);
         public LoadQL_ConhThucPageDelegate LoadQL_ConhThucPageHandler { get; set; }
 
+        public delegate void LoadQL_PhanLoaiPageDelegate(QL_PhanLoaiPage qlPhanLoaiPage);
+        public LoadQL_PhanLoaiPageDelegate LoadQL_PhanLoaiPageHandler { get; set; }
         //event
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -199,6 +201,16 @@ namespace PBL2.Views.QL_Menu
             this.Model.seletedMaMon = maMon;
             QL_CongThucPage conhThucPage = new QL_CongThucPage(this.Presenter);
             this.LoadQL_ConhThucPageHandler?.Invoke(conhThucPage);
+        }
+
+        private void PhanLoaiPage_btnClicked(object sender, EventArgs e)
+        {
+            //this.Hide();
+            //selected mon
+            int maMon = int.Parse(this.dataGridView1.SelectedRows[0].Cells["MaMon"].Value.ToString());
+            this.Model.seletedMaMon = maMon;
+            QL_PhanLoaiPage phanLoaiPage = new QL_PhanLoaiPage(this.Presenter);
+            this.LoadQL_PhanLoaiPageHandler?.Invoke(phanLoaiPage);
         }
 
         //table load
