@@ -9,6 +9,8 @@ namespace PBL2.Models
 {
     public class MenuPageModel : IModel
     {
+        public AccountModel account { get; set; }
+
         public List<MonModel> mons = new List<MonModel>();
 
         public List<DanhMuc> danhmuc = new List<DanhMuc>();
