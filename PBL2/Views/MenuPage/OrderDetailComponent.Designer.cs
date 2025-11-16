@@ -56,25 +56,25 @@
             this.kryptonGroup1.Panel.Controls.Add(this.addBtn);
             this.kryptonGroup1.Panel.Controls.Add(this.labelGia);
             this.kryptonGroup1.Panel.Controls.Add(this.labelTenMon);
-            this.kryptonGroup1.Size = new System.Drawing.Size(250, 107);
+            this.kryptonGroup1.Size = new System.Drawing.Size(240, 89);
             this.kryptonGroup1.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.kryptonGroup1.StateCommon.Back.Color2 = System.Drawing.Color.White;
             this.kryptonGroup1.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonGroup1.StateCommon.Border.Rounding = 10F;
+            this.kryptonGroup1.StateCommon.Border.Rounding = 0F;
             this.kryptonGroup1.TabIndex = 1;
             // 
             // closeBtn
             // 
             this.closeBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.closeBtn.Location = new System.Drawing.Point(192, 52);
+            this.closeBtn.Location = new System.Drawing.Point(184, 49);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.closeBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.closeBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.closeBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.closeBtn.Size = new System.Drawing.Size(47, 34);
+            this.closeBtn.Size = new System.Drawing.Size(35, 35);
             this.closeBtn.StateCommon.Back.Color1 = System.Drawing.Color.Red;
             this.closeBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.closeBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -93,7 +93,7 @@
             this.labelSoLuong.AutoSize = true;
             this.labelSoLuong.BackColor = System.Drawing.Color.Transparent;
             this.labelSoLuong.Font = new System.Drawing.Font("Monotype Corsiva", 16.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSoLuong.Location = new System.Drawing.Point(69, 52);
+            this.labelSoLuong.Location = new System.Drawing.Point(54, 50);
             this.labelSoLuong.Name = "labelSoLuong";
             this.labelSoLuong.Size = new System.Drawing.Size(27, 34);
             this.labelSoLuong.TabIndex = 10;
@@ -102,13 +102,13 @@
             // minusBtn
             // 
             this.minusBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.minusBtn.Location = new System.Drawing.Point(3, 52);
+            this.minusBtn.Location = new System.Drawing.Point(13, 50);
             this.minusBtn.Name = "minusBtn";
             this.minusBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.minusBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.minusBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.minusBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.minusBtn.Size = new System.Drawing.Size(47, 34);
+            this.minusBtn.Size = new System.Drawing.Size(35, 35);
             this.minusBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.minusBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.minusBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -130,13 +130,13 @@
             // addBtn
             // 
             this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBtn.Location = new System.Drawing.Point(117, 52);
+            this.addBtn.Location = new System.Drawing.Point(98, 49);
             this.addBtn.Name = "addBtn";
             this.addBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.addBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.addBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.addBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.addBtn.Size = new System.Drawing.Size(47, 34);
+            this.addBtn.Size = new System.Drawing.Size(35, 35);
             this.addBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.addBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
             this.addBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -160,7 +160,7 @@
             this.labelGia.AutoSize = true;
             this.labelGia.BackColor = System.Drawing.Color.Transparent;
             this.labelGia.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGia.Location = new System.Drawing.Point(122, 9);
+            this.labelGia.Location = new System.Drawing.Point(30, 27);
             this.labelGia.Name = "labelGia";
             this.labelGia.Size = new System.Drawing.Size(50, 21);
             this.labelGia.TabIndex = 1;
@@ -171,7 +171,7 @@
             this.labelTenMon.AutoSize = true;
             this.labelTenMon.BackColor = System.Drawing.Color.Transparent;
             this.labelTenMon.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTenMon.Location = new System.Drawing.Point(3, 9);
+            this.labelTenMon.Location = new System.Drawing.Point(9, 6);
             this.labelTenMon.Name = "labelTenMon";
             this.labelTenMon.Size = new System.Drawing.Size(113, 21);
             this.labelTenMon.TabIndex = 0;
@@ -181,10 +181,11 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.kryptonGroup1);
-            this.Margin = new System.Windows.Forms.Padding(0, 3, 0, 7);
+            this.Font = new System.Drawing.Font("Mongolian Baiti", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "OrderDetailComponent";
             this.Padding = new System.Windows.Forms.Padding(5);
-            this.Size = new System.Drawing.Size(260, 117);
+            this.Size = new System.Drawing.Size(250, 99);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).EndInit();
             this.kryptonGroup1.Panel.ResumeLayout(false);
             this.kryptonGroup1.Panel.PerformLayout();
