@@ -41,7 +41,7 @@ namespace PBL2.Views.QL_Menu
             this.Presenter.loadNguyenLieu(this.cmBoxNguyenLieu);
             this.Presenter.loadDonVi(this.cmBoxDonVi);
             //load
-            this.Presenter.LoadMenu();
+            //this.Presenter.LoadMenu();
             this.LoadTable();
             this.loadDataCongThucTable();
             
