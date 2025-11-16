@@ -57,6 +57,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnCongThucPage = new Krypton.Toolkit.KryptonButton();
+            this.btnPhanLoaiPage = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.ComboBoxDanhMuc)).BeginInit();
             this.panelTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -472,10 +474,58 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "Mã món:";
             // 
+            // btnCongThucPage
+            // 
+            this.btnCongThucPage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCongThucPage.Location = new System.Drawing.Point(153, 73);
+            this.btnCongThucPage.Name = "btnCongThucPage";
+            this.btnCongThucPage.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnCongThucPage.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnCongThucPage.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnCongThucPage.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnCongThucPage.Size = new System.Drawing.Size(124, 46);
+            this.btnCongThucPage.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnCongThucPage.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnCongThucPage.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnCongThucPage.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.btnCongThucPage.StateCommon.Border.Rounding = 10F;
+            this.btnCongThucPage.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnCongThucPage.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCongThucPage.TabIndex = 14;
+            this.btnCongThucPage.Values.Text = "Công thức";
+            this.btnCongThucPage.Click += new System.EventHandler(this.ConhThucPage_btnClicked);
+            // 
+            // btnPhanLoaiPage
+            // 
+            this.btnPhanLoaiPage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPhanLoaiPage.Location = new System.Drawing.Point(299, 71);
+            this.btnPhanLoaiPage.Name = "btnPhanLoaiPage";
+            this.btnPhanLoaiPage.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnPhanLoaiPage.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnPhanLoaiPage.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnPhanLoaiPage.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnPhanLoaiPage.Size = new System.Drawing.Size(124, 46);
+            this.btnPhanLoaiPage.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnPhanLoaiPage.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnPhanLoaiPage.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnPhanLoaiPage.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.btnPhanLoaiPage.StateCommon.Border.Rounding = 10F;
+            this.btnPhanLoaiPage.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnPhanLoaiPage.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPhanLoaiPage.TabIndex = 15;
+            this.btnPhanLoaiPage.Values.Text = "Phân loại";
+            this.btnPhanLoaiPage.Click += new System.EventHandler(this.PhanLoaiPage_btnClicked);
+            // 
             // QL_MenuPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnPhanLoaiPage);
+            this.Controls.Add(this.btnCongThucPage);
             this.Controls.Add(this.panelTable);
             this.Controls.Add(this.findBtn);
             this.Controls.Add(this.FindTxt);
@@ -527,5 +577,7 @@
         private Krypton.Toolkit.KryptonButton kryptonButton1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private Krypton.Toolkit.KryptonButton UpdateSubmitBtn;
+        private Krypton.Toolkit.KryptonButton btnCongThucPage;
+        private Krypton.Toolkit.KryptonButton btnPhanLoaiPage;
     }
 }

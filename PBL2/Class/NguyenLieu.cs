@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +10,13 @@ namespace PBL2.Class
 {
     public enum DonViNguyenLieu
     {
+        [Display(Name = "Kg")]
         Kg,
+        [Display(Name = "g")]
         g,
+        [Display(Name = "L")]
         L,
+        [Display(Name = "ml")]
         ml
     }
 

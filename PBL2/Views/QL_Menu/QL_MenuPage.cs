@@ -43,6 +43,13 @@ namespace PBL2.Views.QL_Menu
         }
 
         private string ImagePath { get; set; } = string.Empty;
+        //page phu
+        //private void cancel() => this.panelDetail.Enabled = false;
+        public delegate void LoadQL_ConhThucPageDelegate(QL_CongThucPage qlConhThucPage);
+        public LoadQL_ConhThucPageDelegate LoadQL_ConhThucPageHandler { get; set; }
+
+        public delegate void LoadQL_PhanLoaiPageDelegate(QL_PhanLoaiPage qlPhanLoaiPage);
+        public LoadQL_PhanLoaiPageDelegate LoadQL_PhanLoaiPageHandler { get; set; }
         //event
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -184,6 +191,23 @@ namespace PBL2.Views.QL_Menu
         //        }
         //    }
         //}
+
+        //chuyen sang trang khac
+        private void ConhThucPage_btnClicked(object sender, EventArgs e)
+        {
+            //this.Hide();
+            //selected mon
+            int maMon = int.Parse(this.dataGridView1.SelectedRows[0].Cells["MaMon"].Value.ToString());
+            this.Model.seletedMaMon = maMon;
+            QL_CongThucPage conhThucPage = new QL_CongThucPage(this.Presenter);
+            this.LoadQL_ConhThucPageHandler?.Invoke(conhThucPage);
+        }
+
+        private void PhanLoaiPage_btnClicked(object sender, EventArgs e)
+        {
+            QL_PhanLoaiPage phanLoaiPage = new QL_PhanLoaiPage(this.Presenter);
+            this.LoadQL_PhanLoaiPageHandler?.Invoke(phanLoaiPage);
+        }
 
         //table load
         public void LoadTable()
@@ -350,15 +374,29 @@ namespace PBL2.Views.QL_Menu
             this.CancelBtn.Visible = false;
         }
 
-        private void DeleteDishDataColumn_Click(string maNV, string tenNV)
+        private void DeleteDishDataColumn_Click(string maMon, string tenMon)
         {
 
-            DeleteNhanVienForm deleteForm = new DeleteNhanVienForm(maNV, tenNV);
-            deleteForm.ShowDialog();
+            //DeleteMonForm deleteForm = new DeleteMonForm(this.Presenter, maNV, tenNV);
+            //deleteForm.ShowDialog();
 
-            // Nếu form trả về DialogResult.OK → reload lại bảng
-            if (deleteForm.DialogResult == DialogResult.OK)
+            //// Nếu form trả về DialogResult.OK → reload lại bảng
+            //if (deleteForm.DialogResult == DialogResult.OK)
+            //{
+            //    this.LoadTable();
+            //    this.cancel();
+            //}
+
+            var result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn xóa món '{tenMon}' (Mã: {maMon})?",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result == DialogResult.Yes)
             {
+                this.Presenter.DeleteMon(maMon);
                 this.LoadTable();
                 this.cancel();
             }

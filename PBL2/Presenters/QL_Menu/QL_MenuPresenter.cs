@@ -95,7 +95,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -155,7 +155,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Thêm món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -210,7 +210,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Cập nhật món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Cập nhật món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -264,7 +264,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result > 0)
                 {
-                    MessageBox.Show("Cập nhật món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Cập nhật món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -290,6 +290,18 @@ namespace PBL2.Presenters.QL_Menu
                 return false;
             }
 
+            //check mon co trong danh muc mon khong
+            if (MySQL_DB.Instance.Count("DanhMuc_Mon", $"MaMon = {maMon}") > 0)
+            {
+                //xoa mon khoi danh muc mon
+                MySQL_DB.Instance.Delete("DanhMuc_Mon", $"MaMon = {maMon}");
+            }
+            //xoa cong thuc
+            if (MySQL_DB.Instance.Count("CongThuc", $"MaMon = {maMon}") > 0)
+            {
+                MySQL_DB.Instance.Delete("CongThuc", $"MaMon = {maMon}");
+            }
+
             try
             {
                 string condition = $"MaMon = {maMon}";
@@ -297,7 +309,7 @@ namespace PBL2.Presenters.QL_Menu
 
                 if (result)
                 {
-                    MessageBox.Show("Xóa món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Xóa món thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadMenu();
                     return true;
                 }
@@ -379,5 +391,177 @@ namespace PBL2.Presenters.QL_Menu
             this.Model.Table = dt;
         }
 
+        //QLCongThuc
+        public void LoadCongThuc(int maMon)
+        {
+            //this.Model.seletedMaMon = maMon;
+            string condition = $"MaMon = {maMon}";
+            //DataTable dt = MySQL_DB.Instance.Select("CongThuc", "*", condition);
+            DataTable dt = MySQL_DB.Instance.SelectJoin("CongThuc ct", "ct.MaMon, nl.MaNguyenLieu, nl.TenNguyenLieu, ct.SoLuong, ct.DonVi", 
+                        $" JOIN NguyenLieu nl ON ct.MaNguyenLieu = nl.MaNguyenLieu WHERE ct.MaMon = {maMon}");
+            //return dt;
+            this.Model.CongThuc = dt;
+        }
+        
+        public void loadNguyenLieu(Krypton.Toolkit.KryptonComboBox cb)
+        {
+            DataTable dt = MySQL_DB.Instance.Select("NguyenLieu", "NguyenLieu.MaNguyenLieu, NguyenLieu.TenNguyenLieu");
+            cb.DataSource = dt;
+            cb.DisplayMember = "TenNguyenLieu";
+            cb.ValueMember = "MaNguyenLieu";
+        }
+
+        public int getMaNguyenLieu(string tenNguyenLieu)
+        {
+            DataTable dt = MySQL_DB.Instance.Select("NguyenLieu", "*", $"TenNguyenLieu = '{tenNguyenLieu}'");
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32( dt.Rows[0]["MaNguyenLieu"]);
+            }
+            return -1;
+        }
+
+        public void loadDonVi(Krypton.Toolkit.KryptonComboBox cb)
+        {
+            DonViNguyenLieu[] donVis = (DonViNguyenLieu[])Enum.GetValues(typeof(DonViNguyenLieu));
+            var donVisList = donVis.Select(dv => new
+            {
+                Name = dv.GetDisplayName(),
+                Value = dv
+            }).ToList();
+            cb.DataSource = donVisList;
+            cb.DisplayMember = "Name";
+            cb.ValueMember = "Value";
+        }
+
+        public void luuCongThuc()
+        {
+            foreach (DataRow row in this.Model.CongThuc.Rows)
+            {
+                int maMon = 0;
+                int maNguyenLieu = 0;
+                double soLuong = 0;
+                string donVi = row["DonVi"].ToString();
+                try
+                {
+                    maMon = Convert.ToInt32(row["MaMon"]);
+                    maNguyenLieu = Convert.ToInt32(row["MaNguyenLieu"]);
+                    soLuong = Convert.ToDouble(row["SoLuong"]);
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return;
+                }
+
+                bool exists = this.CongThucExists(maMon, maNguyenLieu);
+                if(!exists)
+                {
+                    // Insert new record
+                    string fields = "MaMon, MaNguyenLieu, SoLuong, DonVi";
+                    string values = $"{maMon}, {maNguyenLieu}, {soLuong}, '{donVi}'";
+                    MySQL_DB.Instance.Insert("CongThuc", fields, values);
+                    
+                }
+                else
+                {
+                    string updates = $"SoLuong = {soLuong}, DonVi = '{donVi}'";
+                    string condition = $"MaMon = {maMon} AND MaNguyenLieu = {maNguyenLieu}";
+                    MySQL_DB.Instance.Update("CongThuc", updates, condition);
+                }
+                    
+            }
+        }
+
+        public void xoaCongThuc(int maMon, int maNguyenLieu)
+        {
+            string condition = $"MaMon = {maMon} AND MaNguyenLieu = {maNguyenLieu}";
+            MySQL_DB.Instance.Delete("CongThuc", condition);
+        }
+
+        public bool CongThucExists(int maMon, int maNguyenLieu)
+        {
+            return MySQL_DB.Instance.Count("CongThuc", $"MaMon = {maMon} AND MaNguyenLieu = {maNguyenLieu}") > 0;
+        }
+
+        //QL phan loai/ danh muc
+        public void LoadDanhMuc()
+        {  
+            //DataTable dt = MySQL_DB.Instance.Select("CongThuc", "*", condition);
+            DataTable dt = MySQL_DB.Instance.Select("DanhMuc dm LEFT JOIN DanhMuc_Mon dmm ON dm.MaDM = dmm.MaDM GROUP BY dm.MaDM;", 
+                            "dm.*, COUNT(dmm.MaMon) AS SoLuongMon");
+            //return dt;
+            this.Model.DanhMucList = dt;
+        }
+        public void LoadMonInDanhMuc(int maDM)
+        {
+            DataTable dt = MySQL_DB.Instance.SelectJoin("Mon m", "m.*",
+                            $" JOIN DanhMuc_Mon dm ON m.MaMon = dm.MaMon WHERE dm.MaDM = {maDM}");
+            this.Model.MonInDanhMucList = dt;
+        }
+        public void LoadMonNotInDanhMuc(int maDM)
+        {
+            DataTable dt = MySQL_DB.Instance.SelectJoin("Mon m", "m.*",
+                            $" WHERE m.MaMon NOT IN (SELECT dm.MaMon FROM DanhMuc_Mon dm WHERE dm.MaDM = {maDM})");
+            this.Model.MonNotInDanhMucList = dt;
+        }
+        
+        public void AddDanhMuc(string tenDM)
+        {
+            if (TenDanhMucExists(tenDM))
+            {
+                MessageBox.Show($"Danh mục: {tenDM} đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string fields = "TenDM";
+            string values = $"'{tenDM}'";
+            MySQL_DB.Instance.Insert("DanhMuc", fields, values);
+        }
+
+        public bool TenDanhMucExists(string tenDM)
+        {
+            return MySQL_DB.Instance.Count("DanhMuc", $"TenDM = '{tenDM}'") > 0;
+        }
+
+        public void EditDanhMuc(int maDM, string tenDM)
+        {
+            if (TenDanhMucExists(tenDM))
+            {
+                MessageBox.Show($"Danh mục: {tenDM} đã tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string updates = $"TenDM = '{tenDM}'";
+            string condition = $"MaDM = {maDM}";
+            MySQL_DB.Instance.Update("DanhMuc", updates, condition);
+        }
+        public void DeleteDanhMuc(int maDM)
+        {
+            //check if danh muc is used
+            if (MySQL_DB.Instance.Count("DanhMuc_Mon", $"MaDM = {maDM}") > 0)
+            {
+                MessageBox.Show($"Danh mục đang có món, không thể xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string condition = $"MaDM = {maDM}";
+            MySQL_DB.Instance.Delete("DanhMuc", condition);
+        }
+    
+        public void AddMonToDanhMuc(int maMon, int maDM)
+        {
+            //check if exists
+            if (MySQL_DB.Instance.Count("DanhMuc_Mon", $"MaMon = {maMon} AND MaDM = {maDM}") > 0)
+            {
+                MessageBox.Show($"Món đã có trong danh mục!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string fields = "MaMon, MaDM";
+            string values = $"{maMon}, {maDM}";
+            MySQL_DB.Instance.Insert("DanhMuc_Mon", fields, values);
+        }
+
+        public void RemoveMonFromDanhMuc(int maMon, int maDM)
+        {
+            string condition = $"MaMon = {maMon} AND MaDM = {maDM}";
+            MySQL_DB.Instance.Delete("DanhMuc_Mon", condition);
+        }
     }
 }

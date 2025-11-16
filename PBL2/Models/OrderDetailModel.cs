@@ -30,7 +30,9 @@ namespace PBL2.Models
                 }
             }
         }
-        public decimal tongTien { get; set; }
+        public decimal tongTien { 
+            get => giaBan * soLuong;
+            set => OnPropertyChanged(nameof(tongTien));}
 
         //PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

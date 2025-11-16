@@ -282,12 +282,26 @@ namespace PBL2.Views.QL_NhanVien
         private void DeleteNhanVienDataColumn_Click(string maNV, string tenNV)
         {
 
-            DeleteNhanVienForm deleteForm = new DeleteNhanVienForm(maNV, tenNV);
-            deleteForm.ShowDialog();
+            //DeleteNhanVienForm deleteForm = new DeleteNhanVienForm(maNV, tenNV);
+            //deleteForm.ShowDialog();
 
-            // Nếu form trả về DialogResult.OK → reload lại bảng
-            if (deleteForm.DialogResult == DialogResult.OK)
+            //// Nếu form trả về DialogResult.OK → reload lại bảng
+            //if (deleteForm.DialogResult == DialogResult.OK)
+            //{
+            //    this.LoadTableNV();
+            //    this.cancel();
+            //}
+
+            var result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn xóa nhân viên '{tenNV}' (Mã: {maNV})?",
+                "Xác nhận xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result == DialogResult.Yes)
             {
+                this.Presenter.DeleteNhanVien(maNV);
                 this.LoadTableNV();
                 this.cancel();
             }

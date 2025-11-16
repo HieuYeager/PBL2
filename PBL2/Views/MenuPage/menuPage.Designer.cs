@@ -159,15 +159,15 @@
             // 
             this.panel3.Controls.Add(this.ThanhToanbtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 666);
+            this.panel3.Location = new System.Drawing.Point(0, 673);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(256, 87);
+            this.panel3.Size = new System.Drawing.Size(256, 80);
             this.panel3.TabIndex = 9;
             // 
             // ThanhToanbtn
             // 
             this.ThanhToanbtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ThanhToanbtn.Location = new System.Drawing.Point(77, 23);
+            this.ThanhToanbtn.Location = new System.Drawing.Point(74, 17);
             this.ThanhToanbtn.Name = "ThanhToanbtn";
             this.ThanhToanbtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.ThanhToanbtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -207,13 +207,13 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Monotype Corsiva", 16.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Mongolian Baiti", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(91, 25);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 34);
+            this.label2.Size = new System.Drawing.Size(69, 36);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Order";
+            this.label2.Text = "Đơn";
             // 
             // menuPage
             // 
