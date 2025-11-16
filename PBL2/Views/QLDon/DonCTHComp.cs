@@ -37,6 +37,9 @@ namespace PBL2.Views.MenuPage
 
         }
 
-
+        private void ThanhToanBtn_Click(object sender, EventArgs e)
+        {
+            this.Presenter.loadThanhToanPage(this.hoaDon);
+        }
     }
 }

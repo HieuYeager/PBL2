@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.kryptonGroup1 = new Krypton.Toolkit.KryptonGroup();
+            this.HuyDonBtn = new Krypton.Toolkit.KryptonButton();
+            this.ThanhToanBtn = new Krypton.Toolkit.KryptonButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelTrangThai = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.labelMaHD = new System.Windows.Forms.Label();
             this.labelThanhTien = new System.Windows.Forms.Label();
             this.label0 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labelTrangThai = new System.Windows.Forms.Label();
-            this.addBtn = new Krypton.Toolkit.KryptonButton();
-            this.kryptonButton1 = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroup1.Panel)).BeginInit();
             this.kryptonGroup1.Panel.SuspendLayout();
@@ -51,8 +51,8 @@
             // 
             // kryptonGroup1.Panel
             // 
-            this.kryptonGroup1.Panel.Controls.Add(this.kryptonButton1);
-            this.kryptonGroup1.Panel.Controls.Add(this.addBtn);
+            this.kryptonGroup1.Panel.Controls.Add(this.HuyDonBtn);
+            this.kryptonGroup1.Panel.Controls.Add(this.ThanhToanBtn);
             this.kryptonGroup1.Panel.Controls.Add(this.label2);
             this.kryptonGroup1.Panel.Controls.Add(this.labelTrangThai);
             this.kryptonGroup1.Panel.Controls.Add(this.label1);
@@ -68,6 +68,73 @@
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
             this.kryptonGroup1.StateCommon.Border.Rounding = 0F;
             this.kryptonGroup1.TabIndex = 1;
+            // 
+            // HuyDonBtn
+            // 
+            this.HuyDonBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.HuyDonBtn.Location = new System.Drawing.Point(3, 114);
+            this.HuyDonBtn.Name = "HuyDonBtn";
+            this.HuyDonBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.Brown;
+            this.HuyDonBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.HuyDonBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.Brown;
+            this.HuyDonBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.HuyDonBtn.Size = new System.Drawing.Size(113, 36);
+            this.HuyDonBtn.StateCommon.Back.Color1 = System.Drawing.Color.Brown;
+            this.HuyDonBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.HuyDonBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.HuyDonBtn.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.HuyDonBtn.StateCommon.Border.Rounding = 10F;
+            this.HuyDonBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.HuyDonBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HuyDonBtn.TabIndex = 7;
+            this.HuyDonBtn.Values.Text = "Hủy đơn";
+            // 
+            // ThanhToanBtn
+            // 
+            this.ThanhToanBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ThanhToanBtn.Location = new System.Drawing.Point(120, 115);
+            this.ThanhToanBtn.Name = "ThanhToanBtn";
+            this.ThanhToanBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.ThanhToanBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.ThanhToanBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.ThanhToanBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.ThanhToanBtn.Size = new System.Drawing.Size(126, 36);
+            this.ThanhToanBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.ThanhToanBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.ThanhToanBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.ThanhToanBtn.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.ThanhToanBtn.StateCommon.Border.Rounding = 10F;
+            this.ThanhToanBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.ThanhToanBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ThanhToanBtn.TabIndex = 6;
+            this.ThanhToanBtn.Values.Text = "Thanh toán";
+            this.ThanhToanBtn.Click += new System.EventHandler(this.ThanhToanBtn_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(9, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 21);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Trạng Thái: ";
+            // 
+            // labelTrangThai
+            // 
+            this.labelTrangThai.AutoSize = true;
+            this.labelTrangThai.BackColor = System.Drawing.Color.Transparent;
+            this.labelTrangThai.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTrangThai.Location = new System.Drawing.Point(122, 42);
+            this.labelTrangThai.Name = "labelTrangThai";
+            this.labelTrangThai.Size = new System.Drawing.Size(50, 21);
+            this.labelTrangThai.TabIndex = 4;
+            this.labelTrangThai.Text = "1000";
             // 
             // label1
             // 
@@ -113,72 +180,6 @@
             this.label0.TabIndex = 0;
             this.label0.Text = "Mã HD: ";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 21);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Trạng Thái: ";
-            // 
-            // labelTrangThai
-            // 
-            this.labelTrangThai.AutoSize = true;
-            this.labelTrangThai.BackColor = System.Drawing.Color.Transparent;
-            this.labelTrangThai.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTrangThai.Location = new System.Drawing.Point(122, 42);
-            this.labelTrangThai.Name = "labelTrangThai";
-            this.labelTrangThai.Size = new System.Drawing.Size(50, 21);
-            this.labelTrangThai.TabIndex = 4;
-            this.labelTrangThai.Text = "1000";
-            // 
-            // addBtn
-            // 
-            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBtn.Location = new System.Drawing.Point(120, 115);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
-            this.addBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.addBtn.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
-            this.addBtn.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.addBtn.Size = new System.Drawing.Size(126, 36);
-            this.addBtn.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
-            this.addBtn.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.addBtn.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.addBtn.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.addBtn.StateCommon.Border.Rounding = 10F;
-            this.addBtn.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.addBtn.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addBtn.TabIndex = 6;
-            this.addBtn.Values.Text = "Thanh toán";
-            // 
-            // kryptonButton1
-            // 
-            this.kryptonButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.kryptonButton1.Location = new System.Drawing.Point(3, 114);
-            this.kryptonButton1.Name = "kryptonButton1";
-            this.kryptonButton1.OverrideDefault.Back.Color1 = System.Drawing.Color.Brown;
-            this.kryptonButton1.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonButton1.OverrideFocus.Back.Color1 = System.Drawing.Color.Brown;
-            this.kryptonButton1.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonButton1.Size = new System.Drawing.Size(113, 36);
-            this.kryptonButton1.StateCommon.Back.Color1 = System.Drawing.Color.Brown;
-            this.kryptonButton1.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonButton1.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.kryptonButton1.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton1.StateCommon.Border.Rounding = 10F;
-            this.kryptonButton1.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.kryptonButton1.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonButton1.TabIndex = 7;
-            this.kryptonButton1.Values.Text = "Hủy đơn";
-            // 
             // DonCTHComp
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -206,7 +207,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelTrangThai;
-        private Krypton.Toolkit.KryptonButton kryptonButton1;
-        private Krypton.Toolkit.KryptonButton addBtn;
+        private Krypton.Toolkit.KryptonButton HuyDonBtn;
+        private Krypton.Toolkit.KryptonButton ThanhToanBtn;
     }
 }
