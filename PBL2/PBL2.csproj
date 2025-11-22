@@ -197,11 +197,29 @@
     <Compile Include="Views\MenuPage\OrderDetailComponent.Designer.cs">
       <DependentUpon>OrderDetailComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\QLDon\DonCTHComp.cs">
+    <Compile Include="Views\QLDon\DonDSSComp.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\QLDon\DonCTHComp.Designer.cs">
-      <DependentUpon>DonCTHComp.cs</DependentUpon>
+    <Compile Include="Views\QLDon\DonDSSComp.Designer.cs">
+      <DependentUpon>DonDSSComp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QLDon\DonDTTComp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\QLDon\DonDTTComp.Designer.cs">
+      <DependentUpon>DonDTTComp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QLDon\DonDLComp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\QLDon\DonDLComp.Designer.cs">
+      <DependentUpon>DonDLComp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QLDon\DonCTTComp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\QLDon\DonCTTComp.Designer.cs">
+      <DependentUpon>DonCTTComp.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\QLDon\QLDonPage.cs">
       <SubType>UserControl</SubType>
@@ -315,8 +333,17 @@
     <EmbeddedResource Include="Views\MenuPage\OrderDetailComponent.resx">
       <DependentUpon>OrderDetailComponent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\QLDon\DonCTHComp.resx">
-      <DependentUpon>DonCTHComp.cs</DependentUpon>
+    <EmbeddedResource Include="Views\QLDon\DonDSSComp.resx">
+      <DependentUpon>DonDSSComp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QLDon\DonDTTComp.resx">
+      <DependentUpon>DonDTTComp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QLDon\DonDLComp.resx">
+      <DependentUpon>DonDLComp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QLDon\DonCTTComp.resx">
+      <DependentUpon>DonCTTComp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QLDon\QLDonPage.resx">
       <DependentUpon>QLDonPage.cs</DependentUpon>

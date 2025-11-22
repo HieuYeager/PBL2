@@ -11,6 +11,7 @@ namespace PBL2.Models
     {
         public MonModel monModel { get; set; }
 
+        public int maMon { get => monModel.MaMon; }
         public string TenMon => monModel?.TenMon;
         public decimal giaBan { get => monModel.GiaBan; }
         //public int soLuong { get; set; } = 0 ;
