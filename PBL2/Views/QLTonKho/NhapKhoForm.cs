@@ -84,6 +84,7 @@ namespace PBL2.Views.QLTonKho
             //string maNV = txtMaNV.Text.Trim();
             string maNV = currentAccount.MaNV;
             decimal soLuongNhap = 0;
+            decimal GiaNhap = 0;
 
             string maNL = MySQL_DB.Instance.Select("nguyenlieu", "MaNguyenLieu", $"TenNguyenLieu = '{tenNL}'").Rows[0]["MaNguyenLieu"].ToString();
 
@@ -99,6 +100,12 @@ namespace PBL2.Views.QLTonKho
                 MessageBox.Show("Tên và đơn vị nguyên liệu không được để trống!");
                 return;
             }
+            //kiem tra gia nhap
+            if (!decimal.TryParse(txtGia.Text.Trim(), out GiaNhap) || GiaNhap <= 0)
+            {
+                MessageBox.Show("Giá nhập phải > 0");
+                return;
+            }
 
             if (MySQL_DB.Instance.Count($"NhanVien WHERE MaNV = '{maNV}'") == 0)
             {
@@ -110,7 +117,8 @@ namespace PBL2.Views.QLTonKho
             {
                 { "TenNguyenLieu", tenNL },
                 { "DonVi", donVi },
-                { "SoLuong", soLuongNhap }
+                { "SoLuong", soLuongNhap },
+                { "Gia", GiaNhap }
             };
 
             //bool success = MySQL_DB.Instance.InsertNguyenLieu("nguyenlieu", data);

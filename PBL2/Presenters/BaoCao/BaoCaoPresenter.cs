@@ -51,5 +51,13 @@ namespace PBL2.Presenters.BaoCao
                 this.Model.dt.Columns.Add("TongThanhTien", typeof(decimal));
             }
         }
+
+        public DataTable loadMonTheoDoanhThu(DateTime from, DateTime to)
+        {
+            DataTable dt = MySQL_DB.Instance.SelectJoin("ChiTietHoaDon cthd", "m.TenMon, SUM(cthd.TongTien) AS DoanhThu",
+                "JOIN Mon m ON cthd.MaMon = m.MaMon GROUP BY m.MaMon, m.TenMon ORDER BY DoanhThu DESC LIMIT 5;");
+            if (dt != null) return dt;
+            return new DataTable();
+        }
     }
 }

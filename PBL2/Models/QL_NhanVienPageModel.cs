@@ -12,5 +12,11 @@ namespace PBL2.Models
     public class QL_NhanVienPageModel
     {
         public DataTable Table { get; set; }
+
+        //phan ca
+        public DataTable CaLamViec { get; set; }
+
+        //diem danh
+        public DataTable DiemDanh { get; set; }
     }
 }

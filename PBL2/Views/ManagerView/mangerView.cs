@@ -14,6 +14,8 @@ using PBL2.Views.QL_Menu;
 using PBL2.Views.QL_NhanVien;
 using PBL2.Views.BaoCao;
 using PBL2.Views.QLTonKho;
+using PBL2.Presenters.QL_NhanVien;
+using PBL2.Views.PhanCa;
 namespace PBL2.Views.ManagerView
 {
     public partial class mangerView : UserControl
@@ -43,7 +45,8 @@ namespace PBL2.Views.ManagerView
             //this.panelPage.Controls.Add(new QL_MenuPage());
             this.loadBaoCao();
 
-            this.selectedButton = this.btnQLMenu;
+            this.selectedButton = this.btnBaoCao;
+            changeButtonColor(this.selectedButton);
         }
 
         //event
@@ -116,7 +119,10 @@ namespace PBL2.Views.ManagerView
         public void loadQlNhanVien()
         {
             this.panelPage.Controls.Clear();
-            this.panelPage.Controls.Add(new QL_NhanVienPage());
+            QL_NhanVienPage ql_NhanVienPage = new QL_NhanVienPage();
+            ql_NhanVienPage.LoadPhanCaHandler += this.loadPhancaPage;
+
+            this.panelPage.Controls.Add(ql_NhanVienPage);
         }
 
         public void loadBaoCao()
@@ -143,6 +149,15 @@ namespace PBL2.Views.ManagerView
             this.panelPage.Controls.Clear();
             if (ql_PhanLoaiPage != null) ql_PhanLoaiPage.LoadQL_MenuPageHandler += this.loadQLMenu;
             this.panelPage.Controls.Add(ql_PhanLoaiPage);
+        }
+
+        //trang phu
+        public void loadPhancaPage(QL_NhanVienPresenter presenter)
+        {
+            this.panelPage.Controls.Clear();
+            PhanCaPage phanCaPage = new PhanCaPage(presenter);
+            phanCaPage.loadQLNhanVienHandler += this.loadQlNhanVien;
+            this.panelPage.Controls.Add(phanCaPage);
         }
     }
 }

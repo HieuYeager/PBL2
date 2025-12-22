@@ -1,4 +1,9 @@
 ﻿//--------------------Hai--------------------
+//--------------------Hai--------------------
+using PBL2.Class;
+using PBL2.Models;
+using PBL2.Presenters.QL_NhanVien;
+using PBL2.Views.QL_Menu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +14,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//--------------------Hai--------------------
-using PBL2.Class;
-using PBL2.Models;
-using PBL2.Presenters.QL_NhanVien;
 
 namespace PBL2.Views.QL_NhanVien
 {
@@ -22,6 +23,11 @@ namespace PBL2.Views.QL_NhanVien
         public QL_NhanVienPresenter Presenter { get; set; }
 
         public QL_NhanVienPageModel Model { get; set; }
+
+        //page phu
+        public delegate void LoadPhanCaDelegate(QL_NhanVienPresenter presenter);
+        public LoadPhanCaDelegate LoadPhanCaHandler { get; set; }
+
         public QL_NhanVienPage()
         {
             InitializeComponent();
@@ -360,6 +366,10 @@ namespace PBL2.Views.QL_NhanVien
                 e.ToolTipText = "Xóa";
             }
         }
-
+        //chuyen trang
+        private void btnPhanCa_Click(object sender, EventArgs e)
+        {
+            this.LoadPhanCaHandler?.Invoke(this.Presenter);
+        }
     }
 }

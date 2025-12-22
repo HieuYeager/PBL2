@@ -170,7 +170,7 @@ namespace PBL2.Views.QL_Menu
             try
             {
                 maNguyenLieu = Convert.ToInt32(this.cmBoxNguyenLieu.SelectedValue);
-                MessageBox.Show($"Người dùng chọn: {maNguyenLieu}");
+                //MessageBox.Show($"Người dùng chọn: {maNguyenLieu}");
                 if(this.Presenter.CongThucExists(maMon, maNguyenLieu))
                 {
                     this.Presenter.xoaCongThuc(maMon, maNguyenLieu);

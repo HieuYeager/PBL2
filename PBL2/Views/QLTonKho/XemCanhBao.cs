@@ -21,6 +21,7 @@ namespace PBL2.Views.QLTonKho
         {
             if (dataGridView1 != null)
             {
+                this.dataGridView1.Columns.Clear();
                 dataGridView1.DataSource = dtCanhBao;
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }

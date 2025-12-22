@@ -281,6 +281,12 @@
     <Compile Include="Views\QL_Menu\QL_MenuPage.Designer.cs">
       <DependentUpon>QL_MenuPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\QL_NhanVien\PhanCaPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\QL_NhanVien\PhanCaPage.Designer.cs">
+      <DependentUpon>PhanCaPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\QL_NhanVien\QL_NhanVienPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -374,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QL_Menu\QL_MenuPage.resx">
       <DependentUpon>QL_MenuPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QL_NhanVien\PhanCaPage.resx">
+      <DependentUpon>PhanCaPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QL_NhanVien\QL_NhanVienPage.resx">
       <DependentUpon>QL_NhanVienPage.cs</DependentUpon>
