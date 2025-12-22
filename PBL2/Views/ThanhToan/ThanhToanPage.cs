@@ -54,18 +54,24 @@ namespace PBL2.Views.ThanhToan
             this.dataGridView1.DataSource = this.Model.order.orderDetails;
             this.dataGridView1.Columns[0].Visible = false;
             //rename column
-            this.dataGridView1.Columns[1].HeaderText = "Tên món";
-            this.dataGridView1.Columns[2].HeaderText = "Giá bán";
-            this.dataGridView1.Columns[3].HeaderText = "Số lượng";
-            this.dataGridView1.Columns[4].HeaderText = "Tổng tiền";
+            this.dataGridView1.Columns[1].HeaderText = "Mã món";
+            this.dataGridView1.Columns[1].Visible = false;
+            this.dataGridView1.Columns[2].HeaderText = "Tên món";
+            this.dataGridView1.Columns[2].FillWeight = 40;
+            this.dataGridView1.Columns[3].HeaderText = "Giá bán";
+            this.dataGridView1.Columns[3].FillWeight = 25;
+            this.dataGridView1.Columns[4].HeaderText = "Số lượng";
+            this.dataGridView1.Columns[4].FillWeight = 10;
+            this.dataGridView1.Columns[5].HeaderText = "Tổng tiền";
+            this.dataGridView1.Columns[5].FillWeight = 25;
             //format
-            this.dataGridView1.Columns[2].DefaultCellStyle.Format = "#,##0.00 VNĐ";
-            this.dataGridView1.Columns[4].DefaultCellStyle.Format = "#,##0.00 VNĐ";
+            this.dataGridView1.Columns[3].DefaultCellStyle.Format = "#,##0.00 VNĐ";
+            this.dataGridView1.Columns[5].DefaultCellStyle.Format = "#,##0.00 VNĐ";
             //column width, fill weight
-            this.dataGridView1.Columns[1].FillWeight = 40;
-            this.dataGridView1.Columns[2].FillWeight = 25;
-            this.dataGridView1.Columns[3].FillWeight = 10;
-            this.dataGridView1.Columns[4].FillWeight = 25;
+            //this.dataGridView1.Columns[1].FillWeight = 40;
+            //this.dataGridView1.Columns[2].FillWeight = 25;
+            //this.dataGridView1.Columns[3].FillWeight = 10;
+            //this.dataGridView1.Columns[4].FillWeight = 25;
 
             if (this.Presenter.CheckMaHoaDon(this.Model.order.MaHD))
             {

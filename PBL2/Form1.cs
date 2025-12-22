@@ -22,10 +22,9 @@ namespace PBL2
         public Form1()
         {
             InitializeComponent();
-            //LoadView("HomePage", null);
+            LoadView("HomePage", null);
             //LoadView("StaffView", new AccountModel() { MaNV = "Test" , TenNV = "Test", VaiTro = "Nhân viên"});
-            LoadView("ManagerView", new AccountModel() { MaNV = "Test", TenNV = "Test", VaiTro = "Quản lý" });
-
+            //LoadView("ManagerView", new AccountModel() { MaNV = "Test", TenNV = "Test", VaiTro = "Quản lý" });
         }
 
         public void LoadView(String ViewName, AccountModel account)

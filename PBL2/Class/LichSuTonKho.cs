@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,10 @@ namespace PBL2.Class
 {
     public enum HoatDongTonKho
     {
+        [Display(Name = "Nhập kho")]
         NhapKho,
+
+        [Display(Name = "Xuất kho")]
         XuatKho
     }
 

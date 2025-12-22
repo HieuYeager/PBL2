@@ -47,7 +47,7 @@ namespace PBL2.Models
             }
                 catch(Exception e)
                 {
-                    MessageBox.Show("ExecuteQuery error: " + e.Message);
+                    Console.WriteLine("ExecuteQuery error: " + e.Message);
                     return null;
                 }
             }
@@ -66,7 +66,7 @@ namespace PBL2.Models
                 }
                 catch(Exception e)
                 {
-                    MessageBox.Show("ExecuteNonQuery error: "+ e.Message);
+                    Console.WriteLine("ExecuteNonQuery error: "+ e.Message);
                     return -1;
                 }
             }
@@ -84,7 +84,7 @@ namespace PBL2.Models
                     return cmd.ExecuteScalar();
                 }
                 catch(Exception e) {
-                    MessageBox.Show("ExecuteScalar error: " + e.Message);
+                    Console.WriteLine("ExecuteScalar error: " + e.Message);
                     return null;
                 }
             }
@@ -216,6 +216,7 @@ namespace PBL2.Models
         public int Update(string table, string updates, string condition)
         {
             string query = $"UPDATE {table} SET {updates} WHERE {condition}";
+            //MessageBox.Show(query);
             return ExecuteNonQuery(query);
             //Ex: string updates = "name = 'abc', age = 20";
             //Update("table", updates, "id = 1");

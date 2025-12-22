@@ -29,6 +29,13 @@ namespace PBL2.Views.QLTonKho
             InitializeComponent();
             presenters = new QLTonKhoPresenter();
             this.Account = account;
+
+            if(this.Account.VaiTro == VaiTro.NhanVien.GetDisplayName())
+            {
+                this.add.Visible = false;
+                this.xem.Visible = false;
+                this.xemLichSu.Visible = false;
+            }
         }
 
         public void QLTonKhoPage_Load(object sender, EventArgs e)

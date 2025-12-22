@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,9 @@ namespace PBL2.Views.QLTonKho
 
         public void LoadLichSuTonKho(int? maNguyenLieu = null)
         {
-            string table = "lichsutonkho";
-            string fields = "ID, MaNguyenLieu, MaNV, HoatDong, SoLuong, GhiChu, Ngay";
+            string table = "lichsutonkho as ls";
+            //string fields = "ID, MaNguyenLieu, MaNV, HoatDong, SoLuong, Gia, GhiChu, Ngay";
+            string fields = "nl.TenNguyenLieu, nv.TenNV, ls.*";
 
             string where = null;
             if (maNguyenLieu.HasValue)
@@ -30,28 +32,47 @@ namespace PBL2.Views.QLTonKho
 
             DataTable dt;
 
-            if (maNguyenLieu.HasValue)
-            {
-                dt = MySQL_DB.Instance.Select(table, fields, $"MaNguyenLieu = {maNguyenLieu.Value}");
-            }
-            else
-            {
-                dt = MySQL_DB.Instance.Select(table, fields); // load all
-            }
+            //if (maNguyenLieu.HasValue)
+            //{
+            //    dt = MySQL_DB.Instance.Select(table, fields, $"MaNguyenLieu = {maNguyenLieu.Value}");
+            //}
+            //else
+            //{
+            //    dt = MySQL_DB.Instance.Select(table, fields); // load all
+            //}
+            string join = "JOIN NhanVien as nv ON nv.MaNV = ls.MaNV " +
+                "JOIN NguyenLieu as nl ON nl.MaNguyenLieu = ls.MaNguyenLieu";
+
+            dt = MySQL_DB.Instance.SelectJoin(table, fields, join);
 
             if (dt != null && dt.Rows.Count > 0)
             {
+                this.dataGridView1.Columns.Clear();
                 dataGridView1.DataSource = dt;
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                 // Đổi tên cột để dễ đọc
+                dataGridView1.Columns["TenNV"].HeaderText = "Nhân viên";
+                dataGridView1.Columns["TenNV"].FillWeight = 15;
+                dataGridView1.Columns["TenNguyenLieu"].HeaderText = "Nguyên liệu";
+                dataGridView1.Columns["TenNguyenLieu"].FillWeight = 15;
+
                 dataGridView1.Columns["ID"].HeaderText = "ID";
+                dataGridView1.Columns["ID"].Visible = false;
                 dataGridView1.Columns["MaNguyenLieu"].HeaderText = "Mã NL";
+                dataGridView1.Columns["MaNguyenLieu"].Visible = false;
                 dataGridView1.Columns["MaNV"].HeaderText = "Mã NV";
+                dataGridView1.Columns["MaNV"].Visible = false;
+
                 dataGridView1.Columns["HoatDong"].HeaderText = "Hoạt Động";
+                dataGridView1.Columns["HoatDong"].FillWeight = 10;
                 dataGridView1.Columns["SoLuong"].HeaderText = "Số Lượng";
+                dataGridView1.Columns["SoLuong"].FillWeight = 10;
+                dataGridView1.Columns["Gia"].FillWeight = 10;
                 dataGridView1.Columns["GhiChu"].HeaderText = "Ghi Chú";
+                dataGridView1.Columns["GhiChu"].FillWeight = 30;
                 dataGridView1.Columns["Ngay"].HeaderText = "Thời Gian";
+                dataGridView1.Columns["Ngay"].FillWeight = 20;
             }
             else
             {
@@ -246,5 +267,31 @@ namespace PBL2.Views.QLTonKho
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {}
         private void LichSu_Load(object sender, EventArgs e) {}
         private void textBox1_TextChanged(object sender, EventArgs e) {}
+
+        ///------------------------------------------------------
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            try
+            {
+                if (dataGridView1.Rows[e.RowIndex].Cells.Count > 0)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                    if (row.Cells["HoatDong"].Value.ToString().Trim() == HoatDongTonKho.XuatKho.GetDisplayName())
+                    {
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(70, 140, 110);
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(255, 128, 128);
+                    }
+                }
+            }
+            catch (Exception ex) 
+            {
+            
+            }
+
+        }
+
     }
 }

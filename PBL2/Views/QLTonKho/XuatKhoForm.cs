@@ -144,5 +144,10 @@ namespace PBL2.Views.QLTonKho
                 MessageBox.Show("Xuất kho thất bại!");
             }
         }
+
+        private void XuatKhoForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

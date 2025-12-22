@@ -205,9 +205,10 @@ namespace PBL2.Views.QLTonKho
             // add
             // 
             this.add.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(114)))), ((int)(((byte)(232)))));
+            this.add.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.add.Font = new System.Drawing.Font("Times New Roman", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.add.ForeColor = System.Drawing.Color.White;
-            this.add.Location = new System.Drawing.Point(27, 66);
+            this.add.Location = new System.Drawing.Point(326, 66);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(200, 46);
             this.add.TabIndex = 4;
@@ -218,9 +219,10 @@ namespace PBL2.Views.QLTonKho
             // nhapKho
             // 
             this.nhapKho.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(177)))), ((int)(((byte)(67)))));
+            this.nhapKho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nhapKho.Font = new System.Drawing.Font("Times New Roman", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nhapKho.ForeColor = System.Drawing.Color.White;
-            this.nhapKho.Location = new System.Drawing.Point(244, 66);
+            this.nhapKho.Location = new System.Drawing.Point(31, 69);
             this.nhapKho.Name = "nhapKho";
             this.nhapKho.Size = new System.Drawing.Size(130, 46);
             this.nhapKho.TabIndex = 5;
@@ -231,9 +233,10 @@ namespace PBL2.Views.QLTonKho
             // xuat
             // 
             this.xuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(140)))), ((int)(((byte)(22)))));
+            this.xuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xuat.Font = new System.Drawing.Font("Times New Roman", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xuat.ForeColor = System.Drawing.Color.White;
-            this.xuat.Location = new System.Drawing.Point(394, 66);
+            this.xuat.Location = new System.Drawing.Point(181, 69);
             this.xuat.Name = "xuat";
             this.xuat.Size = new System.Drawing.Size(130, 46);
             this.xuat.TabIndex = 6;
@@ -244,6 +247,7 @@ namespace PBL2.Views.QLTonKho
             // xemLichSu
             // 
             this.xemLichSu.BackColor = System.Drawing.Color.White;
+            this.xemLichSu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xemLichSu.Font = new System.Drawing.Font("Times New Roman", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xemLichSu.ForeColor = System.Drawing.Color.Black;
             this.xemLichSu.Location = new System.Drawing.Point(699, 66);
@@ -257,6 +261,7 @@ namespace PBL2.Views.QLTonKho
             // xem
             // 
             this.xem.BackColor = System.Drawing.Color.Red;
+            this.xem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xem.Font = new System.Drawing.Font("Times New Roman", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xem.ForeColor = System.Drawing.Color.Black;
             this.xem.Location = new System.Drawing.Point(542, 66);

@@ -24,13 +24,13 @@ namespace PBL2.Views.BaoCao
             this.Presenter = new BaoCaoPresenter(this);
             this.Model = this.Presenter.Model;
 
-            DateTime from = DateTime.Now.AddDays(-10);
+            DateTime from = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             this.DateTimeFrom.Value = from;
             DateTime today = DateTime.Now;
             this.DateTimeTo.Value = today;
             this.Presenter.load(from, today);
             loadChart();
-
+            loadMonChart();
         }
 
         private void DateTime_ValueChanged(object sender, EventArgs e)
@@ -52,6 +52,7 @@ namespace PBL2.Views.BaoCao
             DateTime to = this.DateTimeTo.Value;
             this.Presenter.load(from, to);
             loadChart(); 
+            loadMonChart();
         }
         
         public void loadChart()
@@ -62,9 +63,30 @@ namespace PBL2.Views.BaoCao
             chart1.Series[0].YValueMembers = "TongThanhTien";
             chart1.Series[0].YValueType = ChartValueType.Double;
             chart1.Series[0].ChartType = SeriesChartType.Column;
+            chart1.Series[0].Name = "Doanh Thu";
             chart1.DataBind();
         }
 
+        public void loadMonChart()
+        {
+            DataTable dt = this.Presenter.loadMonTheoDoanhThu(DateTime.Now, DateTime.Now);
+            MonChart.DataSource = dt;
+            MonChart.Series[0].XValueMember = "TenMon";
+            MonChart.Series[0].XValueType = ChartValueType.Date;
+            MonChart.Series[0].YValueMembers = "DoanhThu";
+            MonChart.Series[0].YValueType = ChartValueType.Double;
+            MonChart.Series[0].ChartType = SeriesChartType.Column;
+            MonChart.Series[0].Name = "Doanh Thu Theo Món";
+            MonChart.DataBind();
+
+            //
+            this.dataGridView1.Columns.Clear();
+            this.dataGridView1.DataSource = dt;
+
+            this.dataGridView1.Columns[0].HeaderText = "Tên Món";
+            this.dataGridView1.Columns[1].HeaderText = "Doanh Thu";
+            this.dataGridView1.Columns[1].DefaultCellStyle.Format = "#,##0.00 VNĐ";
+        }
 
     }
 }
