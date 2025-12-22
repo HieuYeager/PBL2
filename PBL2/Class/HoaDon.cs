@@ -20,7 +20,7 @@ namespace PBL2.Class
         [Display(Name = "Đang làm")]
         DangLam,
 
-        [Display(Name = "Sẵn sàng")]
+        [Display(Name = "Sẳn Sàng")]
         SanSang,
 
         [Display(Name = "Đã phục vụ")]

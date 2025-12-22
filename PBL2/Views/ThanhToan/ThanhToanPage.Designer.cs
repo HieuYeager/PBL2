@@ -40,6 +40,12 @@
             this.tong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelHeader = new System.Windows.Forms.Label();
             this.panelThanhToan = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numericMaBan = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtMaHD = new System.Windows.Forms.TextBox();
+            this.btnHuy = new Krypton.Toolkit.KryptonButton();
+            this.btnCho = new Krypton.Toolkit.KryptonButton();
             this.ThanhToanBtn = new Krypton.Toolkit.KryptonButton();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,11 +53,10 @@
             this.txtTienThua = new System.Windows.Forms.TextBox();
             this.txtTienThanhToan = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnCho = new Krypton.Toolkit.KryptonButton();
-            this.btnHuy = new Krypton.Toolkit.KryptonButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelThanhToan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMaBan)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -63,7 +68,7 @@
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.labelHeader);
             this.panel1.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(55, 3);
+            this.panel1.Location = new System.Drawing.Point(59, 30);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(662, 667);
             this.panel1.TabIndex = 0;
@@ -164,7 +169,7 @@
             this.labelHeader.AutoSize = true;
             this.labelHeader.Font = new System.Drawing.Font("Microsoft Tai Le", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.labelHeader.Location = new System.Drawing.Point(271, 7);
+            this.labelHeader.Location = new System.Drawing.Point(256, 8);
             this.labelHeader.Name = "labelHeader";
             this.labelHeader.Size = new System.Drawing.Size(151, 43);
             this.labelHeader.TabIndex = 8;
@@ -174,6 +179,10 @@
             // 
             this.panelThanhToan.BackColor = System.Drawing.Color.White;
             this.panelThanhToan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelThanhToan.Controls.Add(this.label5);
+            this.panelThanhToan.Controls.Add(this.numericMaBan);
+            this.panelThanhToan.Controls.Add(this.label4);
+            this.panelThanhToan.Controls.Add(this.txtMaHD);
             this.panelThanhToan.Controls.Add(this.btnHuy);
             this.panelThanhToan.Controls.Add(this.btnCho);
             this.panelThanhToan.Controls.Add(this.ThanhToanBtn);
@@ -185,13 +194,99 @@
             this.panelThanhToan.Font = new System.Drawing.Font("Microsoft Tai Le", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelThanhToan.Location = new System.Drawing.Point(805, 30);
             this.panelThanhToan.Name = "panelThanhToan";
-            this.panelThanhToan.Size = new System.Drawing.Size(331, 495);
+            this.panelThanhToan.Size = new System.Drawing.Size(331, 640);
             this.panelThanhToan.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.label5.Location = new System.Drawing.Point(63, 350);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 26);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Mã Bàn";
+            // 
+            // numericMaBan
+            // 
+            this.numericMaBan.BackColor = System.Drawing.SystemColors.Info;
+            this.numericMaBan.Location = new System.Drawing.Point(181, 345);
+            this.numericMaBan.Name = "numericMaBan";
+            this.numericMaBan.Size = new System.Drawing.Size(120, 37);
+            this.numericMaBan.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.label4.Location = new System.Drawing.Point(35, 64);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(125, 26);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Mã hóa đơn";
+            // 
+            // txtMaHD
+            // 
+            this.txtMaHD.BackColor = System.Drawing.SystemColors.Info;
+            this.txtMaHD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtMaHD.Location = new System.Drawing.Point(40, 93);
+            this.txtMaHD.Name = "txtMaHD";
+            this.txtMaHD.ReadOnly = true;
+            this.txtMaHD.Size = new System.Drawing.Size(261, 37);
+            this.txtMaHD.TabIndex = 15;
+            // 
+            // btnHuy
+            // 
+            this.btnHuy.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHuy.Location = new System.Drawing.Point(40, 564);
+            this.btnHuy.Name = "btnHuy";
+            this.btnHuy.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
+            this.btnHuy.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnHuy.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
+            this.btnHuy.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnHuy.Size = new System.Drawing.Size(261, 46);
+            this.btnHuy.StateCommon.Back.Color1 = System.Drawing.Color.Brown;
+            this.btnHuy.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnHuy.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnHuy.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.btnHuy.StateCommon.Border.Rounding = 25F;
+            this.btnHuy.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
+            this.btnHuy.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHuy.TabIndex = 14;
+            this.btnHuy.Values.Text = "Hủy";
+            this.btnHuy.Click += new System.EventHandler(this.CancelOrderBtn_Click);
+            // 
+            // btnCho
+            // 
+            this.btnCho.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCho.Location = new System.Drawing.Point(40, 502);
+            this.btnCho.Name = "btnCho";
+            this.btnCho.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
+            this.btnCho.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnCho.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
+            this.btnCho.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnCho.Size = new System.Drawing.Size(261, 46);
+            this.btnCho.StateCommon.Back.Color1 = System.Drawing.Color.Gold;
+            this.btnCho.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnCho.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnCho.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.btnCho.StateCommon.Border.Rounding = 25F;
+            this.btnCho.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnCho.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCho.TabIndex = 13;
+            this.btnCho.Values.Text = "Chờ";
+            this.btnCho.Click += new System.EventHandler(this.WaitOrderBtn_Click);
             // 
             // ThanhToanBtn
             // 
             this.ThanhToanBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ThanhToanBtn.Location = new System.Drawing.Point(39, 265);
+            this.ThanhToanBtn.Location = new System.Drawing.Point(40, 404);
             this.ThanhToanBtn.Name = "ThanhToanBtn";
             this.ThanhToanBtn.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
             this.ThanhToanBtn.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
@@ -216,7 +311,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.label3.Location = new System.Drawing.Point(34, 183);
+            this.label3.Location = new System.Drawing.Point(35, 243);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 26);
             this.label3.TabIndex = 11;
@@ -227,7 +322,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.label2.Location = new System.Drawing.Point(34, 83);
+            this.label2.Location = new System.Drawing.Point(35, 143);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(157, 26);
             this.label2.TabIndex = 10;
@@ -238,7 +333,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.label1.Location = new System.Drawing.Point(68, 7);
+            this.label1.Location = new System.Drawing.Point(71, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(202, 43);
             this.label1.TabIndex = 9;
@@ -248,7 +343,7 @@
             // 
             this.txtTienThua.BackColor = System.Drawing.SystemColors.Info;
             this.txtTienThua.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTienThua.Location = new System.Drawing.Point(39, 212);
+            this.txtTienThua.Location = new System.Drawing.Point(40, 272);
             this.txtTienThua.Name = "txtTienThua";
             this.txtTienThua.ReadOnly = true;
             this.txtTienThua.Size = new System.Drawing.Size(261, 37);
@@ -258,7 +353,7 @@
             // 
             this.txtTienThanhToan.BackColor = System.Drawing.SystemColors.Info;
             this.txtTienThanhToan.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTienThanhToan.Location = new System.Drawing.Point(39, 112);
+            this.txtTienThanhToan.Location = new System.Drawing.Point(40, 172);
             this.txtTienThanhToan.Name = "txtTienThanhToan";
             this.txtTienThanhToan.Size = new System.Drawing.Size(261, 37);
             this.txtTienThanhToan.TabIndex = 0;
@@ -272,53 +367,8 @@
             this.button1.Size = new System.Drawing.Size(39, 35);
             this.button1.TabIndex = 15;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.backBtn_Click);
-            // 
-            // btnCho
-            // 
-            this.btnCho.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCho.Location = new System.Drawing.Point(39, 363);
-            this.btnCho.Name = "btnCho";
-            this.btnCho.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
-            this.btnCho.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnCho.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
-            this.btnCho.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnCho.Size = new System.Drawing.Size(261, 46);
-            this.btnCho.StateCommon.Back.Color1 = System.Drawing.Color.Gold;
-            this.btnCho.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnCho.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnCho.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnCho.StateCommon.Border.Rounding = 25F;
-            this.btnCho.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
-            this.btnCho.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCho.TabIndex = 13;
-            this.btnCho.Values.Text = "Chờ";
-            this.btnCho.Click += new System.EventHandler(this.WaitOrderBtn_Click);
-            // 
-            // btnHuy
-            // 
-            this.btnHuy.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHuy.Location = new System.Drawing.Point(39, 425);
-            this.btnHuy.Name = "btnHuy";
-            this.btnHuy.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
-            this.btnHuy.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnHuy.OverrideFocus.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(216)))), ((int)(((byte)(191)))));
-            this.btnHuy.OverrideFocus.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnHuy.Size = new System.Drawing.Size(261, 46);
-            this.btnHuy.StateCommon.Back.Color1 = System.Drawing.Color.Brown;
-            this.btnHuy.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnHuy.StateCommon.Border.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnHuy.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnHuy.StateCommon.Border.Rounding = 25F;
-            this.btnHuy.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.White;
-            this.btnHuy.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHuy.TabIndex = 14;
-            this.btnHuy.Values.Text = "Hủy";
-            this.btnHuy.Click += new System.EventHandler(this.CancelOrderBtn_Click);
             // 
             // ThanhToanPage
             // 
@@ -336,6 +386,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelThanhToan.ResumeLayout(false);
             this.panelThanhToan.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMaBan)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -361,5 +412,9 @@
         private System.Windows.Forms.Button button1;
         private Krypton.Toolkit.KryptonButton btnHuy;
         private Krypton.Toolkit.KryptonButton btnCho;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtMaHD;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericMaBan;
     }
 }

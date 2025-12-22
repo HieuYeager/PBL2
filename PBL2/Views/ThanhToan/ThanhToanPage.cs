@@ -37,12 +37,15 @@ namespace PBL2.Views.ThanhToan
             this.Presenter = new ThanhToanPresenter(this, acc, order);
             this.Model = this.Presenter.Model;
 
+            Load();
+
             this.labelTongTien.DataBindings.Add("Text", this.Model.order, "Total", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00 VNĐ");
 
             this.txtTienThanhToan.DataBindings.Add("Text", this.Model, "TienThanhToan", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0");
             this.txtTienThua.DataBindings.Add("Text", this.Model, "TienThua", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0");
+            this.txtMaHD.DataBindings.Add("Text", this.Model.order, "MaHD", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.numericMaBan.DataBindings.Add(new Binding("Value", this.Model.order, "maBan", true, DataSourceUpdateMode.OnPropertyChanged));
 
-            Load();
         }
 
         public void Load()
@@ -64,6 +67,11 @@ namespace PBL2.Views.ThanhToan
             this.dataGridView1.Columns[3].FillWeight = 10;
             this.dataGridView1.Columns[4].FillWeight = 25;
 
+            if (this.Presenter.CheckMaHoaDon(this.Model.order.MaHD))
+            {
+                Console.WriteLine("Hoá đơn đã tồn tại");
+                return;
+            }
             this.Presenter.CreateOrder(this.Model.acc.MaNV);
         }
 
