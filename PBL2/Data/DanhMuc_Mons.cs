@@ -69,6 +69,7 @@ namespace PBL2.Data
                     Console.WriteLine("Get() - DanhMuc_Mons error: " + e.Message);
                 }
             }
+            try { reader.Close(); } catch { }
             return item;
         }
 

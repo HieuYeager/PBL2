@@ -71,6 +71,7 @@ namespace PBL2.Data
                     Console.WriteLine("Get() - CongThucs error: " + e.Message);
                 }
             }
+            try { reader.Close(); } catch { }
             return item;
         }
 

@@ -73,6 +73,7 @@ namespace PBL2.Data
                     Console.WriteLine("Get() - LichLamViecs error: " + e.Message);
                 }
             }
+            try { reader.Close(); } catch { }
             return item;
         }
 

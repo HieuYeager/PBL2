@@ -76,7 +76,7 @@ namespace PBL2.Data
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                return cmd.ExecuteReader();
+                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
             catch (Exception e)
             {
@@ -89,18 +89,18 @@ namespace PBL2.Data
         public static MySqlDataReader ExecuteReader(MySqlCommand cmd)
         {
             MySqlConnection conn = GetConnection();
-            try
-            {
-                conn.Open();
-                cmd.Connection = conn;
-                return cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("ExecuteReader error: " + e.Message);
-                conn.Close();
-                return null;
-            }
+                try
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ExecuteReader error: " + e.Message);
+                    conn.Close();
+                    return null;
+                }
         }
 
         // Thực hiện INSERT, UPDATE, DELETE

@@ -90,6 +90,7 @@ namespace PBL2.Data
                     Console.WriteLine("Get() - HoaDons error: " + e.Message);
                 }
             }
+            try { reader.Close(); } catch { }
             return hd;
         }
 

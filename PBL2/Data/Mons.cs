@@ -83,6 +83,7 @@ namespace PBL2.Data
                     Console.WriteLine("Get() - Mons error: " + e.Message);
                 }
             }
+            try { reader.Close(); } catch { }
             return item;
         }
 
