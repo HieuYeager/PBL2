@@ -24,7 +24,7 @@ namespace PBL2.Views.QLDon
         //AccountModel
         public AccountModel AccountModel { get; set; }
         //loadPageThanhToan
-        public delegate void LoadPageThanhToan(OrderModel hoaDon, AccountModel acc);
+        public delegate void LoadPageThanhToan(Data.HoaDon hoaDon, Data.NhanVien acc);
         public LoadPageThanhToan loadThanhToan_Handler { get; set; }
 
         public QLDonPage(AccountModel acc)
@@ -192,7 +192,7 @@ namespace PBL2.Views.QLDon
             //chuyen hoa don sang oredermodel
             OrderModel orderModel = new OrderModel(hoaDon);
             //invoke event
-            this.loadThanhToan_Handler?.Invoke(orderModel, this.AccountModel);
+            //this.loadThanhToan_Handler?.Invoke(orderModel, this.AccountModel);
         }
 
     }

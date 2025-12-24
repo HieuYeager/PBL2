@@ -16,11 +16,13 @@ namespace PBL2.Views.MenuPage
 {
     public partial class menuPage : UserControl, IMenuPage
     {
-        public delegate void ThanhToan(OrderModel order, AccountModel acc);
+        public delegate void ThanhToan(List<ChiTietHoaDon> order, NhanVien acc);
         public ThanhToan thanhtoanPage = null;
 
         //presenter
         MenuPagePresenter Presenter { get;}
+
+        NhanVien account;
 
         //properties for data binding
         private string FindName { 
@@ -32,7 +34,7 @@ namespace PBL2.Views.MenuPage
             set => this.ComboBoxDanhMuc.SelectedValue = value; 
         }
 
-        public menuPage(AccountModel account)
+        public menuPage(NhanVien acc)
         {
             InitializeComponent();
 
@@ -42,6 +44,7 @@ namespace PBL2.Views.MenuPage
 
             this.FindName = "";
             this.FindDanhMucID = -1;
+            this.account = acc;
         }
 
         //event
@@ -53,8 +56,8 @@ namespace PBL2.Views.MenuPage
         private void buttonThanhToan_click(object sender, EventArgs e)
         {
             if(thanhtoanPage == null) return;
-            //thanhtoanPage?.Invoke(this.Model.order, this.Model.account);
-            this.Presenter.showHoaDon();
+            thanhtoanPage?.Invoke(this.Presenter.GetChiTietHoaDons(), this.account);
+            //this.Presenter.showHoaDon();
         }
         //funtion
         public void clearOrder()

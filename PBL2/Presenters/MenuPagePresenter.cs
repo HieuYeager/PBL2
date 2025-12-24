@@ -120,5 +120,10 @@ namespace PBL2.Presenters.Menu
                 View.LoadMenu(Model.GetMons(findName, findDanhMucID));
             }
         }
+
+        public List<ChiTietHoaDon> GetChiTietHoaDons()
+        {
+            return this.Model.GetChiTietHoaDons();
+        }
     }
 }

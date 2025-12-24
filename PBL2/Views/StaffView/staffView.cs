@@ -94,7 +94,7 @@ namespace PBL2.Views.staffView
         {
             //change button color
             changeButtonColor(this.btnTonKho);
-            LoadIngredientPage();
+            LoadQLTonKhoPage();
         }
 
         //function
@@ -130,7 +130,7 @@ namespace PBL2.Views.staffView
             this.panelPage.Controls.Clear();
             if(menuPage == null)
             {
-                this.menuPage = new menuPage(this.account);
+                this.menuPage = new menuPage(this.nhanVien);
             }
             this.panelPage.Controls.Add(this.menuPage);
             this.menuPage.thanhtoanPage = this.LoadThanhToanPage;
@@ -142,7 +142,7 @@ namespace PBL2.Views.staffView
             this.panelPage.Controls.Clear();
             if (menuPage == null)
             {
-                this.menuPage = new menuPage(this.account);
+                this.menuPage = new menuPage(this.nhanVien);
             }
             else
             {
@@ -162,17 +162,27 @@ namespace PBL2.Views.staffView
 
         }
 
-        private void LoadIngredientPage()
+        private void LoadQLTonKhoPage()
         {
             this.panelPage.Controls.Clear();
 
             this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
         }
 
-        private void LoadThanhToanPage(OrderModel order, AccountModel acc) {
-            if (order.orderDetails.Count == 0) return;
+        private void LoadThanhToanPage(HoaDon order, NhanVien acc) {
             this.panelPage.Controls.Clear();
             ThanhToanPage thanhToanPage = new ThanhToanPage(acc, order);
+
+            thanhToanPage.LoadMenuPageHandler += this.loadMenuPage;
+            thanhToanPage.LoadMenuPageHandler_ClearOrder += this.loadMenuPage_ClearOrder;
+            this.panelPage.Controls.Add(thanhToanPage);
+        }
+
+        private void LoadThanhToanPage(List<ChiTietHoaDon> chiTietHoaDons, NhanVien acc)
+        {
+            this.panelPage.Controls.Clear();
+            ThanhToanPage thanhToanPage = new ThanhToanPage(acc, chiTietHoaDons);
+
             thanhToanPage.LoadMenuPageHandler += this.loadMenuPage;
             thanhToanPage.LoadMenuPageHandler_ClearOrder += this.loadMenuPage_ClearOrder;
             this.panelPage.Controls.Add(thanhToanPage);
