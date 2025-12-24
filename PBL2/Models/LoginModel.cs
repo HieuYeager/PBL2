@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PBL2.Models
 {
-    public class LoginModel : IModel
+    public class LoginModel
     {
         public string MaNV { get; set; }
         public string Password { get; set; }

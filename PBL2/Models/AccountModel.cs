@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PBL2.Models
 {
-    public class AccountModel:IModel
+    public class AccountModel
     {
         public AccountModel() { }
             

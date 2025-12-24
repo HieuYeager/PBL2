@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PBL2.Models
 {
-    public class ThanhToanPageModel: IModel, System.ComponentModel.INotifyPropertyChanged
+    public class ThanhToanPageModel: System.ComponentModel.INotifyPropertyChanged
     {
         public AccountModel acc { get; set; }
         public OrderModel order { get; set; }

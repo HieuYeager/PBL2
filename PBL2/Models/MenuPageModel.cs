@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PBL2.Models
 {
-    public class MenuPageModel : IModel
+    public class MenuPageModel
     {
         public AccountModel account { get; set; }
 

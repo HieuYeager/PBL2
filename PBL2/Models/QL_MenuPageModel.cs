@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 //--------------------Bin--------------------
 namespace PBL2.Models
 {
-    public class QL_MenuPageModel: IModel
+    public class QL_MenuPageModel
     {
         public DataTable Table { get; set; }
         //ql cong thuc

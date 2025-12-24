@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PBL2.Models
 {
-    public class MenuModel: IModel
+    public class MenuModel
     {
         public List<MonModel> mons = new List<MonModel>();
 

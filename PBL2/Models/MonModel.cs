@@ -9,7 +9,7 @@ using PBL2.Class;
 
 namespace PBL2.Models
 {
-    public class MonModel: IModel
+    public class MonModel
     {
         public int MaMon { get; set; }
         public string TenMon { get; set; }

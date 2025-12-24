@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PBL2.Models
 {
-    public class OrderDetailModel: INotifyPropertyChanged, IModel
+    public class OrderDetailModel: INotifyPropertyChanged
     {
         public MonModel monModel { get; set; }
 
