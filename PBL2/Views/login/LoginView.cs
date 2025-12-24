@@ -21,6 +21,7 @@ namespace PBL2.Views.loginForm
 
         private LoginPresenter Presenter;
 
+        //properties for data binding
         private String maNV
         {
             get { return this.AccTxt.Text; }
@@ -37,6 +38,10 @@ namespace PBL2.Views.loginForm
             InitializeComponent();
             Presenter = new LoginPresenter(this);
 
+            this.maNV = "";
+            this.password = "";
+
+            this.AccTxt.Focus();
             //code cu
             // Thiết lập Data Binding
             //this.AccTxt.DataBindings.Add("Text", loginModel, "MaNV");
