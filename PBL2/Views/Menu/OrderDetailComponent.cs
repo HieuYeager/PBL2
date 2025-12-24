@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Presenters.Menu;
 namespace PBL2.Views.MenuPage
@@ -17,35 +17,44 @@ namespace PBL2.Views.MenuPage
         //presenter
         private MenuPagePresenter presenter {get;set;}
         //modle
-        private OrderDetailModel orderDetailModel;
+        private ChiTietHoaDon chiTietHoaDon;
+        private Mon mon;
+
         public OrderDetailComponent()
         {
             InitializeComponent();
         }
-        public OrderDetailComponent(OrderDetailModel orderDetailModel, MenuPagePresenter menuPagePresenter)
+        public OrderDetailComponent(ChiTietHoaDon chiTietHoaDon, MenuPagePresenter menuPagePresenter)
         {
             InitializeComponent();
 
             this.presenter = menuPagePresenter;
-            this.orderDetailModel = orderDetailModel;
 
-            this.labelTenMon.DataBindings.Add("Text", this.orderDetailModel.monModel, "TenMon");
-            this.labelGia.DataBindings.Add("Text", this.orderDetailModel, "giaBan", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00 VNĐ");
-            this.labelSoLuong.DataBindings.Add("Text", this.orderDetailModel, "soLuong", true, DataSourceUpdateMode.OnPropertyChanged);
-            //this.labelSubTotal.DataBindings.Add("Text", this.orderDetailModel, "tongTien", true, DataSourceUpdateMode.OnPropertyChanged, "0", "#,##0.00 VNĐ");
-
+            this.chiTietHoaDon = chiTietHoaDon;
+            this.mon = Mons.Get(this.chiTietHoaDon.MaMon);
+            
+            this.labelTenMon.DataBindings.Add("Text", mon, "TenMon");
+            this.labelSoLuong.DataBindings.Add("Text", chiTietHoaDon, "SoLuong", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.labelGia.DataBindings.Add("Text", mon, "GiaBan", true, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            this.orderDetailModel.soLuong++;
+            if (this.presenter != null)
+            {
+                this.presenter.addMon(mon);
+            }
         }
 
         private void subBtn_Click(object sender, EventArgs e)
         {
-            if(--this.orderDetailModel.soLuong < 1)
+            if(this.presenter != null)
             {
-                this.presenter.removeMon(this.orderDetailModel);
+                this.presenter.subMon(this.chiTietHoaDon);
+            }
+            if (this.chiTietHoaDon.SoLuong == 0)
+            {
+                this.presenter.removeMon(this.chiTietHoaDon);
                 this.Dispose();
             }
         }
@@ -55,9 +64,10 @@ namespace PBL2.Views.MenuPage
             //this.orderDetailModel.monModel = null;
             if (this.presenter != null)
             {
-                this.presenter.removeMon(this.orderDetailModel);
+                this.presenter.removeMon(this.chiTietHoaDon);
                 this.Dispose();
             }
         }
+
     }
 }

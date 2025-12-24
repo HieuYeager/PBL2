@@ -1,7 +1,6 @@
-﻿using PBL2.Class;
+﻿using PBL2.Data;
 using PBL2.Models;
-using PBL2.Models;
-using PBL2.Views.MenuPage;
+using PBL2.Views.Menu;
 using PBL2.Views.MenuPage;
 using System;
 using System.Collections.Generic;
@@ -9,151 +8,117 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static Mysqlx.Expect.Open.Types;
 
 namespace PBL2.Presenters.Menu
 {
     public class MenuPagePresenter
     {
-        public menuPage View { get; set; }
-        public MenuPageModel Model { get; set; }
+        //public menuPage View { get; set; }
 
-        public MenuPagePresenter(menuPage view) {
+        IMenuPage View;
+        private MenuPageModel Model { get; set; } = new MenuPageModel();
+
+        public MenuPagePresenter(IMenuPage view) {
 
             this.View = view;
-            this.Model = new MenuPageModel();
             this.Load();
             
         }
-
         //function
         public void Load()
         {
             loadDM();
             loadMons();
         }
-
-        public void loadDM()
-        {
-            Model.danhmuc.Clear();
-            //add ALL option
-            {
-                DanhMuc danhMuc = new DanhMuc();
-                danhMuc.MaDM = -1;
-                danhMuc.TenDM = "Tất cả";
-                this.Model.danhmuc.Add(danhMuc);
-            }
-            //load danh muc
-            DataTable dt = MySQL_DB.Instance.Select("DanhMuc", "*");
-            foreach (DataRow row in dt.Rows)
-            {
-                DanhMuc danhMuc = new DanhMuc();
-                danhMuc.MaDM = int.Parse(row["MaDM"].ToString());
-                danhMuc.TenDM = row["TenDM"].ToString();
-                Model.danhmuc.Add(danhMuc);
-            }
-        }
-
-        public void loadMons()
-        {
-            //clear
-            this.Model.mons.Clear();
-
-            DataTable dt = MySQL_DB.Instance.Select("Mon", "*");
-            //MessageBox.Show(dt.Rows.Count.ToString());
-
-            loadMons(dt);
-        }
-
-        public void timMon()
-        {
-            //clear
-            this.Model.mons.Clear();
-            //creat query
-            string conditionDMQuery = "";
-            string conditionNameQuery = "";
-
-
-            if (this.Model.FindDanhMucID > 0)
-            {
-                conditionDMQuery += $" JOIN DanhMuc_Mon ON Mon.MaMon = DanhMuc_Mon.MaMon ";
-                conditionDMQuery += $" JOIN DanhMuc ON DanhMuc_Mon.MaDM = DanhMuc.MaDM WHERE DanhMuc.MaDM = {this.Model.FindDanhMucID} ";
-            }
-
-            conditionNameQuery += $" Mon.TenMon LIKE '%{this.Model.FindName}%'";
-
-            //excute query
-            DataTable dt = null;
-            if (this.Model.FindDanhMucID > 0)
-            {
-                dt = MySQL_DB.Instance.SelectJoin("Mon", "Mon.MaMon, Mon.TenMon, Mon.GiaBan, Mon.URL_anh ", $" {conditionDMQuery} AND {conditionNameQuery}");
-            }
-            else
-            {
-                dt = MySQL_DB.Instance.Select("Mon", "*", conditionNameQuery);
-            }
-            if (dt == null)
-            {
-                return;
-            }
-            //add mons
-            loadMons(dt);       
-        }
-
-        private void loadMons(DataTable dt)
-        {
-            foreach (DataRow row in dt.Rows)
-            {
-                MonModel monModel = new MonModel();
-                try
-                {
-                    monModel.MaMon = Convert.ToInt32(row["MaMon"]); //row["MaMon"];
-                }
-                catch
-                {
-                    monModel.MaMon = -1;
-                }
-                monModel.TenMon = row["TenMon"].ToString();
-                try
-                {
-                    string GiaBan = row["GiaBan"].ToString();
-                    monModel.GiaBan = decimal.Parse(GiaBan);
-                }
-                catch
-                {
-                    monModel.GiaBan = -1;
-                }
-                monModel.URLImage = row["URL_anh"].ToString();
-                this.Model.mons.Add(monModel);
-            }
-        }
-
         // them vao hoa don
-        public void addMon(MonModel mon)
+        public void addMon(Mon mon)
         {
-            OrderDetailModel orderDetail = new OrderDetailModel();
+            
             if (mon != null)
             {
-                if (Model.order.orderDetails.Exists(o => o.monModel.MaMon == mon.MaMon))
+                if (Model.GetChiTietHoaDons().Exists(o => o.MaMon == mon.MaMon))
                 {
-                    Model.order.orderDetails.Find(x => x.monModel.MaMon == mon.MaMon).soLuong++;
-                    return;
+                    Model.GetChiTietHoaDons().Find(x => x.MaMon == mon.MaMon).SoLuong++;
                 }
                 else
                 {
-                    orderDetail.monModel = mon;
-                    orderDetail.soLuong = 1;
-                    this.Model.order.orderDetails.Add(orderDetail);
-                    this.View.AddOrderDetail(orderDetail);
-                    return;
+                    ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon
+                    {
+                        MaHD = "",
+                        MaMon = mon.MaMon,
+                        SoLuong = 1,
+                        DonGia = mon.GiaBan
+                    };
+                    this.Model.addChiTietHoaDon(chiTietHoaDon);
+                    this.View.AddChiTietHoaDon(chiTietHoaDon);
                 }
             }
             return;
         }
 
-        public void removeMon(OrderDetailModel orderDetail)
+        public void subMon(ChiTietHoaDon chiTietHoaDon)
         {
-            this.Model.order.orderDetails.Remove(orderDetail);
+            if (chiTietHoaDon == null) {
+                Console.WriteLine("Mon khong ton tai trong hoa don");
+                return;
+            }
+            chiTietHoaDon.SoLuong--;
+
+        }
+
+        public void removeMon(ChiTietHoaDon chiTietHoaDon)
+        {
+            if (chiTietHoaDon == null) return;
+            this.Model.removeChiTietHoaDon(chiTietHoaDon);
+        }
+
+        public void showHoaDon() {
+            foreach (var item in this.Model.GetChiTietHoaDons())
+            {
+                MessageBox.Show("Ma Mon: " + item.MaMon + " So Luong: " + item.SoLuong + " Don Gia: " + item.DonGia);
+            }
+        }
+        //menu
+        public void loadMons()
+        {
+            View.LoadMenu(Model.GetMons());
+        }
+
+        public void loadDM()
+        {
+            List<DanhMuc> danhMucs = new List<DanhMuc>();
+            //Model.danhmuc.Clear();
+            //load danh muc
+            danhMucs = DanhMucs.GetAll();
+            //add ALL option
+            {
+                DanhMuc danhMuc = new DanhMuc();
+                danhMuc.MaDM = -1;
+                danhMuc.TenDM = "Tất cả";
+                danhMucs.Add(danhMuc);
+            }
+            View.LoadDanhMuc(danhMucs);
+        }
+
+        public void timMon(string findName, int findDanhMucID)
+        {
+            findName = findName.Trim();
+
+            if (findDanhMucID == -1 && findName == "")
+            {
+                View.LoadMenu(Model.GetMons());
+                return;
+            }
+            if (findDanhMucID == -1)
+            {
+                View.LoadMenu(Model.GetMons(findName));
+            }
+            else
+            {
+                View.LoadMenu(Model.GetMons(findName, findDanhMucID));
+            }
         }
     }
 }

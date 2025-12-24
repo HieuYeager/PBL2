@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PBL2.Data;
+
 namespace PBL2.Views.MenuPage
 {
     public partial class MonComponent : UserControl
@@ -17,14 +19,14 @@ namespace PBL2.Views.MenuPage
         //presenter
         MenuPagePresenter presenter;
         //model
-        public MonModel mon { get; set; }
+        public Mon mon { get; set; }
 
         private string imagePath;
         public MonComponent()
         {
             InitializeComponent();
         }
-        public MonComponent(MonModel mon, MenuPagePresenter menuPagePresenter)
+        public MonComponent(Mon mon, MenuPagePresenter menuPagePresenter)
         {
             InitializeComponent();
             this.mon = mon;
@@ -34,7 +36,7 @@ namespace PBL2.Views.MenuPage
 
             try
             {
-                imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", mon.URLImage);
+                imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", mon.URL_anh);
                 //MessageBox.Show(imagePath);
                 this.pictureBox.Image = Image.FromFile(imagePath);
             }
