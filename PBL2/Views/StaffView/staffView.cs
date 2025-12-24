@@ -156,7 +156,7 @@ namespace PBL2.Views.staffView
         public void loadQlDonPage()
         {
             this.panelPage.Controls.Clear();
-            QLDonPage qlDonPage = new QLDonPage(this.account);
+            QLDonPage qlDonPage = new QLDonPage(this.nhanVien);
             qlDonPage.loadThanhToan_Handler += this.LoadThanhToanPage;
             this.panelPage.Controls.Add(qlDonPage);
 
@@ -180,6 +180,8 @@ namespace PBL2.Views.staffView
 
         private void LoadThanhToanPage(List<ChiTietHoaDon> chiTietHoaDons, NhanVien acc)
         {
+            if(chiTietHoaDons == null || chiTietHoaDons.Count == 0)
+                return;
             this.panelPage.Controls.Clear();
             ThanhToanPage thanhToanPage = new ThanhToanPage(acc, chiTietHoaDons);
 

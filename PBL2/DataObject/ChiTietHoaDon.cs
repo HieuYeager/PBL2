@@ -15,7 +15,7 @@ namespace PBL2.Data
         public string TenMon {
             get
             {
-                return Mons.Get(MaMon).TenMon;
+                return Mons.Get(MaMon)?.TenMon??"";
             }
             private set { } 
         }

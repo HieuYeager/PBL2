@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PBL2.Class;
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Presenters.QLDon;
 namespace PBL2.Views.MenuPage
@@ -39,19 +39,14 @@ namespace PBL2.Views.MenuPage
 
         private void CheBienBtn_Click(object sender, EventArgs e)
         {
-            this.Presenter.batDauLamMon(this.hoaDon);
+            //this.Presenter.batDauLamMon(this.hoaDon);
         }
 
         private void HuyDonBtn_Click(object sender, EventArgs e)
         {
             if(MessageBox.Show("Bạn có chắc chắn muốn hủy đơn hàng này?", "Xác nhận hủy đơn", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                //update trang thai
-                bool result = this.Presenter.huyDon(this.hoaDon);
-                if (result)
-                {
-                    Console.WriteLine("Hủy đơn hàng thành công");
-                }              
+                this.Presenter.huyDon(this.hoaDon);          
             }
         }
 
