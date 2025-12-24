@@ -16,7 +16,7 @@ namespace PBL2.Data
         // Lên 2 cấp từ bin/Debug → MyProject
         public static string projectRoot = Directory.GetParent(startupPath).Parent.FullName;
         //----------------Hieu,  Bin, Hai-------------------------------------------------
-        private static string connectionString = "server=localhost;port=3306;database=pbl;uid=root;pwd=mysql12345;";
+        private static string connectionString = "server=localhost;port=3306;database=pbl_final;uid=root;pwd=mysql12345;";
         //-----------------------------------------------------------------
         private DB() { }
 
