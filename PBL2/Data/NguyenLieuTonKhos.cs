@@ -50,36 +50,10 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<NguyenLieuTonKho> GetAll()
         {
-            var list = new List<NguyenLieuTonKho>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    // Chuyển đổi string từ DB sang enum
-                    string donViStr = reader["DonVi"].ToString();
-                    EnumDonVi dv;
-                    if (donViStr == EnumDonVi.Ml.GetDisplayName()) dv = EnumDonVi.Ml;
-                    else if (donViStr == EnumDonVi.G.GetDisplayName()) dv = EnumDonVi.G;
-                    else dv = EnumDonVi.Cai;
+            return ToList(reader);
 
-                    list.Add(new NguyenLieuTonKho
-                    {
-                        MaNguyenLieu = reader.GetInt32(reader.GetOrdinal("MaNguyenLieu")),
-                        TenNguyenLieu = reader["TenNguyenLieu"].ToString(),
-                        SoLuong = reader.GetDecimal(reader.GetOrdinal("SoLuong")),
-                        DonVi = dv,
-                        MucCanhBao = reader.GetDecimal(reader.GetOrdinal("MucCanhBao")),
-                        NgayCapNhat = reader.GetDateTime(reader.GetOrdinal("NgayCapNhat"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - NguyenLieuTonKhos error: " + e.Message);
-                }
-            }
-            return list;
         }
 
         // SELECT BY ID
@@ -144,6 +118,42 @@ namespace PBL2.Data
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
         }
+
+        // data reader to list
+        public static List<NguyenLieuTonKho> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<NguyenLieuTonKho>();
+            while (reader.Read())
+            {
+                try
+                {
+                    // Chuyển đổi string từ DB sang enum
+                    string donViStr = reader["DonVi"].ToString();
+                    EnumDonVi dv;
+                    if (donViStr == EnumDonVi.Ml.GetDisplayName()) dv = EnumDonVi.Ml;
+                    else if (donViStr == EnumDonVi.G.GetDisplayName()) dv = EnumDonVi.G;
+                    else dv = EnumDonVi.Cai;
+
+                    list.Add(new NguyenLieuTonKho
+                    {
+                        MaNguyenLieu = reader.GetInt32(reader.GetOrdinal("MaNguyenLieu")),
+                        TenNguyenLieu = reader["TenNguyenLieu"].ToString(),
+                        SoLuong = reader.GetDecimal(reader.GetOrdinal("SoLuong")),
+                        DonVi = dv,
+                        MucCanhBao = reader.GetDecimal(reader.GetOrdinal("MucCanhBao")),
+                        NgayCapNhat = reader.GetDateTime(reader.GetOrdinal("NgayCapNhat"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - NguyenLieuTonKhos error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
+        }
+
     }
 
 }

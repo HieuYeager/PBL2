@@ -48,34 +48,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<NhanVien> GetAll()
         {
-            var list = new List<NhanVien>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                // Chuyển đổi string từ DB sang enum
-                string vaiTroStr = reader["VaiTro"].ToString();
-                EnumVaiTro vt;
-                if (vaiTroStr == EnumVaiTro.Admin.GetDisplayName()) vt = EnumVaiTro.Admin;
-                else if (vaiTroStr == EnumVaiTro.QuanLy.GetDisplayName()) vt = EnumVaiTro.QuanLy;
-                else vt = EnumVaiTro.NhanVien;
-                try
-                {
-                    list.Add(new NhanVien
-                    {
-                        MaNV = reader["MaNV"].ToString(),
-                        TenNV = reader["TenNV"].ToString(),
-                        VaiTro = vt,
-                        SDT = reader["SDT"].ToString(),
-                        MucLuongCoBan = reader.GetDecimal(reader.GetOrdinal("MucLuongCoBan"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - NhanViens error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY MaNV
@@ -113,5 +88,40 @@ namespace PBL2.Data
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
         }
+
+        // data reader to list
+        public static List<NhanVien> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<NhanVien>();
+            while (reader.Read())
+            {
+                try
+                {
+                    // Chuyển đổi string từ DB sang enum
+                    string vaiTroStr = reader.IsDBNull(reader.GetOrdinal("VaiTro")) ? null : reader["VaiTro"].ToString();
+                    EnumVaiTro vt;
+                    if (vaiTroStr == EnumVaiTro.Admin.GetDisplayName()) vt = EnumVaiTro.Admin;
+                    else if (vaiTroStr == EnumVaiTro.QuanLy.GetDisplayName()) vt = EnumVaiTro.QuanLy;
+                    else vt = EnumVaiTro.NhanVien;
+
+                    list.Add(new NhanVien
+                    {
+                        MaNV = reader.IsDBNull(reader.GetOrdinal("MaNV")) ? null : reader["MaNV"].ToString(),
+                        TenNV = reader.IsDBNull(reader.GetOrdinal("TenNV")) ? null : reader["TenNV"].ToString(),
+                        VaiTro = vt,
+                        SDT = reader.IsDBNull(reader.GetOrdinal("SDT")) ? null : reader["SDT"].ToString(),
+                        MucLuongCoBan = reader.IsDBNull(reader.GetOrdinal("MucLuongCoBan")) ? 0m : reader.GetDecimal(reader.GetOrdinal("MucLuongCoBan"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - NhanViens error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
+        }
+
     }
 }

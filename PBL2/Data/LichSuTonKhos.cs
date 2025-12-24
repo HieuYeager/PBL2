@@ -51,36 +51,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<LichSuTonKho> GetAll()
         {
-            var list = new List<LichSuTonKho>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    // Chuyển đổi string từ DB sang enum
-                    string hoatDongStr = reader["HoatDong"].ToString();
-                    EnumHoatDong hd;
-                    if (hoatDongStr == EnumHoatDong.NhapKho.GetDisplayName()) hd = EnumHoatDong.NhapKho;
-                    else hd = EnumHoatDong.XuatKho;
-
-                    list.Add(new LichSuTonKho
-                    {
-                        ID = reader.GetInt32(reader.GetOrdinal("ID")),
-                        MaNV = reader["MaNV"].ToString(),
-                        MaNguyenLieu = reader.GetInt32(reader.GetOrdinal("MaNguyenLieu")),
-                        HoatDong = hd,
-                        SoLuong = reader.GetDecimal(reader.GetOrdinal("SoLuong")),
-                        ghiChu = reader.IsDBNull(reader.GetOrdinal("ghiChu")) ? null : reader["ghiChu"].ToString(),
-                        Ngay = reader.GetDateTime(reader.GetOrdinal("Ngay"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - LichSuTonKhos error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY ID
@@ -144,6 +117,41 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        // data reader to list
+        public static List<LichSuTonKho> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<LichSuTonKho>();
+            while (reader.Read())
+            {
+                try
+                {
+                    // Chuyển đổi string từ DB sang enum (an toàn với NULL)
+                    string hoatDongStr = reader.IsDBNull(reader.GetOrdinal("HoatDong")) ? null : reader["HoatDong"].ToString();
+                    EnumHoatDong hd;
+                    if (hoatDongStr == EnumHoatDong.NhapKho.GetDisplayName()) hd = EnumHoatDong.NhapKho;
+                    else hd = EnumHoatDong.XuatKho;
+
+                    list.Add(new LichSuTonKho
+                    {
+                        ID = reader.IsDBNull(reader.GetOrdinal("ID")) ? 0 : reader.GetInt32(reader.GetOrdinal("ID")),
+                        MaNV = reader.IsDBNull(reader.GetOrdinal("MaNV")) ? null : reader["MaNV"].ToString(),
+                        MaNguyenLieu = reader.IsDBNull(reader.GetOrdinal("MaNguyenLieu")) ? 0 : reader.GetInt32(reader.GetOrdinal("MaNguyenLieu")),
+                        HoatDong = hd,
+                        SoLuong = reader.IsDBNull(reader.GetOrdinal("SoLuong")) ? 0m : reader.GetDecimal(reader.GetOrdinal("SoLuong")),
+                        ghiChu = reader.IsDBNull(reader.GetOrdinal("ghiChu")) ? null : reader["ghiChu"].ToString(),
+                        Ngay = reader.IsDBNull(reader.GetOrdinal("Ngay")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("Ngay"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - LichSuTonKhos error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 }

@@ -39,25 +39,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<DanhMuc> GetAll()
         {
-            var list = new List<DanhMuc>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    list.Add(new DanhMuc
-                    {
-                        MaDM = reader.GetInt32(reader.GetOrdinal("MaDM")),
-                        TenDM = reader.IsDBNull(reader.GetOrdinal("TenDM")) ? null : reader["TenDM"].ToString()
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - DanhMucs error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY MaDM
@@ -111,6 +95,30 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        // data reader to list
+        public static List<DanhMuc> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<DanhMuc>();
+            while (reader.Read())
+            {
+                try
+                {
+                    list.Add(new DanhMuc
+                    {
+                        MaDM = reader.IsDBNull(reader.GetOrdinal("MaDM")) ? 0 : reader.GetInt32(reader.GetOrdinal("MaDM")),
+                        TenDM = reader.IsDBNull(reader.GetOrdinal("TenDM")) ? null : reader["TenDM"].ToString()
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - DanhMucs error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 

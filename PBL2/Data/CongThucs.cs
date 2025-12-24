@@ -44,26 +44,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<CongThuc> GetAll()
         {
-            var list = new List<CongThuc>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    list.Add(new CongThuc
-                    {
-                        MaMon = reader.GetInt32(reader.GetOrdinal("MaMon")),
-                        MaNguyenLieu = reader.GetInt32(reader.GetOrdinal("MaNguyenLieu")),
-                        SoLuong = reader.GetDecimal(reader.GetOrdinal("SoLuong"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - CongThucs error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY MaMon + MaNguyenLieu
@@ -118,6 +101,31 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        // data reader to list
+        public static List<CongThuc> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<CongThuc>();
+            while (reader.Read())
+            {
+                try
+                {
+                    list.Add(new CongThuc
+                    {
+                        MaMon = reader.IsDBNull(reader.GetOrdinal("MaMon")) ? 0 : reader.GetInt32(reader.GetOrdinal("MaMon")),
+                        MaNguyenLieu = reader.IsDBNull(reader.GetOrdinal("MaNguyenLieu")) ? 0 : reader.GetInt32(reader.GetOrdinal("MaNguyenLieu")),
+                        SoLuong = reader.IsDBNull(reader.GetOrdinal("SoLuong")) ? 0m : reader.GetDecimal(reader.GetOrdinal("SoLuong"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - CongThucs error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 

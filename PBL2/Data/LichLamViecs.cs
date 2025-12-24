@@ -45,34 +45,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<LichLamViec> GetAll()
         {
-            var list = new List<LichLamViec>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    // Chuyển đổi string từ DB sang enum
-                    string caLamStr = reader["CaLam"].ToString();
-                    EnumCaLam cl;
-                    if (caLamStr == EnumCaLam.CaSang.GetDisplayName()) cl = EnumCaLam.CaSang;
-                    else if (caLamStr == EnumCaLam.CaChieu.GetDisplayName()) cl = EnumCaLam.CaChieu;
-                    else cl = EnumCaLam.CaToi;
-
-                    list.Add(new LichLamViec
-                    {
-                        MaNV = reader["MaNV"].ToString(),
-                        Ngay = reader.GetDateTime(reader.GetOrdinal("Ngay")),
-                        CaLam = cl,
-                        DiemDanh = reader.IsDBNull(reader.GetOrdinal("DiemDanh")) ? false : reader.GetBoolean(reader.GetOrdinal("DiemDanh"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - LichLamViecs error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY MaNV + Ngay + CaLam
@@ -128,6 +103,39 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        // data reader to list
+        public static List<LichLamViec> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<LichLamViec>();
+            while (reader.Read())
+            {
+                try
+                {
+                    // Chuyển đổi string từ DB sang enum (an toàn với NULL)
+                    string caLamStr = reader.IsDBNull(reader.GetOrdinal("CaLam")) ? null : reader["CaLam"].ToString();
+                    EnumCaLam cl;
+                    if (caLamStr == EnumCaLam.CaSang.GetDisplayName()) cl = EnumCaLam.CaSang;
+                    else if (caLamStr == EnumCaLam.CaChieu.GetDisplayName()) cl = EnumCaLam.CaChieu;
+                    else cl = EnumCaLam.CaToi;
+
+                    list.Add(new LichLamViec
+                    {
+                        MaNV = reader.IsDBNull(reader.GetOrdinal("MaNV")) ? null : reader["MaNV"].ToString(),
+                        Ngay = reader.IsDBNull(reader.GetOrdinal("Ngay")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("Ngay")),
+                        CaLam = cl,
+                        DiemDanh = reader.IsDBNull(reader.GetOrdinal("DiemDanh")) ? false : reader.GetBoolean(reader.GetOrdinal("DiemDanh"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - LichLamViecs error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 }

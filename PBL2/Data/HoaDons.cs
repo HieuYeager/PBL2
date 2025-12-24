@@ -50,39 +50,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<HoaDon> GetAll()
         {
-            var list = new List<HoaDon>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    string trangThaiStr = reader["TrangThai"].ToString();
-                    EnumTrangThai tt;
-                    if (trangThaiStr == EnumTrangThai.ChuaThanhToan.GetDisplayName()) tt = EnumTrangThai.ChuaThanhToan;
-                    else if (trangThaiStr == EnumTrangThai.DangLam.GetDisplayName()) tt = EnumTrangThai.DangLam;
-                    else if (trangThaiStr == EnumTrangThai.SanSang.GetDisplayName()) tt = EnumTrangThai.SanSang;
-                    else tt = EnumTrangThai.DaPhucVu;
-
-                    int maBanVal = reader.IsDBNull(reader.GetOrdinal("MaBan")) ? 0 : reader.GetInt32(reader.GetOrdinal("MaBan"));
-                    int? maBanNullable = reader.IsDBNull(reader.GetOrdinal("MaBan")) ? (int?)null : maBanVal;
-
-                    list.Add(new HoaDon
-                    {
-                        MaHD = reader["MaHD"].ToString(),
-                        MaNV = reader["MaNV"].ToString(),
-                        NgayLapHD = reader.GetDateTime(reader.GetOrdinal("NgayLapHD")),
-                        ThanhTien = reader.GetDecimal(reader.GetOrdinal("ThanhTien")),
-                        MaBan = maBanNullable,
-                        TrangThai = tt
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - HoaDons error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY MaHD
@@ -150,6 +120,46 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        // data reader to list
+        public static List<HoaDon> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<HoaDon>();
+            while (reader.Read())
+            {
+                try
+                {
+                    // TrangThai (enum) safe mapping
+                    string trangThaiStr = reader.IsDBNull(reader.GetOrdinal("TrangThai")) ? null : reader["TrangThai"].ToString();
+                    EnumTrangThai tt;
+                    if (trangThaiStr == EnumTrangThai.ChuaThanhToan.GetDisplayName()) tt = EnumTrangThai.ChuaThanhToan;
+                    else if (trangThaiStr == EnumTrangThai.DangLam.GetDisplayName()) tt = EnumTrangThai.DangLam;
+                    else if (trangThaiStr == EnumTrangThai.SanSang.GetDisplayName()) tt = EnumTrangThai.SanSang;
+                    else tt = EnumTrangThai.DaPhucVu;
+
+                    // MaBan nullable
+                    int? maBanNullable = reader.IsDBNull(reader.GetOrdinal("MaBan")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("MaBan"));
+
+                    list.Add(new HoaDon
+                    {
+                        MaHD = reader.IsDBNull(reader.GetOrdinal("MaHD")) ? null : reader["MaHD"].ToString(),
+                        MaNV = reader.IsDBNull(reader.GetOrdinal("MaNV")) ? null : reader["MaNV"].ToString(),
+                        NgayLapHD = reader.IsDBNull(reader.GetOrdinal("NgayLapHD")) ? DateTime.MinValue : reader.GetDateTime(reader.GetOrdinal("NgayLapHD")),
+                        ThanhTien = reader.IsDBNull(reader.GetOrdinal("ThanhTien")) ? 0m : reader.GetDecimal(reader.GetOrdinal("ThanhTien")),
+                        MaBan = maBanNullable,
+                        TrangThai = tt
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - HoaDons error: " + e.Message);
+                }
+            }
+
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 

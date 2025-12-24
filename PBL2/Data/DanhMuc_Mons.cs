@@ -43,25 +43,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<DanhMuc_Mon> GetAll()
         {
-            var list = new List<DanhMuc_Mon>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    list.Add(new DanhMuc_Mon
-                    {
-                        MaMon = reader.GetInt32(reader.GetOrdinal("MaMon")),
-                        MaDM = reader.GetInt32(reader.GetOrdinal("MaDM"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - DanhMuc_Mons error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY MaMon + MaDM
@@ -115,6 +99,30 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        // data reader to list
+        public static List<DanhMuc_Mon> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<DanhMuc_Mon>();
+            while (reader.Read())
+            {
+                try
+                {
+                    list.Add(new DanhMuc_Mon
+                    {
+                        MaMon = reader.IsDBNull(reader.GetOrdinal("MaMon")) ? 0 : reader.GetInt32(reader.GetOrdinal("MaMon")),
+                        MaDM = reader.IsDBNull(reader.GetOrdinal("MaDM")) ? 0 : reader.GetInt32(reader.GetOrdinal("MaDM"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - DanhMuc_Mons error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 

@@ -45,27 +45,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<ChiTietHoaDon> GetAll()
         {
-            var list = new List<ChiTietHoaDon>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    list.Add(new ChiTietHoaDon
-                    {
-                        MaHD = reader["MaHD"].ToString(),
-                        MaMon = reader.GetInt32(reader.GetOrdinal("MaMon")),
-                        SoLuong = reader.GetInt32(reader.GetOrdinal("SoLuong")),
-                        DonGia = reader.GetDecimal(reader.GetOrdinal("DonGia"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - ChiTietHoaDons error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY MaHD + MaMon
@@ -121,6 +103,32 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        // data reader to list
+        public static List<ChiTietHoaDon> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<ChiTietHoaDon>();
+            while (reader.Read())
+            {
+                try
+                {
+                    list.Add(new ChiTietHoaDon
+                    {
+                        MaHD = reader.IsDBNull(reader.GetOrdinal("MaHD")) ? null : reader["MaHD"].ToString(),
+                        MaMon = reader.IsDBNull(reader.GetOrdinal("MaMon")) ? 0 : reader.GetInt32(reader.GetOrdinal("MaMon")),
+                        SoLuong = reader.IsDBNull(reader.GetOrdinal("SoLuong")) ? 0 : reader.GetInt32(reader.GetOrdinal("SoLuong")),
+                        DonGia = reader.IsDBNull(reader.GetOrdinal("DonGia")) ? 0m : reader.GetDecimal(reader.GetOrdinal("DonGia"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - ChiTietHoaDons error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 

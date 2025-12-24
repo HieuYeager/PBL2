@@ -52,29 +52,10 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<Mon> GetAll()
         {
-            var list = new List<Mon>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    list.Add(new Mon
-                    {
-                        MaMon = reader.GetInt32(reader.GetOrdinal("MaMon")),
-                        TenMon = reader["TenMon"].ToString(),
-                        GiaBan = reader.GetDecimal(reader.GetOrdinal("GiaBan")),
-                        DonVi = reader.IsDBNull(reader.GetOrdinal("DonVi")) ? null : reader["DonVi"].ToString(),
-                        URL_anh = reader.IsDBNull(reader.GetOrdinal("URL_anh")) ? null : reader["URL_anh"].ToString(),
-                        Khoa = reader.GetBoolean(reader.GetOrdinal("Khoa"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - Mons error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
+           
         }
 
         // SELECT BY MaMon
@@ -132,6 +113,34 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        //data reader to list
+        public static List<Mon> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<Mon>();
+            while (reader.Read())
+            {
+                try
+                {
+                    list.Add(new Mon
+                    {
+                        MaMon = reader.GetInt32(reader.GetOrdinal("MaMon")),
+                        TenMon = reader["TenMon"].ToString(),
+                        GiaBan = reader.GetDecimal(reader.GetOrdinal("GiaBan")),
+                        DonVi = reader.IsDBNull(reader.GetOrdinal("DonVi")) ? null : reader["DonVi"].ToString(),
+                        URL_anh = reader.IsDBNull(reader.GetOrdinal("URL_anh")) ? null : reader["URL_anh"].ToString(),
+                        Khoa = reader.GetBoolean(reader.GetOrdinal("Khoa"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - Mons error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 

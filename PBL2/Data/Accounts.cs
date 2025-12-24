@@ -46,26 +46,9 @@ namespace PBL2.Data
         // SELECT ALL
         public static List<Account> GetAll()
         {
-            var list = new List<Account>();
             string sql = $"SELECT * FROM {TableName}";
             MySqlDataReader reader = DB.ExecuteReader(sql);
-            while (reader.Read())
-            {
-                try
-                {
-                    list.Add(new Account
-                    {
-                        MaNV = reader["MaNV"].ToString(),
-                        password = reader["password"].ToString(),
-                        khoa = reader.GetBoolean(reader.GetOrdinal("khoa"))
-                    });
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("GetAll() - Accounts error: " + e.Message);
-                }
-            }
-            return list;
+            return ToList(reader);
         }
 
         // SELECT BY MaNV
@@ -120,6 +103,31 @@ namespace PBL2.Data
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
             return (int)DB.ExecuteScalar(sql);
+        }
+
+        // data reader to list
+        public static List<Account> ToList(MySqlDataReader reader)
+        {
+            if (reader == null) return null;
+            var list = new List<Account>();
+            while (reader.Read())
+            {
+                try
+                {
+                    list.Add(new Account
+                    {
+                        MaNV = reader.IsDBNull(reader.GetOrdinal("MaNV")) ? null : reader["MaNV"].ToString(),
+                        password = reader.IsDBNull(reader.GetOrdinal("password")) ? null : reader["password"].ToString(),
+                        khoa = reader.IsDBNull(reader.GetOrdinal("khoa")) ? false : reader.GetBoolean(reader.GetOrdinal("khoa"))
+                    });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ToList() - Accounts error: " + e.Message);
+                }
+            }
+            try { reader.Close(); } catch { }
+            return list;
         }
     }
 }
