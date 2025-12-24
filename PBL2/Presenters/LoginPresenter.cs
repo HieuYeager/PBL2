@@ -13,10 +13,11 @@ using PBL2.Views.login;
 using PBL2.Data;
 namespace PBL2.Presenters.Login
 {
-    internal class LoginPresenter
+    public class LoginPresenter
     {
         LoginModel Model = new LoginModel();
         ILoginView View;
+
         public LoginPresenter(ILoginView view) {
             this.View = view;
         }

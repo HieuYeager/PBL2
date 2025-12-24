@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PBL2.Views.login
 {
-    internal interface ILoginView
+    public interface ILoginView
     {
         void LoginSuccess(NhanVien nv);
         void ShowError(string message);
