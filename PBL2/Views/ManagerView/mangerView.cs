@@ -1,5 +1,4 @@
-﻿using PBL2.Class;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,12 +15,27 @@ using PBL2.Views.BaoCao;
 using PBL2.Views.QLTonKho;
 using PBL2.Presenters.QL_NhanVien;
 using PBL2.Views.PhanCa;
+using PBL2.Data;
+
 namespace PBL2.Views.ManagerView
 {
     public partial class mangerView : UserControl
     {
         public Form1 form1;
         private AccountModel account;
+        private NhanVien nhanVien { get; set; }
+
+        //properties for data binding
+        private String tenNV
+        {
+            get { return this.labelTen.Text; }
+            set { this.labelTen.Text = value; }
+        }
+        private String vaiTro
+        {
+            get { return this.labelVaiTro.Text; }
+            set { this.labelVaiTro.Text = value; }
+        }
 
         // màu khi được chọn
         private readonly Color SelectedBack = Color.FromArgb(70, 101, 87);
@@ -33,14 +47,15 @@ namespace PBL2.Views.ManagerView
 
         //select button
         private Krypton.Toolkit.KryptonButton selectedButton { get; set; }
-        public mangerView(AccountModel account)
+        public mangerView(NhanVien nv)
         {
+            //this.account = account;
+            //this.labelTen.DataBindings.Add("Text", account, "TenNV");
+            //this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
             InitializeComponent();
-            this.account = account;
-
-
-            this.labelTen.DataBindings.Add("Text", account, "TenNV");
-            this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
+            this.nhanVien = nv;
+            this.tenNV = nv.TenNV;
+            this.vaiTro = nv.VaiTroStr;
 
             //this.panelPage.Controls.Add(new QL_MenuPage());
             this.loadBaoCao();
