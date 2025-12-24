@@ -13,7 +13,7 @@ using static Mysqlx.Expect.Open.Types;
 
 namespace PBL2.Presenters.Menu
 {
-    public class MenuPagePresenter : IPresenter<menuPage, MenuPageModel>
+    public class MenuPagePresenter
     {
         public menuPage View { get; set; }
         public MenuPageModel Model { get; set; }

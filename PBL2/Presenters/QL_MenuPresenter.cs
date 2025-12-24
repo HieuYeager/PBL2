@@ -11,7 +11,7 @@ using PBL2.Class;
 //--------------------Bin--------------------
 namespace PBL2.Presenters.QL_Menu
 {
-    public class QL_MenuPresenter : IPresenter<QL_MenuPage, QL_MenuPageModel>
+    public class QL_MenuPresenter
     {
         public QL_MenuPage View { get; set; }
         public QL_MenuPageModel Model { get; set; }

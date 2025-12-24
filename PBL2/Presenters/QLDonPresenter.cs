@@ -13,7 +13,7 @@ using System.Data;
 
 namespace PBL2.Presenters.QLDon
 {
-    public class QLDonPresenter : IPresenter<QLDonPage, QLDonModel>
+    public class QLDonPresenter
     {
         public QLDonModel Model { get; set; }
         public QLDonPage View { get; set; }

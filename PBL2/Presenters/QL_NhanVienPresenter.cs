@@ -24,7 +24,7 @@ namespace PBL2.Presenters.QL_NhanVien
         [Display(Name = "CT")]
         CaToi = 3
     }
-    public class QL_NhanVienPresenter : IPresenter<QL_NhanVienPage, QL_NhanVienPageModel>
+    public class QL_NhanVienPresenter
     {
         public QL_NhanVienPage View { get; set; }
         public QL_NhanVienPageModel Model { get; set; }

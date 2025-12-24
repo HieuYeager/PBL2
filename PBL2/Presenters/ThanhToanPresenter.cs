@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace PBL2.Presenters.ThanhToan
 {
-    public class ThanhToanPresenter : IPresenter<ThanhToanPage, ThanhToanPageModel>
+    public class ThanhToanPresenter
     {
         public ThanhToanPage View { get; set; }
         public ThanhToanPageModel Model { get; set; }

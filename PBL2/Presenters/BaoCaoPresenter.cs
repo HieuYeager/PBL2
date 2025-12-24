@@ -13,7 +13,7 @@ using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace PBL2.Presenters.BaoCao
 {
-    public class BaoCaoPresenter : IPresenter<BaoCaoPage, BaoCaoModel>
+    public class BaoCaoPresenter
     {
         public BaoCaoPage View { get; set; }
         public BaoCaoModel Model { get; set; }
