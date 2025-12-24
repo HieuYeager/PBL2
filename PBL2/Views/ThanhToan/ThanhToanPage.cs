@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace PBL2.Views.ThanhToan
 {
-    public partial class ThanhToanPage : UserControl, IView<ThanhToanPresenter, ThanhToanPageModel>
+    public partial class ThanhToanPage : UserControl
     {
         private string pre_value = "0.00";
         public ThanhToanPresenter Presenter { get; set; }

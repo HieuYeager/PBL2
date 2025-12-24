@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace PBL2.Views.QL_Menu
 {
-    public partial class QL_CongThucPage : UserControl, IView<QL_MenuPresenter, QL_MenuPageModel>
+    public partial class QL_CongThucPage : UserControl
     {
         public QL_MenuPresenter Presenter { get; set; }
 

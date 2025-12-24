@@ -15,7 +15,7 @@ using PBL2.Views.MenuPage;
 
 namespace PBL2.Views.QLDon
 {
-    public partial class QLDonPage : UserControl, IView<QLDonPresenter, QLDonModel>
+    public partial class QLDonPage : UserControl
     {
         public QLDonPresenter Presenter { get; set; }
         public QLDonModel Model { get; set; }

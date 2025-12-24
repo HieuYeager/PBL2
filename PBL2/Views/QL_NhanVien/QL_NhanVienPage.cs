@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace PBL2.Views.QL_NhanVien
 {
-    public partial class QL_NhanVienPage : UserControl, IView<QL_NhanVienPresenter, QL_NhanVienPageModel>
+    public partial class QL_NhanVienPage : UserControl
     {
 
         public QL_NhanVienPresenter Presenter { get; set; }

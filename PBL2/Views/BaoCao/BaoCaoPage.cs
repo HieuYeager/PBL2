@@ -13,7 +13,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace PBL2.Views.BaoCao
 {
-    public partial class BaoCaoPage : UserControl, IView<BaoCaoPresenter, BaoCaoModel>
+    public partial class BaoCaoPage : UserControl
     {
         public BaoCaoPresenter Presenter { get; set; }
 
