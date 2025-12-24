@@ -22,8 +22,8 @@ namespace PBL2
         public Form1()
         {
             InitializeComponent();
-            LoadView("HomePage", null);
-            //LoadView("StaffView", new AccountModel() { MaNV = "Test" , TenNV = "Test", VaiTro = "Nhân viên"});
+            //LoadView("HomePage", null);
+            LoadView("StaffView", NhanViens.Get("NV001"));
             //LoadView("ManagerView", new AccountModel() { MaNV = "Test", TenNV = "Test", VaiTro = "Quản lý" });
         }
 
