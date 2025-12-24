@@ -25,10 +25,7 @@ namespace PBL2.Views.ThanhToan
         public delegate void LoadMenuPageDelegate_ClearOrder();
         public event LoadMenuPageDelegate_ClearOrder LoadMenuPageHandler_ClearOrder;
 
-
         public ThanhToanPresenter Presenter { get; set; }
-
-        public ThanhToanPageModel Model { get; set; }
 
         private decimal pre_value = 0;
         private decimal total = 0;
