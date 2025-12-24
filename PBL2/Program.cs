@@ -16,14 +16,10 @@ namespace PBL2
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
 
-            string sql = NhanViens.select()
-                .From(NhanViens.TableName).Where($"{NhanViens.MaNV} = 'NV01'")
-                .GetSql();
-            MessageBox.Show(sql);
         }
     }
 }

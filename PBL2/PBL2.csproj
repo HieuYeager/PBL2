@@ -121,34 +121,33 @@
     <Compile Include="Class\Mon.cs" />
     <Compile Include="Class\NguyenLieu.cs" />
     <Compile Include="Class\NhanVien.cs" />
-    <Compile Include="Database\Account.cs" />
-    <Compile Include="Database\Accounts.cs" />
-    <Compile Include="Database\ChiTietHoaDon.cs" />
-    <Compile Include="Database\ChiTietHoaDons.cs" />
-    <Compile Include="Database\CongThuc.cs" />
-    <Compile Include="Database\CongThucs.cs" />
-    <Compile Include="Database\DanhMuc.cs" />
-    <Compile Include="Database\DanhMucs.cs" />
-    <Compile Include="Database\DanhMuc_Mon.cs" />
-    <Compile Include="Database\DanhMuc_Mons.cs" />
-    <Compile Include="Database\DB.cs" />
-    <Compile Include="Database\HoaDon.cs" />
-    <Compile Include="Database\HoaDons.cs" />
-    <Compile Include="Database\LichLamViec.cs" />
-    <Compile Include="Database\LichLamViecs.cs" />
-    <Compile Include="Database\LichSuTonKho.cs" />
-    <Compile Include="Database\LichSuTonKhos.cs" />
-    <Compile Include="Database\Mon.cs" />
-    <Compile Include="Database\Mons.cs" />
-    <Compile Include="Database\NguyenLieuTonKho.cs" />
-    <Compile Include="Database\NguyenLieuTonKhos.cs" />
-    <Compile Include="Database\NhanVien.cs" />
-    <Compile Include="Database\NhanViens.cs" />
-    <Compile Include="Database\Query.cs" />
+    <Compile Include="Data\Account.cs" />
+    <Compile Include="Data\Accounts.cs" />
+    <Compile Include="Data\ChiTietHoaDon.cs" />
+    <Compile Include="Data\ChiTietHoaDons.cs" />
+    <Compile Include="Data\CongThuc.cs" />
+    <Compile Include="Data\CongThucs.cs" />
+    <Compile Include="Data\DanhMuc.cs" />
+    <Compile Include="Data\DanhMucs.cs" />
+    <Compile Include="Data\DanhMuc_Mon.cs" />
+    <Compile Include="Data\DanhMuc_Mons.cs" />
+    <Compile Include="Data\DB.cs" />
+    <Compile Include="Data\HoaDon.cs" />
+    <Compile Include="Data\HoaDons.cs" />
+    <Compile Include="Data\LichLamViec.cs" />
+    <Compile Include="Data\LichLamViecs.cs" />
+    <Compile Include="Data\LichSuTonKho.cs" />
+    <Compile Include="Data\LichSuTonKhos.cs" />
+    <Compile Include="Data\Mon.cs" />
+    <Compile Include="Data\Mons.cs" />
+    <Compile Include="Data\NguyenLieuTonKho.cs" />
+    <Compile Include="Data\NguyenLieuTonKhos.cs" />
+    <Compile Include="Data\NhanVien.cs" />
+    <Compile Include="Data\NhanViens.cs" />
+    <Compile Include="Data\Query.cs" />
     <Compile Include="Models\BaoCaoModel.cs" />
     <Compile Include="Models\MenuPageModel.cs" />
     <Compile Include="Models\NhanVienModel.cs" />
-    <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\MonModel.cs" />
     <Compile Include="Models\MySQL_DB.cs" />
@@ -167,15 +166,14 @@
     <Compile Include="Models\QL_MenuPageModel.cs" />
     <Compile Include="Models\QL_NhanVienPageModel.cs" />
     <Compile Include="Models\ThanhToanPageModel.cs" />
-    <Compile Include="Presenters\BaoCao\BaoCaoPresenter.cs" />
-    <Compile Include="Presenters\IPresenter.cs" />
-    <Compile Include="Presenters\Login\LoginPresenter.cs" />
-    <Compile Include="Presenters\Menu\MenuPagePresenter.cs" />
-    <Compile Include="Presenters\QLDon\QLDonPresenter.cs" />
-    <Compile Include="Presenters\QLTonKho\QLTonKhoPresenter.cs" />
-    <Compile Include="Presenters\QL_Menu\QL_MenuPresenter.cs" />
-    <Compile Include="Presenters\QL_NhanVien\QL_NhanVienPresenter.cs" />
-    <Compile Include="Presenters\ThanhToan\ThanhToanPresenter.cs" />
+    <Compile Include="Presenters\BaoCaoPresenter.cs" />
+    <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\MenuPagePresenter.cs" />
+    <Compile Include="Presenters\QLDonPresenter.cs" />
+    <Compile Include="Presenters\QLTonKhoPresenter.cs" />
+    <Compile Include="Presenters\QL_MenuPresenter.cs" />
+    <Compile Include="Presenters\QL_NhanVienPresenter.cs" />
+    <Compile Include="Presenters\ThanhToanPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\BaoCao\BaoCaoPage.cs">
@@ -184,17 +182,16 @@
     <Compile Include="Views\BaoCao\BaoCaoPage.Designer.cs">
       <DependentUpon>BaoCaoPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomePage\HomePage.cs">
+    <Compile Include="Views\Home\HomePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\HomePage\HomePage.Designer.cs">
+    <Compile Include="Views\Home\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IView.cs" />
-    <Compile Include="Views\loginForm\LoginView.cs">
+    <Compile Include="Views\login\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\loginForm\LoginView.Designer.cs">
+    <Compile Include="Views\login\LoginView.Designer.cs">
       <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagerView\mangerView.cs">
@@ -345,10 +342,10 @@
     <EmbeddedResource Include="Views\BaoCao\BaoCaoPage.resx">
       <DependentUpon>BaoCaoPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\HomePage\HomePage.resx">
+    <EmbeddedResource Include="Views\Home\HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\loginForm\LoginView.resx">
+    <EmbeddedResource Include="Views\login\LoginView.resx">
       <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManagerView\mangerView.resx">
@@ -467,5 +464,6 @@
   <ItemGroup>
     <None Include="Resources\arrow_back_icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
