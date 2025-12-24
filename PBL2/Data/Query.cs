@@ -70,7 +70,7 @@ namespace PBL2.Data
 
         public Query Join(string table, string joinString)
         {
-            this.JoinString = $" JOIN {table} ON {joinString} ";
+            this.JoinString += $" JOIN {table} ON {joinString} ";
             return this;
         }
 

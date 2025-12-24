@@ -76,7 +76,7 @@ namespace PBL2.Data
             {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                return cmd.ExecuteReader();
             }
             catch (Exception e)
             {
@@ -93,7 +93,7 @@ namespace PBL2.Data
             {
                 conn.Open();
                 cmd.Connection = conn;
-                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                return cmd.ExecuteReader();
             }
             catch (Exception e)
             {
