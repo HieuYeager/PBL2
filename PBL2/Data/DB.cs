@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PBL2.Database
+namespace PBL2.Data
 {
     public class DB
     {
