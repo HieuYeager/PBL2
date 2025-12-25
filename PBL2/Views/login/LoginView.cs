@@ -95,7 +95,7 @@ namespace PBL2.Views.loginForm
         {
             if(nv != null)
             {
-                if(nv.VaiTro == EnumVaiTro.QuanLy)
+                if(nv.VaiTro == EnumVaiTro.QuanLy || nv.VaiTro == EnumVaiTro.Admin)
                 {
                     form1.LoadView("ManagerView", nv);
                 }
