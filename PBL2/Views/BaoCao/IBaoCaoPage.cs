@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PBL2.Models
+namespace PBL2.Views.BaoCao
 {
-    public class BaoCaoModel
+    public interface IBaoCaoPage
     {
+        void loadChart(DataTable dt);
+        void loadMonChart(DataTable dt);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Mysqlx.Crud;
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Views.BaoCao;
 using System;
@@ -15,49 +16,76 @@ namespace PBL2.Presenters.BaoCao
 {
     public class BaoCaoPresenter
     {
-        public BaoCaoPage View { get; set; }
-        public BaoCaoModel Model { get; set; }
+        private IBaoCaoPage View { get; set; }
+        private BaoCaoModel Model { get; set; } = new BaoCaoModel();
 
-        public BaoCaoPresenter(BaoCaoPage view)
+        public BaoCaoPresenter(IBaoCaoPage view)
         {
             this.View = view;
-            this.Model = new BaoCaoModel();
             this.load();
         }
 
         public void load()
         {
             string query = "SELECT DATE(NgayLapHD) AS Ngay, SUM(ThanhTien) AS TongThanhTien FROM HoaDon GROUP BY DATE(NgayLapHD) ORDER BY Ngay;";
-            DataTable dt = MySQL_DB.Instance.ExecuteQuery(query);
-            if(dt != null) this.Model.dt = dt;
+            DataTable dt = DB.ExecuteQuery(query);
+            if(dt != null) { }
             else
             {
-                this.Model.dt = new DataTable();
-                this.Model.dt.Columns.Add("Ngay", typeof(string));
-                this.Model.dt.Columns.Add("TongThanhTien", typeof(decimal));
+                dt = new DataTable();
+                dt.Columns.Add("Ngay", typeof(string));
+                dt.Columns.Add("TongThanhTien", typeof(decimal));
             }
+            this.View?.loadChart(dt);
         }
 
         public void load(DateTime from, DateTime to)
         {
             string query = $"SELECT DATE(NgayLapHD) AS Ngay, SUM(ThanhTien) AS TongThanhTien FROM HoaDon WHERE NgayLapHD BETWEEN '{from.ToString("yyyy-MM-dd")}' AND '{to.ToString("yyyy-MM-dd")}' GROUP BY DATE(NgayLapHD) ORDER BY Ngay;";
             //MessageBox.Show(query);
-            DataTable dt = MySQL_DB.Instance.ExecuteQuery(query);
-            if (dt != null) this.Model.dt = dt;
+            DataTable dt = DB.ExecuteQuery(query);
+            if (dt != null) { }
             else
             {
-                this.Model.dt = new DataTable();
-                this.Model.dt.Columns.Add("Ngay", typeof(DateTime));
-                this.Model.dt.Columns.Add("TongThanhTien", typeof(decimal));
+                dt = new DataTable();
+                dt.Columns.Add("Ngay", typeof(DateTime));
+                dt.Columns.Add("TongThanhTien", typeof(decimal));
             }
+            this.View?.loadChart(dt);
         }
 
-        public DataTable loadMonTheoDoanhThu(DateTime from, DateTime to)
+        public void loadMonTheoDoanhThu()
         {
-            DataTable dt = MySQL_DB.Instance.SelectJoin("ChiTietHoaDon cthd", "m.TenMon, SUM(cthd.TongTien) AS DoanhThu",
-                "JOIN Mon m ON cthd.MaMon = m.MaMon GROUP BY m.MaMon, m.TenMon ORDER BY DoanhThu DESC LIMIT 5;");
-            if (dt != null) return dt;
-            return new DataTable();
+            string query = "SELECT m.TenMon, SUM(cthd.soLuong * cthd.DonGia) AS DoanhThu" +
+                " FROM ChiTietHoaDon cthd" +
+                " JOIN Mon m ON cthd.MaMon = m.MaMon" +
+                " GROUP BY m.MaMon, m.TenMon" +
+                " ORDER BY DoanhThu DESC LIMIT 5; ";
+            DataTable dt = DB.ExecuteQuery(query);
+            if (dt == null)
+            {
+                MessageBox.Show("Không có dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            this.View?.loadMonChart(dt);
+        }
+
+        public void loadMonTheoDoanhThu(DateTime from, DateTime to)
+        {
+            string query = "SELECT m.TenMon, SUM(cthd.soLuong * cthd.DonGia) AS DoanhThu" +
+                " FROM ChiTietHoaDon cthd" +
+                " JOIN Mon m ON cthd.MaMon = m.MaMon" +
+                " JOIN HoaDon hd ON hd.MaHD = cthd.MaHD" +
+                $" WHERE NgayLapHD BETWEEN '{from.ToString("yyyy-MM-dd")}' AND '{to.ToString("yyyy-MM-dd")}'" +
+                " GROUP BY m.MaMon, m.TenMon" +
+                " ORDER BY DoanhThu DESC LIMIT 5";
+            DataTable dt = DB.ExecuteQuery(query);
+            if (dt == null)
+            {
+                MessageBox.Show("Không có dữ liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            this.View?.loadMonChart(dt);
         }
     }
 }
