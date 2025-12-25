@@ -1,6 +1,6 @@
 ﻿//--------------------Hai--------------------
 //--------------------Hai--------------------
-using PBL2.Class;
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Presenters.QL_NhanVien;
 using PBL2.Views.QL_Menu;
@@ -17,22 +17,104 @@ using System.Windows.Forms;
 
 namespace PBL2.Views.QL_NhanVien
 {
-    public partial class QL_NhanVienPage : UserControl, IView<QL_NhanVienPresenter, QL_NhanVienPageModel>
+    public partial class QL_NhanVienPage : UserControl, IQL_NhanVienPage
     {
 
         public QL_NhanVienPresenter Presenter { get; set; }
 
-        public QL_NhanVienPageModel Model { get; set; }
+        private NhanVien Acc;
+
+        //bien 
+        private string MaNV
+        {
+            get
+            {
+                return this.txtMaNV.Text;
+            }
+            set {
+                this.txtMaNV.Text = value;
+            }
+        }
+
+        private EnumVaiTro Vaitro
+        {
+            get
+            {
+                if (this.comboBox1.SelectedItem.ToString() == EnumVaiTro.QuanLy.GetDisplayName())
+                    return EnumVaiTro.QuanLy;
+                else
+                    return EnumVaiTro.NhanVien;
+            }
+            set
+            {
+                this.comboBox1.SelectedItem = value.GetDisplayName();
+            }
+        }
+
+
+        private string TenNV
+        {
+            get
+            {
+                return this.txtTen.Text;
+            }
+            set
+            {
+                this.txtTen.Text = value;
+            }
+        }
+
+        private string SDT
+        {
+            get
+            {
+                return this.txtSDT.Text;
+            }
+            set
+            {
+                this.txtSDT.Text = value;
+            }
+        }
+
+        private decimal mucluong
+        {
+            get {
+                try
+                {
+                    return Convert.ToDecimal(this.txtMucLuong.Text);
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                this.txtMucLuong.Text = value.ToString();
+            }
+        }
+
+        private string search
+        {
+            get
+            {
+                return this.FindTxt.Text;
+            }
+            set
+            {
+                this.FindTxt.Text = value;
+            }
+        }
 
         //page phu
         public delegate void LoadPhanCaDelegate(QL_NhanVienPresenter presenter);
         public LoadPhanCaDelegate LoadPhanCaHandler { get; set; }
 
-        public QL_NhanVienPage()
+        public QL_NhanVienPage(NhanVien acc)
         {
             InitializeComponent();
             this.Presenter = new QL_NhanVienPresenter(this);
-            this.Model = this.Presenter.Model;
+            this.Acc = acc;
 
             this.LoadTableNV();
 
@@ -43,89 +125,20 @@ namespace PBL2.Views.QL_NhanVien
 
         public void LoadTableNV()
         {
-            this.Presenter.Load();
-            this.dataGridView1.Columns.Clear();
-            this.dataGridView1.DataSource = Model.Table;
-            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
-            //custom column
-            try
-            {
-                this.dataGridView1.Columns["MaNV"].HeaderText = "Mã NV";
-
-                this.dataGridView1.Columns["TenNV"].HeaderText = "Tên";
-                this.dataGridView1.Columns["TenNV"].FillWeight = 100;
-
-                this.dataGridView1.Columns["VaiTro"].HeaderText = "Vai trò";
-                this.dataGridView1.Columns["SDT"].HeaderText = "SĐT";
-
-                this.dataGridView1.Columns["DiaChi"].HeaderText = "Địa chỉ";
-                this.dataGridView1.Columns["DiaChi"].FillWeight = 200;
-
-                this.dataGridView1.Columns["MucLuongCoBan"].HeaderText = "Lương cơ bản";
-                //this.dataGridView1.Columns["CaLamViec"].HeaderText = "Ca làm việc";
-                this.dataGridView1.Columns["CaLamViec"].Visible = false;
-
-                this.dataGridView1.Columns["khoa"].HeaderText = "Khóa";
-                this.dataGridView1.Columns["khoa"].FillWeight = 40;
-                this.dataGridView1.Columns["khoa"].Visible = false;
-
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-            string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "edit_icon.png");
-
-            this.dataGridView1.ShowCellToolTips = true;
-            //Cột SỬA
-            DataGridViewButtonColumn editButtonColumn = new DataGridViewButtonColumn();
-            editButtonColumn.Name = "EditColumn";
-            editButtonColumn.HeaderText = "";
-            editButtonColumn.Text = "Sửa";
-            editButtonColumn.UseColumnTextForButtonValue = false;
-            editButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            //Cột XÓA
-            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
-            deleteButtonColumn.Name = "DeleteColumn";
-            deleteButtonColumn.HeaderText = "";
-            deleteButtonColumn.Text = "Xóa";
-            deleteButtonColumn.UseColumnTextForButtonValue = false;
-            deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            // Thêm cột vào DataGridView
-            this.dataGridView1.Columns.Add(editButtonColumn);
-            this.dataGridView1.Columns.Add(deleteButtonColumn);
-
-            // Đảm bảo thiết lập kéo giãn hàng và tắt hàng trống (đã hướng dẫn ở phần trước)
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
-            //load details
-            this.loadDetails(dataGridView1.Rows[0]);
-
+            this.Presenter.Load(this.Acc);
             //conboBox
             comboBox1.Items.Clear();
-            comboBox1.Items.Add("Nhân viên");
-            comboBox1.Items.Add("Quản lý");
+            comboBox1.Items.Add(EnumVaiTro.NhanVien.GetDisplayName());
+            if(this.Acc.VaiTro == EnumVaiTro.Admin)
+                comboBox1.Items.Add(EnumVaiTro.QuanLy.GetDisplayName());
 
             if (comboBox1.SelectedItem == null)
-                comboBox1.SelectedItem = "Nhân viên";
+                comboBox1.SelectedItem = EnumVaiTro.NhanVien.GetDisplayName();
         }
-
-        private void QL_NhanVienPage_Load(object sender, EventArgs e) {}
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
-            string keyword = FindTxt.Text.Trim();
-
-            this.Presenter.search(keyword);
-
-            this.dataGridView1.DataSource = this.Model.Table;
+            this.Presenter.search(Acc, this.search);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -134,7 +147,15 @@ namespace PBL2.Views.QL_NhanVien
             {
                 return; 
             }
-            loadDetails(dataGridView1.Rows[e.RowIndex]);
+            NhanVien nv = new NhanVien();
+            try
+            {
+                nv = this.dataGridView1.SelectedRows[0].DataBoundItem as NhanVien;
+            }
+            catch
+            { }
+
+            this.loadChiTietNhanVien(nv);
 
             string columnName = dataGridView1.Columns[e.ColumnIndex].Name;
 
@@ -144,7 +165,7 @@ namespace PBL2.Views.QL_NhanVien
                 string maNV = dataGridView1.Rows[e.RowIndex].Cells["MaNV"].Value.ToString();
                 string tenNV = dataGridView1.Rows[e.RowIndex].Cells["TenNV"].Value.ToString();
 
-                this.DeleteNhanVienDataColumn_Click(maNV, tenNV);
+                this.DeleteNhanVienDataColumn_Click(nv);
                 return;
             }
 
@@ -158,36 +179,10 @@ namespace PBL2.Views.QL_NhanVien
             this.cancel();
         }
 
-        private void loadDetails(DataGridViewRow row)
-        {
-            if(row == null)
-            {
-                this.txtMaNV.Text = this.Presenter.GenerateMaNV();
-                this.txtTen.Text = "";
-                this.comboBox1.SelectedItem = "Nhân viên";
-                this.txtSDT.Text = "";
-                this.txtDiaChi.Text = "";
-                this.txtMucLuong.Text = "";
-                return;
-            }
-            try {
-                this.txtMaNV.Text = row.Cells["MaNV"].Value.ToString();
-                this.txtTen.Text = row.Cells["TenNV"].Value.ToString();
-                this.comboBox1.SelectedItem = row.Cells["VaiTro"].Value.ToString();
-                this.txtSDT.Text = row.Cells["SDT"].Value.ToString();
-                this.txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
-                this.txtMucLuong.Text = row.Cells["MucLuongCoBan"].Value.ToString();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-        }
-
         private void addBtn_Click(object sender, EventArgs e)
         {
             this.panelDetail.Enabled = true;
-            this.loadDetails(null);
+            this.loadChiTietNhanVien(null);
             //btns
             this.AddSubmitBtn.Visible = true;
             this.CancelBtn.Visible = true;
@@ -200,15 +195,14 @@ namespace PBL2.Views.QL_NhanVien
             NhanVien newNhanVien = new NhanVien()
             {
                 MaNV = this.txtMaNV.Text.Trim(),
-                TenNV = txtTen.Text.Trim(),
-                SDT = txtSDT.Text.Trim(),
-                DiaChi = txtDiaChi.Text.Trim(),
-                //MucLuongCoBan = Convert.ToDecimal(txtMucLuong.Text.Trim()),
+                TenNV = this.TenNV,
+                SDT = this.SDT,
+                MucLuongCoBan = this.mucluong,
                 //VaiTro = comboBox1.SelectedItem.ToString()
-                VaiTro = this.comboBox1.SelectedItem.ToString() == VaiTro.QuanLy.GetDisplayName() ? VaiTro.QuanLy : VaiTro.NhanVien
+                VaiTro = this.comboBox1.SelectedItem.ToString() == EnumVaiTro.QuanLy.GetDisplayName() ? EnumVaiTro.QuanLy : EnumVaiTro.NhanVien
             };
 
-            if (string.IsNullOrEmpty(newNhanVien.TenNV) || string.IsNullOrEmpty(newNhanVien.SDT) || string.IsNullOrEmpty(newNhanVien.DiaChi) || string.IsNullOrEmpty(this.txtMucLuong.Text.ToString()))
+            if (string.IsNullOrEmpty(newNhanVien.TenNV) || string.IsNullOrEmpty(newNhanVien.SDT) || string.IsNullOrEmpty(newNhanVien.MucLuongCoBan.ToString()))
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -222,8 +216,7 @@ namespace PBL2.Views.QL_NhanVien
 
             newNhanVien.MucLuongCoBan = mucLuongCoBan;
 
-            this.Presenter.Add_NhanVien(newNhanVien);
-            this.LoadTableNV();
+            this.Presenter.Add_NhanVien(newNhanVien, Acc);
             this.cancel();
         }
 
@@ -235,7 +228,7 @@ namespace PBL2.Views.QL_NhanVien
         private void UpdateNhanVienBtn_Click(object sender, EventArgs e)
         {
             // ktr data
-            if (string.IsNullOrEmpty(txtTen.Text) || string.IsNullOrEmpty(txtSDT.Text) || string.IsNullOrEmpty(txtDiaChi.Text) || string.IsNullOrEmpty(txtMucLuong.Text))
+            if (string.IsNullOrEmpty(txtTen.Text) || string.IsNullOrEmpty(txtSDT.Text) || string.IsNullOrEmpty(txtMucLuong.Text))
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -253,13 +246,11 @@ namespace PBL2.Views.QL_NhanVien
                 MaNV = this.txtMaNV.Text.Trim(),
                 TenNV = txtTen.Text.Trim(),
                 SDT = txtSDT.Text.Trim(),
-                DiaChi = txtDiaChi.Text.Trim(),
                 MucLuongCoBan = mucLuongCoBan,
-                VaiTro = this.comboBox1.SelectedItem.ToString() == VaiTro.QuanLy.GetDisplayName() ? VaiTro.QuanLy : VaiTro.NhanVien
+                VaiTro = this.comboBox1.SelectedItem.ToString() == EnumVaiTro.QuanLy.GetDisplayName() ? EnumVaiTro.QuanLy : EnumVaiTro.NhanVien
             };
 
-            this.Presenter.UpdateNhanVien(updateNhanVien);
-            this.LoadTableNV();
+            this.Presenter.UpdateNhanVien(updateNhanVien, Acc);
             this.cancel();
         }
 
@@ -267,7 +258,14 @@ namespace PBL2.Views.QL_NhanVien
         private void UpdateNhanVienDataColumn_Click()
         {
             this.panelDetail.Enabled = true;
-            this.loadDetails(this.dataGridView1.SelectedRows[0]);
+            try
+            {
+                this.loadChiTietNhanVien(this.dataGridView1.SelectedRows[0].DataBoundItem as NhanVien);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             //btns
             this.UpdateSubmitBtn.Visible = true;
             this.CancelBtn.Visible = true;
@@ -278,28 +276,24 @@ namespace PBL2.Views.QL_NhanVien
         private void cancel()
         {
             this.panelDetail.Enabled = false;
-            this.loadDetails(this.dataGridView1.SelectedRows[0]);
+            try
+            {
+                this.loadChiTietNhanVien(this.dataGridView1.SelectedRows[0].DataBoundItem as NhanVien);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             //btns
             this.AddSubmitBtn.Visible = false;
             this.UpdateSubmitBtn.Visible = false;
             this.CancelBtn.Visible = false;
         }
 
-        private void DeleteNhanVienDataColumn_Click(string maNV, string tenNV)
+        private void DeleteNhanVienDataColumn_Click(NhanVien nv)
         {
-
-            //DeleteNhanVienForm deleteForm = new DeleteNhanVienForm(maNV, tenNV);
-            //deleteForm.ShowDialog();
-
-            //// Nếu form trả về DialogResult.OK → reload lại bảng
-            //if (deleteForm.DialogResult == DialogResult.OK)
-            //{
-            //    this.LoadTableNV();
-            //    this.cancel();
-            //}
-
             var result = MessageBox.Show(
-                $"Bạn có chắc chắn muốn xóa nhân viên '{tenNV}' (Mã: {maNV})?",
+                $"Bạn có chắc chắn muốn xóa nhân viên '{nv.TenNV}' (Mã: {nv.MaNV})?",
                 "Xác nhận xóa",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
@@ -307,8 +301,7 @@ namespace PBL2.Views.QL_NhanVien
 
             if (result == DialogResult.Yes)
             {
-                this.Presenter.DeleteNhanVien(maNV);
-                this.LoadTableNV();
+                this.Presenter.DeleteNhanVien(nv, Acc);
                 this.cancel();
             }
         }
@@ -321,7 +314,7 @@ namespace PBL2.Views.QL_NhanVien
 
                 // Vẽ nút như bình thường
                 e.PaintContent(e.CellBounds);
-                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "edit_icon.png");
+                string imagePath = Path.Combine(DB.projectRoot, "Resources", "edit_icon.png");
                 // Load ảnh icon
                 Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 
@@ -340,7 +333,7 @@ namespace PBL2.Views.QL_NhanVien
 
                 // Vẽ nút như bình thường
                 e.PaintContent(e.CellBounds);
-                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "close.png");
+                string imagePath = Path.Combine(DB.projectRoot, "Resources", "close.png");
                 // Load ảnh icon
                 Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 
@@ -370,6 +363,88 @@ namespace PBL2.Views.QL_NhanVien
         private void btnPhanCa_Click(object sender, EventArgs e)
         {
             this.LoadPhanCaHandler?.Invoke(this.Presenter);
+        }
+
+        //Iterface
+        public void loadNhnVienTable(List<NhanVien> listNhanVien)
+        {
+            this.dataGridView1.Columns.Clear();
+            this.dataGridView1.DataSource = listNhanVien;
+            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            //custom column
+            try
+            {
+                this.dataGridView1.Columns["MaNV"].HeaderText = "Mã NV";
+
+                this.dataGridView1.Columns["TenNV"].HeaderText = "Tên";
+                this.dataGridView1.Columns["TenNV"].FillWeight = 100;
+
+                this.dataGridView1.Columns["VaiTro"].Visible = false;
+                this.dataGridView1.Columns["VaiTroStr"].HeaderText = "Vai trò";
+                this.dataGridView1.Columns["SDT"].HeaderText = "SĐT";
+
+                this.dataGridView1.Columns["MucLuongCoBan"].HeaderText = "Lương cơ bản";
+
+                //this.dataGridView1.Columns["khoa"].HeaderText = "Khóa";
+                //this.dataGridView1.Columns["khoa"].FillWeight = 40;
+                //this.dataGridView1.Columns["khoa"].Visible = false;
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            string imagePath = Path.Combine(DB.projectRoot, "Resources", "edit_icon.png");
+
+            this.dataGridView1.ShowCellToolTips = true;
+            //Cột SỬA
+            DataGridViewButtonColumn editButtonColumn = new DataGridViewButtonColumn();
+            editButtonColumn.Name = "EditColumn";
+            editButtonColumn.HeaderText = "";
+            editButtonColumn.Text = "Sửa";
+            editButtonColumn.UseColumnTextForButtonValue = false;
+            editButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            //Cột XÓA
+            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
+            deleteButtonColumn.Name = "DeleteColumn";
+            deleteButtonColumn.HeaderText = "";
+            deleteButtonColumn.Text = "Xóa";
+            deleteButtonColumn.UseColumnTextForButtonValue = false;
+            deleteButtonColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            // Thêm cột vào DataGridView
+            this.dataGridView1.Columns.Add(editButtonColumn);
+            this.dataGridView1.Columns.Add(deleteButtonColumn);
+
+            // Đảm bảo thiết lập kéo giãn hàng và tắt hàng trống (đã hướng dẫn ở phần trước)
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+        }
+
+        public void loadChiTietNhanVien(NhanVien nhavien)
+        {
+            if(nhavien == null)
+            {
+                this.TenNV = "";
+                this.SDT = "";
+                this.mucluong = 0;
+                return;
+            }
+            this.MaNV = nhavien.MaNV;
+            this.TenNV = nhavien.TenNV;
+            this.Vaitro = nhavien.VaiTro;
+            this.SDT = nhavien.SDT;
+            this.mucluong = nhavien.MucLuongCoBan;
+        }
+
+        public void showMessage(string message)
+        {
+            MessageBox.Show(message);
         }
     }
 }

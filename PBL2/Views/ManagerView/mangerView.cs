@@ -1,5 +1,4 @@
-﻿using PBL2.Class;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,12 +15,26 @@ using PBL2.Views.BaoCao;
 using PBL2.Views.QLTonKho;
 using PBL2.Presenters.QL_NhanVien;
 using PBL2.Views.PhanCa;
+using PBL2.Data;
+
 namespace PBL2.Views.ManagerView
 {
     public partial class mangerView : UserControl
     {
         public Form1 form1;
-        private AccountModel account;
+        private NhanVien nhanVien { get; set; }
+
+        //properties for data binding
+        private String tenNV
+        {
+            get { return this.labelTen.Text; }
+            set { this.labelTen.Text = value; }
+        }
+        private String vaiTro
+        {
+            get { return this.labelVaiTro.Text; }
+            set { this.labelVaiTro.Text = value; }
+        }
 
         // màu khi được chọn
         private readonly Color SelectedBack = Color.FromArgb(70, 101, 87);
@@ -33,14 +46,12 @@ namespace PBL2.Views.ManagerView
 
         //select button
         private Krypton.Toolkit.KryptonButton selectedButton { get; set; }
-        public mangerView(AccountModel account)
+        public mangerView(NhanVien nv)
         {
             InitializeComponent();
-            this.account = account;
-
-
-            this.labelTen.DataBindings.Add("Text", account, "TenNV");
-            this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
+            this.nhanVien = nv;
+            this.tenNV = nv.TenNV;
+            this.vaiTro = nv.VaiTroStr;
 
             //this.panelPage.Controls.Add(new QL_MenuPage());
             this.loadBaoCao();
@@ -75,11 +86,13 @@ namespace PBL2.Views.ManagerView
             changeButtonColor((Krypton.Toolkit.KryptonButton)sender);
             this.loadBaoCao();
         }
+
         private void btnQLTonKho_click(object sender, EventArgs e)
         {
             changeButtonColor((Krypton.Toolkit.KryptonButton)sender);
             this.loadQLTonKho();
         }
+
         //function
         private void changeButtonColor(Krypton.Toolkit.KryptonButton button)
         {
@@ -119,7 +132,7 @@ namespace PBL2.Views.ManagerView
         public void loadQlNhanVien()
         {
             this.panelPage.Controls.Clear();
-            QL_NhanVienPage ql_NhanVienPage = new QL_NhanVienPage();
+            QL_NhanVienPage ql_NhanVienPage = new QL_NhanVienPage(nhanVien);
             ql_NhanVienPage.LoadPhanCaHandler += this.loadPhancaPage;
 
             this.panelPage.Controls.Add(ql_NhanVienPage);
@@ -134,7 +147,7 @@ namespace PBL2.Views.ManagerView
         public void loadQLTonKho()
         {
             this.panelPage.Controls.Clear();
-            this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
+            this.panelPage.Controls.Add(new QLTonKhoPage(this.nhanVien));
         }
 
         public void loadQL_CongThuc(QL_CongThucPage ql_CongThucPage)
@@ -144,14 +157,13 @@ namespace PBL2.Views.ManagerView
             this.panelPage.Controls.Add(ql_CongThucPage);
         }
 
+        //trang phu
         public void loadQL_PhanLoai(QL_PhanLoaiPage ql_PhanLoaiPage)
         {
             this.panelPage.Controls.Clear();
             if (ql_PhanLoaiPage != null) ql_PhanLoaiPage.LoadQL_MenuPageHandler += this.loadQLMenu;
             this.panelPage.Controls.Add(ql_PhanLoaiPage);
         }
-
-        //trang phu
         public void loadPhancaPage(QL_NhanVienPresenter presenter)
         {
             this.panelPage.Controls.Clear();

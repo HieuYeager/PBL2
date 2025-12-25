@@ -208,7 +208,7 @@ namespace PBL2.Views.QLTonKho
             this.add.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.add.Font = new System.Drawing.Font("Times New Roman", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.add.ForeColor = System.Drawing.Color.White;
-            this.add.Location = new System.Drawing.Point(326, 66);
+            this.add.Location = new System.Drawing.Point(651, 69);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(200, 46);
             this.add.TabIndex = 4;
@@ -250,7 +250,7 @@ namespace PBL2.Views.QLTonKho
             this.xemLichSu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xemLichSu.Font = new System.Drawing.Font("Times New Roman", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xemLichSu.ForeColor = System.Drawing.Color.Black;
-            this.xemLichSu.Location = new System.Drawing.Point(699, 66);
+            this.xemLichSu.Location = new System.Drawing.Point(497, 69);
             this.xemLichSu.Name = "xemLichSu";
             this.xemLichSu.Size = new System.Drawing.Size(130, 46);
             this.xemLichSu.TabIndex = 8;
@@ -264,7 +264,7 @@ namespace PBL2.Views.QLTonKho
             this.xem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.xem.Font = new System.Drawing.Font("Times New Roman", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xem.ForeColor = System.Drawing.Color.Black;
-            this.xem.Location = new System.Drawing.Point(542, 66);
+            this.xem.Location = new System.Drawing.Point(333, 69);
             this.xem.Name = "xem";
             this.xem.Size = new System.Drawing.Size(137, 46);
             this.xem.TabIndex = 7;
@@ -379,7 +379,6 @@ namespace PBL2.Views.QLTonKho
             this.MinimumSize = new System.Drawing.Size(1203, 753);
             this.Name = "QLTonKhoPage";
             this.Size = new System.Drawing.Size(1203, 753);
-            this.Load += new System.EventHandler(this.QLTonKhoPage_Load);
             this.TBPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

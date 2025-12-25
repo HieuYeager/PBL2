@@ -1,5 +1,5 @@
 ﻿using Google.Protobuf.WellKnownTypes;
-using PBL2.Class;
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Presenters.QL_Menu;
 using PBL2.Views.QL_NhanVien;
@@ -11,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,11 +19,13 @@ using System.Windows.Forms;
 
 namespace PBL2.Views.QL_Menu
 {
-    public partial class QL_MenuPage : UserControl, IView<QL_MenuPresenter, QL_MenuPageModel>
+    public partial class QL_MenuPage : UserControl
     {
         public QL_MenuPresenter Presenter { get; set; }
 
         public QL_MenuPageModel Model { get; set; }
+
+        private string url_anh = "";
         public QL_MenuPage()
         {
             InitializeComponent();
@@ -110,13 +113,13 @@ namespace PBL2.Views.QL_Menu
                 return;
             }
 
-            Mon mon = new Mon()
+            Mon mon = new Mon
             {
                 MaMon = int.Parse(txtMaMon.Text),
                 TenMon = txtTenMon.Text,
                 GiaBan = mucLuongCoBan,
                 DonVi = txtDonVi.Text,
-                URL_anh = this.pictureBox1.Image != null ? Path.GetFileName(this.pictureBox1.ImageLocation) : ""
+                URL_anh = this.url_anh
             };
 
             this.Presenter.EditMon(mon);
@@ -139,15 +142,18 @@ namespace PBL2.Views.QL_Menu
                 return;
             }
 
-            Mon newMon = new Mon()
+            Mon newMon = new Mon
             {
                 TenMon = this.txtTenMon.Text,
                 GiaBan = mucLuongCoBan,
                 DonVi = this.txtDonVi.Text,
-                URL_anh = this.pictureBox1.Image != null ? Path.GetFileName(this.pictureBox1.ImageLocation) : ""
+                URL_anh = url_anh,
+                Khoa = false
+                
             };
-
             this.Presenter.AddMon(newMon);
+
+            MessageBox.Show(this.url_anh);
             this.LoadTable();
             this.cancel();
         }
@@ -173,24 +179,12 @@ namespace PBL2.Views.QL_Menu
             }
         }
 
-        //private void uploadImageBtn_Click(object sender, EventArgs e)
-        //{
-        //    using (OpenFileDialog openFileDialog = new OpenFileDialog())
-        //    {
-        //        openFileDialog.Title = "Chọn ảnh";
-        //        openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
-        //        if (openFileDialog.ShowDialog() == DialogResult.OK)
-        //        {
-        //            // Lấy đường dẫn tệp đã chọn
-        //            string selectedFilePath = openFileDialog.FileName;
-        //            // Hiển thị ảnh trong PictureBox
-        //            this.pictureBox1.Image = Image.FromFile(selectedFilePath);
-        //            this.pictureBox1.ImageLocation = selectedFilePath;
-        //            // Lưu đường dẫn ảnh tương đối vào thuộc tính ImagePath
-        //            this.ImagePath = Path.GetFileName(selectedFilePath);
-        //        }
-        //    }
-        //}
+        private void uploadImageBtn_Click(object sender, EventArgs e)
+        {
+            string folderPath  = Path.Combine(DB.projectRoot, "Resources");
+            //MessageBox.Show(folderPath,"Lỗi",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            this.CopySelectedImageToFolder(folderPath);
+        }
 
         //chuyen sang trang khac
         private void ConhThucPage_btnClicked(object sender, EventArgs e)
@@ -212,6 +206,7 @@ namespace PBL2.Views.QL_Menu
         //table load
         public void LoadTable()
         {
+            if (this.Model.Table == null || this.Model.Table.Rows.Count == 0) return;
             //this.Presenter.LoadMenu();
             this.dataGridView1.Columns.Clear();
             this.dataGridView1.DataSource = Model.Table;
@@ -246,6 +241,7 @@ namespace PBL2.Views.QL_Menu
                 this.dataGridView1.Columns["GiaBan"].FillWeight = 15;
                 this.dataGridView1.Columns["DonVi"].HeaderText = "Đơn vị";
                 this.dataGridView1.Columns["DonVi"].FillWeight = 15;
+                this.dataGridView1.Columns["khoa"].Visible = false;
                 this.dataGridView1.Columns["URl_Anh"].Visible = false;
                 // them cot anh
                 //DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
@@ -274,7 +270,7 @@ namespace PBL2.Views.QL_Menu
                 this.txtMaMon.Text = this.txtTenMon.Text = this.txtGiaBan.Text = this.txtDonVi.Text = "";
                 try
                 {
-                    string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "image_icon.png");
+                    string imagePath = Path.Combine(DB.projectRoot, "Resources", "image_icon.png");
                     this.pictureBox1.Image = Image.FromFile(imagePath);
                 }catch(Exception ex)
                 {
@@ -294,11 +290,13 @@ namespace PBL2.Views.QL_Menu
                     string imagePath = "";
                     if(row.Cells["URl_Anh"].Value.ToString() == "")
                     {
-                        imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "image_icon.png");
+                        imagePath = Path.Combine(DB.projectRoot, "Resources", "image_icon.png");
                     }
                     else
                     {
-                        imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", row.Cells["URl_Anh"].Value.ToString());
+                        imagePath = Path.Combine(DB.projectRoot, "Resources", row.Cells["URl_Anh"].Value.ToString());
+                        this.url_anh = row.Cells["URl_Anh"].Value.ToString();
+                        //MessageBox.Show(url_anh);
                     }
                     this.pictureBox1.Image = Image.FromFile(imagePath);
                 }
@@ -318,7 +316,7 @@ namespace PBL2.Views.QL_Menu
 
                 // Vẽ nút như bình thường
                 e.PaintContent(e.CellBounds);
-                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "edit_icon.png");
+                string imagePath = Path.Combine(DB.projectRoot, "Resources", "edit_icon.png");
                 // Load ảnh icon
                 Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 
@@ -337,7 +335,7 @@ namespace PBL2.Views.QL_Menu
 
                 // Vẽ nút như bình thường
                 e.PaintContent(e.CellBounds);
-                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "close.png");
+                string imagePath = Path.Combine(DB.projectRoot, "Resources", "close.png");
                 // Load ảnh icon
                 Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 
@@ -413,7 +411,62 @@ namespace PBL2.Views.QL_Menu
             this.txtTenMon.Focus();
         }
 
+        //tets image
+        private void CopySelectedImageToFolder(string destFolder)
+        {
+            // đảm bảo thư mục tồn tại
+            if (!Directory.Exists(destFolder))
+            { 
+                //Directory.CreateDirectory(destFolder); 
+                MessageBox.Show("Thu muc chua hinh anh khong ton tai");
+                return;
+            }
 
+            using (var ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+                ofd.Multiselect = false;
+
+                if (ofd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                string srcPath = ofd.FileName;
+                string fileName = Path.GetFileName(srcPath);
+                string destPath = Path.Combine(destFolder, fileName);
+                this.url_anh = fileName;
+                // xử lý trùng tên: thêm timestamp nếu đã tồn tại
+                if (File.Exists(destPath))
+                {
+                    string nameOnly = Path.GetFileNameWithoutExtension(fileName);
+                    string ext = Path.GetExtension(fileName);
+                    string newName = $"{nameOnly}_{DateTime.Now:yyyyMMddHHmmss}{ext}";
+                    destPath = Path.Combine(destFolder, newName);
+                    this.url_anh = newName;
+                }
+
+                try
+                {
+                    File.Copy(srcPath, destPath);
+
+                    // Nếu muốn hiển thị ảnh trong PictureBox mà không khóa file:
+                    byte[] bytes = File.ReadAllBytes(destPath);
+                    using (var ms = new MemoryStream(bytes))
+                    {
+                        var img = Image.FromStream(ms);
+                        pictureBox1.Image?.Dispose();
+                        pictureBox1.Image = new Bitmap(img);
+                    }
+
+                    //MessageBox.Show("Sao chép thành công: " + destPath);
+                    Console.WriteLine("Sao chép thành công: " + destPath);
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show("Lỗi khi sao chép ảnh: " + ex.Message);
+                    Console.WriteLine("Lỗi khi sao chép ảnh: " + ex.Message);
+                }
+            }
+        }
     }
 
 }

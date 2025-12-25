@@ -10,33 +10,63 @@ using System.Windows.Forms;
 
 using PBL2.Presenters.QLDon;
 using PBL2.Models;
-using PBL2.Class;
+using PBL2.Data;
 using PBL2.Views.MenuPage;
 
 namespace PBL2.Views.QLDon
 {
-    public partial class QLDonPage : UserControl, IView<QLDonPresenter, QLDonModel>
+    public partial class QLDonPage : UserControl, IQLDonPage
     {
         public QLDonPresenter Presenter { get; set; }
-        public QLDonModel Model { get; set; }
 
-        private HoaDon SelectedHoaDon { get; set; }
-        //AccountModel
-        public AccountModel AccountModel { get; set; }
         //loadPageThanhToan
-        public delegate void LoadPageThanhToan(OrderModel hoaDon, AccountModel acc);
+        public delegate void LoadPageThanhToan(Data.HoaDon hoaDon, Data.NhanVien acc);
         public LoadPageThanhToan loadThanhToan_Handler { get; set; }
 
-        public QLDonPage(AccountModel acc)
+        private HoaDon SelectedHoaDon { get; set; }
+
+        private NhanVien nhanVien { get; set; }
+
+        //bien
+        private string maHD
+        {
+            get
+            {
+                return this.txtMaHD.Text;
+            }
+            set
+            {
+                this.txtMaHD.Text = value;
+            }
+        }
+
+        private int soBan
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(this.txtSoBan.Text);
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                this.txtSoBan.Text = value.ToString();
+            }
+        }
+        public QLDonPage(NhanVien acc)
         {
             InitializeComponent();
             //presenter = new QLDonPresenter(this);
             this.Presenter = new QLDonPresenter(this);
-            this.Model = this.Presenter.Model;
 
-            this.AccountModel = acc;
+            this.nhanVien = acc;
 
-            this.DangChoBtn.PerformClick();
+            this.DangLamBtn.PerformClick();
             //an panel detail
             //this.PanelDetail.Visible = false;
         }
@@ -44,25 +74,16 @@ namespace PBL2.Views.QLDon
         private void ChuaThanhToanBtn_Click(object sender, EventArgs e)
         {
             this.Presenter.LoadAllHoaDonChuaThanhToan();
-            this.loadAllDonHang();
-        }
-
-        private void DangChoBtn_Click(object sender, EventArgs e)
-        {
-            this.Presenter.LoadAllHoaDonDaThanhToan();
-            this.loadAllDonHang();
         }
 
         private void DangLamBtn_Click(object sender, EventArgs e)
         {
             this.Presenter.LoadAllHoaDonDangLam();
-            this.loadAllDonHang();
         }
 
         private void SanSangBtn_Click(object sender, EventArgs e)
         {
             this.Presenter.LoadAllHoaDonSanSang();
-            this.loadAllDonHang();
         }
 
         //-----------------
@@ -74,126 +95,100 @@ namespace PBL2.Views.QLDon
 
         private void dataGridViewMons_cellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex < 0 || e.RowIndex >= this.dataGridViewMons.Rows.Count)
+            if (e.RowIndex < 0 || e.RowIndex >= this.dataGridViewMons.Rows.Count)
             {
                 return;
             }
-            int maMon = this.dataGridViewMons.Rows[e.RowIndex].Cells["maMon"].Value != DBNull.Value ?
-                Convert.ToInt32(this.dataGridViewMons.Rows[e.RowIndex].Cells["maMon"].Value) : -1;
-            if (maMon == -1) return;
-
-            this.Presenter.LoadCongThuc(maMon);
-        }
-        //load
-        public void loadAllDonHang() {
-
-            this.PanelHD.Controls.Clear();
-            if (this.Model.HoaDons == null || this.Model.HoaDons.Count == 0)
+            try
             {
-                return;
+                ChiTietHoaDon mon = this.dataGridViewMons.Rows[e.RowIndex].DataBoundItem as ChiTietHoaDon;
+
+                this.Presenter.LoadCongThuc(mon.MaMon);
             }
-
-            TrangThaiHoaDon trangThai = TrangThaiHoaDon.ChuaThanhToan;
-            trangThai = this.Model.HoaDons[0].TrangThai;
-            
-            if (trangThai == TrangThaiHoaDon.ChuaThanhToan)
-            foreach (HoaDon hd in this.Model.HoaDons)
+            catch (Exception ex)
             {
-                DonCTTComp donCTHComp = new DonCTTComp(hd, this.Presenter);
-                this.PanelHD.Controls.Add(donCTHComp);
-            }
+                Console.WriteLine("Lỗi khi tải công thức: " + ex.Message);
 
-            if(trangThai ==  TrangThaiHoaDon.DangLam)
-            foreach (HoaDon hd in this.Model.HoaDons)
-            {
-                DonDLComp donCTHComp_DangLam = new DonDLComp(hd, this.Presenter);
-                this.PanelHD.Controls.Add(donCTHComp_DangLam);
-            }
-
-            if (trangThai == TrangThaiHoaDon.SanSang)
-            foreach (HoaDon hd in this.Model.HoaDons)
-            {
-                DonDSSComp donCTHComp_SanSang = new DonDSSComp(hd, this.Presenter);
-                this.PanelHD.Controls.Add(donCTHComp_SanSang);
-            }
-
-            if (trangThai == TrangThaiHoaDon.DaThanhToan)
-            foreach (HoaDon hd in this.Model.HoaDons)
-            {
-                DonDTTComp donCTHComp_DangCho = new DonDTTComp(hd, this.Presenter);
-                this.PanelHD.Controls.Add(donCTHComp_DangCho);
             }
         }
 
-        public void loadChiTietDon(HoaDon hd)
+        //interface methods
+        public void loadTatCaDonHang(List<HoaDon> hoaDons)
         {
-            this.SelectedHoaDon = hd;
-            //load chi tiet don
-            OrderModel orderModel = new OrderModel(hd);
-            this.txtMaHD.Text = orderModel.MaHD;
-            this.txtSoBan.Text = orderModel.maBan.ToString();
+            this.PanelHD.Controls.Clear();
+            if(hoaDons == null || hoaDons.Count == 0)
+            {
+                return;
+            }
+            EnumTrangThai trangThai = EnumTrangThai.ChuaThanhToan;
+            trangThai = hoaDons[0].TrangThai;
 
+            if (trangThai == EnumTrangThai.ChuaThanhToan)
+                foreach (HoaDon hd in hoaDons)
+                {
+                    DonCTTComp donCTHComp = new DonCTTComp(hd, this.Presenter);
+                    this.PanelHD.Controls.Add(donCTHComp);
+                }
+
+            if (trangThai == EnumTrangThai.DangLam)
+                foreach (HoaDon hd in hoaDons)
+                {
+                    DonDLComp donCTHComp_DangLam = new DonDLComp(hd, this.Presenter);
+                    this.PanelHD.Controls.Add(donCTHComp_DangLam);
+                }
+
+            if (trangThai == EnumTrangThai.SanSang)
+                foreach (HoaDon hd in hoaDons)
+                {
+                    DonDSSComp donCTHComp_SanSang = new DonDSSComp(hd, this.Presenter);
+                    this.PanelHD.Controls.Add(donCTHComp_SanSang);
+                }
+        }
+
+        public void loadChiTietDon(HoaDon hoaDon, List<ChiTietHoaDon> chiTietHoaDons)
+        {
+            this.maHD = hoaDon.MaHD;
+            this.soBan = hoaDon.MaBan.HasValue ? hoaDon.MaBan.Value : 0;
             //load data grid view
             this.dataGridViewMons.Columns.Clear();
-            this.dataGridViewMons.DataSource = orderModel.orderDetails;
-            try
-            {
-                this.dataGridViewMons.Columns["monModel"].HeaderText = "Món";
-                this.dataGridViewMons.Columns["monModel"].Visible = false;
-                //this.dataGridViewMons.Columns["TenMon"].DisplayIndex = 0;
-                this.dataGridViewMons.Columns["maMon"].Visible = false;
-                this.dataGridViewMons.Columns["TenMon"].HeaderText = "Tên Món";
-                this.dataGridViewMons.Columns["giaBan"].HeaderText = "Giá Bán";
-                this.dataGridViewMons.Columns["giaBan"].Visible = false;
-                this.dataGridViewMons.Columns["soLuong"].HeaderText = "SL";
-                this.dataGridViewMons.Columns["soLuong"].FillWeight = 20;
-                this.dataGridViewMons.Columns["tongTien"].HeaderText = "Tổng Tiền";
-                this.dataGridViewMons.Columns["tongTien"].Visible = false;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            this.dataGridViewMons.DataSource = null;
+            this.dataGridViewMons.DataSource = chiTietHoaDons;
+            //rename column
+            this.dataGridViewMons.Columns["MaHD"].Visible = false;
+            this.dataGridViewMons.Columns["MaMon"].Visible = false;
+            this.dataGridViewMons.Columns["DonGia"].Visible = false;
+            this.dataGridViewMons.Columns["TongTien"].Visible = false;
+            this.dataGridViewMons.Columns["TenMon"].HeaderText = "Tên món";
+            this.dataGridViewMons.Columns["TenMon"].FillWeight = 80;
+            this.dataGridViewMons.Columns["SoLuong"].HeaderText = "Số lượng";
+            this.dataGridViewMons.Columns["SoLuong"].FillWeight = 20;
+            this.dataGridViewMons.Columns["DonGia"].HeaderText = "Giá bán";
+            this.dataGridViewMons.Columns["TongTien"].HeaderText = "Tổng tiền";
+            //format
+            this.dataGridViewMons.Columns["DonGia"].DefaultCellStyle.Format = "#,##0";
+            this.dataGridViewMons.Columns["TongTien"].DefaultCellStyle.Format = "#,##0 VNĐ";
 
         }
 
-        public void ClearChiTietDon()
+        public void loadThanhToanPage(HoaDon hoaDon)
         {
-            this.txtMaHD.Text = "";
-            this.txtSoBan.Text = "";
-            this.dataGridViewMons.Columns.Clear();
+            this.loadThanhToan_Handler?.Invoke(hoaDon, this.nhanVien);
         }
 
-        public void loadCongThucMon(DataTable dt)
+        public void loadCongThuc(List<CongThuc> congThucs)
         {
             this.dataGridViewCongthuc.Columns.Clear();
-            this.dataGridViewCongthuc.DataSource = dt;
+            this.dataGridViewCongthuc.DataSource = congThucs;
 
-            try
-            {
-                //this.dataGridViewCongthuc.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                this.dataGridViewCongthuc.Columns["MaMon"].Visible = false;
-                this.dataGridViewCongthuc.Columns["MaNguyenLieu"].Visible = false;
-                this.dataGridViewCongthuc.Columns["TenNguyenLieu"].HeaderText = "Nguyên liệu";
-                this.dataGridViewCongthuc.Columns["TenNguyenLieu"].FillWeight = 50;
-                this.dataGridViewCongthuc.Columns["SoLuong"].HeaderText = "SL";
-                this.dataGridViewCongthuc.Columns["SoLuong"].FillWeight = 30;
-                this.dataGridViewCongthuc.Columns["DonVi"].HeaderText = "Đơn vị";
-                this.dataGridViewCongthuc.Columns["DonVi"].FillWeight = 20;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+            this.dataGridViewCongthuc.Columns["MaMon"].Visible = false;
+            this.dataGridViewCongthuc.Columns["MaNguyenLieu"].Visible = false;
+            this.dataGridViewCongthuc.Columns["TenMon"].Visible = false;
+            this.dataGridViewCongthuc.Columns["TenNguyenLieu"].HeaderText = "Nguyên liệu";
+            this.dataGridViewCongthuc.Columns["TenNguyenLieu"].FillWeight = 60;
+            this.dataGridViewCongthuc.Columns["SoLuong"].HeaderText = "Số lượng";
+            this.dataGridViewCongthuc.Columns["SoLuong"].FillWeight = 20;
+            this.dataGridViewCongthuc.Columns["DonViStr"].HeaderText = "";
+            this.dataGridViewCongthuc.Columns["DonViStr"].FillWeight = 10;
         }
-        //load thanh toan form component
-        public void DonCTHComp_LoadThanhToan(HoaDon hoaDon)
-        {
-            //chuyen hoa don sang oredermodel
-            OrderModel orderModel = new OrderModel(hoaDon);
-            //invoke event
-            this.loadThanhToan_Handler?.Invoke(orderModel, this.AccountModel);
-        }
-
     }
 }

@@ -1,5 +1,6 @@
-﻿using PBL2.Class;
+﻿using PBL2.Data;
 using PBL2.Models;
+using PBL2.Presenters.QLTonKho;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,248 +16,96 @@ namespace PBL2.Views.QLTonKho
 {
     public partial class LichSu : Form
     {
-        public LichSu()
+        QLTonKhoPresenter Presenter;
+        private int maNguyenLieu
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(comboBoxTenNL.SelectedValue.ToString());
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                comboBoxTenNL.SelectedValue = value;
+            }
+        }
+
+        public LichSu(QLTonKhoPresenter qLTonKhoPresenter)
         {
             InitializeComponent();
+            this.Presenter = qLTonKhoPresenter;
+
+            //load comboBox ten nguyen lieu
+            List<NguyenLieuTonKho> nguyenLieuTonKhos = new List<NguyenLieuTonKho>();
+            nguyenLieuTonKhos.Add(new NguyenLieuTonKho() { MaNguyenLieu = -1, TenNguyenLieu = "tất cả" });
+            nguyenLieuTonKhos.AddRange(this.Presenter.GetAllLieu());
+            this.comboBoxTenNL.DataSource = nguyenLieuTonKhos;
+            this.comboBoxTenNL.DisplayMember = "TenNguyenLieu";
+            this.comboBoxTenNL.ValueMember = "MaNguyenLieu";
+            maNguyenLieu = -1;
         }
 
-        public void LoadLichSuTonKho(int? maNguyenLieu = null)
+        public void LoadLichSuTonKho()
         {
-            string table = "lichsutonkho as ls";
-            //string fields = "ID, MaNguyenLieu, MaNV, HoatDong, SoLuong, Gia, GhiChu, Ngay";
-            string fields = "nl.TenNguyenLieu, nv.TenNV, ls.*";
+            this.dataGridView1.Columns.Clear();
+            List<LichSuTonKho> lichSuTonKhos = this.Presenter.GetAllLichSuTonKho();
 
-            string where = null;
-            if (maNguyenLieu.HasValue)
-                where = $"MaNguyenLieu = {maNguyenLieu.Value}";
-
-            DataTable dt;
-
-            //if (maNguyenLieu.HasValue)
-            //{
-            //    dt = MySQL_DB.Instance.Select(table, fields, $"MaNguyenLieu = {maNguyenLieu.Value}");
-            //}
-            //else
-            //{
-            //    dt = MySQL_DB.Instance.Select(table, fields); // load all
-            //}
-            string join = "JOIN NhanVien as nv ON nv.MaNV = ls.MaNV " +
-                "JOIN NguyenLieu as nl ON nl.MaNguyenLieu = ls.MaNguyenLieu";
-
-            dt = MySQL_DB.Instance.SelectJoin(table, fields, join);
-
-            if (dt != null && dt.Rows.Count > 0)
+            if (lichSuTonKhos != null && lichSuTonKhos.Count > 0)
             {
-                this.dataGridView1.Columns.Clear();
-                dataGridView1.DataSource = dt;
+                dataGridView1.DataSource = lichSuTonKhos;
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-                // Đổi tên cột để dễ đọc
-                dataGridView1.Columns["TenNV"].HeaderText = "Nhân viên";
-                dataGridView1.Columns["TenNV"].FillWeight = 15;
-                dataGridView1.Columns["TenNguyenLieu"].HeaderText = "Nguyên liệu";
-                dataGridView1.Columns["TenNguyenLieu"].FillWeight = 15;
+                this.dataGridView1.Columns["ID"].HeaderText = "ID";
+                this.dataGridView1.Columns["ID"].FillWeight = 5;
 
-                dataGridView1.Columns["ID"].HeaderText = "ID";
-                dataGridView1.Columns["ID"].Visible = false;
-                dataGridView1.Columns["MaNguyenLieu"].HeaderText = "Mã NL";
-                dataGridView1.Columns["MaNguyenLieu"].Visible = false;
-                dataGridView1.Columns["MaNV"].HeaderText = "Mã NV";
-                dataGridView1.Columns["MaNV"].Visible = false;
+                this.dataGridView1.Columns["MaNV"].HeaderText = "Mã NV";
+                this.dataGridView1.Columns["MaNV"].FillWeight = 5;
+                this.dataGridView1.Columns["MaNV"].Visible = false;
 
-                dataGridView1.Columns["HoatDong"].HeaderText = "Hoạt Động";
-                dataGridView1.Columns["HoatDong"].FillWeight = 10;
-                dataGridView1.Columns["SoLuong"].HeaderText = "Số Lượng";
-                dataGridView1.Columns["SoLuong"].FillWeight = 10;
-                dataGridView1.Columns["Gia"].FillWeight = 10;
-                dataGridView1.Columns["GhiChu"].HeaderText = "Ghi Chú";
-                dataGridView1.Columns["GhiChu"].FillWeight = 30;
-                dataGridView1.Columns["Ngay"].HeaderText = "Thời Gian";
-                dataGridView1.Columns["Ngay"].FillWeight = 20;
-            }
-            else
-            {
-                MessageBox.Show("Không thể tải dữ liệu lichsutonkho.", "Lỗi Tải Dữ Liệu");
-            }
-        }
+                this.dataGridView1.Columns["TenNhanVien"].HeaderText = "Nhân viên";
+                this.dataGridView1.Columns["TenNhanVien"].FillWeight = 12;
+                this.dataGridView1.Columns["TenNhanVien"].ReadOnly = true;
 
-        private void UncheckOthers(CheckBox selected)
-        {
-            foreach (var control in this.Controls)
-            {
-                if (control is CheckBox cb && cb != selected)
-                {
-                    cb.Checked = false;
-                }
-            }
-        }
+                this.dataGridView1.Columns["MaNguyenLieu"].HeaderText = "Mã NL";
+                this.dataGridView1.Columns["MaNguyenLieu"].FillWeight = 5;
+                this.dataGridView1.Columns["MaNguyenLieu"].Visible = false;
 
-        private void MaNL_CheckedChanged(object sender, EventArgs e)
-        {
-            if (MaNL.Checked)
-                UncheckOthers(MaNL);
-        }
+                this.dataGridView1.Columns["TenNguyenLieu"].HeaderText = "Nguyên liệu";
+                this.dataGridView1.Columns["TenNguyenLieu"].FillWeight = 17;
+                this.dataGridView1.Columns["TenNguyenLieu"].ReadOnly = true;
 
-        private void MaNV_CheckedChanged(object sender, EventArgs e)
-        {
-            if (MaNV.Checked)
-                UncheckOthers(MaNV);
-        }
+                this.dataGridView1.Columns["HoatDong"].HeaderText = "Hoạt động (enum)";
+                this.dataGridView1.Columns["HoatDong"].FillWeight = 8;
+                this.dataGridView1.Columns["HoatDong"].Visible = false;
 
-        private void TenNL_CheckedChanged(object sender, EventArgs e)
-        {
-            if (TenNL.Checked)
-                UncheckOthers(TenNL);
-        }
+                this.dataGridView1.Columns["HoatDongStr"].HeaderText = "Hoạt động";
+                this.dataGridView1.Columns["HoatDongStr"].FillWeight = 10;
+                this.dataGridView1.Columns["HoatDongStr"].ReadOnly = true;
+                this.dataGridView1.Columns["HoatDongStr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-        private void ngay_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ngay.Checked)
-                UncheckOthers(ngay);
-        }
+                this.dataGridView1.Columns["SoLuong"].HeaderText = "Số lượng";
+                this.dataGridView1.Columns["SoLuong"].FillWeight = 10;
+                this.dataGridView1.Columns["SoLuong"].DefaultCellStyle.Format = "N2";
+                this.dataGridView1.Columns["SoLuong"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-        private void thang_CheckedChanged(object sender, EventArgs e)
-        {
-            if (thang.Checked)
-                UncheckOthers(thang);
-        }
+                this.dataGridView1.Columns["DonVi"].HeaderText = "Đơn vị";
+                this.dataGridView1.Columns["DonVi"].FillWeight = 6;
+                this.dataGridView1.Columns["DonVi"].ReadOnly = true;
 
-        private void nam_CheckedChanged(object sender, EventArgs e)
-        {
-            if (nam.Checked)
-                UncheckOthers(nam);
-        }
+                this.dataGridView1.Columns["ghiChu"].HeaderText = "Ghi chú";
+                this.dataGridView1.Columns["ghiChu"].FillWeight = 18;
 
-        private void button1_Click(object sender, EventArgs e) 
-        {
-            string keyword = txtSearch.Text.Trim();
+                this.dataGridView1.Columns["Ngay"].HeaderText = "Ngày";
+                this.dataGridView1.Columns["Ngay"].FillWeight = 12;
+                this.dataGridView1.Columns["Ngay"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                this.dataGridView1.Columns["Ngay"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            string table = "lichsutonkho";
-            string fields = "ID, MaNguyenLieu, MaNV, HoatDong, SoLuong, GhiChu, Ngay";
-            string condition = "";
-
-            if (string.IsNullOrEmpty(keyword))
-            {
-                condition = null;
-            }
-
-            if (MaNL.Checked)
-            {
-                condition = $"MaNguyenLieu LIKE '%{keyword}%'";
-            }
-            else if (MaNV.Checked)
-            {
-                condition = $"MaNV LIKE '%{keyword}%'";
-            }
-            else if (TenNL.Checked)
-            {
-                condition = $"TenNguyenLieu LIKE '%{keyword}%'";
-            }
-            else if (ngay.Checked)
-            {
-                if (!int.TryParse(keyword, out int day) || day < 1 || day > 31)
-                {
-                    MessageBox.Show("Ngày không hợp lệ (1-31).");
-                    return;
-                }
-                condition = $"DAY(Ngay) = {day}";
-            }
-            else if (thang.Checked)
-            {
-                if (!int.TryParse(keyword, out int month) || month < 1 || month > 12)
-                {
-                    MessageBox.Show("Tháng không hợp lệ (1-12).");
-                    return;
-                }
-                condition = $"MONTH(Ngay) = {month}";
-            }
-            else if (nam.Checked)
-            {
-                if (!int.TryParse(keyword, out int year) || year < 1900)
-                {
-                    MessageBox.Show("Năm không hợp lệ.");
-                    return;
-                }
-                condition = $"YEAR(Ngay) = {year}";
-            }
-            else
-            {
-                string[] parts = keyword.Split('/', '-');
-
-                // dd/mm/yyyy
-                if (parts.Length == 3)
-                {
-                    if (int.TryParse(parts[0], out int day)
-                        && int.TryParse(parts[1], out int month)
-                        && int.TryParse(parts[2], out int year))
-                    {
-                        string mysqlDate = $"{year}-{month:D2}-{day:D2}";
-                        condition = $"DATE(Ngay) = '{mysqlDate}'";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Định dạng không hợp lệ. Đúng: dd/mm/yyyy");
-                        return;
-                    }
-                }
-
-                //dd/mm
-                else if (parts.Length == 2)
-                {
-                    // user nhập dd/MM
-                    if (int.TryParse(parts[0], out int day)
-                        && int.TryParse(parts[1], out int month))
-                    {
-                        condition = $"DAY(Ngay) = {day} AND MONTH(Ngay) = {month}";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Định dạng ngày/tháng không hợp lệ (dd/mm).");
-                        return;
-                    }
-                }
-
-                // mm/yyyy
-                else if (parts.Length == 2)
-                {
-                    if (int.TryParse(parts[0], out int month)
-                        && int.TryParse(parts[1], out int year))
-                    {
-                        condition = $"MONTH(Ngay) = {month} AND YEAR(Ngay) = {year}";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Định dạng tháng-năm không hợp lệ (mm/yyyy).");
-                        return;
-                    }
-                }
-
-                // yyyy
-                else if (parts.Length == 1 && keyword.Length == 4)
-                {
-                    if (int.TryParse(keyword, out int year))
-                    {
-                        condition = $"YEAR(Ngay) = {year}";
-                    }
-                    else
-                    {
-                        MessageBox.Show("Năm không hợp lệ.");
-                        return;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Không thể phân tích cú pháp thời gian.");
-                    return;
-                }
-            }
-
-            DataTable dt = MySQL_DB.Instance.Select(table, fields, condition);
-
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                dataGridView1.DataSource = dt;
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             else
             {
@@ -264,34 +113,78 @@ namespace PBL2.Views.QLTonKho
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {}
+        private void txtMaNL_choose_Click(object sender, EventArgs e)
+        {
+            this.dataGridView1.Columns.Clear();
+            List<LichSuTonKho> lichSuTonKhos = this.Presenter.GetAllLichSuTonKho();
+            //LoadNguyenLieu();
+            if (maNguyenLieu != -1)
+            {
+                lichSuTonKhos = this.Presenter.GetAllLichSuTonKho($"{LichSuTonKhos.MaNguyenLieu} = '{maNguyenLieu}'");
+
+            }
+            if (lichSuTonKhos != null && lichSuTonKhos.Count > 0)
+            {
+                dataGridView1.DataSource = lichSuTonKhos;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                this.dataGridView1.Columns["ID"].HeaderText = "ID";
+                this.dataGridView1.Columns["ID"].FillWeight = 5;
+
+                this.dataGridView1.Columns["MaNV"].HeaderText = "Mã NV";
+                this.dataGridView1.Columns["MaNV"].FillWeight = 5;
+                this.dataGridView1.Columns["MaNV"].Visible = false;
+
+                this.dataGridView1.Columns["TenNhanVien"].HeaderText = "Nhân viên";
+                this.dataGridView1.Columns["TenNhanVien"].FillWeight = 12;
+                this.dataGridView1.Columns["TenNhanVien"].ReadOnly = true;
+
+                this.dataGridView1.Columns["MaNguyenLieu"].HeaderText = "Mã NL";
+                this.dataGridView1.Columns["MaNguyenLieu"].FillWeight = 5;
+                this.dataGridView1.Columns["MaNguyenLieu"].Visible = false;
+
+                this.dataGridView1.Columns["TenNguyenLieu"].HeaderText = "Nguyên liệu";
+                this.dataGridView1.Columns["TenNguyenLieu"].FillWeight = 17;
+                this.dataGridView1.Columns["TenNguyenLieu"].ReadOnly = true;
+
+                this.dataGridView1.Columns["HoatDong"].HeaderText = "Hoạt động (enum)";
+                this.dataGridView1.Columns["HoatDong"].FillWeight = 8;
+                this.dataGridView1.Columns["HoatDong"].Visible = false;
+
+                this.dataGridView1.Columns["HoatDongStr"].HeaderText = "Hoạt động";
+                this.dataGridView1.Columns["HoatDongStr"].FillWeight = 10;
+                this.dataGridView1.Columns["HoatDongStr"].ReadOnly = true;
+                this.dataGridView1.Columns["HoatDongStr"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                this.dataGridView1.Columns["SoLuong"].HeaderText = "Số lượng";
+                this.dataGridView1.Columns["SoLuong"].FillWeight = 10;
+                this.dataGridView1.Columns["SoLuong"].DefaultCellStyle.Format = "N2";
+                this.dataGridView1.Columns["SoLuong"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+                this.dataGridView1.Columns["DonVi"].HeaderText = "Đơn vị";
+                this.dataGridView1.Columns["DonVi"].FillWeight = 6;
+                this.dataGridView1.Columns["DonVi"].ReadOnly = true;
+
+                this.dataGridView1.Columns["ghiChu"].HeaderText = "Ghi chú";
+                this.dataGridView1.Columns["ghiChu"].FillWeight = 18;
+
+                this.dataGridView1.Columns["Ngay"].HeaderText = "Ngày";
+                this.dataGridView1.Columns["Ngay"].FillWeight = 12;
+                this.dataGridView1.Columns["Ngay"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                this.dataGridView1.Columns["Ngay"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            }
+            else
+            {
+                
+            }
+        }
+
+
         private void LichSu_Load(object sender, EventArgs e) {}
         private void textBox1_TextChanged(object sender, EventArgs e) {}
 
         ///------------------------------------------------------
-        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            try
-            {
-                if (dataGridView1.Rows[e.RowIndex].Cells.Count > 0)
-                {
-                    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                    if (row.Cells["HoatDong"].Value.ToString().Trim() == HoatDongTonKho.XuatKho.GetDisplayName())
-                    {
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(70, 140, 110);
-                    }
-                    else
-                    {
-                        row.DefaultCellStyle.BackColor = Color.FromArgb(255, 128, 128);
-                    }
-                }
-            }
-            catch (Exception ex) 
-            {
-            
-            }
-
-        }
 
     }
 }

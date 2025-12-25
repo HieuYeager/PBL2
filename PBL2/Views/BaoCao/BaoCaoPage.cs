@@ -13,24 +13,20 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace PBL2.Views.BaoCao
 {
-    public partial class BaoCaoPage : UserControl, IView<BaoCaoPresenter, BaoCaoModel>
+    public partial class BaoCaoPage : UserControl, IBaoCaoPage
     {
         public BaoCaoPresenter Presenter { get; set; }
-
-        public BaoCaoModel Model { get; set; }
         public BaoCaoPage()
         {
             InitializeComponent();
             this.Presenter = new BaoCaoPresenter(this);
-            this.Model = this.Presenter.Model;
 
             DateTime from = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             this.DateTimeFrom.Value = from;
             DateTime today = DateTime.Now;
             this.DateTimeTo.Value = today;
             this.Presenter.load(from, today);
-            loadChart();
-            loadMonChart();
+            this.Presenter.loadMonTheoDoanhThu(from, today);
         }
 
         private void DateTime_ValueChanged(object sender, EventArgs e)
@@ -51,13 +47,13 @@ namespace PBL2.Views.BaoCao
             DateTime from = this.DateTimeFrom.Value;
             DateTime to = this.DateTimeTo.Value;
             this.Presenter.load(from, to);
-            loadChart(); 
-            loadMonChart();
+            this.Presenter.loadMonTheoDoanhThu(from, to);
         }
         
-        public void loadChart()
+        //load
+        public void loadChart(DataTable dt)
         {
-            chart1.DataSource = this.Model.dt;
+            chart1.DataSource = dt;
             chart1.Series[0].XValueMember = "Ngay";
             chart1.Series[0].XValueType = ChartValueType.Date;
             chart1.Series[0].YValueMembers = "TongThanhTien";
@@ -67,9 +63,8 @@ namespace PBL2.Views.BaoCao
             chart1.DataBind();
         }
 
-        public void loadMonChart()
+        public void loadMonChart(DataTable dt)
         {
-            DataTable dt = this.Presenter.loadMonTheoDoanhThu(DateTime.Now, DateTime.Now);
             MonChart.DataSource = dt;
             MonChart.Series[0].XValueMember = "TenMon";
             MonChart.Series[0].XValueType = ChartValueType.Date;

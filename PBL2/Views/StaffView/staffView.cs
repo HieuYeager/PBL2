@@ -14,19 +14,29 @@ using PBL2.Views.MenuPage;
 using PBL2.Views.ThanhToan;
 using PBL2.Views.QLTonKho;
 using PBL2.Views.QLDon;
-using PBL2.Class;
+using PBL2.Data;
 namespace PBL2.Views.staffView
 {
     public partial class staffView : UserControl
     {
-        public Form1 form1 { get; set; }
-        private AccountModel account { get; set; }
         //form
+        public Form1 form1 { get; set; }
+        private NhanVien nhanVien { get; set; }
         private menuPage menuPage { get; set; }
 
+        //properties for data binding
+        private String tenNV {
+            get { return this.labelTen.Text; }
+            set { this.labelTen.Text = value; }
+        }
+        private String vaiTro {
+            get { return this.labelVaiTro.Text; }
+            set { this.labelVaiTro.Text = value; }
+        }
 
-        // màu khi được chọn
-        private readonly Color SelectedBack = Color.FromArgb(70, 101, 87);
+
+    // màu khi được chọn
+    private readonly Color SelectedBack = Color.FromArgb(70, 101, 87);
         private readonly Color SelectedText = Color.FromArgb(255, 255, 255);
 
         // màu mặc định (hoặc màu "không chọn")
@@ -36,13 +46,18 @@ namespace PBL2.Views.staffView
         //select button
         private Krypton.Toolkit.KryptonButton selectedButton { get; set; }
 
-        public staffView(AccountModel account)
+        public staffView(NhanVien nv)
         {
-            InitializeComponent();
-            this.account = account;
+            //code cu
+            //this.account = account;
+            //this.labelTen.DataBindings.Add("Text", account, "TenNV");
+            //this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
 
-            this.labelTen.DataBindings.Add("Text", account, "TenNV");
-            this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
+            InitializeComponent();
+
+            this.nhanVien = nv;
+            this.tenNV = nv.TenNV;
+            this.vaiTro = nv.VaiTroStr;
 
             //default button
             //changeButtonColor(this.btnMenu);
@@ -50,6 +65,7 @@ namespace PBL2.Views.staffView
 
             this.loadMenuPage();
         }
+        
         //event
         private void logout_btn_click(object sender, EventArgs e)
         {
@@ -72,11 +88,11 @@ namespace PBL2.Views.staffView
             loadQlDonPage();
         }
 
-        private void Ingredient_btn_click(object sender, EventArgs e)
+        private void TonKho_btn_click(object sender, EventArgs e)
         {
             //change button color
-            changeButtonColor(this.btnIngredient);
-            LoadIngredientPage();
+            changeButtonColor(this.btnTonKho);
+            LoadQLTonKhoPage();
         }
 
         //function
@@ -112,7 +128,7 @@ namespace PBL2.Views.staffView
             this.panelPage.Controls.Clear();
             if(menuPage == null)
             {
-                this.menuPage = new menuPage(this.account);
+                this.menuPage = new menuPage(this.nhanVien);
             }
             this.panelPage.Controls.Add(this.menuPage);
             this.menuPage.thanhtoanPage = this.LoadThanhToanPage;
@@ -124,7 +140,7 @@ namespace PBL2.Views.staffView
             this.panelPage.Controls.Clear();
             if (menuPage == null)
             {
-                this.menuPage = new menuPage(this.account);
+                this.menuPage = new menuPage(this.nhanVien);
             }
             else
             {
@@ -138,22 +154,35 @@ namespace PBL2.Views.staffView
         public void loadQlDonPage()
         {
             this.panelPage.Controls.Clear();
-            QLDonPage qlDonPage = new QLDonPage(this.account);
+            QLDonPage qlDonPage = new QLDonPage(this.nhanVien);
             qlDonPage.loadThanhToan_Handler += this.LoadThanhToanPage;
             this.panelPage.Controls.Add(qlDonPage);
 
         }
 
-        private void LoadIngredientPage()
+        private void LoadQLTonKhoPage()
         {
             this.panelPage.Controls.Clear();
 
-            this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
+            this.panelPage.Controls.Add(new QLTonKhoPage(this.nhanVien));
         }
-        private void LoadThanhToanPage(OrderModel order, AccountModel acc) {
-            if (order.orderDetails.Count == 0) return;
+
+        private void LoadThanhToanPage(HoaDon order, NhanVien acc) {
             this.panelPage.Controls.Clear();
             ThanhToanPage thanhToanPage = new ThanhToanPage(acc, order);
+
+            thanhToanPage.LoadMenuPageHandler += this.loadMenuPage;
+            thanhToanPage.LoadMenuPageHandler_ClearOrder += this.loadMenuPage_ClearOrder;
+            this.panelPage.Controls.Add(thanhToanPage);
+        }
+
+        private void LoadThanhToanPage(List<ChiTietHoaDon> chiTietHoaDons, NhanVien acc)
+        {
+            if(chiTietHoaDons == null || chiTietHoaDons.Count == 0)
+                return;
+            this.panelPage.Controls.Clear();
+            ThanhToanPage thanhToanPage = new ThanhToanPage(acc, chiTietHoaDons);
+
             thanhToanPage.LoadMenuPageHandler += this.loadMenuPage;
             thanhToanPage.LoadMenuPageHandler_ClearOrder += this.loadMenuPage_ClearOrder;
             this.panelPage.Controls.Add(thanhToanPage);

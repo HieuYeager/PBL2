@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PBL2.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 //--------------------Bin--------------------
 namespace PBL2.Models
 {
-    public class QL_MenuPageModel: IModel
+    public class QL_MenuPageModel
     {
         public DataTable Table { get; set; }
         //ql cong thuc

@@ -1,6 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Mysqlx.Resultset;
-using PBL2.Class;
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Presenters.QL_Menu;
 using PBL2.Views.QL_NhanVien;
@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace PBL2.Views.QL_Menu
 {
-    public partial class QL_CongThucPage : UserControl, IView<QL_MenuPresenter, QL_MenuPageModel>
+    public partial class QL_CongThucPage : UserControl
     {
         public QL_MenuPresenter Presenter { get; set; }
 
@@ -134,12 +134,12 @@ namespace PBL2.Views.QL_Menu
         private void btnAddNguyenLieu_Click(object sender, EventArgs e)
         {
             double soLuong = 0;
-            DonViNguyenLieu donVi = DonViNguyenLieu.g;
+            EnumDonVi donVi = EnumDonVi.G;
 
             try
             {
                 soLuong = double.Parse(this.txtSoLuong.Text);
-                donVi = (DonViNguyenLieu)cmBoxDonVi.SelectedValue;
+                donVi = (EnumDonVi)cmBoxDonVi.SelectedValue;
                 if(soLuong <= 0)
                 {
                     MessageBox.Show("Số lượng phải lớn hơn 0", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -192,7 +192,7 @@ namespace PBL2.Views.QL_Menu
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Console.WriteLine("Người dùng đã nhập xong và nhấn Enter!");
+                //Console.WriteLine("Người dùng đã nhập xong và nhấn Enter!");
                 e.SuppressKeyPress = true; // tránh tiếng 'ding'
                 this.update_Soluong();
             }
@@ -207,7 +207,7 @@ namespace PBL2.Views.QL_Menu
         //cmb don vi
         private void comboBoxDonVi_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            this.dataGridViewCongThuc.Rows[this.dataGridViewCongThuc.SelectedRows[0].Index].Cells["donVi"].Value = ((DonViNguyenLieu)cmBoxDonVi.SelectedValue).GetDisplayName();
+            this.dataGridViewCongThuc.Rows[this.dataGridViewCongThuc.SelectedRows[0].Index].Cells["donVi"].Value = ((EnumDonVi)cmBoxDonVi.SelectedValue).GetDisplayName();
         }
 
         //back 
@@ -221,6 +221,7 @@ namespace PBL2.Views.QL_Menu
         public void loadDataCongThucTable()
         {
             this.Presenter.LoadCongThuc(this.Model.seletedMaMon);
+            if(this.Model.CongThuc == null || this.Model.CongThuc.Rows.Count <= 0) return;
             this.dataGridViewCongThuc.Columns.Clear();
             this.dataGridViewCongThuc.DataSource = Model.CongThuc;
             //custom column
@@ -233,8 +234,8 @@ namespace PBL2.Views.QL_Menu
                 this.dataGridViewCongThuc.Columns["TenNguyenLieu"].FillWeight = 60;
                 this.dataGridViewCongThuc.Columns["SoLuong"].HeaderText = "Số lượng";
                 this.dataGridViewCongThuc.Columns["SoLuong"].FillWeight = 20;
-                this.dataGridViewCongThuc.Columns["DonVi"].HeaderText = "Đơn vị tính";
-                this.dataGridViewCongThuc.Columns["DonVi"].FillWeight = 20;
+                //this.dataGridViewCongThuc.Columns["DonVi"].HeaderText = "Đơn vị tính";
+                //this.dataGridViewCongThuc.Columns["DonVi"].FillWeight = 20;
             }
             catch (Exception ex)
             {
@@ -262,6 +263,7 @@ namespace PBL2.Views.QL_Menu
                 this.dataGridView1.Columns["DonVi"].FillWeight = 15;
                 this.dataGridView1.Columns["DonVi"].Visible = false;
                 this.dataGridView1.Columns["URl_Anh"].Visible = false;
+                this.dataGridView1.Columns["khoa"].Visible = false;
 
             }
             catch(Exception ex)
@@ -291,7 +293,7 @@ namespace PBL2.Views.QL_Menu
             this.canAdd(false);
             double soluong = 0;
             int maNguyenLieu = 0;
-            DonViNguyenLieu donVi = DonViNguyenLieu.g;
+            EnumDonVi donVi = EnumDonVi.G;
             try
             {
                 soluong = double.Parse(row.Cells["SoLuong"].Value.ToString());
@@ -299,16 +301,10 @@ namespace PBL2.Views.QL_Menu
                 switch (row.Cells["DonVi"].Value.ToString())
                 {
                     case "g":
-                        donVi = DonViNguyenLieu.g;
-                        break;
-                    case "Kg":
-                        donVi = DonViNguyenLieu.Kg;
-                        break;
-                    case "L":
-                        donVi = DonViNguyenLieu.L;
+                        donVi = EnumDonVi.G;
                         break;
                     case "ml":
-                        donVi = DonViNguyenLieu.ml;
+                        donVi = EnumDonVi.Ml;
                         break;
                 }
                 this.cmBoxNguyenLieu.SelectedValue = maNguyenLieu;

@@ -51,7 +51,7 @@
             this.comboBoxTenNL.Name = "comboBoxTenNL";
             this.comboBoxTenNL.Size = new System.Drawing.Size(223, 24);
             this.comboBoxTenNL.TabIndex = 29;
-            this.comboBoxTenNL.Leave += new System.EventHandler(this.txtMaNL_Leave);
+            this.comboBoxTenNL.SelectedIndexChanged += new System.EventHandler(this.txtMaNL_choose_Click);
             // 
             // Huy
             // 
@@ -175,8 +175,6 @@
             this.txtMaNL.TabIndex = 18;
             this.txtMaNL.Text = "Nhập nguyên liệu...";
             this.txtMaNL.Visible = false;
-            this.txtMaNL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMaNL_KeyDown);
-            this.txtMaNL.Leave += new System.EventHandler(this.txtMaNL_Leave);
             // 
             // label2
             // 

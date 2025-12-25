@@ -9,6 +9,5 @@ namespace PBL2.Models
 {
     public class BaoCaoModel
     {
-        public DataTable dt { get; set; }
     }
 }

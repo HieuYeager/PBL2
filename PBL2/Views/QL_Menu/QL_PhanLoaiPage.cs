@@ -1,6 +1,6 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Mysqlx.Resultset;
-using PBL2.Class;
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Presenters.QL_Menu;
 using PBL2.Views.QL_NhanVien;
@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace PBL2.Views.QL_Menu
 {
-    public partial class QL_PhanLoaiPage : UserControl, IView<QL_MenuPresenter, QL_MenuPageModel>
+    public partial class QL_PhanLoaiPage : UserControl
     {
         public QL_MenuPresenter Presenter { get; set; }
 
@@ -109,6 +109,7 @@ namespace PBL2.Views.QL_Menu
                 this.dataGridViewIn.Columns["DonVi"].HeaderText = "Đơn vị";
                 this.dataGridViewIn.Columns["DonVi"].Visible = false;
                 this.dataGridViewIn.Columns["URl_Anh"].Visible = false;
+                this.dataGridViewIn.Columns["khoa"].Visible = false;
 
             }
             catch (Exception ex)
@@ -153,7 +154,7 @@ namespace PBL2.Views.QL_Menu
 
                 // Vẽ nút như bình thường
                 e.PaintContent(e.CellBounds);
-                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "minus.png");
+                string imagePath = Path.Combine(DB.projectRoot, "Resources", "minus.png");
                 // Load ảnh icon
                 Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 
@@ -199,6 +200,7 @@ namespace PBL2.Views.QL_Menu
                 this.dataGridViewNotIn.Columns["DonVi"].HeaderText = "Đơn vị";
                 this.dataGridViewNotIn.Columns["DonVi"].Visible = false;
                 this.dataGridViewNotIn.Columns["URl_Anh"].Visible = false;
+                this.dataGridViewNotIn.Columns["khoa"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -242,7 +244,7 @@ namespace PBL2.Views.QL_Menu
 
                 // Vẽ nút như bình thường
                 e.PaintContent(e.CellBounds);
-                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "plus.png");
+                string imagePath = Path.Combine(DB.projectRoot, "Resources", "plus.png");
                 // Load ảnh icon
                 Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 

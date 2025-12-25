@@ -12,7 +12,7 @@ using PBL2.Models;
 using PBL2.Views.staffView;
 using PBL2.Views.ManagerView;
 using PBL2.Views.HomePage;
-using PBL2.Class;
+using PBL2.Data;
 
 
 namespace PBL2
@@ -22,12 +22,12 @@ namespace PBL2
         public Form1()
         {
             InitializeComponent();
-            LoadView("HomePage", null);
-            //LoadView("StaffView", new AccountModel() { MaNV = "Test" , TenNV = "Test", VaiTro = "Nhân viên"});
-            //LoadView("ManagerView", new AccountModel() { MaNV = "Test", TenNV = "Test", VaiTro = "Quản lý" });
+            //LoadView("HomePage", null);
+            //LoadView("StaffView", NhanViens.Get("NV001"));
+            LoadView("ManagerView", NhanViens.Get("QL001"));
         }
 
-        public void LoadView(String ViewName, AccountModel account)
+        public void LoadView(String ViewName, NhanVien account)
         {
             if (ViewName == "StaffView")
             {
@@ -35,6 +35,7 @@ namespace PBL2
                 staffView.form1 = this;
                 this.MainPanel.Controls.Clear();
                 this.MainPanel.Controls.Add(staffView);
+                //MessageBox.Show(ViewName);
             }
             else if(ViewName == "ManagerView")
             {
@@ -42,6 +43,7 @@ namespace PBL2
                 mangerView.form1 = this;
                 this.MainPanel.Controls.Clear();
                 this.MainPanel.Controls.Add(mangerView);
+                //MessageBox.Show(ViewName);
             }
             else {
                 HomePage homePage = new HomePage();

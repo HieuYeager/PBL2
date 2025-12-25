@@ -91,9 +91,9 @@
             this.labelTong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
             this.labelTong.Location = new System.Drawing.Point(272, 605);
             this.labelTong.Name = "labelTong";
-            this.labelTong.Size = new System.Drawing.Size(158, 42);
+            this.labelTong.Size = new System.Drawing.Size(175, 42);
             this.labelTong.TabIndex = 14;
-            this.labelTong.Text = "Tổng tiền";
+            this.labelTong.Text = "Thành tiền";
             // 
             // dataGridView1
             // 

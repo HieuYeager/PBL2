@@ -30,7 +30,7 @@
         {
             this.panelSideBar = new System.Windows.Forms.Panel();
             this.panelBtns = new System.Windows.Forms.Panel();
-            this.btnIngredient = new Krypton.Toolkit.KryptonButton();
+            this.btnTonKho = new Krypton.Toolkit.KryptonButton();
             this.btnDon = new Krypton.Toolkit.KryptonButton();
             this.btnMenu = new Krypton.Toolkit.KryptonButton();
             this.panelAccount = new System.Windows.Forms.Panel();
@@ -62,7 +62,7 @@
             // 
             // panelBtns
             // 
-            this.panelBtns.Controls.Add(this.btnIngredient);
+            this.panelBtns.Controls.Add(this.btnTonKho);
             this.panelBtns.Controls.Add(this.btnDon);
             this.panelBtns.Controls.Add(this.btnMenu);
             this.panelBtns.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -72,35 +72,35 @@
             this.panelBtns.Size = new System.Drawing.Size(179, 394);
             this.panelBtns.TabIndex = 1;
             // 
-            // btnIngredient
+            // btnTonKho
             // 
-            this.btnIngredient.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnIngredient.Location = new System.Drawing.Point(15, 95);
-            this.btnIngredient.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
-            this.btnIngredient.Name = "btnIngredient";
-            this.btnIngredient.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnIngredient.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnIngredient.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnIngredient.OverrideDefault.Border.Draw = Krypton.Toolkit.InheritBool.False;
-            this.btnIngredient.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnTonKho.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTonKho.Location = new System.Drawing.Point(15, 95);
+            this.btnTonKho.Margin = new System.Windows.Forms.Padding(3, 3, 3, 7);
+            this.btnTonKho.Name = "btnTonKho";
+            this.btnTonKho.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnTonKho.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnTonKho.OverrideDefault.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnTonKho.OverrideDefault.Border.Draw = Krypton.Toolkit.InheritBool.False;
+            this.btnTonKho.OverrideDefault.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnIngredient.Size = new System.Drawing.Size(149, 47);
-            this.btnIngredient.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnIngredient.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
-            this.btnIngredient.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnIngredient.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
-            this.btnIngredient.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnTonKho.Size = new System.Drawing.Size(149, 47);
+            this.btnTonKho.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnTonKho.StateCommon.Back.ColorStyle = Krypton.Toolkit.PaletteColorStyle.Solid;
+            this.btnTonKho.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnTonKho.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(163)))), ((int)(((byte)(146)))));
+            this.btnTonKho.StateCommon.Border.DrawBorders = ((Krypton.Toolkit.PaletteDrawBorders)((((Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | Krypton.Toolkit.PaletteDrawBorders.Left) 
             | Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnIngredient.StateCommon.Border.Rounding = 10F;
-            this.btnIngredient.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(49)))), ((int)(((byte)(43)))));
-            this.btnIngredient.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngredient.StateCommon.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
-            this.btnIngredient.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
-            this.btnIngredient.TabIndex = 2;
-            this.btnIngredient.Values.Text = "Tồn kho";
-            this.btnIngredient.Click += new System.EventHandler(this.Ingredient_btn_click);
+            this.btnTonKho.StateCommon.Border.Rounding = 10F;
+            this.btnTonKho.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(49)))), ((int)(((byte)(43)))));
+            this.btnTonKho.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTonKho.StateCommon.Content.ShortText.TextH = Krypton.Toolkit.PaletteRelativeAlign.Near;
+            this.btnTonKho.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(101)))), ((int)(((byte)(87)))));
+            this.btnTonKho.TabIndex = 2;
+            this.btnTonKho.Values.Text = "Tồn kho";
+            this.btnTonKho.Click += new System.EventHandler(this.TonKho_btn_click);
             // 
             // btnDon
             // 
@@ -177,7 +177,7 @@
             this.panelAccount.Controls.Add(this.labelVaiTro);
             this.panelAccount.Controls.Add(this.labelTen);
             this.panelAccount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelAccount.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelAccount.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelAccount.Location = new System.Drawing.Point(0, 162);
             this.panelAccount.Name = "panelAccount";
             this.panelAccount.Size = new System.Drawing.Size(179, 103);
@@ -288,7 +288,7 @@
         private System.Windows.Forms.Panel panelBot;
         private System.Windows.Forms.Panel panelBtns;
         private Krypton.Toolkit.KryptonButton btnMenu;
-        private Krypton.Toolkit.KryptonButton btnIngredient;
+        private Krypton.Toolkit.KryptonButton btnTonKho;
         private Krypton.Toolkit.KryptonButton btnDon;
         private Krypton.Toolkit.KryptonButton btnLogout;
         private System.Windows.Forms.Panel panelPage;
