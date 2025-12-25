@@ -21,8 +21,6 @@ namespace PBL2.Views.staffView
     {
         //form
         public Form1 form1 { get; set; }
-        private AccountModel account { get; set; }
-
         private NhanVien nhanVien { get; set; }
         private menuPage menuPage { get; set; }
 
@@ -166,7 +164,7 @@ namespace PBL2.Views.staffView
         {
             this.panelPage.Controls.Clear();
 
-            this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
+            this.panelPage.Controls.Add(new QLTonKhoPage(this.nhanVien));
         }
 
         private void LoadThanhToanPage(HoaDon order, NhanVien acc) {

@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace PBL2.Views.QLTonKho
 {
-    public partial class AddNguyenLieuForm : Form
+    public partial class EditNguyenLieuForm : Form
     {
         private string TenNguyenLieu
         {
@@ -39,11 +39,17 @@ namespace PBL2.Views.QLTonKho
         }
 
         QLTonKhoPresenter presenter;
-        public AddNguyenLieuForm(QLTonKhoPresenter qLTonKhoPresenter)
+        NguyenLieuTonKho nguyenLieu;
+        public EditNguyenLieuForm(QLTonKhoPresenter qLTonKhoPresenter, NguyenLieuTonKho nguyenLieu)
         {
             InitializeComponent();
             this.presenter = qLTonKhoPresenter;
             LoadDonVi();
+
+            this.nguyenLieu = nguyenLieu;
+            this.txtTen.Text = nguyenLieu.TenNguyenLieu;
+            this.cbDonVi.SelectedItem = nguyenLieu.DonVi;
+            this.numMucCB.Value = nguyenLieu.MucCanhBao;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -53,15 +59,13 @@ namespace PBL2.Views.QLTonKho
 
         private void button1_Click(object sender, EventArgs e)
         {
-            NguyenLieuTonKho nguyenLieuMoi = new NguyenLieuTonKho
-            {
-                TenNguyenLieu = this.TenNguyenLieu,
-                DonVi = this.DonVi,
-                SoLuong = 0,
-                MucCanhBao = this.muccanhbao,
-                NgayCapNhat = DateTime.Now
-            };
-            if (this.presenter.AddNguyenLieu(nguyenLieuMoi)){
+            nguyenLieu.TenNguyenLieu = this.TenNguyenLieu;
+            nguyenLieu.DonVi = this.DonVi;
+            nguyenLieu.MucCanhBao = this.muccanhbao;
+
+            //MessageBox.Show($"{nguyenLieu.TenNguyenLieu} - {nguyenLieu.DonVi} - {nguyenLieu.MucCanhBao}");
+
+            if (this.presenter.EditNguyenLieu(nguyenLieu)){
                 this.Close();
             }
             else{

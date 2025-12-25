@@ -22,7 +22,6 @@ namespace PBL2.Views.ManagerView
     public partial class mangerView : UserControl
     {
         public Form1 form1;
-        private AccountModel account;
         private NhanVien nhanVien { get; set; }
 
         //properties for data binding
@@ -95,6 +94,7 @@ namespace PBL2.Views.ManagerView
             changeButtonColor((Krypton.Toolkit.KryptonButton)sender);
             this.loadQLTonKho();
         }
+
         //function
         private void changeButtonColor(Krypton.Toolkit.KryptonButton button)
         {
@@ -149,7 +149,7 @@ namespace PBL2.Views.ManagerView
         public void loadQLTonKho()
         {
             this.panelPage.Controls.Clear();
-            this.panelPage.Controls.Add(new QLTonKhoPage(this.account));
+            this.panelPage.Controls.Add(new QLTonKhoPage(this.nhanVien));
         }
 
         public void loadQL_CongThuc(QL_CongThucPage ql_CongThucPage)
@@ -159,14 +159,13 @@ namespace PBL2.Views.ManagerView
             this.panelPage.Controls.Add(ql_CongThucPage);
         }
 
+        //trang phu
         public void loadQL_PhanLoai(QL_PhanLoaiPage ql_PhanLoaiPage)
         {
             this.panelPage.Controls.Clear();
             if (ql_PhanLoaiPage != null) ql_PhanLoaiPage.LoadQL_MenuPageHandler += this.loadQLMenu;
             this.panelPage.Controls.Add(ql_PhanLoaiPage);
         }
-
-        //trang phu
         public void loadPhancaPage(QL_NhanVienPresenter presenter)
         {
             this.panelPage.Controls.Clear();

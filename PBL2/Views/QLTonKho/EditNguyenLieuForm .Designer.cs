@@ -1,6 +1,6 @@
 ﻿namespace PBL2.Views.QLTonKho
 {
-    partial class AddNguyenLieuForm
+    partial class EditNguyenLieuForm
     {
         /// <summary>
         /// Required designer variable.
@@ -102,7 +102,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 47);
             this.button1.TabIndex = 7;
-            this.button1.Text = "Thêm";
+            this.button1.Text = "Sửa";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -123,11 +123,11 @@
             // numMucCB
             // 
             this.numMucCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.14286F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numMucCB.Location = new System.Drawing.Point(41, 273);
+            this.numMucCB.Location = new System.Drawing.Point(40, 273);
             this.numMucCB.Margin = new System.Windows.Forms.Padding(2);
             this.numMucCB.Maximum = new decimal(new int[] {
-            1316134912,
-            2328,
+            1410065408,
+            2,
             0,
             0});
             this.numMucCB.Name = "numMucCB";
@@ -145,7 +145,7 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Mức cảnh báo:";
             // 
-            // AddNguyenLieuForm
+            // EditNguyenLieuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -160,7 +160,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "AddNguyenLieuForm";
+            this.Name = "EditNguyenLieuForm";
             this.Text = "AddNguyenLieuForm";
             ((System.ComponentModel.ISupportInitialize)(this.numMucCB)).EndInit();
             this.ResumeLayout(false);

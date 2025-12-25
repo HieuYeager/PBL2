@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtMaNL = new System.Windows.Forms.TextBox();
             this.txtSoLuong = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtDonVi = new System.Windows.Forms.TextBox();
@@ -42,8 +41,6 @@
             this.Huy = new System.Windows.Forms.Button();
             this.XacNhan = new System.Windows.Forms.Button();
             this.comboBoxTenNL = new System.Windows.Forms.ComboBox();
-            this.txtGia = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -67,19 +64,6 @@
             this.label2.Size = new System.Drawing.Size(191, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "Chọn Nguyên Liệu:";
-            // 
-            // txtMaNL
-            // 
-            this.txtMaNL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaNL.Location = new System.Drawing.Point(23, 352);
-            this.txtMaNL.Margin = new System.Windows.Forms.Padding(2);
-            this.txtMaNL.Name = "txtMaNL";
-            this.txtMaNL.Size = new System.Drawing.Size(569, 26);
-            this.txtMaNL.TabIndex = 2;
-            this.txtMaNL.Text = "Nhập nguyên liệu...";
-            this.txtMaNL.Visible = false;
-            this.txtMaNL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMaNL_KeyDown);
-            this.txtMaNL.Leave += new System.EventHandler(this.txtMaNL_Leave);
             // 
             // txtSoLuong
             // 
@@ -147,7 +131,7 @@
             // txtGhiChu
             // 
             this.txtGhiChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGhiChu.Location = new System.Drawing.Point(23, 333);
+            this.txtGhiChu.Location = new System.Drawing.Point(22, 277);
             this.txtGhiChu.Margin = new System.Windows.Forms.Padding(2);
             this.txtGhiChu.Multiline = true;
             this.txtGhiChu.Name = "txtGhiChu";
@@ -158,7 +142,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.14286F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(18, 303);
+            this.label6.Location = new System.Drawing.Point(19, 247);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 24);
@@ -170,7 +154,7 @@
             this.Huy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
             this.Huy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Huy.ForeColor = System.Drawing.Color.White;
-            this.Huy.Location = new System.Drawing.Point(365, 413);
+            this.Huy.Location = new System.Drawing.Point(366, 368);
             this.Huy.Margin = new System.Windows.Forms.Padding(2);
             this.Huy.Name = "Huy";
             this.Huy.Size = new System.Drawing.Size(108, 39);
@@ -184,7 +168,7 @@
             this.XacNhan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
             this.XacNhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.XacNhan.ForeColor = System.Drawing.Color.White;
-            this.XacNhan.Location = new System.Drawing.Point(150, 413);
+            this.XacNhan.Location = new System.Drawing.Point(111, 368);
             this.XacNhan.Margin = new System.Windows.Forms.Padding(2);
             this.XacNhan.Name = "XacNhan";
             this.XacNhan.Size = new System.Drawing.Size(157, 39);
@@ -200,36 +184,13 @@
             this.comboBoxTenNL.Name = "comboBoxTenNL";
             this.comboBoxTenNL.Size = new System.Drawing.Size(223, 24);
             this.comboBoxTenNL.TabIndex = 15;
-            this.comboBoxTenNL.Leave += new System.EventHandler(this.txtMaNL_Leave);
-            // 
-            // txtGia
-            // 
-            this.txtGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.857143F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGia.Location = new System.Drawing.Point(22, 270);
-            this.txtGia.Margin = new System.Windows.Forms.Padding(2);
-            this.txtGia.Name = "txtGia";
-            this.txtGia.Size = new System.Drawing.Size(223, 26);
-            this.txtGia.TabIndex = 16;
-            this.txtGia.Text = "0.00";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.14286F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(19, 244);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 24);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Đơn giá:";
+            this.comboBoxTenNL.SelectedIndexChanged += new System.EventHandler(this.txtMaNL_choose_Click);
             // 
             // NhapKhoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 463);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.txtGia);
+            this.ClientSize = new System.Drawing.Size(622, 419);
             this.Controls.Add(this.comboBoxTenNL);
             this.Controls.Add(this.Huy);
             this.Controls.Add(this.XacNhan);
@@ -241,7 +202,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtSoLuong);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtMaNL);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -256,7 +216,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtMaNL;
         private System.Windows.Forms.TextBox txtSoLuong;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDonVi;
@@ -268,7 +227,5 @@
         private System.Windows.Forms.Button Huy;
         private System.Windows.Forms.Button XacNhan;
         private System.Windows.Forms.ComboBox comboBoxTenNL;
-        private System.Windows.Forms.TextBox txtGia;
-        private System.Windows.Forms.Label label7;
     }
 }

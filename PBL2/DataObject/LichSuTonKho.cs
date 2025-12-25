@@ -19,7 +19,25 @@ namespace PBL2.Data
     {
         public int ID { get; set; }
         public string MaNV { get; set; }
+
+        public string TenNhanVien
+        {
+            get
+            {
+                return NhanViens.Get(MaNV).TenNV;
+            }
+            private set { }
+        }
         public int MaNguyenLieu { get; set; }
+
+        public string TenNguyenLieu
+        {
+            get
+            {
+                return NguyenLieuTonKhos.Get(MaNguyenLieu).TenNguyenLieu;
+            }
+            private set { }
+        }
         public EnumHoatDong HoatDong { get; set; }
 
         // Property phụ để hiển thị tiếng Việt trong DataGridView
@@ -32,8 +50,17 @@ namespace PBL2.Data
             }
             private set { }
         }
-
         public decimal SoLuong { get; set; }
+
+        public string DonVi 
+        {
+            get
+            {
+                return NguyenLieuTonKhos.Get(MaNguyenLieu).DonViStr;
+            }
+            private set { }
+        }
+
         public string ghiChu { get; set; }
         public DateTime Ngay { get; set; }
     }
