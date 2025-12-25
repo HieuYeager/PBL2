@@ -31,8 +31,8 @@ namespace PBL2.Data
         public static int Update(NhanVien nv)
         {
             string sql = $" UPDATE {TableName} SET " +
-            $" {TenNv}='{nv.TenNV}', {VaiTro}='{nv.VaiTro.GetDisplayName()}', {SDT}='{nv.SDT}', {MucLuongCoBan}='{nv.MucLuongCoBan} " +
-            $" WHERE {MaNV}='{nv.MaNV}' ";
+            $" {TenNv}='{nv.TenNV}', {VaiTro}='{nv.VaiTro.GetDisplayName()}', {SDT}='{nv.SDT}', {MucLuongCoBan}='{nv.MucLuongCoBan}' " +
+            $" WHERE {MaNV}='{nv.MaNV}'; ";
 
             return DB.ExecuteNonQuery(sql);
         }

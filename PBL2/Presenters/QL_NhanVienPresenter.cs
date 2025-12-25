@@ -1,5 +1,6 @@
 ﻿
-using PBL2.Class;
+using MySql.Data.MySqlClient;
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Views.QL_NhanVien;
 using System;
@@ -26,199 +27,99 @@ namespace PBL2.Presenters.QL_NhanVien
     }
     public class QL_NhanVienPresenter
     {
-        public QL_NhanVienPage View { get; set; }
+        public IQL_NhanVienPage View { get; set; }
         public QL_NhanVienPageModel Model { get; set; }
 
-        public QL_NhanVienPresenter(QL_NhanVienPage view)
+        public QL_NhanVienPresenter(IQL_NhanVienPage view)
         {
             this.View = view;
             this.Model = new QL_NhanVienPageModel();
         }
 
-        public void Load()
+        public void Load(NhanVien acc)
         {
-            //DataTable dt = MySQL_DB.Instance.Select("nhanvien", "*");
-            DataTable dt = MySQL_DB.Instance.SelectJoin("nhanvien", "nhanvien.*, account.khoa", "JOIN account ON nhanvien.MaNV = account.MaNV");
-            this.Model.Table = dt;
+            List<NhanVien> list = this.Model.GetNhanVienTable(acc);
+            this.View.loadNhnVienTable(list);
+
         }
 
-        public string GenerateMaNV()
+        public string GenerateMaNV(EnumVaiTro vaiTro)
         {
+            string ma = "NV";
+            if(vaiTro == EnumVaiTro.NhanVien) { }
+            else if (vaiTro == EnumVaiTro.QuanLy) { ma = "QL"; }
             try
             {
-                object obj = MySQL_DB.Instance.ExecuteScalar("SELECT MAX(MaNV) FROM NhanVien");
-
-                int nextID = 1;
-                if (obj != null && obj != DBNull.Value)
+                int ID = 1;
+                string maMoi = ma + ID.ToString("D3");
+                while (NhanViens.Get(maMoi) != null)
                 {
-                    string countStr = obj.ToString();
-
-                    if (countStr.Length > 2 && countStr.StartsWith("NV"))
-                    {
-                        int currentID = int.Parse(countStr.Substring(2));
-                        nextID = currentID + 1;
-                    }
+                    ID += 1;
+                    maMoi = ma + ID.ToString("D3");
                 }
+                int nextID = ID;
 
                 // Mã mới = NV + số thứ tự 3 chữ số (001, 002,...)
-                return "NV" + nextID.ToString("D3");
+                return ma + nextID.ToString("D3");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi tạo mã NV: " + ex.Message);
-                return "NV001"; // nếu lỗi thì trả về mặc định
+                return ""; // nếu lỗi thì trả về mặc định
             }
         }
 
-        public void Add_NhanVien(NhanVien nv)
+        public void Add_NhanVien(NhanVien nv, NhanVien acc)
         {
-            try
+            if(nv == null)
             {
-                Dictionary<string, string> Data = new Dictionary<string, string>
-                {
-                    { "MaNV", nv.MaNV },
-                    { "TenNV", nv.TenNV },
-                    { "SDT", nv.SDT },
-                    { "DiaChi", nv.DiaChi },
-                    { "MucLuongCoBan", nv.MucLuongCoBan.ToString() },
-                    { "VaiTro", nv.VaiTro.GetDisplayName() } //Mặc định
-                    //{ "CaLamViec", "Ca Sáng" }
-                };
-
-                bool success = MySQL_DB.Instance.Insert("NhanVien", Data);
-
-                if (success)
-                {
-                    MessageBox.Show("Thêm nhân viên thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Thêm nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                //tao acc
-                string password = BCrypt.Net.BCrypt.HashPassword("123456");
-                Dictionary<string, string> DataAcc = new Dictionary<string, string>
-                {
-                    { "MaNV", nv.MaNV },
-                    { "Password", password }, //Mặc định
-                    { "khoa",  "0"}
-
-                };
-
-                bool result = MySQL_DB.Instance.Insert("Account", DataAcc);
-
-                if (result)
-                {
-                    //MessageBox.Show("Tạo acc thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    //MessageBox.Show("Tạo acc thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi thêm nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void UpdateNhanVien(NhanVien nv)
-        {
-            try
-            {
-                string updates = $"TenNV = '{nv.TenNV}', " +
-                                 $"SDT = '{nv.SDT}', " +
-                                 $"DiaChi = '{nv.DiaChi}', " +
-                                 $"MucLuongCoBan = {nv.MucLuongCoBan?.ToString(System.Globalization.CultureInfo.InvariantCulture)}, " +
-                                 $"VaiTro = '{nv.VaiTro.GetDisplayName()}'";
-
-                string condition = $"MaNV = '{nv.MaNV}'";
-
-                //update
-                bool success = MySQL_DB.Instance.Update("NhanVien", updates, condition) > 0;
-
-                if (success)
-                {
-                    MessageBox.Show("Cập nhật thông tin nhân viên thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //this.DialogResult = DialogResult.OK; // để form cha reload DataGridView
-                    //this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Cập nhật thông tin nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi cập nhật thông tin nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void DeleteNhanVien(string MaNV)
-        {
-            try
-            {
-                string condition = $"MaNV = '{MaNV}'";
-
-                //delete account truoc
-                bool successAcc = MySQL_DB.Instance.Delete("Account", condition);
-
-                if (successAcc)
-                {
-                    //MessageBox.Show("Xoá tài khoản nhân viên thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    //MessageBox.Show("Xoá tài khoản nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                bool success = MySQL_DB.Instance.Delete("NhanVien", condition);
-                if (success)
-                {
-                    MessageBox.Show("Xóa nhân viên thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Xóa nhân viên thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi xoá nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void search(string keyword)
-        {
-
-            if (string.IsNullOrEmpty(keyword))
-            {
-                // Nếu ô tìm kiếm trống
-                DataTable dt = MySQL_DB.Instance.SelectJoin("nhanvien", "nhanvien.*, account.khoa", "JOIN account ON nhanvien.MaNV = account.MaNV");
-                this.Model.Table = dt;
+                this.View.showMessage("Thêm nhân viên thất bại");
                 return;
             }
 
-            string condition = $"JOIN account ON nhanvien.MaNV = account.MaNV WHERE nhanvien.MaNV LIKE '%{keyword}%' OR nhanvien.TenNV LIKE '%{keyword}%' OR nhanvien.SDT LIKE '%{keyword}%' OR nhanvien.DiaChi LIKE '%{keyword}%'";
-
-            try
+            string maNV = this.GenerateMaNV(nv.VaiTro);
+            nv.MaNV = maNV;
+            if (this.Model.AddNhanVien(nv))
             {
-                DataTable dt = MySQL_DB.Instance.SelectJoin("nhanvien", "nhanvien.*, account.khoa", condition);
-
-                if (dt.Rows.Count == 0)
-                {
-                    MessageBox.Show("Không tìm thấy nhân viên phù hợp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //return;
-                }
-
-                this.Model.Table = dt;
+                this.View.showMessage("Thêm nhân viên thành công");
+                this.Load(acc);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Đã xảy ra lỗi khi tìm kiếm nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.View.showMessage("Thêm nhân viên thất bai");
             }
+        }
+
+        public void UpdateNhanVien(NhanVien nv, NhanVien acc)
+        {
+            if (this.Model.UpdateNhanVien(nv))
+            {
+                this.View.showMessage("Sửa nhân viên thành công");
+                this.Load(acc);
+            }
+            else
+            {
+                this.View.showMessage("Sửa nhân viên thất bại");
+            }
+        }
+
+        public void DeleteNhanVien(NhanVien nhanVien, NhanVien acc)
+        {
+            if (this.Model.DeleteNhanVien(nhanVien))
+            {
+                this.View.showMessage("Xóa nhân viên thành công");
+                this.Load(acc);
+            }
+            else
+            {
+                this.View.showMessage("Xóa nhân viên thất bại");
+            }
+        }
+
+        public void search(NhanVien acc, string keyword)
+        {
+            List<NhanVien> list = this.Model.GetNhanVienTable(acc, keyword);
+            this.View.loadNhnVienTable(list);
         }
 
         //ql phan ca

@@ -48,9 +48,6 @@ namespace PBL2.Views.ManagerView
         private Krypton.Toolkit.KryptonButton selectedButton { get; set; }
         public mangerView(NhanVien nv)
         {
-            //this.account = account;
-            //this.labelTen.DataBindings.Add("Text", account, "TenNV");
-            //this.labelVaiTro.DataBindings.Add("Text", account, "VaiTro");
             InitializeComponent();
             this.nhanVien = nv;
             this.tenNV = nv.TenNV;
@@ -89,6 +86,7 @@ namespace PBL2.Views.ManagerView
             changeButtonColor((Krypton.Toolkit.KryptonButton)sender);
             this.loadBaoCao();
         }
+
         private void btnQLTonKho_click(object sender, EventArgs e)
         {
             changeButtonColor((Krypton.Toolkit.KryptonButton)sender);
@@ -134,7 +132,7 @@ namespace PBL2.Views.ManagerView
         public void loadQlNhanVien()
         {
             this.panelPage.Controls.Clear();
-            QL_NhanVienPage ql_NhanVienPage = new QL_NhanVienPage();
+            QL_NhanVienPage ql_NhanVienPage = new QL_NhanVienPage(nhanVien);
             ql_NhanVienPage.LoadPhanCaHandler += this.loadPhancaPage;
 
             this.panelPage.Controls.Add(ql_NhanVienPage);
