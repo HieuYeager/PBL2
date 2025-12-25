@@ -111,46 +111,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\Account.cs" />
-    <Compile Include="Class\ChiTietHoaDon.cs" />
-    <Compile Include="Class\CongThuc.cs" />
-    <Compile Include="Class\DanhMuc.cs" />
-    <Compile Include="Class\DanhMuc_Mon.cs" />
-    <Compile Include="Class\HoaDon.cs" />
-    <Compile Include="Class\LichSuTonKho.cs" />
-    <Compile Include="Class\Mon.cs" />
-    <Compile Include="Class\NguyenLieu.cs" />
-    <Compile Include="Class\NhanVien.cs" />
-    <Compile Include="Data\Account.cs" />
+    <Compile Include="DataObject\Account.cs" />
     <Compile Include="Data\Accounts.cs" />
-    <Compile Include="Data\ChiTietHoaDon.cs" />
+    <Compile Include="DataObject\ChiTietHoaDon.cs" />
     <Compile Include="Data\ChiTietHoaDons.cs" />
-    <Compile Include="Data\CongThuc.cs" />
+    <Compile Include="DataObject\CongThuc.cs" />
     <Compile Include="Data\CongThucs.cs" />
-    <Compile Include="Data\DanhMuc.cs" />
+    <Compile Include="DataObject\DanhMuc.cs" />
     <Compile Include="Data\DanhMucs.cs" />
-    <Compile Include="Data\DanhMuc_Mon.cs" />
+    <Compile Include="DataObject\DanhMuc_Mon.cs" />
     <Compile Include="Data\DanhMuc_Mons.cs" />
     <Compile Include="Data\DB.cs" />
-    <Compile Include="Data\HoaDon.cs" />
+    <Compile Include="DataObject\HoaDon.cs" />
     <Compile Include="Data\HoaDons.cs" />
-    <Compile Include="Data\LichLamViec.cs" />
+    <Compile Include="DataObject\LichLamViec.cs" />
     <Compile Include="Data\LichLamViecs.cs" />
-    <Compile Include="Data\LichSuTonKho.cs" />
+    <Compile Include="DataObject\LichSuTonKho.cs" />
     <Compile Include="Data\LichSuTonKhos.cs" />
-    <Compile Include="Data\Mon.cs" />
+    <Compile Include="DataObject\Mon.cs" />
     <Compile Include="Data\Mons.cs" />
-    <Compile Include="Data\NguyenLieuTonKho.cs" />
+    <Compile Include="DataObject\NguyenLieuTonKho.cs" />
     <Compile Include="Data\NguyenLieuTonKhos.cs" />
-    <Compile Include="Data\NhanVien.cs" />
+    <Compile Include="DataObject\NhanVien.cs" />
     <Compile Include="Data\NhanViens.cs" />
     <Compile Include="Data\Query.cs" />
     <Compile Include="Models\BaoCaoModel.cs" />
     <Compile Include="Models\MenuPageModel.cs" />
-    <Compile Include="Models\NhanVienModel.cs" />
-    <Compile Include="Models\MenuModel.cs" />
-    <Compile Include="Models\MonModel.cs" />
-    <Compile Include="Models\MySQL_DB.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,9 +144,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\AccountModel.cs" />
-    <Compile Include="Models\OrderDetailModel.cs" />
-    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\QLDonModel.cs" />
     <Compile Include="Models\QLTonKhoModel.cs" />
     <Compile Include="Models\QL_MenuPageModel.cs" />
@@ -182,12 +165,14 @@
     <Compile Include="Views\BaoCao\BaoCaoPage.Designer.cs">
       <DependentUpon>BaoCaoPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\BaoCao\IBaoCaoPage.cs" />
     <Compile Include="Views\Home\HomePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Home\HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\login\ILoginView.cs" />
     <Compile Include="Views\login\LoginView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,22 +185,23 @@
     <Compile Include="Views\ManagerView\mangerView.Designer.cs">
       <DependentUpon>mangerView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuPage\menuPage.cs">
+    <Compile Include="Views\Menu\IMenuPage.cs" />
+    <Compile Include="Views\Menu\menuPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MenuPage\menuPage.Designer.cs">
+    <Compile Include="Views\Menu\menuPage.Designer.cs">
       <DependentUpon>menuPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuPage\MonComponent.cs">
+    <Compile Include="Views\Menu\MonComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MenuPage\MonComponent.Designer.cs">
+    <Compile Include="Views\Menu\MonComponent.Designer.cs">
       <DependentUpon>MonComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuPage\OrderDetailComponent.cs">
+    <Compile Include="Views\Menu\OrderDetailComponent.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MenuPage\OrderDetailComponent.Designer.cs">
+    <Compile Include="Views\Menu\OrderDetailComponent.Designer.cs">
       <DependentUpon>OrderDetailComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\QLDon\DonDSSComp.cs">
@@ -242,11 +228,18 @@
     <Compile Include="Views\QLDon\DonCTTComp.Designer.cs">
       <DependentUpon>DonCTTComp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\QLDon\IQLDonPage.cs" />
     <Compile Include="Views\QLDon\QLDonPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\QLDon\QLDonPage.Designer.cs">
       <DependentUpon>QLDonPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QLTonKho\EditNguyenLieuForm .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\QLTonKho\EditNguyenLieuForm .Designer.cs">
+      <DependentUpon>EditNguyenLieuForm .cs</DependentUpon>
     </Compile>
     <Compile Include="Views\QLTonKho\AddNguyenLieuForm.cs">
       <SubType>Form</SubType>
@@ -254,6 +247,7 @@
     <Compile Include="Views\QLTonKho\AddNguyenLieuForm.Designer.cs">
       <DependentUpon>AddNguyenLieuForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\QLTonKho\IQLTonKho.cs" />
     <Compile Include="Views\QLTonKho\LichSu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +278,7 @@
     <Compile Include="Views\QLTonKho\XuatKhoForm.Designer.cs">
       <DependentUpon>XuatKhoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\QL_Menu\IQL_MenuPage.cs" />
     <Compile Include="Views\QL_Menu\QL_PhanLoaiPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -302,6 +297,7 @@
     <Compile Include="Views\QL_Menu\QL_MenuPage.Designer.cs">
       <DependentUpon>QL_MenuPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\QL_NhanVien\IQL_NhanVienPage.cs" />
     <Compile Include="Views\QL_NhanVien\PhanCaPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -320,6 +316,7 @@
     <Compile Include="Views\StaffView\staffView.Designer.cs">
       <DependentUpon>staffView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ThanhToan\IThanhToanPage.cs" />
     <Compile Include="Views\ThanhToan\ThanhToanPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -351,13 +348,13 @@
     <EmbeddedResource Include="Views\ManagerView\mangerView.resx">
       <DependentUpon>mangerView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MenuPage\menuPage.resx">
+    <EmbeddedResource Include="Views\Menu\menuPage.resx">
       <DependentUpon>menuPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MenuPage\MonComponent.resx">
+    <EmbeddedResource Include="Views\Menu\MonComponent.resx">
       <DependentUpon>MonComponent.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MenuPage\OrderDetailComponent.resx">
+    <EmbeddedResource Include="Views\Menu\OrderDetailComponent.resx">
       <DependentUpon>OrderDetailComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QLDon\DonDSSComp.resx">
@@ -374,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QLDon\QLDonPage.resx">
       <DependentUpon>QLDonPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\QLTonKho\EditNguyenLieuForm .resx">
+      <DependentUpon>EditNguyenLieuForm .cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\QLTonKho\AddNguyenLieuForm.resx">
       <DependentUpon>AddNguyenLieuForm.cs</DependentUpon>

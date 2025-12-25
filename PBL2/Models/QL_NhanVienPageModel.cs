@@ -66,6 +66,17 @@ namespace PBL2.Models
             return NhanViens.Add(nhanVien) > 0;
         }
 
+        public bool AddAccforNhanVien(NhanVien nhanVien)
+        {
+            Account newAcc = new Account
+            {
+                MaNV = nhanVien.MaNV,
+                password = BCrypt.Net.BCrypt.HashPassword("123456"),
+                khoa = false,
+            };
+            return Accounts.Add(newAcc) > 0;
+        }
+
         public bool UpdateNhanVien(NhanVien nhanVien)
         {
             return NhanViens.Update(nhanVien) > 0;

@@ -20,7 +20,7 @@ namespace PBL2.Data
         public static int Add(Account acc)
         {
             string sql = $" INSERT INTO {TableName} ({MaNV}, {password}, {khoa})" +
-                $" VALUES ('{acc.MaNV}', '{acc.password}', '{acc.khoa}') ";
+                $" VALUES ('{acc.MaNV}', '{acc.password}', {acc.khoa}) ";
 
             return DB.ExecuteNonQuery(sql);
         }

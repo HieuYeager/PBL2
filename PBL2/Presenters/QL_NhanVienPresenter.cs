@@ -81,8 +81,17 @@ namespace PBL2.Presenters.QL_NhanVien
             nv.MaNV = maNV;
             if (this.Model.AddNhanVien(nv))
             {
-                this.View.showMessage("Thêm nhân viên thành công");
-                this.Load(acc);
+                if (this.Model.AddAccforNhanVien(nv))
+                {
+                    this.View.showMessage("Thêm nhân viên thành công");
+                    this.Load(acc);
+                }
+                else
+                {
+                    //remove nhan vien
+                    this.Model.DeleteNhanVien(nv);
+                    this.View.showMessage("Thêm nhân viên thất bai");
+                }
             }
             else
             {
