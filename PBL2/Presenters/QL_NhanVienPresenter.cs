@@ -122,12 +122,13 @@ namespace PBL2.Presenters.QL_NhanVien
             this.View.loadNhnVienTable(list);
         }
 
-        //ql phan ca
+        //ql phan ca (CHUA LAM)
         public void Load_PhanCa(CaLamViec calamviec)
         {
             //select ma nhan vien, ten nhan vien, ca lam viec
-            DataTable dt = MySQL_DB.Instance.Select($"nhanvien ORDER BY CASE WHEN CaLamViec Like '%{calamviec.GetDisplayName()}%' THEN 0  ELSE 1  END, TenNV;", "MaNV, TenNV, CaLamViec");
-            this.Model.CaLamViec = dt;
+            //DataTable dt = MySQL_DB.Instance.Select($"nhanvien ORDER BY CASE WHEN CaLamViec Like '%{calamviec.GetDisplayName()}%' THEN 0  ELSE 1  END, TenNV;", "MaNV, TenNV, CaLamViec");
+            DataTable dt = new DataTable();
+            this.Model.CaLamViec = null;
         }
 
         public void updatePhanCa()
@@ -140,7 +141,7 @@ namespace PBL2.Presenters.QL_NhanVien
                     string CaLamViec = row["CaLamViec"].ToString();
                     string updates = $"CaLamViec = '{CaLamViec}'";
                     string condition = $"MaNV = '{MaNV}'";
-                    MySQL_DB.Instance.Update("NhanVien", updates, condition);
+                    //MySQL_DB.Instance.Update("NhanVien", updates, condition);
                 }
 
                 MessageBox.Show("Cập nhật phân ca thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -162,31 +163,35 @@ namespace PBL2.Presenters.QL_NhanVien
             {
                 
                 string thu = ConvertToDayOfWeek(date);
-                DataTable NvTrongCa = MySQL_DB.Instance.SelectJoin("nhanvien as nv", "nv.MaNV, nv.TenNV, nv.CaLamViec", $"JOIN account acc ON nv.MaNV = acc.MaNV WHERE acc.khoa = 0 AND nv.CaLamViec LIKE '%{thu+calamviec.GetDisplayName()}%' ORDER BY nv.TenNV;");
+                //DataTable NvTrongCa = MySQL_DB.Instance.SelectJoin("nhanvien as nv", "nv.MaNV, nv.TenNV, nv.CaLamViec", $"JOIN account acc ON nv.MaNV = acc.MaNV WHERE acc.khoa = 0 AND nv.CaLamViec LIKE '%{thu+calamviec.GetDisplayName()}%' ORDER BY nv.TenNV;");
+                DataTable NvTrongCa = new DataTable();
                 foreach (DataRow row in NvTrongCa.Rows)
                 {
                     string MaNV = row["MaNV"].ToString();
                     //kiem tra neu chua co trong bang diem danh thi them vao
-                    bool checkExist = MySQL_DB.Instance.Count("diemdanh", $"MaNV = '{MaNV}' AND Ngay Like '{date.ToString("yyyy-MM-dd")}' AND CaLam = '{calamviec.GetDisplayName()}'") > 0;
+                    //bool checkExist = MySQL_DB.Instance.Count("diemdanh", $"MaNV = '{MaNV}' AND Ngay Like '{date.ToString("yyyy-MM-dd")}' AND CaLam = '{calamviec.GetDisplayName()}'") > 0;
+                    bool checkExist = false;
                     if (!checkExist)
                     {
                         string fields = "MaNV, Ngay, CaLam, DiemDanh";
                         string values = $"'{MaNV}', '{date.ToString("yyyy-MM-dd")}', '{calamviec.GetDisplayName()}', '0'";
-                        MySQL_DB.Instance.Insert("diemdanh", fields, values);
+                        //MySQL_DB.Instance.Insert("diemdanh", fields, values);
                     }
                 }
 
-                DataTable NvKhongTrongCa = MySQL_DB.Instance.SelectJoin("nhanvien as nv", "nv.MaNV, nv.TenNV, nv.CaLamViec", $"JOIN account acc ON nv.MaNV = acc.MaNV WHERE nv.CaLamViec NOT LIKE '%{thu + calamviec.GetDisplayName()}%';");
+                //DataTable NvKhongTrongCa = MySQL_DB.Instance.SelectJoin("nhanvien as nv", "nv.MaNV, nv.TenNV, nv.CaLamViec", $"JOIN account acc ON nv.MaNV = acc.MaNV WHERE nv.CaLamViec NOT LIKE '%{thu + calamviec.GetDisplayName()}%';");
+                DataTable NvKhongTrongCa = new DataTable();
                 //delete nhan vien khong trong ca
                 foreach (DataRow row in NvKhongTrongCa.Rows)
                 {
                     //MessageBox.Show(row["MaNV"].ToString());
                     string MaNV = row["MaNV"].ToString();
-                    MySQL_DB.Instance.Delete("diemdanh", $"MaNV = '{MaNV}' AND Ngay Like '{date.ToString("yyyy-MM-dd")}' AND CaLam = '{calamviec.GetDisplayName()}'");
+                    //MySQL_DB.Instance.Delete("diemdanh", $"MaNV = '{MaNV}' AND Ngay Like '{date.ToString("yyyy-MM-dd")}' AND CaLam = '{calamviec.GetDisplayName()}'");
                 }
             }
             //select ma nhan vien, ten nhan vien, ca lam viec
-            DataTable dt = MySQL_DB.Instance.SelectJoin("diemdanh as dd", "dd.MaNV, nv.TenNV, dd.DiemDanh, dd.CaLam, dd.Ngay", $"JOIN NhanVien nv ON dd.MaNV = nv.MaNV WHERE dd.Ngay Like '{date.ToString("yyyy-MM-dd")}' AND dd.CaLam = '{calamviec.GetDisplayName()}';");
+            //DataTable dt = MySQL_DB.Instance.SelectJoin("diemdanh as dd", "dd.MaNV, nv.TenNV, dd.DiemDanh, dd.CaLam, dd.Ngay", $"JOIN NhanVien nv ON dd.MaNV = nv.MaNV WHERE dd.Ngay Like '{date.ToString("yyyy-MM-dd")}' AND dd.CaLam = '{calamviec.GetDisplayName()}';");
+            DataTable dt = new DataTable();
             this.Model.DiemDanh = dt;
     }
 
@@ -200,7 +205,7 @@ namespace PBL2.Presenters.QL_NhanVien
                 string Ngay = Convert.ToDateTime(row["Ngay"]).ToString("yyyy-MM-dd");
                 string updates = $"DiemDanh = '{DiemDanh}'";
                 string condition = $"MaNV = '{MaNV}' AND Ngay Like '%{Ngay}%' AND CaLam = '{CaLamViec}'";
-                MySQL_DB.Instance.Update("DiemDanh", updates, condition);
+                //MySQL_DB.Instance.Update("DiemDanh", updates, condition);
             }
         }
        string ConvertToDayOfWeek(DateTime date)

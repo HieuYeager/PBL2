@@ -1,4 +1,4 @@
-﻿using PBL2.Class;
+﻿using PBL2.Data;
 using PBL2.Models;
 using PBL2.Presenters.QL_NhanVien;
 using System;

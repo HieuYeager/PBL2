@@ -298,11 +298,11 @@ namespace PBL2.Views.QL_Menu
                     string imagePath = "";
                     if(row.Cells["URl_Anh"].Value.ToString() == "")
                     {
-                        imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "image_icon.png");
+                        imagePath = Path.Combine(DB.projectRoot, "Resources", "image_icon.png");
                     }
                     else
                     {
-                        imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", row.Cells["URl_Anh"].Value.ToString());
+                        imagePath = Path.Combine(DB.projectRoot, "Resources", row.Cells["URl_Anh"].Value.ToString());
                     }
                     this.pictureBox1.Image = Image.FromFile(imagePath);
                 }
@@ -322,7 +322,7 @@ namespace PBL2.Views.QL_Menu
 
                 // Vẽ nút như bình thường
                 e.PaintContent(e.CellBounds);
-                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "edit_icon.png");
+                string imagePath = Path.Combine(DB.projectRoot, "Resources", "edit_icon.png");
                 // Load ảnh icon
                 Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 
@@ -341,7 +341,7 @@ namespace PBL2.Views.QL_Menu
 
                 // Vẽ nút như bình thường
                 e.PaintContent(e.CellBounds);
-                string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "close.png");
+                string imagePath = Path.Combine(DB.projectRoot, "Resources", "close.png");
                 // Load ảnh icon
                 Image icon = Image.FromFile(imagePath); // Đường dẫn tới icon
 
