@@ -125,5 +125,10 @@ namespace PBL2.Presenters.Menu
         {
             return this.Model.GetChiTietHoaDons();
         }
+
+        public void ClearHoaDon()
+        {
+            this.Model.ClearHoaDon();
+        }
     }
 }

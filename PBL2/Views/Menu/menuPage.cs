@@ -63,6 +63,7 @@ namespace PBL2.Views.MenuPage
         public void clearOrder()
         {
             this.ListOrderDetailsPn.Controls.Clear();
+            this.Presenter.ClearHoaDon();
         }
 
         public void LoadMenu(List<Mon> mons)

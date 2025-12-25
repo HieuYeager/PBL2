@@ -138,14 +138,14 @@ namespace PBL2.Views.staffView
         private void loadMenuPage_ClearOrder()
         {
             this.panelPage.Controls.Clear();
-            if (menuPage == null)
-            {
-                this.menuPage = new menuPage(this.nhanVien);
-            }
-            else
-            {
-                this.menuPage.clearOrder();
-            }
+            this.menuPage = new menuPage(this.nhanVien);
+            //if (menuPage == null)
+            //{
+            //}
+            //else
+            //{
+            //    this.menuPage.clearOrder();
+            //}
             this.panelPage.Controls.Add(this.menuPage);
             this.menuPage.thanhtoanPage = this.LoadThanhToanPage;
 

@@ -55,5 +55,10 @@ namespace PBL2.Models
             return Mons.ToList(reader);
         }
 
+        public void ClearHoaDon()
+        {
+            chiTietHoaDons.Clear();
+        }
+
     }
 }
