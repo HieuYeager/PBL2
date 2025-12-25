@@ -24,9 +24,9 @@ namespace PBL2.Data
         public static int Add(Mon item)
         {
             string sql = $"INSERT INTO {TableName} ({TenMon}, {GiaBan}, {DonVi}, {URL_anh}, {Khoa}) " +
-                         $"VALUES ('{item.TenMon}', '{item.GiaBan.ToString(CultureInfo.InvariantCulture)}', " +
+                         $"VALUES ('{item.TenMon}', '{item.GiaBan.ToString()}', " +
                          $"{(item.DonVi != null ? $"'{item.DonVi}'" : "NULL")}, " +
-                         $"{(item.URL_anh != null ? $"'{item.URL_anh}'" : "NULL")}, '{item.Khoa}')";
+                         $"{(item.URL_anh != null ? $"'{item.URL_anh}'" : "NULL")}, {item.Khoa.ToString()})";
             return DB.ExecuteNonQuery(sql);
         }
 
@@ -37,7 +37,7 @@ namespace PBL2.Data
                          $" {TenMon}='{item.TenMon}', {GiaBan}='{item.GiaBan.ToString(CultureInfo.InvariantCulture)}', " +
                          $"{DonVi}={(item.DonVi != null ? $"'{item.DonVi}'" : "NULL")}, " +
                          $"{URL_anh}={(item.URL_anh != null ? $"'{item.URL_anh}'" : "NULL")}, " +
-                         $"{Khoa}='{item.Khoa}' " +
+                         $"{Khoa}={item.Khoa} " +
                          $" WHERE {MaMon}={item.MaMon}";
             return DB.ExecuteNonQuery(sql);
         }

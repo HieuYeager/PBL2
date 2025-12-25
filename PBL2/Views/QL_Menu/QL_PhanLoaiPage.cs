@@ -109,6 +109,7 @@ namespace PBL2.Views.QL_Menu
                 this.dataGridViewIn.Columns["DonVi"].HeaderText = "Đơn vị";
                 this.dataGridViewIn.Columns["DonVi"].Visible = false;
                 this.dataGridViewIn.Columns["URl_Anh"].Visible = false;
+                this.dataGridViewIn.Columns["khoa"].Visible = false;
 
             }
             catch (Exception ex)
@@ -199,6 +200,7 @@ namespace PBL2.Views.QL_Menu
                 this.dataGridViewNotIn.Columns["DonVi"].HeaderText = "Đơn vị";
                 this.dataGridViewNotIn.Columns["DonVi"].Visible = false;
                 this.dataGridViewNotIn.Columns["URl_Anh"].Visible = false;
+                this.dataGridViewNotIn.Columns["khoa"].Visible = false;
             }
             catch (Exception ex)
             {

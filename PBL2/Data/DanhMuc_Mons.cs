@@ -99,7 +99,8 @@ namespace PBL2.Data
         public static int Count(string condition)
         {
             string sql = $"SELECT COUNT(*) FROM {TableName} WHERE {condition}";
-            return (int)DB.ExecuteScalar(sql);
+            Console.WriteLine(sql);
+            return Convert.ToInt32(DB.ExecuteScalar(sql));
         }
 
         // data reader to list

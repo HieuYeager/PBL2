@@ -106,6 +106,7 @@ namespace PBL2.Data
         // Thực hiện INSERT, UPDATE, DELETE
         public static int ExecuteNonQuery(string query)
         {
+            Console.WriteLine(query);
             using (MySqlConnection conn = GetConnection())
             {
                 try

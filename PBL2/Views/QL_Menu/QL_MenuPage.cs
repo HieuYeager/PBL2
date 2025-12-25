@@ -1,5 +1,5 @@
 ﻿using Google.Protobuf.WellKnownTypes;
-using PBL2.Class;
+using PBL2.Data;
 using PBL2.Models;
 using PBL2.Presenters.QL_Menu;
 using PBL2.Views.QL_NhanVien;
@@ -110,7 +110,7 @@ namespace PBL2.Views.QL_Menu
                 return;
             }
 
-            Mon mon = new Mon()
+            Mon mon = new Mon
             {
                 MaMon = int.Parse(txtMaMon.Text),
                 TenMon = txtTenMon.Text,
@@ -139,12 +139,14 @@ namespace PBL2.Views.QL_Menu
                 return;
             }
 
-            Mon newMon = new Mon()
+            Mon newMon = new Mon
             {
                 TenMon = this.txtTenMon.Text,
                 GiaBan = mucLuongCoBan,
                 DonVi = this.txtDonVi.Text,
-                URL_anh = this.pictureBox1.Image != null ? Path.GetFileName(this.pictureBox1.ImageLocation) : ""
+                URL_anh = this.pictureBox1.Image != null ? Path.GetFileName(this.pictureBox1.ImageLocation) : "",
+                Khoa = false
+                
             };
 
             this.Presenter.AddMon(newMon);
@@ -212,6 +214,7 @@ namespace PBL2.Views.QL_Menu
         //table load
         public void LoadTable()
         {
+            if (this.Model.Table == null || this.Model.Table.Rows.Count == 0) return;
             //this.Presenter.LoadMenu();
             this.dataGridView1.Columns.Clear();
             this.dataGridView1.DataSource = Model.Table;
@@ -246,6 +249,7 @@ namespace PBL2.Views.QL_Menu
                 this.dataGridView1.Columns["GiaBan"].FillWeight = 15;
                 this.dataGridView1.Columns["DonVi"].HeaderText = "Đơn vị";
                 this.dataGridView1.Columns["DonVi"].FillWeight = 15;
+                this.dataGridView1.Columns["khoa"].Visible = false;
                 this.dataGridView1.Columns["URl_Anh"].Visible = false;
                 // them cot anh
                 //DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
@@ -274,7 +278,7 @@ namespace PBL2.Views.QL_Menu
                 this.txtMaMon.Text = this.txtTenMon.Text = this.txtGiaBan.Text = this.txtDonVi.Text = "";
                 try
                 {
-                    string imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", "image_icon.png");
+                    string imagePath = Path.Combine(DB.projectRoot, "Resources", "image_icon.png");
                     this.pictureBox1.Image = Image.FromFile(imagePath);
                 }catch(Exception ex)
                 {
