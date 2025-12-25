@@ -98,7 +98,6 @@ namespace PBL2.Presenters.QL_Menu
             }
         }
 
-
         public bool EditMon(Mon mon)
         {
             if (mon == null || string.IsNullOrWhiteSpace(mon.MaMon.ToString()))
@@ -149,6 +148,7 @@ namespace PBL2.Presenters.QL_Menu
                 return false;
             }
         }
+
         public bool DeleteMon(string maMon)
         {
             if (string.IsNullOrWhiteSpace(maMon))
