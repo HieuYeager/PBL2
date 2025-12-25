@@ -22,9 +22,9 @@ namespace PBL2
         public Form1()
         {
             InitializeComponent();
-            //LoadView("HomePage", null);
+            LoadView("HomePage", null);
             //LoadView("StaffView", NhanViens.Get("NV001"));
-            LoadView("ManagerView", NhanViens.Get("QL001"));
+            //LoadView("ManagerView", NhanViens.Get("QL001"));
         }
 
         public void LoadView(String ViewName, NhanVien account)
