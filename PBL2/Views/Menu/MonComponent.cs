@@ -36,7 +36,7 @@ namespace PBL2.Views.MenuPage
 
             try
             {
-                imagePath = Path.Combine(MySQL_DB.projectRoot, "Resources", mon.URL_anh);
+                imagePath = Path.Combine(DB.projectRoot, "Resources", mon.URL_anh);
                 //MessageBox.Show(imagePath);
                 this.pictureBox.Image = Image.FromFile(imagePath);
             }
